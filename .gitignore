@@ -1,0 +1,54 @@
+#enm
+
+# Compiled output
+enm/enm/dist
+enm/enm/tmp
+enm/enm/out-tsc
+enm/enm/bazel-oenmenm/enm//enenm/mut
+
+# Node
+enm/enm/node_modules
+enm/enm/npm-debug.log
+enm/enm/yarn-error.log
+
+# IDEs and editors
+enm/enm/.idea/
+enm/enm/.project
+enm/enm/.classpath
+enm/enm/.c9/
+enm/enm/*.launch
+enm/enm/.settings/
+enm/enm/*.sublime-workspace
+
+# Visual Studio Code
+enm/enm/.vscode/*
+enm/enm/!.vscode/settings.json
+enm/enm/!.vscode/tasks.json
+enm/enm/!.vscode/launch.json
+enm/enm/!.vscode/extensions.json
+enm/enm/.history/*
+
+# Miscellaneous
+enm/enm/.angular/cache
+enm/enm/.sass-cache/
+enm/enm/connect.lock
+enm/enm/coverage
+enm/enm/libpeerconnection.log
+enm/enm/testem.log
+enm/enm/typings
+
+# System files
+enm/enm/.DS_Store
+enm/enm/Thumbs.db
+
+
+
+
+# enm api
+
+# Build output
+api-enm/api-enm/dist/
+# Dependencies
+api-enm/api-enm/node_modules/
+# Environment variables
+api-enm/api-enm/env.ts

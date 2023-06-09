@@ -1,0 +1,20 @@
+<app-enm-event-list-toolbar></app-enm-event-list-toolbar>
+
+<div class="container-fluid">
+  <div *ngFor="let date of (groupedByDateEnmEventList$ | async | keyvalue)">
+    <h5>{{date.key | wordifiedDateKey }}</h5>
+    <!-- date.value resolves to EnmEvent[] -->
+    <div *ngFor="let enmEvent of date.value" class="card event-card">
+      <a [routerLink]="['/', enmEvent.id]" class="event-card-link" href="/" (click)="onEnmEventListSelection(enmEvent.id)">
+        <div class="card-body">
+          <h5 class="card-title">{{enmEvent.name}}</h5>
+          <p class="card-text">
+            {{enmEvent.startTime | standardTime }} | {{enmEvent.month | wordifiedMonth }} {{enmEvent.day}} <span *ngIf="enmEvent.priceOfEntry >= 0">| {{enmEvent.priceOfEntry | wordifiedPriceOfEntry}}</span>
+          </p>
+          <p class="card-text">{{enmEvent.address}}, {{enmEvent.city}}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+

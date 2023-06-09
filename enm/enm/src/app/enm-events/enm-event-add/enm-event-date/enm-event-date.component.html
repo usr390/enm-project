@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <form [formGroup]="dateForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <label>Day</label>
+        <div class="col">
+          <input type="number" formControlName="day">
+        </div>
+      </div>
+      <div class="row">
+        <label>Month</label>
+        <div class="col">
+          <input type="number" formControlName="month">
+        </div>
+      </div>
+      <div class="row">
+        <label>Year</label>
+        <div class="col">
+          <input type="number" formControlName="year">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button type="button" (click)="cancelForm()">Cancel</button>
+          <button type="button" (click)="goBack()">Back</button>
+          <button type="submit" [disabled]="dateForm.invalid">Next</button>
+        </div>
+      </div>
+    </form>
+</div>
+  
