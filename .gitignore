@@ -1,45 +1,45 @@
 #enm
 
 # Compiled output
-enm/enm/dist
-enm/enm/tmp
-enm/enm/out-tsc
-enm/enm/bazel-oenmenm/enm//enenm/mut
+enm/dist
+enm/tmp
+enm/out-tsc
+enm/bazel-oenmenm/enm//enenm/mut
 
 # Node
-enm/enm/node_modules
-enm/enm/npm-debug.log
-enm/enm/yarn-error.log
+enm/node_modules
+enm/npm-debug.log
+enm/yarn-error.log
 
 # IDEs and editors
-enm/enm/.idea/
-enm/enm/.project
-enm/enm/.classpath
-enm/enm/.c9/
-enm/enm/*.launch
-enm/enm/.settings/
-enm/enm/*.sublime-workspace
+enm/.idea/
+enm/.project
+enm/.classpath
+enm/.c9/
+enm/*.launch
+enm/.settings/
+enm/*.sublime-workspace
 
 # Visual Studio Code
-enm/enm/.vscode/*
-enm/enm/!.vscode/settings.json
-enm/enm/!.vscode/tasks.json
-enm/enm/!.vscode/launch.json
-enm/enm/!.vscode/extensions.json
-enm/enm/.history/*
+enm/.vscode/*
+enm/!.vscode/settings.json
+enm/!.vscode/tasks.json
+enm/!.vscode/launch.json
+enm/!.vscode/extensions.json
+enm/.history/*
 
 # Miscellaneous
-enm/enm/.angular/cache
-enm/enm/.sass-cache/
-enm/enm/connect.lock
-enm/enm/coverage
-enm/enm/libpeerconnection.log
-enm/enm/testem.log
-enm/enm/typings
+enm/.angular/cache
+enm/.sass-cache/
+enm/connect.lock
+enm/coverage
+enm/libpeerconnection.log
+enm/testem.log
+enm/typings
 
 # System files
-enm/enm/.DS_Store
-enm/enm/Thumbs.db
+enm/.DS_Store
+enm/Thumbs.db
 
 
 
@@ -47,8 +47,8 @@ enm/enm/Thumbs.db
 # enm api
 
 # Build output
-api-enm/api-enm/dist/
+api-enm/dist/
 # Dependencies
-api-enm/api-enm/node_modules/
+api-enm/node_modules/
 # Environment variables
-api-enm/api-enm/env.ts
+api-enm/env.ts
