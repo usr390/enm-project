@@ -18,6 +18,13 @@ export class EnmEventPriceOfEntryComponent {
 
   cancelForm() { this.router.navigate(['/']); }
   goBack(): void { this.router.navigate(['/add-event/time']); }
-  onSubmit(): void { if (this.priceForm.valid) console.log(this.priceForm.value); }
+  onSubmit(): void { 
+    if (this.priceForm.valid) {
+      // do something with the form values here
+      // for example, store the form values for later use.
+      console.log(this.priceForm.value);
+      this.router.navigate(['/add-event/artists']);
+    }
+  }
 
 }

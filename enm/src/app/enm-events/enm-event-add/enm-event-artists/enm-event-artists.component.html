@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <form [formGroup]="artistsForm" (ngSubmit)="onSubmit()">
+    <div formArrayName="artists">
+      <div class="row" *ngFor="let artist of artistsArray.controls; let i = index">
+        <label>Artist {{i + 1}}</label>
+        <div class="col" [formGroupName]="i">
+          <input type="text" formControlName="artist" placeholder="Artist Name" maxlength="50" #artistInput>
+          <button *ngIf="artistsArray.controls.length > 1" type="button" (click)="deleteArtistInputField(i)">Delete</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button type="button" [disabled]="!canAddArtistInputField()" (click)="addArtistInputField()">Add Artist</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button type="button" (click)="cancelForm()">Cancel</button>
+        <button type="button" (click)="goBack()">Back</button>
+        <button type="submit" [disabled]="artistsForm.invalid">Done</button>
+      </div>
+    </div>
+  </form>
+</div>

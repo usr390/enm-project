@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { EnmEventTimeComponent } from './enm-event-add/enm-event-time/enm-event-time.component';
 import { EnmEventPriceOfEntryComponent } from './enm-event-add/enm-event-price-of-entry/enm-event-price-of-entry.component';
+import { EnmEventArtistsComponent } from './enm-event-add/enm-event-artists/enm-event-artists.component';
 
 
 
@@ -21,6 +22,7 @@ import { EnmEventPriceOfEntryComponent } from './enm-event-add/enm-event-price-o
     EnmEventListToolbarComponent,
     EnmEventTimeComponent,
     EnmEventPriceOfEntryComponent,
+    EnmEventArtistsComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +37,7 @@ import { EnmEventPriceOfEntryComponent } from './enm-event-add/enm-event-price-o
     EnmEventPageComponent,
     EnmEventTimeComponent,
     EnmEventPriceOfEntryComponent,
+    EnmEventArtistsComponent,
   ]
 })
 export class EnmEventModule { }
