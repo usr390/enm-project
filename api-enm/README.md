@@ -1,9 +1,5 @@
 # Node.js + TypeScript Starter
 
-![](../../actions/workflows/ci.yml/badge.svg)
-
-[![](https://railway.app/button.svg)](https://railway.app/template/8AWlL5?referralCode=bonus)
-
 ## Key Features
 
 - [<img src="https://user-images.githubusercontent.com/17180392/211619716-8630ae1a-e5ea-424f-87a6-f3188edae821.svg" height=19.2 align=center /> TypeScript](https://www.typescriptlang.org/)
