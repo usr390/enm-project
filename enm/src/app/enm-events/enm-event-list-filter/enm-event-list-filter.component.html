@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col">
             <form  [formGroup]="enmEventListFilterForm" (ngSubmit)="filterResults()">
-                <input formControlName="filter" type="text" placeholder="City, Event Name" maxlength="20">
-                <button type="submit">See Results</button>
+                <input formControlName="filter" type="text" placeholder="Artist, City, Venue" maxlength="20">
+                <button type="submit">Find</button>
                 <button (click)="clearFilter()">Clear</button>
             </form>
         </div>
