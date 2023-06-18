@@ -9,7 +9,10 @@
         <div class="card-body">
           <h5 class="card-title">{{enmEvent.name}}</h5>
           <p class="card-text">
-            {{enmEvent.startTime | standardTime }} | {{enmEvent.month | wordifiedMonth }} {{enmEvent.day}} <span *ngIf="enmEvent.priceOfEntry >= 0">| {{enmEvent.priceOfEntry | wordifiedPriceOfEntry}}</span>
+            <!-- 2400 indicates military time. 2401 is a flag used at the db level to indicate startTime was not provided -->
+            <span *ngIf="enmEvent.startTime < 2400">{{enmEvent.startTime | standardTime }} | </span>
+            {{enmEvent.month | wordifiedMonth }} {{enmEvent.day}} 
+            <span *ngIf="enmEvent.priceOfEntry >= 0">| {{enmEvent.priceOfEntry | wordifiedPriceOfEntry}}</span>
           </p>
           <p class="card-text">{{enmEvent.address}}, {{enmEvent.city}}</p>
         </div>
