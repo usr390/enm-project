@@ -1,6 +1,11 @@
-<form  [formGroup]="enmEventListFilterForm" (ngSubmit)="filterResults()">
-    <input formControlName="filter" type="text" placeholder="City, Event Name" maxlength="20">
-    <button type="submit">See Results</button>
-</form>
-
-<button (click)="clearFilter()">Clear</button>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <form  [formGroup]="enmEventListFilterForm" (ngSubmit)="filterResults()">
+                <input formControlName="filter" type="text" placeholder="City, Event Name" maxlength="20">
+                <button type="submit">See Results</button>
+                <button (click)="clearFilter()">Clear</button>
+            </form>
+        </div>
+    </div>
+</div>
