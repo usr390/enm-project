@@ -20,6 +20,13 @@ export class EnmEventDateComponent {
 
   cancelForm() { this.router.navigate(['/']); }
   goBack(): void { this.router.navigate(['/add-event/address']); }
-  onSubmit(): void { if (this.dateForm.valid) console.log(this.dateForm.value); }
+  onSubmit(): void { 
+    if (this.dateForm.valid) {
+      // do something with the form values here
+      // for example, store the form values for later use.
+      console.log(this.dateForm.value);
+      this.router.navigate(['/add-event/time']);
+    }
+   }
 
 }

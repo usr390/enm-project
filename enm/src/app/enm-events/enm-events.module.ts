@@ -8,6 +8,7 @@ import { EnmEventRoutingModule } from './enm-events-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
+import { EnmEventTimeComponent } from './enm-event-add/enm-event-time/enm-event-time.component';
 
 
 
@@ -17,6 +18,7 @@ import { SharedModule } from '../shared/shared.module';
     EnmEventPageComponent,
     EnmEventListFilterComponent,
     EnmEventListToolbarComponent,
+    EnmEventTimeComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { SharedModule } from '../shared/shared.module';
   exports: [
     EnmEventListComponent,
     EnmEventPageComponent,
+    EnmEventTimeComponent,
   ]
 })
 export class EnmEventModule { }
