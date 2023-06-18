@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { EnmEventTimeComponent } from './enm-event-add/enm-event-time/enm-event-time.component';
+import { EnmEventPriceOfEntryComponent } from './enm-event-add/enm-event-price-of-entry/enm-event-price-of-entry.component';
 
 
 
@@ -19,6 +20,7 @@ import { EnmEventTimeComponent } from './enm-event-add/enm-event-time/enm-event-
     EnmEventListFilterComponent,
     EnmEventListToolbarComponent,
     EnmEventTimeComponent,
+    EnmEventPriceOfEntryComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { EnmEventTimeComponent } from './enm-event-add/enm-event-time/enm-event-
     EnmEventListComponent,
     EnmEventPageComponent,
     EnmEventTimeComponent,
+    EnmEventPriceOfEntryComponent,
   ]
 })
 export class EnmEventModule { }

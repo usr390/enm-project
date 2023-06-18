@@ -1,0 +1,17 @@
+<div class="container-fluid">
+    <form [formGroup]="priceForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <label>Price Of Entry</label>
+        <div class="col">
+          <input type="number" formControlName="price" max="9999">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button type="button" (click)="cancelForm()">Cancel</button>
+          <button type="button" (click)="goBack()">Back</button>
+          <button type="submit" [disabled]="priceForm.invalid">Next</button>
+        </div>
+      </div>
+    </form>
+</div>
