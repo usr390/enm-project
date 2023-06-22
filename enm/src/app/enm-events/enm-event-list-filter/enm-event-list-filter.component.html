@@ -3,7 +3,7 @@
         <div class="col">
             <form  [formGroup]="enmEventListFilterForm" (ngSubmit)="filterResults()">
                 <input formControlName="filter" type="text" placeholder="Artist, City, Venue" maxlength="20">
-                <button type="submit">Find</button>
+                <button type="submit" style="margin: 0 2px ;">Find</button>
                 <button (click)="clearFilter()">Clear</button>
             </form>
         </div>
