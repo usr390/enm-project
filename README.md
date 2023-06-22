@@ -1,5 +1,9 @@
 # enm-project
 
+Actively working on:
+- Implementing CI/CD pipeline
+- Implementing feature allowing users to upload events
+
 Project wiki - https://enmm.atlassian.net/wiki/home
 
 Prior to June 2023 the frontend and backend components of this project each maintained their own repositories. In early June 2023 an operation was conducted to merge frontend and backend into a single repository (monorepo). To view the commit histories of each prior to this operation, see:
