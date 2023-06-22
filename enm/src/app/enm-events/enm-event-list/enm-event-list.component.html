@@ -1,10 +1,10 @@
 <app-enm-event-list-toolbar></app-enm-event-list-toolbar>
 
 <div class="container-fluid">
-  <div *ngFor="let date of (groupedByDateEnmEventList$ | async | keyvalue)">
+  <div *ngFor="let date of (groupedByDateEnmEventList$ | async | keyvalue)" style="margin-top: 20px">
     <h5>{{date.key | wordifiedDateKey }}</h5>
     <!-- date.value resolves to EnmEvent[] -->
-    <div *ngFor="let enmEvent of date.value" class="card event-card">
+    <div *ngFor="let enmEvent of date.value" class="card event-card" style="margin-top: 5px">
         <div class="card-body">
           <h5 class="card-title">{{enmEvent.name}}</h5>
           <p class="card-text">
