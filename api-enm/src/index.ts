@@ -13,6 +13,17 @@ app.get('/', (req: Request, res: Response) => {
 
 app.get('/api/enmEvents', async (req: Request, res: Response) => {
 
+  // create and adjust to the start of the UTC day
+  let currentDate = new Date().setUTCHours(0, 0, 0, 0);
+  
+  // return all future EnmEvent objects (including today's)
+  res.json(await EnmEventModel.find({ time: { $gte: currentDate } })
+  .sort({ time: 1 })
+  .catch(err => console.log(err)))
+})
+
+app.get('/api/enmEventsPendingDeletion', async (req: Request, res: Response) => {
+
   // get current date parts
   let currentDate = new Date();
   let currentYear = currentDate.getFullYear();
@@ -39,6 +50,7 @@ app.post('/api/enmEvent', async (req: Request, res: Response) => {
     city: req.body.city,
     state: req.body.state,
     country: req.body.country,
+    time: req.body.time,
     startTime: req.body.startTime,
     endTime: req.body.endTime,
     day: req.body.day,

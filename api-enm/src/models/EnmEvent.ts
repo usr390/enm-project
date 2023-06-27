@@ -9,6 +9,7 @@ const EnmEventSchema = new Schema({
     city: String,
     state: String,
     country: String,
+    time: Date,
     startTime: Number,
     endTime: {
         type: Number,
