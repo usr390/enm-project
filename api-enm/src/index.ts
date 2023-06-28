@@ -62,6 +62,22 @@ app.post('/api/enmEvent', async (req: Request, res: Response) => {
   res.json(await enmEvent.save());
 })
 
+app.post('/api/enmEventTest', async (req: Request, res: Response) => {
+  /* summary
+    using this API point to slowly build up ENM-3 (feature allowing users to add their own events to the website).
+  */
+  const enmEvent = new EnmEventModel({
+    address: req.body.address,
+    city: req.body.city,
+    state: req.body.state, 
+    day: req.body.day, 
+    month: req.body.month, 
+    year: req.body.year, 
+  });
+  // persist and respond to client with created EnmEvent object
+  res.json(await enmEvent.save());
+})
+
 // asynchronous initialization. keeps api from processesing requests until a successful connection to db is established
 mongoose.connect(process.env.MONGO_URL || '').then(() => { app.listen(port, () => {}); })
 .catch((error) => {
