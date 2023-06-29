@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EnmEventAddMultipageFormService } from 'src/app/core/services/enm-event-add-multipage-form.service';
+
+import { EnmEventAddMultipageFormService } from './../../../core/services/enm-event-add-multipage-form.service';
 
 @Component({
   selector: 'app-enm-event-address',
@@ -25,17 +26,7 @@ export class EnmEventAddressComponent {
     this.addressForm.setControl('state', this.fb.control('', Validators.required));
   }
 
-  onSubmit(): void {
-    if (this.addressForm.valid) {
-      this.router.navigate(['/add-event/date']);
-    }
-  }
+  onSubmit() { if (this.addressForm.valid) { this.router.navigate(['/add-event/date']); } }
 
-  cancelForm() { 
-    this.addressForm.removeControl('eventLocation');
-    this.addressForm.removeControl('address');
-    this.addressForm.removeControl('city');
-    this.addressForm.removeControl('state');
-    this.router.navigate(['/']);
-  }
+  cancelForm() { this.router.navigate(['/']); }
 }

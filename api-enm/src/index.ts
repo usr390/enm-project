@@ -72,7 +72,10 @@ app.post('/api/enmEventTest', async (req: Request, res: Response) => {
     state: req.body.state, 
     day: req.body.day, 
     month: req.body.month, 
-    year: req.body.year, 
+    year: req.body.year,
+    startTime: req.body.startTime,
+    endTime: req.body.endTime,
+    priceOfEntry: req.body.priceOfEntry
   });
   // persist and respond to client with created EnmEvent object
   res.json(await enmEvent.save());

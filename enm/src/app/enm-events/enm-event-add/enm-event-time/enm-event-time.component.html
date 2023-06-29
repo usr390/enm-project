@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <form [formGroup]="timeForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="enmEventAddForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <label>Start Time</label>
         <div class="col">
@@ -16,7 +16,7 @@
         <div class="col">
           <button type="button" (click)="cancelForm()">Cancel</button>
           <button type="button" (click)="goBack()">Back</button>
-          <button type="submit" [disabled]="timeForm.invalid">Next</button>
+          <button type="submit" [disabled]="enmEventAddForm.invalid">Next</button>
         </div>
       </div>
     </form>

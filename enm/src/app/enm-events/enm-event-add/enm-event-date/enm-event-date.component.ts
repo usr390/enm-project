@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EnmEventAddMultipageFormService } from 'src/app/core/services/enm-event-add-multipage-form.service';
+
+import { EnmEventAddMultipageFormService } from './../../../core/services/enm-event-add-multipage-form.service';
 
 @Component({
   selector: 'app-enm-event-date',
@@ -16,7 +17,7 @@ export class EnmEventDateComponent {
  
   dateForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
 
-  constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder,private router: Router) {}
+  constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     this.dateForm.setControl('day', this.fb.control('', [Validators.required, Validators.min(1), Validators.max(31)]));
@@ -24,22 +25,14 @@ export class EnmEventDateComponent {
     this.dateForm.setControl('year', this.fb.control('', [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear() + 1)]));
   }
 
-  onSubmit(): void { 
-    if (this.dateForm.valid) {
-      this.enmEventAddMultipageFormService.postEnmEvent();
-      this.router.navigate(['/add-event/time']);
-    }
-  }
+  onSubmit() { if (this.dateForm.valid) { this.router.navigate(['/add-event/time']); } }
 
-  goBack(): void { 
+  goBack() { 
     this.dateForm.removeControl('day');
     this.dateForm.removeControl('month');
     this.dateForm.removeControl('year');
     this.router.navigate(['/add-event/address']); 
   }
 
-  cancelForm() { 
-    this.router.navigate(['/']); 
-  }
-
+  cancelForm() { this.router.navigate(['/']); }
 }
