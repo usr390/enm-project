@@ -1,11 +1,11 @@
 <div class="container-fluid">
-  <form [formGroup]="artistsForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="enmEventAddForm" (ngSubmit)="onSubmit()">
     <div formArrayName="artists">
       <div class="row" *ngFor="let artist of artistsArray.controls; let i = index">
         <label>Artist {{i + 1}}</label>
-        <div class="col" [formGroupName]="i">
-          <input type="text" formControlName="artist" placeholder="Artist Name" maxlength="50" #artistInput>
-          <button *ngIf="artistsArray.controls.length > 1" type="button" (click)="deleteArtistInputField(i)">Delete</button>
+        <div class="col">
+          <input type="text" [formControlName]="i" placeholder="Artist Name" maxlength="50" #artistInput>
+          <button *ngIf="artistsArray.controls.length > 1" type="button" (click)="removeArtistInputField(i)">Remove</button>
         </div>
       </div>
     </div>
@@ -18,7 +18,7 @@
       <div class="col">
         <button type="button" (click)="cancelForm()">Cancel</button>
         <button type="button" (click)="goBack()">Back</button>
-        <button type="submit" [disabled]="artistsForm.invalid">Done</button>
+        <button type="submit" [disabled]="enmEventAddForm.invalid">Done</button>
       </div>
     </div>
   </form>

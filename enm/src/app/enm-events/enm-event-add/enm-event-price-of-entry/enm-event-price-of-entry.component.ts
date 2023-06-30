@@ -24,7 +24,7 @@ export class EnmEventPriceOfEntryComponent {
   }
 
   onSubmit() { 
-    if (this.enmEventAddForm.valid) { this.enmEventAddMultipageFormService.postEnmEvent(); this.router.navigate(['/add-event/artists']); }
+    if (this.enmEventAddForm.valid) { this.router.navigate(['/add-event/artists']); }
   }
 
   goBack() { 

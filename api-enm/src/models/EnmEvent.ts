@@ -19,6 +19,7 @@ const EnmEventSchema = new Schema({
     month: Number,
     year: Number,
     priceOfEntry: Number,
+    artists: [String]
 });
 
 const EnmEventModel = mongoose.model("EnmEvent", EnmEventSchema);

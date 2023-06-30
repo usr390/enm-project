@@ -2,6 +2,8 @@ import { Component, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { EnmEventAddMultipageFormService } from './../../../core/services/enm-event-add-multipage-form.service';
+
 @Component({
   selector: 'app-enm-event-artists',
   templateUrl: './enm-event-artists.component.html',
@@ -11,36 +13,44 @@ export class EnmEventArtistsComponent {
   
   @ViewChildren('artistInput') artistInputs!: QueryList<ElementRef>;
 
-  artistsForm: FormGroup;
+  enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
 
-  constructor(private fb: FormBuilder, private router: Router) {
-    this.artistsForm = this.fb.group({ artists: this.fb.array([ this.createArtistInputField() ]) });
+  constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) { }
+
+  ngOnInit() { this.enmEventAddForm.setControl('artists', this.fb.array([ this.createArtistInputField() ])) }
+
+  onSubmit() {
+    if (this.enmEventAddForm.valid) {
+      this.enmEventAddMultipageFormService.postEnmEvent();
+      this.router.navigate(['/']);
+    }
   }
-  
-  get artistsArray() { return this.artistsForm.get('artists') as FormArray; }
 
+  goBack() { this.router.navigate(['/add-event/price']); }
+
+  cancelForm() { this.router.navigate(['/']); }
+  
+  // utility
+  get artistsArray() { return this.enmEventAddForm.get('artists') as FormArray; }
+  createArtistInputField() { return this.fb.control('', Validators.required); }
+  removeArtistInputField(index: number) { 
+    // counterpart of 'addArtistInputField'
+    this.artistsArray.removeAt(index); 
+  }
   canAddArtistInputField() {
-    //#region summary
-      /* returns true when:
-        - less than 50 input fields
-        - the previous input field has been filled
-      */
-    //#endregion
+    /* summary
+      used by template to enable 'add artist' button
+      returns true when:
+      - less than 50 input fields
+      - the previous input field has been filled
+    */
     const previousArtistInputField = this.artistsArray.controls[this.artistsArray.controls.length - 1];
-    return this.artistsArray.controls.length < 50 && previousArtistInputField.value.artist;
+    return this.artistsArray.controls.length < 50 && previousArtistInputField.value;
   }
   addArtistInputField() {
+    // counterpart of 'removeArtistInputField'
     this.artistsArray.push(this.createArtistInputField());
     setTimeout(() => this.artistInputs.last.nativeElement.focus(), 0);
   }
-  createArtistInputField() { return this.fb.group({ artist: ['', Validators.required] }); }
-  deleteArtistInputField(index: number) {
-    this.artistsArray.removeAt(index);
-  }
-  
-
-  cancelForm() { this.router.navigate(['/']); }
-  goBack(): void { this.router.navigate(['/add-event/price']); }
-  onSubmit(): void { if (this.artistsForm.valid) console.log(this.artistsForm.value); }
-
 }
+

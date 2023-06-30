@@ -17,5 +17,6 @@ export interface EnmEvent {
     "month": number;
     "year": number;
     "priceOfEntry": number;
+    "artists": string[];
 
 }

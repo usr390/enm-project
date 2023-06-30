@@ -75,7 +75,8 @@ app.post('/api/enmEventTest', async (req: Request, res: Response) => {
     year: req.body.year,
     startTime: req.body.startTime,
     endTime: req.body.endTime,
-    priceOfEntry: req.body.priceOfEntry
+    priceOfEntry: req.body.priceOfEntry,
+    artists: req.body.artists
   });
   // persist and respond to client with created EnmEvent object
   res.json(await enmEvent.save());
