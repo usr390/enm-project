@@ -6,7 +6,11 @@
     <!-- date.value resolves to EnmEvent[] -->
     <div *ngFor="let enmEvent of date.value" class="card event-card" style="margin-top: 5px">
         <div class="card-body">
-          <h5 class="card-title">{{enmEvent.name}}</h5>
+          <h5 class="card-title" *ngIf="enmEvent.name">{{enmEvent.name}}</h5>
+          <h5 class="card-title" *ngIf="enmEvent.artists && enmEvent.location">
+            {{ enmEvent.location }} -
+            {{ enmEvent.artists.join(', ') }}
+          </h5>
           <p class="card-text">
             <!-- 2400 indicates military time. 2401 is a flag used at the db level to indicate startTime was not provided -->
             <span *ngIf="enmEvent.startTime < 2400">{{enmEvent.startTime | standardTime }} &middot; </span>

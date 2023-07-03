@@ -20,7 +20,7 @@ export class EnmEventAddressComponent {
   constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
-    this.addressForm.setControl('eventLocation', this.fb.control('', Validators.required));
+    this.addressForm.setControl('location', this.fb.control('', Validators.required));
     this.addressForm.setControl('address', this.fb.control('', Validators.required));
     this.addressForm.setControl('city', this.fb.control('', Validators.required));
     this.addressForm.setControl('state', this.fb.control('', Validators.required));
