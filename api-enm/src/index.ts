@@ -67,10 +67,13 @@ app.post('/api/enmEventTest', async (req: Request, res: Response) => {
     using this API point to slowly build up ENM-3 (feature allowing users to add their own events to the website).
   */
   const enmEvent = new EnmEventModel({
+    name: "",
+    location: req.body.location,
     address: req.body.address,
     city: req.body.city,
     state: req.body.state,
     country: "USA",
+    time: "2023-07-08T00:00:00Z",
     day: req.body.day, 
     month: req.body.month, 
     year: req.body.year,
