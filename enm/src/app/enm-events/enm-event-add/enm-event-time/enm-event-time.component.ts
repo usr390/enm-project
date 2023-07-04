@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { DateTime } from "luxon";
+
 import { EnmEventAddMultipageFormService } from './../../../core/services/enm-event-add-multipage-form.service';
 
 @Component({
@@ -24,7 +26,9 @@ export class EnmEventTimeComponent {
     this.enmEventAddForm.setControl('endTime', this.fb.control('', [Validators.required]));
   }
 
-  onSubmit() { if (this.enmEventAddForm.valid) { this.router.navigate(['/add-event/price']); } }
+  onSubmit() { 
+    if (this.enmEventAddForm.valid) { this.addUTCTimestampToForm(); this.router.navigate(['/add-event/price']); } 
+  }
 
   goBack() { 
     this.enmEventAddForm.removeControl('startTime');
@@ -33,4 +37,15 @@ export class EnmEventTimeComponent {
   }
 
   cancelForm() { this.router.navigate(['/']); }
+
+  // utility
+  addUTCTimestampToForm() {  
+    this.enmEventAddForm.setControl('time', this.fb.control(DateTime.fromObject({ 
+      year:   this.enmEventAddForm.get('year')!.value, 
+      month:  this.enmEventAddForm.get('month')!.value, 
+      day:    this.enmEventAddForm.get('day')!.value, 
+      hour:   Math.floor(this.enmEventAddForm.get('startTime')!.value / 100), 
+      minute: this.enmEventAddForm.get('startTime')!.value % 100 
+    }).toUTC().toISO()));
+  }
 }

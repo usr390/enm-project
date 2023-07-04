@@ -73,7 +73,7 @@ app.post('/api/enmEventTest', async (req: Request, res: Response) => {
     city: req.body.city,
     state: req.body.state,
     country: "USA",
-    time: "2023-07-08T00:00:00Z",
+    time: req.body.time,
     day: req.body.day, 
     month: req.body.month, 
     year: req.body.year,
