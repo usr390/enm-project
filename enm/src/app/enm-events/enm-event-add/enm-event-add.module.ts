@@ -1,11 +1,13 @@
+// angular imports
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
+// enm imports
 import { EnmEventAddRoutingModule } from './enm-event-add-routing.module';
 import { EnmEventAddressComponent } from './enm-event-address/enm-event-address.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { EnmEventDateComponent } from './enm-event-date/enm-event-date.component';
-import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -14,10 +16,10 @@ import { RouterModule } from '@angular/router';
     EnmEventDateComponent
   ],
   imports: [
-    EnmEventAddRoutingModule,
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    EnmEventAddRoutingModule,
   ],
   exports: [
     EnmEventAddressComponent,
