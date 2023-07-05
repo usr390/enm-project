@@ -22,26 +22,6 @@ app.get('/api/enmEvents', async (req: Request, res: Response) => {
   .catch(err => console.log(err)))
 })
 
-app.get('/api/enmEventsPendingDeletion', async (req: Request, res: Response) => {
-
-  // get current date parts
-  let currentDate = new Date();
-  let currentYear = currentDate.getFullYear();
-  let currentMonth = currentDate.getMonth() + 1; // adjust for 0-based index in JS
-  let currentDay = currentDate.getDate();
-
-  // return all future EnmEvent objects
-  res.json(await EnmEventModel.find({
-    $or: [
-      { year: { $gt: currentYear } },
-      { year: currentYear, month: { $gt: currentMonth } },
-      { year: currentYear, month: currentMonth, day: { $gte: currentDay } }
-    ]
-  })
-  .sort({ year: 1, month: 1, day: 1, startTime: 1})
-  .catch(err => console.log(err)))
-})
-
 app.post('/api/enmEvent', async (req: Request, res: Response) => {
   const enmEvent = new EnmEventModel({
     id: req.body.id,
