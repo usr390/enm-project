@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-const BASE_URL = environment.api + '/enmEventTest';
+const BASE_URL = environment.api;
 
 
 @Injectable({
@@ -22,9 +23,12 @@ export class EnmEventAddMultipageFormService {
 
   // in the context of the multipage form, the last page (aka last component) will call this function to deliver the form value to the API
   postEnmEvent() {
-    this.http.post(BASE_URL, this.enmEventAddMultipageForm.value)
+    this.http.post(BASE_URL + '/enmEventTest', this.enmEventAddMultipageForm.value)
     .subscribe({
       error: error => console.log(error),
     });
   }
+
+  venues$ = this.http.get<any[]>(BASE_URL + '/venues').pipe();
+  
 }

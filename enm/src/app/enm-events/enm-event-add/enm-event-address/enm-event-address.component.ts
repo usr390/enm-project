@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { EnmEventAddMultipageFormService } from './../../../core/services/enm-event-add-multipage-form.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-enm-event-address',
@@ -14,6 +15,12 @@ export class EnmEventAddressComponent {
     adds location information to an event.
     cancel: EnmEventListComponent, next: EnmEventAddDateComponent
   */
+
+  venues$ = this.enmEventAddMultipageFormService.venues$.pipe(
+    tap(value => console.log(value))
+  );
+
+  filteredVenues: any[] | undefined;
  
   addressForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
 

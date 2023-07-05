@@ -3,6 +3,7 @@ import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 
 import EnmEventModel from "./models/EnmEvent";
+import VenueModel from "./models/Venue";
 
 const app = express(); app.use(cors({ origin: '*' })); app.use(express.json())
 const port = process.env.PORT || 3000
@@ -19,6 +20,11 @@ app.get('/api/enmEvents', async (req: Request, res: Response) => {
   // return all future EnmEvent objects (including today's)
   res.json(await EnmEventModel.find({ time: { $gte: currentDate } })
   .sort({ time: 1 })
+  .catch(err => console.log(err)))
+})
+
+app.get('/api/venues', async (req: Request, res: Response) => {
+  res.json(await VenueModel.find()
   .catch(err => console.log(err)))
 })
 
