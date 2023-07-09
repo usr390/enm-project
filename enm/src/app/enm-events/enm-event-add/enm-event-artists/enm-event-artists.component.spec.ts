@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { EnmEventArtistsComponent } from './enm-event-artists.component';
-import { EnmEventAddMultipageFormService } from 'src/app/core/services/enm-event-add-multipage-form.service';
+import { EnmEventAddMultipageFormService } from './../../../core/services/enm-event-add-multipage-form.service';
 
 describe('EnmEventArtistsComponent', () => {
   let component: EnmEventArtistsComponent;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { combineLatest, map } from 'rxjs';
-import { EnmEventService } from '../../core/services/enm-event.service';
+import { EnmEventService } from './../../core/services/enm-event.service';
 
 @Component({
   selector: 'app-enm-event-page',

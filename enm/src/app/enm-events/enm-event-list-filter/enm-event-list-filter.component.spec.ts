@@ -3,7 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { EnmEventListFilterComponent } from './enm-event-list-filter.component';
-import { EnmEventService } from '../../core/services/enm-event.service';
+import { EnmEventService } from './../../core/services/enm-event.service';
 
 
 describe('EnmEventListFilterComponent', () => {

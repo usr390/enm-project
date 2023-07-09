@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { EnmEventService } from '../../core/services/enm-event.service';
+import { EnmEventService } from './../../core/services/enm-event.service';
 
 @Component({
   selector: 'app-enm-event-list-filter',

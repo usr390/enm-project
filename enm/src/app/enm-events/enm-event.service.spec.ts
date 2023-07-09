@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { EnmEventService } from '../core/services/enm-event.service';
+import { EnmEventService } from './../core/services/enm-event.service';
 
 describe('EnmEventService', () => {
   let service: EnmEventService;

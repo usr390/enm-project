@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { EnmEventPageComponent } from './enm-event-page.component';
-import { EnmEventService } from '../../core/services/enm-event.service';
+import { EnmEventService } from './../../core/services/enm-event.service';
 
 describe('EnmEventPageComponent', () => {
   let component: EnmEventPageComponent;

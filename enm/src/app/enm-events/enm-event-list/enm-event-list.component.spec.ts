@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { EnmEventListComponent } from './enm-event-list.component';
-import { EnmEventService } from '../../core/services/enm-event.service';
-import { EnmEventModule } from '../enm-events.module';
+import { EnmEventService } from './../../core/services/enm-event.service';
+import { EnmEventModule } from './../enm-events.module';
 
 
 describe('EnmEventListComponent', () => {

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EnmEventTimeComponent } from './enm-event-time.component';
-import { EnmEventAddMultipageFormService } from 'src/app/core/services/enm-event-add-multipage-form.service';
+import { EnmEventAddMultipageFormService } from './../../../core/services/enm-event-add-multipage-form.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('EnmEventTimeComponent', () => {

@@ -7,7 +7,7 @@ import { EnmEventAddModule } from './enm-event-add/enm-event-add.module';
 import { EnmEventRoutingModule } from './enm-events-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from './../shared/shared.module';
 import { EnmEventTimeComponent } from './enm-event-add/enm-event-time/enm-event-time.component';
 import { EnmEventPriceOfEntryComponent } from './enm-event-add/enm-event-price-of-entry/enm-event-price-of-entry.component';
 import { EnmEventArtistsComponent } from './enm-event-add/enm-event-artists/enm-event-artists.component';

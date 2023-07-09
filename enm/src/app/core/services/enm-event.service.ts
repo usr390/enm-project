@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EnmEvent } from '../../enm-events/enm-event.model';
-import { environment } from 'src/environments/environment';
+import { EnmEvent } from './../../enm-events/enm-event.model';
+import { environment } from './../../../environments/environment';
 import { BehaviorSubject, Observable, shareReplay } from 'rxjs';
 const BASE_URL = environment.api + '/enmEvents';
 
