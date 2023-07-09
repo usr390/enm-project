@@ -18,8 +18,8 @@ app.get('/api/enmEvents', async (req: Request, res: Response) => {
   let currentDate = new Date().setUTCHours(0, 0, 0, 0);
   
   // return all future EnmEvent objects (including today's)
-  res.json(await EnmEventModel.find({ time: { $gte: currentDate } })
-  .sort({ time: 1 })
+  res.json(await EnmEventModel.find({ dateTime: { $gte: currentDate } })
+  .sort({ dateTime: 1 })
   .catch(err => console.log(err)))
 })
 
@@ -36,7 +36,7 @@ app.post('/api/enmEvent', async (req: Request, res: Response) => {
     city: req.body.city,
     state: req.body.state,
     country: req.body.country,
-    time: req.body.time,
+    dateTime: req.body.dateTime,
     startTime: req.body.startTime,
     endTime: req.body.endTime,
     day: req.body.day,
@@ -59,7 +59,7 @@ app.post('/api/enmEventTest', async (req: Request, res: Response) => {
     city: req.body.city,
     state: req.body.state,
     country: "USA",
-    time: req.body.time,
+    dateTime: req.body.dateTime,
     day: req.body.day, 
     month: req.body.month, 
     year: req.body.year,
