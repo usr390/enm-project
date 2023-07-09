@@ -2,22 +2,22 @@
 
 <div class="container-fluid">
   <div *ngFor="let date of (groupedByDateEnmEventList$ | async | keyvalue)" style="margin-top: 20px">
-    <h5>{{date.key | wordifiedDateKey }}</h5>
+    <h5>{{ date.key | wordifiedDateKey }}</h5>
     <!-- date.value resolves to EnmEvent[] -->
     <div *ngFor="let enmEvent of date.value" class="card event-card" style="margin-top: 5px">
         <div class="card-body">
-          <h5 class="card-title" *ngIf="enmEvent.name">{{enmEvent.name}}</h5>
+          <h5 class="card-title" *ngIf="enmEvent.name">{{ enmEvent.name }}</h5>
           <h5 class="card-title" *ngIf="enmEvent.artists && enmEvent.location">
             {{ enmEvent.location }} -
             {{ enmEvent.artists.join(', ') }}
           </h5>
           <p class="card-text">
             <!-- 2400 indicates military time. 2401 is a flag used at the db level to indicate startTime was not provided -->
-            <span *ngIf="enmEvent.startTime < 2400">{{enmEvent.startTime | standardTime }} &middot; </span>
+            <span *ngIf="enmEvent.startTime < 2400">{{ enmEvent.dateTime | dateTimeToTime }} &middot; </span>
             {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }} 
-            <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{enmEvent.priceOfEntry | wordifiedPriceOfEntry}}</span>
+            <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedPriceOfEntry }}</span>
           </p>
-          <p class="card-text">{{enmEvent.address}}, {{enmEvent.city}}</p>
+          <p class="card-text">{{ enmEvent.address }}, {{ enmEvent.city }}</p>
         </div>
     </div>
   </div>
