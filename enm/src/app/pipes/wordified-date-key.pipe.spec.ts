@@ -1,5 +1,4 @@
 import { WordifiedDateKeyPipe } from './wordified-date-key.pipe';
-import { WordifiedMonthPipe } from './wordified-month.pipe';
 
 describe('WordifiedDateKeyPipe', () => {
 
