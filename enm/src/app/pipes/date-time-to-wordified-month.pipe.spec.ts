@@ -12,7 +12,7 @@ it('create an instance', () => {
 });
 
 describe('on valid inputs', () => {
-  it('should transform "2023-07-15T01:00:00.000Z" to "July"', () => {
+  it('should transform "2023-07-15T01:00:00.000Z" to "Jul"', () => {
 
     const input = DateTime.fromObject({ 
       year:   2023, 
