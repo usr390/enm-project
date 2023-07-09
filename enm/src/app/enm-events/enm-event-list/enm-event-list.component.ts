@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { combineLatest, map } from 'rxjs';
 import { EnmEventService } from './../../core/services/enm-event.service';
 import { EnmEvent } from './../enm-event.model';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-enm-event-list',
@@ -18,7 +19,8 @@ export class EnmEventListComponent implements OnInit {
     map((events) => {
       const enmEventsGroupedByDate = new Map<string, EnmEvent[]>();
       events.forEach(event => {
-        const dateKey = `${event.year}${event.month.toString().padStart(2, '0')}${event.day.toString().padStart(2, '0')}`
+        let dateTime = DateTime.fromISO(event.dateTime);
+        const dateKey = dateTime.toFormat('yyyy') + dateTime.toFormat('LL') + dateTime.toFormat('dd');
         if (!enmEventsGroupedByDate.has(dateKey)) enmEventsGroupedByDate.set(dateKey, []);
         enmEventsGroupedByDate.get(dateKey)!.push(event);
       });
