@@ -40,7 +40,7 @@ export class EnmEventTimeComponent {
 
   // utility
   addUTCTimestampToForm() {  
-    this.enmEventAddForm.setControl('time', this.fb.control(DateTime.fromObject({ 
+    this.enmEventAddForm.setControl('dateTime', this.fb.control(DateTime.fromObject({ 
       year:   this.enmEventAddForm.get('year')!.value, 
       month:  this.enmEventAddForm.get('month')!.value, 
       day:    this.enmEventAddForm.get('day')!.value, 
