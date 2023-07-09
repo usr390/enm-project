@@ -20,6 +20,7 @@ export interface EnmEvent {
     "day": number;
     "month": number;
     "year": number;
+    "dateTime": string;
     "priceOfEntry": number;
     "artists": string[];
 

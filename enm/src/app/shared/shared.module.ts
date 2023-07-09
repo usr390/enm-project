@@ -7,6 +7,7 @@ import { StandardTimePipe } from './../pipes/standard-time.pipe';
 import { WordifiedMonthPipe } from './../pipes/wordified-month.pipe';
 import { WordifiedDateKeyPipe } from './../pipes/wordified-date-key.pipe';
 import { WordifiedPriceOfEntryPipe } from './wordified-price-of-entry.pipe';
+import { DateTimeToWordifiedMonthPipe } from '../src/app/date-time-to-wordified-month.pipe';
 
 
 
@@ -15,7 +16,8 @@ import { WordifiedPriceOfEntryPipe } from './wordified-price-of-entry.pipe';
     StandardTimePipe,
     WordifiedMonthPipe,
     WordifiedDateKeyPipe,
-    WordifiedPriceOfEntryPipe
+    WordifiedPriceOfEntryPipe,
+    DateTimeToWordifiedMonthPipe
   ],
   imports: [
     CommonModule
@@ -24,7 +26,8 @@ import { WordifiedPriceOfEntryPipe } from './wordified-price-of-entry.pipe';
     StandardTimePipe,
     WordifiedMonthPipe,
     WordifiedDateKeyPipe,
-    WordifiedPriceOfEntryPipe
+    WordifiedPriceOfEntryPipe,
+    DateTimeToWordifiedMonthPipe
   ],
 })
 export class SharedModule { }
