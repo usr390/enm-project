@@ -15,11 +15,6 @@ export interface EnmEvent {
     "city": string,
     "state": string,
     "country": string,
-    "startTime": number;
-    "endTime"?: number;
-    "day": number;
-    "month": number;
-    "year": number;
     "dateTime": string;
     "priceOfEntry": number;
     "artists": string[];

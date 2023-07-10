@@ -27,7 +27,7 @@ export class EnmEventTimeComponent {
   }
 
   onSubmit() { 
-    if (this.enmEventAddForm.valid) { this.addUTCTimestampToForm(); this.router.navigate(['/add-event/price']); } 
+    if (this.enmEventAddForm.valid) { this.addDateTimeToForm(); this.dropHelperControls(); this.router.navigate(['/add-event/price']); } 
   }
 
   goBack() { 
@@ -39,7 +39,7 @@ export class EnmEventTimeComponent {
   cancelForm() { this.router.navigate(['/']); }
 
   // utility
-  addUTCTimestampToForm() {  
+  addDateTimeToForm() {  
     this.enmEventAddForm.setControl('dateTime', this.fb.control(DateTime.fromObject({ 
       year:   this.enmEventAddForm.get('year')!.value, 
       month:  this.enmEventAddForm.get('month')!.value, 
@@ -47,5 +47,14 @@ export class EnmEventTimeComponent {
       hour:   Math.floor(this.enmEventAddForm.get('startTime')!.value / 100), 
       minute: this.enmEventAddForm.get('startTime')!.value % 100 
     }).toUTC().toISO()));
+  }
+
+  dropHelperControls() {
+    // controls used to build 'dateTime' property. can be dropped after dateTime is created
+    this.enmEventAddForm.removeControl('startTime');
+    this.enmEventAddForm.removeControl('endTime');
+    this.enmEventAddForm.removeControl('day');
+    this.enmEventAddForm.removeControl('month');
+    this.enmEventAddForm.removeControl('year');
   }
 }
