@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "clean-install": "cd enm && npm ci && cd ./../api-enm && pnpm install",
+    "build": "cd enm && npm run build && cd ./../api-enm && pnpm run build",
+    "test": "cd enm && npm run test"
+  }
+}
