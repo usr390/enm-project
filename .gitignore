@@ -6,6 +6,12 @@ enm/tmp
 enm/out-tsc
 enm/bazel-oenmenm/enm//enenm/mut
 
+# Playwright
+enm/test-results/
+enm/playwright-report/
+enm/playwright/.cache/
+
+
 # Node
 enm/node_modules
 enm/npm-debug.log
