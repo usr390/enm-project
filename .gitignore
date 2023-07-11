@@ -52,3 +52,6 @@ api-enm/dist/
 api-enm/node_modules/
 # Environment variables
 api-enm/env.ts
+/test-results/
+/playwright-report/
+/playwright/.cache/
