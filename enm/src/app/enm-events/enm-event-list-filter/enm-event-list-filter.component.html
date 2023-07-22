@@ -1,10 +1,12 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row ">
         <div class="col">
             <form  [formGroup]="enmEventListFilterForm" (ngSubmit)="filterResults()">
-                <input formControlName="filter" type="text" placeholder="Artist, City, Venue" maxlength="20">
-                <button type="submit" style="margin: 0 2px ;">Find</button>
-                <button (click)="clearFilter()">Clear</button>
+                <div class="p-inputgroup">
+                    <input formControlName="filter" type="text" pInputText placeholder="Artist, City, Venue" maxlength="20" style="max-width: 250px;"/>
+                    <button pButton type="submit" icon="pi pi-search" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
+                    <button pButton (click)="clearFilter()" icon="pi pi-times" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
+                </div>
             </form>
         </div>
     </div>
