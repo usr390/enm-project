@@ -1,6 +1,7 @@
 import cors from "cors";
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
+import { DateTime } from "luxon";
 
 import EnmEventModel from "./models/EnmEvent";
 import VenueModel from "./models/Venue";
@@ -14,11 +15,12 @@ app.get('/', (req: Request, res: Response) => {
 
 app.get('/api/enmEvents', async (req: Request, res: Response) => {
 
-  // create and adjust to the start of the UTC day
-  let currentDate = new Date().setUTCHours(0, 0, 0, 0);
+  // dt is -12 hours because it is still desirable to get EnmEvents when their dateTime has passed by only a few hours.
+  // for example, users searching for events at 9pm would probably be interested in seeing which events started at 8pm or earlier
+  let dt = DateTime.now().minus({ hours: 12 })
   
   // return all future EnmEvent objects (including today's)
-  res.json(await EnmEventModel.find({ dateTime: { $gte: currentDate } })
+  res.json(await EnmEventModel.find({ dateTime: { $gte: dt } })
   .sort({ dateTime: 1 })
   .catch(err => console.log(err)))
 })
