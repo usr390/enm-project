@@ -1,3 +1,4 @@
+// enm imports
 import { EnmEventListComponent } from './enm-event-list/enm-event-list.component';
 import { EnmEventPageComponent } from './enm-event-page/enm-event-page.component';
 import { EnmEventListFilterComponent } from './enm-event-list-filter/enm-event-list-filter.component';
@@ -7,12 +8,16 @@ import { EnmEventRoutingModule } from './enm-events-routing.module';
 import { EnmEventTimeComponent } from './enm-event-add/enm-event-time/enm-event-time.component';
 import { EnmEventPriceOfEntryComponent } from './enm-event-add/enm-event-price-of-entry/enm-event-price-of-entry.component';
 import { EnmEventArtistsComponent } from './enm-event-add/enm-event-artists/enm-event-artists.component';
+import { CoreModule } from '../core/core.module';
+import { SharedModule } from './../shared/shared.module';
 
+// angular imports
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { SharedModule } from './../shared/shared.module';
 
+// primeng imports
+import { SidebarModule } from 'primeng/sidebar';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -35,7 +40,10 @@ import { InputTextModule } from 'primeng/inputtext';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    CoreModule,
     SharedModule,
+    // primeng modules
+    SidebarModule,
     ToolbarModule,
     ButtonModule,
     InputTextModule
