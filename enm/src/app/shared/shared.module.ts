@@ -8,6 +8,11 @@ import { WordifiedPriceOfEntryPipe } from './wordified-price-of-entry.pipe';
 import { DateTimeToWordifiedMonthPipe } from './../pipes/date-time-to-wordified-month.pipe';
 import { DateTimeToDayPipe } from './../pipes/date-time-to-day.pipe';
 import { DateTimeToTimePipe } from '../pipes/date-time-to-time.pipe';
+import { LogoComponent } from './logo/logo.component';
+
+// primeng imports
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
 
 
 
@@ -17,17 +22,22 @@ import { DateTimeToTimePipe } from '../pipes/date-time-to-time.pipe';
     WordifiedPriceOfEntryPipe,
     DateTimeToWordifiedMonthPipe,
     DateTimeToDayPipe,
-    DateTimeToTimePipe
+    DateTimeToTimePipe,
+    LogoComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    // primeng modules
+    AvatarModule,
+    AvatarGroupModule
   ],
   exports: [
     WordifiedDateKeyPipe,
     WordifiedPriceOfEntryPipe,
     DateTimeToWordifiedMonthPipe,
     DateTimeToDayPipe,
-    DateTimeToTimePipe
+    DateTimeToTimePipe,
+    LogoComponent
   ],
 })
 export class SharedModule { }
