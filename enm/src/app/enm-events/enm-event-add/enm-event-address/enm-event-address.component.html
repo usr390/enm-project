@@ -14,8 +14,10 @@
         </div>
         <div class="row">
             <div class="col">
-                <button type="button" (click)="cancelForm()">Cancel</button>
-                <button type="submit" [disabled]="addressForm.invalid">Next</button>
+                <div class="p-inputgroup">
+                    <button pButton type="button" (click)="cancelForm()" icon="pi pi-times" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
+                    <button pButton type="submit" [disabled]="addressForm.invalid" icon="pi pi-arrow-right" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
+                </div>
             </div>
         </div>
     </form>

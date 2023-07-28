@@ -4,7 +4,9 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+// primeng imports
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ButtonModule } from 'primeng/button';
 
 // enm imports
 import { EnmEventAddRoutingModule } from './enm-event-add-routing.module';
@@ -22,7 +24,9 @@ import { EnmEventDateComponent } from './enm-event-date/enm-event-date.component
     ReactiveFormsModule,
     RouterModule,
     EnmEventAddRoutingModule,
-    AutoCompleteModule
+    // primeng modules
+    AutoCompleteModule,
+    ButtonModule
   ],
   exports: [
     EnmEventAddressComponent,
