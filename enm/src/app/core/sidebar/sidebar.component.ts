@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
   sidebarVisible: boolean = false;
+  currentDate = new Date();
 }

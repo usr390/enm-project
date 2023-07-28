@@ -1,13 +1,20 @@
 <p-sidebar [(visible)]="sidebarVisible">
-    <h3>Enm</h3>
-    <p>
-        Welcome to Enm, the valley's premium event search service
-    </p>
-    <p>
-        Feel free to browse upcoming events, search for events in specific cities and venues, or even look up your favorite local artists to see where they perform next
-    </p>
-    <p>
-        We're in active development, check back in frequently to see our latest updates
-    </p>
+    <ng-template pTemplate="header">
+        <h3>Enm</h3>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <p>
+            Welcome to Enm, the valley's premium event search service
+        </p>
+        <p>
+            Feel free to browse upcoming events, search for events in specific cities and venues, or even look up your favorite local artists to see where they perform next
+        </p>
+        <p>
+            We're in active development, check back in frequently to see our latest updates
+        </p>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <p>Copyright @{{currentDate | date: 'y'}} All Rights Reserved</p>
+    </ng-template>
 </p-sidebar>
 <p-button (click)="sidebarVisible = true" icon="pi pi-bars" styleClass="p-button-sm"></p-button>
