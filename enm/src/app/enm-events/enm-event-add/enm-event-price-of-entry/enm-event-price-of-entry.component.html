@@ -8,9 +8,9 @@
       </div>
       <div class="row">
         <div class="col">
-          <button type="button" (click)="cancelForm()">Cancel</button>
-          <button type="button" (click)="goBack()">Back</button>
-          <button type="submit" [disabled]="enmEventAddForm.invalid">Next</button>
+          <button pButton type="button" (click)="cancelForm()" icon="pi pi-times" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
+          <button pButton type="button" (click)="goBack()" icon="pi pi-arrow-left" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
+          <button pButton type="submit" [disabled]="enmEventAddForm.invalid" icon="pi pi-arrow-right" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
         </div>
       </div>
     </form>

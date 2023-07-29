@@ -14,7 +14,7 @@ import { EnmEventAddMultipageFormService } from './../../../core/services/enm-ev
 export class EnmEventTimeComponent {
   /* summary
     adds time information to an event.
-    previous: EnmEventListDateComponent, next: EnmEventAddPriceComponent
+    previous: EnmEventListDateComponent, next: EnmEventPriceOfEntryComponent
   */
  
   enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
