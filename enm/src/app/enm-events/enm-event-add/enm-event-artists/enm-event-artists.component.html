@@ -5,7 +5,7 @@
         <label>Artist {{i + 1}}</label>
         <div class="col">
           <input type="text" [formControlName]="i" placeholder="Artist Name" maxlength="50" #artistInput>
-          <button *ngIf="artistsArray.controls.length > 1" type="button" (click)="removeArtistInputField(i)">Remove</button>
+          <button pButton *ngIf="artistsArray.controls.length > 1" type="button" (click)="removeArtistInputField(i)" icon="pi pi-times"></button>
         </div>
       </div>
     </div>
