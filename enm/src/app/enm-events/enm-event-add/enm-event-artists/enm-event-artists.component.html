@@ -4,7 +4,7 @@
       <div class="row" *ngFor="let artist of artistsArray.controls; let i = index">
         <label>Artist {{i + 1}}</label>
         <div class="col">
-          <input type="text" [formControlName]="i" placeholder="Artist Name" maxlength="50" #artistInput>
+          <input pInputText type="text" [formControlName]="i" placeholder="Artist Name" maxlength="50" #artistInput>
           <button pButton *ngIf="artistsArray.controls.length > 1" type="button" (click)="removeArtistInputField(i)" icon="pi pi-times"></button>
         </div>
       </div>
