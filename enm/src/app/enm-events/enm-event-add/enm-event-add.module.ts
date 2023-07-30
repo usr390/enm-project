@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { CalendarModule } from 'primeng/calendar';
 
 // enm imports
 import { EnmEventAddRoutingModule } from './enm-event-add-routing.module';
@@ -28,7 +29,8 @@ import { EnmEventDateComponent } from './enm-event-date/enm-event-date.component
     // primeng modules
     AutoCompleteModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    CalendarModule
   ],
   exports: [
     EnmEventAddressComponent,

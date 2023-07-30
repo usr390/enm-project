@@ -23,6 +23,7 @@ export class EnmEventDateComponent {
     this.dateForm.setControl('day', this.fb.control('', [Validators.required, Validators.min(1), Validators.max(31)]));
     this.dateForm.setControl('month', this.fb.control('', [Validators.required, Validators.min(1), Validators.max(12)]));
     this.dateForm.setControl('year', this.fb.control('', [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear() + 1)]));
+    this.dateForm.setControl('date', this.fb.control('', [Validators.required, Validators.min(1), Validators.max(31)]));
   }
 
   onSubmit() { if (this.dateForm.valid) { this.router.navigate(['/add-event/time']); } }
