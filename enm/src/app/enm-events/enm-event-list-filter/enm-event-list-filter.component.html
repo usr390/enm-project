@@ -3,7 +3,7 @@
         <div class="col">
             <form  [formGroup]="enmEventListFilterForm" (ngSubmit)="filterResults()">
                 <div class="p-inputgroup">
-                    <input formControlName="filter" type="text" pInputText placeholder="Search" maxlength="20" style="max-width: 150px;"/>
+                    <input formControlName="filter" type="text" pInputText placeholder="Search" maxlength="20" style="max-width: 130px;"/>
                     <button pButton type="submit" icon="pi pi-search" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
                     <button pButton (click)="clearFilter()" icon="pi pi-times" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
                 </div>
