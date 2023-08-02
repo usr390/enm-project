@@ -7,12 +7,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 // enm imports
 import { SharedModule } from '../shared/shared.module';
 
-// primeng imports
-import { SidebarModule } from 'primeng/sidebar';
-import { ButtonModule } from 'primeng/button';
-
-
-
 
 @NgModule({
   declarations: [
@@ -23,10 +17,6 @@ import { ButtonModule } from 'primeng/button';
     HttpClientModule,
     // enm modules,
     SharedModule,
-
-    // primeng modules
-    SidebarModule,
-    ButtonModule,
   ],
   exports: [
     SidebarComponent

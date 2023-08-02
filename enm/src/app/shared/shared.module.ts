@@ -13,6 +13,12 @@ import { LogoComponent } from './logo/logo.component';
 // primeng imports
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { CalendarModule } from 'primeng/calendar';
+import { SidebarModule } from 'primeng/sidebar';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 
@@ -27,9 +33,15 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
   ],
   imports: [
     CommonModule,
-    // primeng modules
+    // primeng imports
     AvatarModule,
-    AvatarGroupModule
+    AvatarGroupModule,
+    AutoCompleteModule,
+    ButtonModule,
+    CalendarModule,
+    InputTextModule,
+    SidebarModule,
+    ToolbarModule,
   ],
   exports: [
     WordifiedDateKeyPipe,
@@ -37,7 +49,16 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
     DateTimeToWordifiedMonthPipe,
     DateTimeToDayPipe,
     DateTimeToTimePipe,
-    LogoComponent
+    LogoComponent,
+    // primeng exports
+    AvatarModule,
+    AvatarGroupModule,
+    AutoCompleteModule,
+    ButtonModule,
+    CalendarModule,
+    InputTextModule,
+    SidebarModule,
+    ToolbarModule,
   ],
 })
 export class SharedModule { }

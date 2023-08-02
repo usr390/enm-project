@@ -16,14 +16,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-// primeng imports
-import { SidebarModule } from 'primeng/sidebar';
-import { ToolbarModule } from 'primeng/toolbar';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-
-
-
 @NgModule({
   declarations: [
     EnmEventListComponent,
@@ -42,11 +34,6 @@ import { InputTextModule } from 'primeng/inputtext';
     ReactiveFormsModule,
     CoreModule,
     SharedModule,
-    // primeng modules
-    SidebarModule,
-    ToolbarModule,
-    ButtonModule,
-    InputTextModule
   ],
   exports: [
     EnmEventListComponent,

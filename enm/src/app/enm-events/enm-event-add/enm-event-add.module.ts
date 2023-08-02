@@ -4,16 +4,11 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-// primeng imports
-import { AutoCompleteModule } from 'primeng/autocomplete';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import { CalendarModule } from 'primeng/calendar';
-
 // enm imports
 import { EnmEventAddRoutingModule } from './enm-event-add-routing.module';
 import { EnmEventAddressComponent } from './enm-event-address/enm-event-address.component';
 import { EnmEventDateComponent } from './enm-event-date/enm-event-date.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -26,11 +21,7 @@ import { EnmEventDateComponent } from './enm-event-date/enm-event-date.component
     ReactiveFormsModule,
     RouterModule,
     EnmEventAddRoutingModule,
-    // primeng modules
-    AutoCompleteModule,
-    ButtonModule,
-    InputTextModule,
-    CalendarModule
+    SharedModule
   ],
   exports: [
     EnmEventAddressComponent,
