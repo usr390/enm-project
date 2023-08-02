@@ -25,4 +25,8 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app.title).toEqual('enm');
   });
+  it(`should assert that 1 is equal to 1`, () => {
+    // test to see how github actions reacts to a failing test
+    expect(1).toEqual(2);
+  });
 });
