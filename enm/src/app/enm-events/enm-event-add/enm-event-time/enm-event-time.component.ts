@@ -15,15 +15,18 @@ export class EnmEventTimeComponent {
   /* summary
     adds time information to an event.
     previous: EnmEventListDateComponent, next: EnmEventPriceOfEntryComponent
-  */
+  */    
  
   enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
+
+  defaultTime = new Date(0, 0, 0, 0, 0);
 
   constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     this.enmEventAddForm.setControl('startTime', this.fb.control('', [Validators.required]));
     this.enmEventAddForm.setControl('endTime', this.fb.control('', [Validators.required]));
+    this.enmEventAddForm.setControl('test', this.fb.control('', [Validators.required]));
   }
 
   onSubmit() { 

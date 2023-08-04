@@ -13,6 +13,12 @@
         </div>
       </div>
       <div class="row">
+        <label>Start Time (Test)</label>
+        <div class="col">
+          <p-calendar [timeOnly]="true" formControlName="test" hourFormat="12" [stepMinute]=15 [defaultDate]="defaultTime"></p-calendar>
+        </div>
+      </div>
+      <div class="row">
         <div class="col">
           <button pButton type="button" (click)="cancelForm()" icon="pi pi-times" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
           <button pButton type="button" (click)="goBack()" icon="pi pi-arrow-left" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
