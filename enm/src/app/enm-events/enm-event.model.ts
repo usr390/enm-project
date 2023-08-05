@@ -1,3 +1,11 @@
+export interface Venue {
+    "name": string,
+    "address": string,
+    "city": string,
+    "state": string,
+    "country": string
+}
+
 export interface EnmEvent {
 
     /* summary
@@ -11,6 +19,7 @@ export interface EnmEvent {
     "id": number,
     "name": string,
     "location": string,
+    "venue": Venue,
     "address": string,
     "city": string,
     "state": string,

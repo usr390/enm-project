@@ -10,10 +10,19 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
+const VenueSchema = new Schema({
+    name: String,
+    address: String,
+    city: String,
+    state: String,
+    country: String
+});
+
 const EnmEventSchema = new Schema({
     id: Number,
     name: String,
     location: String,
+    venue: VenueSchema,
     address: String,
     city: String,
     state: String,

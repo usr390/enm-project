@@ -13,7 +13,7 @@
             <div class="col"><input pInputText type="text" formControlName="state"></div>
         </div>
         <div class="row"><label>Event Location (Autocomplete Test)</label>
-            <p-autoComplete formControlName="test" [virtualScroll]="true" [suggestions]="filteredVenues" (completeMethod)="filterVenue($event)" field="name"></p-autoComplete>
+            <p-autoComplete formControlName="venue" [virtualScroll]="true" [suggestions]="filteredVenues" (completeMethod)="filterVenue($event)" field="name"></p-autoComplete>
         </div>
         <div class="row">
             <div class="col">

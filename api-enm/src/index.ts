@@ -52,6 +52,7 @@ app.post('/api/enmEventTest', async (req: Request, res: Response) => {
   const enmEvent = new EnmEventModel({
     name: "",
     location: req.body.location,
+    venue: req.body.venue,
     address: req.body.address,
     city: req.body.city,
     state: req.body.state,

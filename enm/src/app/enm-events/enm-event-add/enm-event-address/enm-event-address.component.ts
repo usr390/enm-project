@@ -32,7 +32,7 @@ export class EnmEventAddressComponent {
     this.addressForm.setControl('address', this.fb.control('', Validators.required));
     this.addressForm.setControl('city', this.fb.control('', Validators.required));
     this.addressForm.setControl('state', this.fb.control('', Validators.required));
-    this.addressForm.setControl('test', this.fb.control('', Validators.required));
+    this.addressForm.setControl('venue', this.fb.control('', Validators.required));
   }
 
   onSubmit() { if (this.addressForm.valid) { this.router.navigate(['/add-event/date']); } }
