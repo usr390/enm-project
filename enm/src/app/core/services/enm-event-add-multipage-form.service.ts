@@ -29,6 +29,21 @@ export class EnmEventAddMultipageFormService {
     });
   }
 
-  venues$ = this.http.get<any[]>(BASE_URL + '/venues').pipe();
-  
+  // promise-based http request. used in EnmEventAddressComponent for autocomplete functionality
+  getVenues() {
+    const promise = new Promise<any[]>((resolve, reject) => {
+      this.http.get<any[]>(BASE_URL + '/venues').subscribe({
+        next: (res: any) => {
+          resolve(res);
+        },
+        error: (err: any) => {
+          reject(err);
+        },
+        complete: () => {
+          console.log('complete');
+        },
+      });
+    });
+    return promise;
+  }
 }
