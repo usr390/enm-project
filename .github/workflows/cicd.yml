@@ -21,8 +21,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Install PNPM
       run: npm install -g pnpm
-    - run: npm run clean-install
-    - run: npm run test
+    - name: Install Project Dependencies
+      run: npm run clean-install
+    - name: Run Commit Tests
+      run: npm run test
     - name: Install Vercel CLI
       run: npm install --global vercel@latest
     - name: Pull Vercel Environment Information
@@ -33,7 +35,7 @@ jobs:
       run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
     - name: Install Railway CLI
       run: npm i -g @railway/cli
-    - name: Deploy
+    - name: Deploy To Railway
       run: railway up
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
