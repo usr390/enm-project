@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { EnmEventService } from './../../core/services/enm-event.service';
 
 @Component({
@@ -13,8 +13,7 @@ export class EnmEventListFilterComponent implements OnInit {
 
   constructor(private enmEventService: EnmEventService, private fb: FormBuilder) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit() {}
 
   filterResults() { this.enmEventService.updateEnmEventListFilter(this.enmEventListFilterForm.value.filter?.trim() as string); }
 

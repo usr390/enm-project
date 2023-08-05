@@ -21,6 +21,7 @@ export class EnmEventArtistsComponent {
 
   onSubmit() {
     if (this.enmEventAddForm.valid) {
+      this.trimArtistArrayElements();
       this.enmEventAddMultipageFormService.postEnmEvent();
       this.router.navigate(['/']);
     }
@@ -51,6 +52,11 @@ export class EnmEventArtistsComponent {
     // counterpart of 'removeArtistInputField'
     this.artistsArray.push(this.createArtistInputField());
     setTimeout(() => this.artistInputs.last.nativeElement.focus(), 0);
+  }
+  trimArtistArrayElements() {
+    this.artistsArray.controls.forEach((control) => {
+      control.setValue(control.value.trim());
+    });
   }
 }
 
