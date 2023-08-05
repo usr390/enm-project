@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 // enm imports
 import { WordifiedDateKeyPipe } from './../pipes/wordified-date-key.pipe';
-import { WordifiedPriceOfEntryPipe } from './wordified-price-of-entry.pipe';
+import { WordifiedPriceOfEntryPipe } from './../pipes/wordified-price-of-entry.pipe';
 import { DateTimeToWordifiedMonthPipe } from './../pipes/date-time-to-wordified-month.pipe';
 import { DateTimeToDayPipe } from './../pipes/date-time-to-day.pipe';
 import { DateTimeToTimePipe } from '../pipes/date-time-to-time.pipe';
