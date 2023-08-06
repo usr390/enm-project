@@ -3,18 +3,6 @@
         <div class="row"><label>Venue (Autocomplete Test)</label>
             <p-autoComplete formControlName="venue" [virtualScroll]="true" [suggestions]="filteredVenues" (completeMethod)="filterVenue($event)" field="name"></p-autoComplete>
         </div>
-        <div class="row"><label>Venue</label>
-            <div class="col"><input pInputText type="text" formControlName="location"></div>
-        </div>
-        <div class="row"><label>Address</label>
-            <div class="col"><input pInputText type="text" formControlName="address"></div>
-        </div>
-        <div class="row"><label>City</label>
-            <div class="col"><input pInputText type="text" formControlName="city"></div>
-        </div>
-        <div class="row"><label>State</label>
-            <div class="col"><input pInputText type="text" formControlName="state"></div>
-        </div>
         <div class="row">
             <div class="col">
                 <div class="p-inputgroup">

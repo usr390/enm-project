@@ -28,10 +28,6 @@ export class EnmEventVenueComponent {
 
   ngOnInit() {
     this.enmEventAddMultipageFormService.getVenues().then((venues) => { this.venues = venues; });
-    this.enmEventAddForm.setControl('location', this.fb.control('', Validators.required));
-    this.enmEventAddForm.setControl('address', this.fb.control('', Validators.required));
-    this.enmEventAddForm.setControl('city', this.fb.control('', Validators.required));
-    this.enmEventAddForm.setControl('state', this.fb.control('', Validators.required));
     this.enmEventAddForm.setControl('venue', this.fb.control('', Validators.required));
   }
 
