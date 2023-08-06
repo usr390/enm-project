@@ -1,6 +1,9 @@
 <div class="container-fluid">
-    <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
-        <div class="row"><label>Event Location</label>
+    <form [formGroup]="enmEventAddForm" (ngSubmit)="onSubmit()">
+        <div class="row"><label>Venue (Autocomplete Test)</label>
+            <p-autoComplete formControlName="venue" [virtualScroll]="true" [suggestions]="filteredVenues" (completeMethod)="filterVenue($event)" field="name"></p-autoComplete>
+        </div>
+        <div class="row"><label>Venue</label>
             <div class="col"><input pInputText type="text" formControlName="location"></div>
         </div>
         <div class="row"><label>Address</label>
@@ -12,14 +15,11 @@
         <div class="row"><label>State</label>
             <div class="col"><input pInputText type="text" formControlName="state"></div>
         </div>
-        <div class="row"><label>Event Location (Autocomplete Test)</label>
-            <p-autoComplete formControlName="venue" [virtualScroll]="true" [suggestions]="filteredVenues" (completeMethod)="filterVenue($event)" field="name"></p-autoComplete>
-        </div>
         <div class="row">
             <div class="col">
                 <div class="p-inputgroup">
                     <button pButton type="button" (click)="cancelForm()" icon="pi pi-times" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
-                    <button pButton type="submit" [disabled]="addressForm.invalid" icon="pi pi-arrow-right" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
+                    <button pButton type="submit" [disabled]="enmEventAddForm.invalid" icon="pi pi-arrow-right" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
                 </div>
             </div>
         </div>

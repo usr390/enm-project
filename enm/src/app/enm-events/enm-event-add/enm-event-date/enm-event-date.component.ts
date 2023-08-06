@@ -12,7 +12,7 @@ import { EnmEventAddMultipageFormService } from './../../../core/services/enm-ev
 export class EnmEventDateComponent {
   /* summary
     adds date information to an event.
-    previous: EnmEventAddAddressComponent, next: EnmEventAddTimeComponent
+    previous: EnmEventVenueComponent, next: EnmEventTimeComponent
   */
  
   dateForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
@@ -32,7 +32,7 @@ export class EnmEventDateComponent {
     this.dateForm.removeControl('day');
     this.dateForm.removeControl('month');
     this.dateForm.removeControl('year');
-    this.router.navigate(['/add-event/address']); 
+    this.router.navigate(['/add-event/venue']); 
   }
 
   cancelForm() { this.router.navigate(['/']); }

@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 
 // enm imports
 import { EnmEventAddRoutingModule } from './enm-event-add-routing.module';
-import { EnmEventAddressComponent } from './enm-event-address/enm-event-address.component';
+import { EnmEventVenueComponent } from './enm-event-venue/enm-event-venue.component';
 import { EnmEventDateComponent } from './enm-event-date/enm-event-date.component';
 import { EnmEventTimeComponent } from './enm-event-time/enm-event-time.component';
 import { EnmEventPriceOfEntryComponent } from './enm-event-price-of-entry/enm-event-price-of-entry.component';
@@ -15,7 +15,7 @@ import { SharedModule } from './../../shared/shared.module';
 
 @NgModule({
   declarations: [
-    EnmEventAddressComponent,
+    EnmEventVenueComponent,
     EnmEventDateComponent,
     EnmEventTimeComponent,
     EnmEventPriceOfEntryComponent,

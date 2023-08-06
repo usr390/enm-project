@@ -12,8 +12,6 @@ export interface EnmEvent {
         an enmEvent represents what users would typically consider an event local to their area.
         examples include shows performed by local artists/bands, concerts for touring musicians, or
         seasonal music festivals
-
-        "location" is the name of venue, bar, club, community center, or any other establishment hosting the event
     */
 
     "id": number,
