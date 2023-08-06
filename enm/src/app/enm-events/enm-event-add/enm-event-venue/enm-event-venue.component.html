@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <form [formGroup]="enmEventAddForm" (ngSubmit)="onSubmit()">
-        <div class="row"><label>Venue (Autocomplete Test)</label>
+        <div class="row"><label>Venue</label>
             <p-autoComplete formControlName="venue" [virtualScroll]="true" [suggestions]="filteredVenues" (completeMethod)="filterVenue($event)" field="name"></p-autoComplete>
         </div>
         <div class="row">
