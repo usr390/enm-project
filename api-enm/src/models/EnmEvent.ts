@@ -19,24 +19,9 @@ const VenueSchema = new Schema({
 });
 
 const EnmEventSchema = new Schema({
-    id: Number,
-    name: String,
-    location: String,
     tags: [String],
     venue: VenueSchema,
-    address: String,
-    city: String,
-    state: String,
-    country: String,
     dateTime: Date,
-    startTime: Number,
-    endTime: {
-        type: Number,
-        required: false
-    },
-    day: Number,
-    month: Number,
-    year: Number,
     priceOfEntry: Number,
     artists: [String]
 });
