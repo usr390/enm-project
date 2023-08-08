@@ -25,8 +25,6 @@ export class EnmEventTimeComponent {
 
   ngOnInit() {
     this.enmEventAddForm.setControl('startTime', this.fb.control('', [Validators.required]));
-    this.enmEventAddForm.setControl('endTime', this.fb.control('', [Validators.required]));
-    this.enmEventAddForm.setControl('test', this.fb.control('', [Validators.required]));
   }
 
   onSubmit() { 
@@ -34,30 +32,26 @@ export class EnmEventTimeComponent {
   }
 
   goBack() { 
-    this.enmEventAddForm.removeControl('startTime');
-    this.enmEventAddForm.removeControl('endTime');
+    // .setControl as workaround to erroring .removeControl
+    this.enmEventAddForm.setControl('startTime', this.fb.control(this.defaultTime, [Validators.required]));
     this.router.navigate(['/add-event/date']); 
   }
 
   cancelForm() { this.router.navigate(['/']); }
 
   // utility
-  addDateTimeToForm() {  
-    this.enmEventAddForm.setControl('dateTime', this.fb.control(DateTime.fromObject({ 
-      year:   this.enmEventAddForm.get('year')!.value, 
-      month:  this.enmEventAddForm.get('month')!.value, 
-      day:    this.enmEventAddForm.get('day')!.value, 
-      hour:   Math.floor(this.enmEventAddForm.get('startTime')!.value / 100), 
-      minute: this.enmEventAddForm.get('startTime')!.value % 100 
+  addDateTimeToForm() { 
+    let date = DateTime.fromJSDate(this.enmEventAddForm.get('date')!.value)
+    let time = DateTime.fromJSDate(this.enmEventAddForm.get('startTime')!.value)
+    this.enmEventAddForm.setControl('dateTime', this.fb.control(date.set({ 
+      hour: time.hour, 
+      minute: time.minute 
     }).toUTC().toISO()));
   }
 
   dropHelperControls() {
-    // controls used to build 'dateTime' property. can be dropped after dateTime is created
-    this.enmEventAddForm.removeControl('startTime');
-    this.enmEventAddForm.removeControl('endTime');
-    this.enmEventAddForm.removeControl('day');
-    this.enmEventAddForm.removeControl('month');
-    this.enmEventAddForm.removeControl('year');
+    // controls used to build 'dateTime' property. can be reset to default values after dateTime is created
+    // .setControl as workaround to erroring .removeControl
+    this.enmEventAddForm.setControl('startTime', this.fb.control(this.defaultTime, [Validators.required]));
   }
 }

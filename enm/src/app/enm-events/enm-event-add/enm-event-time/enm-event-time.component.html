@@ -3,19 +3,7 @@
       <div class="row">
         <label>Start Time</label>
         <div class="col">
-          <input pInputText type="number" formControlName="startTime">
-        </div>
-      </div>
-      <div class="row">
-        <label>End Time</label>
-        <div class="col">
-          <input pInputText type="number" formControlName="endTime">
-        </div>
-      </div>
-      <div class="row">
-        <label>Start Time (Test)</label>
-        <div class="col">
-          <p-calendar [timeOnly]="true" formControlName="test" hourFormat="12" [stepMinute]=15 [defaultDate]="defaultTime"></p-calendar>
+          <p-calendar [timeOnly]="true" formControlName="startTime" hourFormat="12" [stepMinute]=15 [defaultDate]="defaultTime"></p-calendar>
         </div>
       </div>
       <div class="row">

@@ -15,23 +15,17 @@ export class EnmEventDateComponent {
     previous: EnmEventVenueComponent, next: EnmEventTimeComponent
   */
  
-  dateForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
+  enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
 
   constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
-    this.dateForm.setControl('day', this.fb.control('', [Validators.required, Validators.min(1), Validators.max(31)]));
-    this.dateForm.setControl('month', this.fb.control('', [Validators.required, Validators.min(1), Validators.max(12)]));
-    this.dateForm.setControl('year', this.fb.control('', [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear() + 1)]));
-    this.dateForm.setControl('date', this.fb.control('', [Validators.required, Validators.min(1), Validators.max(31)]));
+    this.enmEventAddForm.setControl('date', this.fb.control('', [Validators.required, Validators.min(1), Validators.max(31)]));
   }
 
-  onSubmit() { if (this.dateForm.valid) { this.router.navigate(['/add-event/time']); } }
+  onSubmit() { if (this.enmEventAddForm.valid) { this.router.navigate(['/add-event/time']); } }
 
   goBack() { 
-    this.dateForm.removeControl('day');
-    this.dateForm.removeControl('month');
-    this.dateForm.removeControl('year');
     this.router.navigate(['/add-event/venue']); 
   }
 
