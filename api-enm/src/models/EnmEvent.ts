@@ -22,6 +22,7 @@ const EnmEventSchema = new Schema({
     id: Number,
     name: String,
     location: String,
+    tags: [String],
     venue: VenueSchema,
     address: String,
     city: String,

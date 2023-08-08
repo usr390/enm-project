@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { EnmEventAddMultipageFormService } from '../../../core/services/enm-event-add-multipage-form.service';
@@ -29,9 +29,10 @@ export class EnmEventVenueComponent {
   ngOnInit() {
     this.enmEventAddMultipageFormService.getVenues().then((venues) => { this.venues = venues; });
     this.enmEventAddForm.setControl('venue', this.fb.control('', Validators.required));
+    this.enmEventAddForm.setControl('tags', this.fb.array([]));
   }
 
-  onSubmit() { if (this.enmEventAddForm.valid) { this.router.navigate(['/add-event/date']); } }
+  onSubmit() { if (this.enmEventAddForm.valid) { this.addTags(); this.router.navigate(['/add-event/date']); } }
 
   cancelForm() { this.router.navigate(['/']); }
 
@@ -45,5 +46,12 @@ export class EnmEventVenueComponent {
     }
 
     this.filteredVenues = filtered;
+  }
+
+  // utility
+  addTags() {
+    const tagsArray = this.enmEventAddForm.get('tags') as FormArray;
+    const venueName = this.enmEventAddForm.get('venue')?.value.name;
+    if (venueName) tagsArray.push(this.fb.control(venueName));
   }
 }

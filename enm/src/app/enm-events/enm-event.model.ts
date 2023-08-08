@@ -17,6 +17,7 @@ export interface EnmEvent {
     "id": number,
     "name": string,
     "location": string,
+    "tags": string[],
     "venue": Venue,
     "address": string,
     "city": string,
