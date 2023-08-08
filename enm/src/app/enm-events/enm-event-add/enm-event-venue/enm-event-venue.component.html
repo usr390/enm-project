@@ -1,5 +1,5 @@
 <div class="x">
-    <p-button type="button" (click)="cancelForm()" icon="pi pi-times" styleClass="p-button-rounded  p-button-text"></p-button>
+    <p-button type="button" (click)="cancelForm()" icon="pi pi-times" styleClass="p-button-rounded p-button-lg p-button-text"></p-button>
 </div>
 
 <div class="container text-center">
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col">
                 <p-autoComplete formControlName="venue" [virtualScroll]="true" [suggestions]="filteredVenues" (completeMethod)="filterVenue($event)" field="name"></p-autoComplete>
-                <button pButton type="submit" [disabled]="enmEventAddForm.invalid" icon="pi pi-arrow-right" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
+                <button class="arrow" pButton type="submit" [disabled]="enmEventAddForm.invalid" icon="pi pi-arrow-right" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
             </div>
         </div>
     </form>
