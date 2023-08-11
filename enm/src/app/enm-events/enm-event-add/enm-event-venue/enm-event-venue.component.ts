@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -19,6 +19,21 @@ export class EnmEventVenueComponent {
     adds venue information to an event.
     cancel: EnmEventListComponent, next: EnmEventDateComponent
   */
+
+  @ViewChild('containerRef') container!: ElementRef;
+  ngAfterViewInit() {
+    this.centerElement();
+  }
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.centerElement();
+  }
+  centerElement() {
+    const containerElement = this.container.nativeElement;
+    const topPosition = (window.innerHeight - containerElement.offsetHeight) / 2;
+    containerElement.style.position = 'relative';
+    containerElement.style.top = `${topPosition}px`;
+  }
 
   venues: any[] | undefined;
   filteredVenues!: any[];
