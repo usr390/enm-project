@@ -9,6 +9,7 @@ import { DateTimeToWordifiedMonthPipe } from './../pipes/date-time-to-wordified-
 import { DateTimeToDayPipe } from './../pipes/date-time-to-day.pipe';
 import { DateTimeToTimePipe } from '../pipes/date-time-to-time.pipe';
 import { LogoComponent } from './logo/logo.component';
+import { CenterContainerDirective } from './center-container.directive';
 
 // primeng imports
 import { AvatarModule } from 'primeng/avatar';
@@ -24,12 +25,14 @@ import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
+    // enm imports
     WordifiedDateKeyPipe,
     WordifiedPriceOfEntryPipe,
     DateTimeToWordifiedMonthPipe,
     DateTimeToDayPipe,
     DateTimeToTimePipe,
-    LogoComponent
+    LogoComponent,
+    CenterContainerDirective
   ],
   imports: [
     CommonModule,
@@ -44,12 +47,14 @@ import { InputTextModule } from 'primeng/inputtext';
     ToolbarModule,
   ],
   exports: [
+    // enm imports
     WordifiedDateKeyPipe,
     WordifiedPriceOfEntryPipe,
     DateTimeToWordifiedMonthPipe,
     DateTimeToDayPipe,
     DateTimeToTimePipe,
     LogoComponent,
+    CenterContainerDirective,
     // primeng exports
     AvatarModule,
     AvatarGroupModule,
