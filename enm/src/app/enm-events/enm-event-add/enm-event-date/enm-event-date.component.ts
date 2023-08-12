@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -23,11 +23,31 @@ export class EnmEventDateComponent {
     this.enmEventAddForm.setControl('date', this.fb.control('', [Validators.required, Validators.min(1), Validators.max(31)]));
   }
 
+  ngAfterViewInit() {
+    this.centerContainer();
+  }
+
   onSubmit() { if (this.enmEventAddForm.valid) { this.router.navigate(['/add-event/time']); } }
 
   goBack() { 
     this.router.navigate(['/add-event/venue']); 
+
   }
 
   cancelForm() { this.router.navigate(['/']); }
+
+  //#region utility
+    // center container logic
+    @ViewChild('containerRef') container!: ElementRef;
+    @HostListener('window:resize', ['$event'])
+    onResize() {
+      this.centerContainer();
+    }
+    centerContainer() {
+      const containerElement = this.container.nativeElement;
+      const topPosition = (window.innerHeight - containerElement.offsetHeight) / 2;
+      containerElement.style.position = 'relative';
+      containerElement.style.top = `${topPosition}px`;
+    }
+  //
 }
