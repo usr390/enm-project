@@ -32,10 +32,6 @@ export class EnmEventVenueComponent {
     this.enmEventAddForm.setControl('tags', this.fb.array([]));
   }
 
-  ngAfterViewInit() {
-    this.centerContainer();
-  }
-
   onSubmit() { if (this.enmEventAddForm.valid) { this.addTags(); this.router.navigate(['/add-event/date']); } }
 
   cancelForm() { this.router.navigate(['/']); }
@@ -57,19 +53,6 @@ export class EnmEventVenueComponent {
     const tagsArray = this.enmEventAddForm.get('tags') as FormArray;
     const venueName = this.enmEventAddForm.get('venue')?.value.name;
     if (venueName) tagsArray.push(this.fb.control(venueName));
-  }
-
-  // center container logic
-  @ViewChild('containerRef') container!: ElementRef;
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    this.centerContainer();
-  }
-  centerContainer() {
-    const containerElement = this.container.nativeElement;
-    const topPosition = (window.innerHeight - containerElement.offsetHeight) / 2;
-    containerElement.style.position = 'relative';
-    containerElement.style.top = `${topPosition}px`;
   }
   //#endregion
 
