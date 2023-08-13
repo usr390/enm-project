@@ -4,7 +4,7 @@
 <div class="x">
   <p-button type="button" (click)="cancelForm()" icon="pi pi-times" styleClass="p-button-rounded p-button-lg p-button-text"></p-button>
 </div>
-<div #containerRef class="container text-center">
+<div appCenterContainer class="container text-center">
     <form [formGroup]="enmEventAddForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col">
