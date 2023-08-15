@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChildren, QueryList } from '@angular/core';
+import { Component, ElementRef, ViewChildren, QueryList, ViewChild, HostListener } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -19,6 +19,10 @@ export class EnmEventArtistsComponent {
 
   ngOnInit() { this.enmEventAddForm.setControl('artists', this.fb.array([ this.createArtistInputField() ])) }
 
+  ngAfterViewInit() {
+    this.centerContainer();
+  }
+
   onSubmit() {
     if (this.enmEventAddForm.valid) {
       this.trimArtistArrayElements();
@@ -36,7 +40,8 @@ export class EnmEventArtistsComponent {
   createArtistInputField() { return this.fb.control('', Validators.required); }
   removeArtistInputField(index: number) { 
     // counterpart of 'addArtistInputField'
-    this.artistsArray.removeAt(index); 
+    this.artistsArray.removeAt(index);
+    if (this.artistsArray.length < 3) this.centerContainer();
   }
   canAddArtistInputField() {
     /* summary
@@ -51,12 +56,26 @@ export class EnmEventArtistsComponent {
   addArtistInputField() {
     // counterpart of 'removeArtistInputField'
     this.artistsArray.push(this.createArtistInputField());
+    if (this.artistsArray.length < 7) this.centerContainer();
     setTimeout(() => this.artistInputs.last.nativeElement.focus(), 0);
   }
   trimArtistArrayElements() {
     this.artistsArray.controls.forEach((control) => {
       control.setValue(control.value.trim());
     });
+  }
+
+  // center container logic
+  @ViewChild('containerRef') container!: ElementRef;
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.centerContainer();
+  }
+  centerContainer() {
+    const containerElement = this.container.nativeElement;
+    const topPosition = (window.innerHeight - containerElement.offsetHeight) / 2;
+    containerElement.style.position = 'relative';
+    containerElement.style.top = `${topPosition}px`;
   }
 }
 

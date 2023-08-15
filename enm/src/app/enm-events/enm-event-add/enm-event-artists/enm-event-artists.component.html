@@ -1,25 +1,24 @@
-<div class="container-fluid">
-  <form [formGroup]="enmEventAddForm" (ngSubmit)="onSubmit()">
-    <div formArrayName="artists">
-      <div class="row" *ngFor="let artist of artistsArray.controls; let i = index">
-        <label>Artist {{i + 1}}</label>
-        <div class="col">
-          <input pInputText type="text" [formControlName]="i" placeholder="Artist Name" maxlength="50" #artistInput>
-          <button pButton *ngIf="artistsArray.controls.length > 1" type="button" (click)="removeArtistInputField(i)" icon="pi pi-times"></button>
+<div class="back-arrow">
+  <p-button type="button" (click)="goBack()" icon="pi pi-arrow-left" styleClass="p-button-rounded p-button-lg p-button-text"></p-button>
+</div>
+<div class="submit-button">
+  <p-button type="submit" [disabled]="enmEventAddForm.invalid" styleClass="p-button-link">Submit Event</p-button>
+</div>
+<div #containerRef class="container text-center">
+    <form [formGroup]="enmEventAddForm" (ngSubmit)="onSubmit()">
+      <div formArrayName="artists">
+        <div class="row" *ngFor="let artist of artistsArray.controls; let i = index">
+          <label [ngClass]="{ 'artist-label': this.artistsArray.length > 1 }">Artist {{i + 1}}</label>
+          <div class="col">
+            <input pInputText type="text" [formControlName]="i" placeholder="Artist Name" maxlength="50" #artistInput>
+            <button pButton *ngIf="artistsArray.controls.length > 1" type="button" (click)="removeArtistInputField(i)" icon="pi pi-times"></button>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <button pButton type="button" [disabled]="!canAddArtistInputField()" (click)="addArtistInputField()">Add Artist</button>
+      <div class="row">
+        <div class="col">
+          <button pButton type="button" icon="pi pi-plus" [disabled]="!canAddArtistInputField()" (click)="addArtistInputField()"></button>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <button pButton type="button" (click)="cancelForm()" icon="pi pi-times" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
-        <button pButton type="button" (click)="goBack()" icon="pi pi-arrow-left" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
-        <button pButton type="submit" [disabled]="enmEventAddForm.invalid" icon="pi pi-check" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
-      </div>
-    </div>
-  </form>
+    </form>
 </div>
