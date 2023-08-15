@@ -2,7 +2,7 @@
   <p-button type="button" (click)="goBack()" icon="pi pi-arrow-left" styleClass="p-button-rounded p-button-lg p-button-text"></p-button>
 </div>
 <div class="submit-button">
-  <p-button type="submit" (ngSubmit)="onSubmit()" [disabled]="enmEventAddForm.invalid" styleClass="p-button-link">Submit Event</p-button>
+  <p-button type="submit" (click)="onSubmit()" [disabled]="enmEventAddForm.invalid" styleClass="p-button-link">Submit Event</p-button>
 </div>
 <div #containerRef class="container text-center">
     <form [formGroup]="enmEventAddForm" (ngSubmit)="onSubmit()">
