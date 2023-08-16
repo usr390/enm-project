@@ -16,6 +16,7 @@ export class EnmEventDateComponent {
   */
  
   enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
+  today: Date = new Date();
 
   constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
