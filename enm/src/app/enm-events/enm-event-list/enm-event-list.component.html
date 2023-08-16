@@ -1,6 +1,6 @@
 <app-enm-event-list-toolbar></app-enm-event-list-toolbar>
 
-<div class="container-fluid">
+<div class="container-sm">
   <div *ngFor="let date of (groupedByDateEnmEventList$ | async | keyvalue)" style="margin-top: 20px">
     <h5>{{ date.key | wordifiedDateKey }}</h5>
     <!-- date.value resolves to EnmEvent[] -->
