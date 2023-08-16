@@ -42,7 +42,7 @@ export class EnmEventVenueComponent {
     
     for (let i = 0; i < (this.venues as any[]).length; i++) {
       let venue = (this.venues as any[])[i];
-      if (venue.name.toLowerCase().indexOf(query.toLowerCase()) == 0) filtered.push(venue); 
+      if (venue.name.toLowerCase().indexOf(query.toLowerCase()) != -1) filtered.push(venue); 
     }
 
     this.filteredVenues = filtered;
