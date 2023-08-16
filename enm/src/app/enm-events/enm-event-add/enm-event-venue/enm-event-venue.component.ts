@@ -52,7 +52,11 @@ export class EnmEventVenueComponent {
   addTags() {
     const tagsArray = this.enmEventAddForm.get('tags') as FormArray;
     const venueName = this.enmEventAddForm.get('venue')?.value.name;
-    if (venueName) tagsArray.push(this.fb.control(venueName));
+    const cityName = this.enmEventAddForm.get('venue')?.value.city;
+    if (venueName) {
+      tagsArray.push(this.fb.control(venueName));
+      tagsArray.push(this.fb.control(cityName));
+    }
   }
   //#endregion
 
