@@ -45,6 +45,9 @@ export class EnmEventVenueComponent {
       if (venue.name.toLowerCase().indexOf(query.toLowerCase()) != -1) filtered.push(venue); 
     }
 
+    // if no matches, add a special "Add Venue" button
+    if (filtered.length === 0) filtered.push({name: 'Add Venue', isCustomAdd: true});
+
     this.filteredVenues = filtered;
   }
 
@@ -57,6 +60,12 @@ export class EnmEventVenueComponent {
       tagsArray.push(this.fb.control(venueName));
       tagsArray.push(this.fb.control(cityName));
     }
+  }
+
+  addVenue() { 
+    // temporary method call. will simply reroute to EnmEventListComponent
+    // eventually the ability to add new venues will be implemented
+    this.router.navigate(['/'])
   }
   //#endregion
 
