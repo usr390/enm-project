@@ -65,7 +65,7 @@ export class EnmEventVenueComponent {
   addVenue() { 
     // temporary method call. will simply reroute to EnmEventListComponent
     // eventually the ability to add new venues will be implemented
-  this.router.navigate(['/add-event/add-venue'])
+  this.router.navigate(['/add-event/add-venue-name'])
   }
   //#endregion
 

@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { EnmEventAddMultipageFormService } from 'src/app/core/services/enm-event-add-multipage-form.service';
 
 @Component({
-  selector: 'app-enm-event-add-venue',
-  templateUrl: './enm-event-add-venue.component.html',
-  styleUrls: ['./enm-event-add-venue.component.less']
+  selector: 'app-enm-event-add-venue-name',
+  templateUrl: './enm-event-add-venue-name.component.html',
+  styleUrls: ['./enm-event-add-venue-name.component.less']
 })
-export class EnmEventAddVenueComponent {
+export class EnmEventAddVenueNameComponent {
 
   enmEventAddVenueForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddVenueForm;
 
