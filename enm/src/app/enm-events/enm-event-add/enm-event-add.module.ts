@@ -13,6 +13,7 @@ import { EnmEventPriceOfEntryComponent } from './enm-event-price-of-entry/enm-ev
 import { EnmEventArtistsComponent } from './enm-event-artists/enm-event-artists.component';
 import { SharedModule } from './../../shared/shared.module';
 import { EnmEventAddVenueNameComponent } from './enm-event-add-venue-name/enm-event-add-venue-name.component';
+import { EnmEventAddVenueCityComponent } from './enm-event-add-venue-city/enm-event-add-venue-city.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { EnmEventAddVenueNameComponent } from './enm-event-add-venue-name/enm-ev
     EnmEventPriceOfEntryComponent,
     EnmEventArtistsComponent,
     EnmEventAddVenueNameComponent,
+    EnmEventAddVenueCityComponent,
   ],
   imports: [
     // angular modules
