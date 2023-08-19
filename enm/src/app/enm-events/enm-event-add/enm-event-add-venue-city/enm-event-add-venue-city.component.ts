@@ -19,7 +19,9 @@ export class EnmEventAddVenueCityComponent {
   }
 
   onSubmit() { 
-    if (this.enmEventAddVenueForm.valid) { this.router.navigate(['/add-event/date']); console.log(this.enmEventAddVenueForm.controls) } 
+    if (this.enmEventAddVenueForm.valid) { 
+      this.router.navigate(['/add-event/add-venue-address']); 
+    } 
   }
 
   goBack() { 
