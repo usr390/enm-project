@@ -18,6 +18,7 @@ export class EnmEventAddMultipageFormService {
    
   // initially set to an empty form group because consuming components will add their respective controls to the group as the components are initialized
   public enmEventAddMultipageForm: FormGroup = this.fb.group({});
+  public enmEventAddVenueForm: FormGroup = this.fb.group({});
 
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 
@@ -29,7 +30,7 @@ export class EnmEventAddMultipageFormService {
     });
   }
 
-  // promise-based http request. used in EnmEventAddressComponent for autocomplete functionality
+  // promise-based http request. used in EnmEventVenueComponent for autocomplete functionality
   getVenues() {
     const promise = new Promise<any[]>((resolve, reject) => {
       this.http.get<any[]>(BASE_URL + '/venues').subscribe({
