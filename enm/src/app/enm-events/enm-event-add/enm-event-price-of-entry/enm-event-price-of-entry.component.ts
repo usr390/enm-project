@@ -28,9 +28,25 @@ export class EnmEventPriceOfEntryComponent {
   }
 
   goBack() { 
-    this.enmEventAddForm.removeControl('priceOfEntry');
+    this.nullifyLocalControls();
     this.router.navigate(['/add-event/time']); 
   }
 
-  cancelForm() { this.router.navigate(['/']); }
+  cancelForm() { 
+    this.nullifyExistingControls();
+    this.router.navigate(['/']); 
+  }
+
+  //#region utility
+  nullifyLocalControls() {
+    this.enmEventAddForm.removeControl('priceOfEntry');
+  }
+  nullifyExistingControls() {
+    this.enmEventAddForm.removeControl('priceOfEntry');
+    this.enmEventAddForm.setControl('startTime', this.fb.control(new Date(0, 0, 0, 0, 0), [Validators.required]));
+    this.enmEventAddForm.setControl('date', this.fb.control('00/00/0000', [Validators.required]));
+    this.enmEventAddForm.removeControl('venue');
+    this.enmEventAddForm.removeControl('tags');
+  }
+  //#endregion
 }

@@ -32,14 +32,25 @@ export class EnmEventTimeComponent {
   }
 
   goBack() { 
-    // .setControl as workaround to erroring .removeControl
-    this.enmEventAddForm.setControl('startTime', this.fb.control(this.defaultTime, [Validators.required]));
+    this.nullifyLocalControls();
     this.router.navigate(['/add-event/date']); 
   }
 
-  cancelForm() { this.router.navigate(['/']); }
+  cancelForm() { 
+    this.nullifyExistingControls();
+    this.router.navigate(['/']); 
+  }
 
   // utility
+  nullifyLocalControls() {
+    this.enmEventAddForm.setControl('startTime', this.fb.control(this.defaultTime, [Validators.required]));
+  }
+  nullifyExistingControls() {
+    this.enmEventAddForm.setControl('startTime', this.fb.control(this.defaultTime, [Validators.required]));
+    this.enmEventAddForm.setControl('date', this.fb.control('00/00/0000', [Validators.required]));
+    this.enmEventAddForm.removeControl('venue');
+    this.enmEventAddForm.removeControl('tags');
+  }
   addDateTimeToForm() { 
     let date = DateTime.fromJSDate(this.enmEventAddForm.get('date')!.value)
     let time = DateTime.fromJSDate(this.enmEventAddForm.get('startTime')!.value)
@@ -48,7 +59,6 @@ export class EnmEventTimeComponent {
       minute: time.minute 
     }).toUTC().toISO()));
   }
-
   dropHelperControls() {
     // controls used to build 'dateTime' property. can be reset to default values after dateTime is created
     // .setControl as workaround to erroring .removeControl

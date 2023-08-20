@@ -31,12 +31,16 @@ export class EnmEventArtistsComponent {
     }
   }
 
-  goBack() { this.router.navigate(['/add-event/price']); }
-
-  cancelForm() { this.router.navigate(['/']); }
+  goBack() { 
+    this.nullifyLocalControls();
+    this.router.navigate(['/add-event/price']); 
+  }
   
   // utility
   get artistsArray() { return this.enmEventAddForm.get('artists') as FormArray; }
+  nullifyLocalControls() {
+    this.enmEventAddForm.removeControl('artists');
+  }
   createArtistInputField() { return this.fb.control('', Validators.required); }
   removeArtistInputField(index: number) { 
     // counterpart of 'addArtistInputField'

@@ -34,7 +34,10 @@ export class EnmEventVenueComponent {
 
   onSubmit() { if (this.enmEventAddForm.valid) { this.addTags(); this.router.navigate(['/add-event/date']); } }
 
-  cancelForm() { this.router.navigate(['/']); }
+  cancelForm() { 
+    this.nullifyExistingControls();
+    this.router.navigate(['/']); 
+  }
 
   filterVenue(event: AutoCompleteCompleteEvent){
     let filtered: any[] = [];
@@ -52,6 +55,10 @@ export class EnmEventVenueComponent {
   }
 
   //#region utility
+  nullifyExistingControls() {
+    this.enmEventAddForm.removeControl('venue');
+    this.enmEventAddForm.removeControl('tags');
+  }
   addTags() {
     const tagsArray = this.enmEventAddForm.get('tags') as FormArray;
     const venueName = this.enmEventAddForm.get('venue')?.value.name;
@@ -61,11 +68,8 @@ export class EnmEventVenueComponent {
       tagsArray.push(this.fb.control(cityName));
     }
   }
-
   addVenue() { 
-    // temporary method call. will simply reroute to EnmEventListComponent
-    // eventually the ability to add new venues will be implemented
-  this.router.navigate(['/add-event/add-venue-name'])
+    this.router.navigate(['/add-event/add-venue-name'])
   }
   //#endregion
 
