@@ -24,7 +24,7 @@ export class EnmEventVenueComponent {
   filteredVenues!: any[];
   enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
 
-  constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router, private renderer: Renderer2) {}
+  constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     this.enmEventAddMultipageFormService.getVenues().then((venues) => { this.venues = venues; });
@@ -35,7 +35,6 @@ export class EnmEventVenueComponent {
   onSubmit() { 
     if (this.enmEventAddForm.valid) { 
       this.addTags(); 
-      this.hideKeyboard();
       this.router.navigate(['/add-event/date']); 
     } 
   }
@@ -43,21 +42,6 @@ export class EnmEventVenueComponent {
   cancelForm() { 
     this.nullifyExistingControls();
     this.router.navigate(['/']); 
-  }
-
-  filterVenue(event: AutoCompleteCompleteEvent){
-    let filtered: any[] = [];
-    let query = event.query;
-    
-    for (let i = 0; i < (this.venues as any[]).length; i++) {
-      let venue = (this.venues as any[])[i];
-      if (venue.name.toLowerCase().indexOf(query.toLowerCase()) != -1) filtered.push(venue); 
-    }
-
-    // if no matches, add a special "Add Venue" button
-    if (filtered.length === 0) filtered.push({name: 'Add Venue', isCustomAdd: true});
-
-    this.filteredVenues = filtered;
   }
 
   //#region utility
@@ -74,15 +58,22 @@ export class EnmEventVenueComponent {
       tagsArray.push(this.fb.control(cityName));
     }
   }
+  filterVenue(event: AutoCompleteCompleteEvent){
+    let filtered: any[] = [];
+    let query = event.query;
+    
+    for (let i = 0; i < (this.venues as any[]).length; i++) {
+      let venue = (this.venues as any[])[i];
+      if (venue.name.toLowerCase().indexOf(query.toLowerCase()) != -1) filtered.push(venue); 
+    }
+
+    // if no matches, add a special "Add Venue" button
+    if (filtered.length === 0) filtered.push({name: 'Add Venue', isCustomAdd: true});
+
+    this.filteredVenues = filtered;
+  }
   addVenue() { 
     this.router.navigate(['/add-event/add-venue-name'])
-  }
-
-  hideKeyboard() {
-    const activeElement = this.renderer.selectRootElement(document.activeElement) as HTMLElement;
-    if (activeElement) {
-      activeElement.blur();
-    }
   }
   //#endregion
 
