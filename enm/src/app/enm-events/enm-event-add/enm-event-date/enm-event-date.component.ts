@@ -21,26 +21,31 @@ export class EnmEventDateComponent {
   constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
-    this.enmEventAddForm.setControl('date', this.fb.control('', [Validators.required]));
+    this.setUpLocalControls();
   }
 
-  onSubmit() { console.log(this.enmEventAddForm.controls); if (this.enmEventAddForm.valid) { this.router.navigate(['/add-event/time']); } }
+  onSubmit() { 
+    if (this.enmEventAddForm.valid) { this.router.navigate(['/add-event/time']); } 
+  }
 
   goBack() { 
-    this.nullifyLocalControls();
+    this.tearDownLocalControls();
     this.router.navigate(['/add-event/venue']); 
   }
 
   cancelForm() { 
-    this.nullifyExistingControls();
+    this.tearDownExistingControls();
     this.router.navigate(['/']); 
   }
 
   //#region utility
-    nullifyLocalControls() {
+    setUpLocalControls() {
+      this.enmEventAddForm.setControl('date', this.fb.control('', [Validators.required]));
+    }
+    tearDownLocalControls() {
       this.enmEventAddForm.setControl('date', this.fb.control('00/00/0000', [Validators.required]));
     }
-    nullifyExistingControls() {
+    tearDownExistingControls() {
       this.enmEventAddForm.setControl('date', this.fb.control('00/00/0000', [Validators.required]));
       this.enmEventAddForm.removeControl('venue');
       this.enmEventAddForm.removeControl('tags');

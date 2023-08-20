@@ -20,28 +20,31 @@ export class EnmEventPriceOfEntryComponent {
   constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
-    this.enmEventAddForm.setControl('priceOfEntry', this.fb.control('', [Validators.required]));
+    this.setUpLocalControls();
   }
 
-  onSubmit() { 
+  onSubmit() {
     if (this.enmEventAddForm.valid) { this.router.navigate(['/add-event/artists']); }
   }
 
-  goBack() { 
-    this.nullifyLocalControls();
-    this.router.navigate(['/add-event/time']); 
+  goBack() {
+    this.tearDownLocalControls();
+    this.router.navigate(['/add-event/time']);
   }
 
   cancelForm() { 
-    this.nullifyExistingControls();
+    this.tearDownExistingControls();
     this.router.navigate(['/']); 
   }
 
   //#region utility
-  nullifyLocalControls() {
+  setUpLocalControls() {
+    this.enmEventAddForm.setControl('priceOfEntry', this.fb.control('', [Validators.required]));
+  }
+  tearDownLocalControls() {
     this.enmEventAddForm.removeControl('priceOfEntry');
   }
-  nullifyExistingControls() {
+  tearDownExistingControls() {
     this.enmEventAddForm.removeControl('priceOfEntry');
     this.enmEventAddForm.setControl('startTime', this.fb.control(new Date(0, 0, 0, 0, 0), [Validators.required]));
     this.enmEventAddForm.setControl('date', this.fb.control('00/00/0000', [Validators.required]));

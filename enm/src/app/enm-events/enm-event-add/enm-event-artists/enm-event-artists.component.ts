@@ -17,7 +17,9 @@ export class EnmEventArtistsComponent {
 
   constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) { }
 
-  ngOnInit() { this.enmEventAddForm.setControl('artists', this.fb.array([ this.createArtistInputField() ])) }
+  ngOnInit() { 
+    this.setUpLocalControls();
+  }
 
   ngAfterViewInit() {
     this.centerContainer();
@@ -32,13 +34,16 @@ export class EnmEventArtistsComponent {
   }
 
   goBack() { 
-    this.nullifyLocalControls();
+    this.tearDownLocalControls();
     this.router.navigate(['/add-event/price']); 
   }
   
-  // utility
+  //#region utility
   get artistsArray() { return this.enmEventAddForm.get('artists') as FormArray; }
-  nullifyLocalControls() {
+  setUpLocalControls() {
+    this.enmEventAddForm.setControl('artists', this.fb.array([ this.createArtistInputField() ])) 
+  }
+  tearDownLocalControls() {
     this.enmEventAddForm.removeControl('artists');
   }
   createArtistInputField() { return this.fb.control('', Validators.required); }
@@ -81,5 +86,6 @@ export class EnmEventArtistsComponent {
     containerElement.style.position = 'relative';
     containerElement.style.top = `${topPosition}px`;
   }
+  //#endregion
 }
 

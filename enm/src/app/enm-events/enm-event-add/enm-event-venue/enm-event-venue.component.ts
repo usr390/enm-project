@@ -28,8 +28,7 @@ export class EnmEventVenueComponent {
 
   ngOnInit() {
     this.enmEventAddMultipageFormService.getVenues().then((venues) => { this.venues = venues; });
-    this.enmEventAddForm.setControl('venue', this.fb.control('', Validators.required));
-    this.enmEventAddForm.setControl('tags', this.fb.array([]));
+    this.setUpLocalControls();
   }
 
   onSubmit() { 
@@ -40,12 +39,16 @@ export class EnmEventVenueComponent {
   }
 
   cancelForm() { 
-    this.nullifyExistingControls();
+    this.tearDownExistingControls();
     this.router.navigate(['/']); 
   }
 
   //#region utility
-  nullifyExistingControls() {
+  setUpLocalControls() {
+    this.enmEventAddForm.setControl('venue', this.fb.control('', Validators.required));
+    this.enmEventAddForm.setControl('tags', this.fb.array([]));
+  }
+  tearDownExistingControls() {
     this.enmEventAddForm.removeControl('venue');
     this.enmEventAddForm.removeControl('tags');
   }
