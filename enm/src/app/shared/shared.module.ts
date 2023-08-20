@@ -20,6 +20,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 
 
@@ -45,6 +46,7 @@ import { InputTextModule } from 'primeng/inputtext';
     InputTextModule,
     SidebarModule,
     ToolbarModule,
+    InputNumberModule
   ],
   exports: [
     // enm imports
@@ -64,6 +66,7 @@ import { InputTextModule } from 'primeng/inputtext';
     InputTextModule,
     SidebarModule,
     ToolbarModule,
+    InputNumberModule
   ],
 })
 export class SharedModule { }
