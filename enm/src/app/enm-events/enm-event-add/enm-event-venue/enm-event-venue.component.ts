@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Renderer2, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -24,7 +24,7 @@ export class EnmEventVenueComponent {
   filteredVenues!: any[];
   enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
 
-  constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
+  constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router, private renderer: Renderer2) {}
 
   ngOnInit() {
     this.enmEventAddMultipageFormService.getVenues().then((venues) => { this.venues = venues; });
@@ -32,7 +32,13 @@ export class EnmEventVenueComponent {
     this.enmEventAddForm.setControl('tags', this.fb.array([]));
   }
 
-  onSubmit() { if (this.enmEventAddForm.valid) { this.addTags(); this.router.navigate(['/add-event/date']); } }
+  onSubmit() { 
+    if (this.enmEventAddForm.valid) { 
+      this.addTags(); 
+      this.hideKeyboard();
+      this.router.navigate(['/add-event/date']); 
+    } 
+  }
 
   cancelForm() { 
     this.nullifyExistingControls();
@@ -70,6 +76,13 @@ export class EnmEventVenueComponent {
   }
   addVenue() { 
     this.router.navigate(['/add-event/add-venue-name'])
+  }
+
+  hideKeyboard() {
+    const activeElement = this.renderer.selectRootElement(document.activeElement) as HTMLElement;
+    if (activeElement) {
+      activeElement.blur();
+    }
   }
   //#endregion
 
