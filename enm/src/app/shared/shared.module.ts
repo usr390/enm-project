@@ -20,6 +20,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
 import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
 
 
@@ -46,6 +47,7 @@ import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
     InputTextModule,
     SidebarModule,
     ToolbarModule,
+    InputNumberModule,
     DataViewModule
   ],
   exports: [
@@ -65,6 +67,7 @@ import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
     CalendarModule,
     InputTextModule,
     SidebarModule,
+    InputNumberModule,
     ToolbarModule,
     DataViewLayoutOptions
   ],
