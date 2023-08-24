@@ -21,8 +21,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
-
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 
 
 @NgModule({
@@ -48,7 +47,7 @@ import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
     SidebarModule,
     ToolbarModule,
     InputNumberModule,
-    DataViewModule
+    ScrollPanelModule
   ],
   exports: [
     // enm imports
@@ -69,7 +68,7 @@ import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
     SidebarModule,
     InputNumberModule,
     ToolbarModule,
-    DataViewLayoutOptions
+    ScrollPanelModule
   ],
 })
 export class SharedModule { }
