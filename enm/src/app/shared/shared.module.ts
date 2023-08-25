@@ -21,7 +21,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
-
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 
 
 @NgModule({
@@ -46,7 +46,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     InputTextModule,
     SidebarModule,
     ToolbarModule,
-    InputNumberModule
+    InputNumberModule,
+    ScrollPanelModule
   ],
   exports: [
     // enm imports
@@ -65,8 +66,9 @@ import { InputNumberModule } from 'primeng/inputnumber';
     CalendarModule,
     InputTextModule,
     SidebarModule,
+    InputNumberModule,
     ToolbarModule,
-    InputNumberModule
+    ScrollPanelModule
   ],
 })
 export class SharedModule { }
