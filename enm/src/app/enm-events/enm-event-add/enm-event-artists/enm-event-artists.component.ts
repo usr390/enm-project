@@ -21,9 +21,7 @@ export class EnmEventArtistsComponent {
     this.setUpLocalControls();
   }
 
-  ngAfterViewInit() {
-    this.centerContainer();
-  }
+  ngAfterViewInit() {}
 
   onSubmit() {
     if (this.enmEventAddForm.valid) {
@@ -50,7 +48,6 @@ export class EnmEventArtistsComponent {
   removeArtistInputField(index: number) { 
     // counterpart of 'addArtistInputField'
     this.artistsArray.removeAt(index);
-    if (this.artistsArray.length < 3) this.centerContainer();
   }
   canAddArtistInputField() {
     /* summary
@@ -65,26 +62,12 @@ export class EnmEventArtistsComponent {
   addArtistInputField() {
     // counterpart of 'removeArtistInputField'
     this.artistsArray.push(this.createArtistInputField());
-    if (this.artistsArray.length < 7) this.centerContainer();
     setTimeout(() => this.artistInputs.last.nativeElement.focus(), 0);
   }
   trimArtistArrayElements() {
     this.artistsArray.controls.forEach((control) => {
       control.setValue(control.value.trim());
     });
-  }
-
-  // center container logic
-  @ViewChild('containerRef') container!: ElementRef;
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    this.centerContainer();
-  }
-  centerContainer() {
-    const containerElement = this.container.nativeElement;
-    const topPosition = (window.innerHeight - containerElement.offsetHeight) / 2;
-    containerElement.style.position = 'relative';
-    containerElement.style.top = `${topPosition}px`;
   }
   //#endregion
 }
