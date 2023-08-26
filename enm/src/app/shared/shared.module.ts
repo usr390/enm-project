@@ -9,7 +9,6 @@ import { DateTimeToWordifiedMonthPipe } from './../pipes/date-time-to-wordified-
 import { DateTimeToDayPipe } from './../pipes/date-time-to-day.pipe';
 import { DateTimeToTimePipe } from '../pipes/date-time-to-time.pipe';
 import { LogoComponent } from './logo/logo.component';
-import { CenterContainerDirective } from './center-container.directive';
 
 // primeng imports
 import { AvatarModule } from 'primeng/avatar';
@@ -33,7 +32,6 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
     DateTimeToDayPipe,
     DateTimeToTimePipe,
     LogoComponent,
-    CenterContainerDirective
   ],
   imports: [
     CommonModule,
@@ -57,7 +55,6 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
     DateTimeToDayPipe,
     DateTimeToTimePipe,
     LogoComponent,
-    CenterContainerDirective,
     // primeng exports
     AvatarModule,
     AvatarGroupModule,
