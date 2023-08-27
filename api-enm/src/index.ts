@@ -45,6 +45,21 @@ app.post('/api/enmEventTest', async (req: Request, res: Response) => {
   res.json(await enmEvent.save());
 })
 
+app.post('/api/venue', async (req: Request, res: Response) => {
+  /* summary
+    used to post new venues. for now, defaulting 'state' and 'country' to hard coded values
+  */
+  const venue = new VenueModel({
+    name: req.body.name,
+    address: req.body.address,
+    city: req.body.city,
+    state: "Texas",
+    country: "USA",
+  });
+  // persist and respond to client with created EnmEvent object
+  res.json(await venue.save());
+})
+
 // asynchronous initialization. keeps api from processesing requests until a successful connection to db is established
 mongoose.connect(process.env.MONGO_URL || '').then(() => { app.listen(port, () => {}); })
 .catch((error) => {
