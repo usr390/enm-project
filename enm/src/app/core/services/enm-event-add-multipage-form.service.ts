@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { environment } from './../../../environments/environment';
 const BASE_URL = environment.api;
 
@@ -11,8 +10,8 @@ const BASE_URL = environment.api;
 })
 export class EnmEventAddMultipageFormService {
   /* summary
-    semantically, this service's name should be understood as "EnmEventAdd_MultipageFormService" and it works directly with EnmEventAddModule.
-    the EnmEventAddModule (semantically, "EnmEventAdd_Module") contains components that consume this service and together they are responsible 
+    this service's name should be understood as "EnmEventAdd_MultipageFormService" and it works directly with EnmEventAddModule.
+    the EnmEventAddModule ("EnmEventAdd_Module") contains components that consume this service and together they are responsible 
     for facilitating user-driven creation of EnmEvents (i.e. this is how users add their events to the website).
   */ 
    
@@ -46,5 +45,22 @@ export class EnmEventAddMultipageFormService {
       });
     });
     return promise;
+  }
+
+  /* summary
+    typically the main "flow" of this multipage form goes like this: 
+    venue -> date -> time -> cover -> artists -> submit. where 'venue' is a pre-existing object value from a list we maintain in our backend system.
+    
+    however, in cases where the venue is not yet in our system (and is therefore not presented as a 
+    suggestion in EnmEventVenueComponent's autocomplete suggestion list) the multipage form's flow will look more like: 
+    venue -> venue name -> venue city -> venue address -> date -> time -> cover -> artists -> submit
+    when submitting on 'venue address', this post api call will be triggered creating and returning an actual venue object which is what the 
+    multipage form will store and use
+  */
+  postVenue() {
+    this.http.post(BASE_URL + '/venue', this.enmEventAddVenueForm.value)
+    .subscribe({
+      error: error => console.log(error),
+    });
   }
 }
