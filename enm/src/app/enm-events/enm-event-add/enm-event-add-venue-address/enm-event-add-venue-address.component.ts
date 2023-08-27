@@ -20,9 +20,8 @@ export class EnmEventAddVenueAddressComponent {
   }
 
   onSubmit() {
-    // temp. have to make sure EnmEvent.venue is not left null
-    // planning on replacing this with the return value of a venue POST request
     if (this.enmEventAddVenueForm.valid) { 
+      this.enmEventAddMultipageFormService.postVenue();
       this.enmEventAddForm.setControl('venue', this.fb.group({
         name: this.fb.control(this.enmEventAddVenueForm.get('name')?.value, [Validators.required]),
         address: this.fb.control(this.enmEventAddVenueForm.get('address')?.value, [Validators.required]),
