@@ -72,9 +72,6 @@ export class EnmEventVenueComponent {
 
     this.filteredVenues = filtered;
   }
-  addVenue() { 
-    this.router.navigate(['/add-event/add-venue-name'])
-  }
   //#endregion
 
 }

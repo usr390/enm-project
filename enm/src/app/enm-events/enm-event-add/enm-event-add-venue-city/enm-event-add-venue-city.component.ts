@@ -26,7 +26,7 @@ export class EnmEventAddVenueCityComponent {
 
   goBack() { 
     this.enmEventAddVenueForm.removeControl('city');
-    this.router.navigate(['/add-event/add-venue-name']); 
+    this.router.navigate(['/add-event/venue']); 
   }
 
   cancelForm() { 
