@@ -11,16 +11,7 @@
             </div>
             <div class="row g-0 justify-content-center">
                 <div class="col-auto">
-                    <p-autoComplete formControlName="venue" [suggestions]="filteredVenues" (completeMethod)="filterVenue($event)" [forceSelection]="true" field="name" [minLength]="3">
-                        <ng-template let-venue pTemplate="item">
-                            <div *ngIf="!venue.isCustomAdd">
-                              {{ venue.name }}
-                            </div>
-                            <div *ngIf="venue.isCustomAdd">
-                                <p-button (click)="addVenue()" styleClass="p-button-link"><i class="pi pi-plus"></i>&nbsp;&nbsp;Add New Venue</p-button>
-                            </div>
-                          </ng-template>
-                    </p-autoComplete>
+                    <p-autoComplete formControlName="venue" [suggestions]="filteredVenues" (completeMethod)="filterVenue($event)" field="name" [minLength]="3"></p-autoComplete>
                 </div>
                 <div class="col-auto">
                     <button class="arrow" pButton type="submit" [disabled]="enmEventAddForm.invalid" icon="pi pi-arrow-right" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
