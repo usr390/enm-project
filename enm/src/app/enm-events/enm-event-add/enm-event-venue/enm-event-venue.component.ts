@@ -23,6 +23,7 @@ export class EnmEventVenueComponent {
   venues: any[] | undefined;
   filteredVenues!: any[];
   enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
+  enmEventAddVenueForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddVenueForm;
 
   constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
@@ -32,9 +33,20 @@ export class EnmEventVenueComponent {
   }
 
   onSubmit() { 
-    if (this.enmEventAddForm.valid) { 
-      this.addTags(); 
-      this.router.navigate(['/add-event/date']); 
+    if (this.enmEventAddForm.valid) {
+      // the basis of this code is an assumption on PrimeNG's default autocomplete behavior: suggested values are Objects
+      // if, then, the form control's value is a string it means the user did not select from the suggestions list and is thus attempting to enter a venue not yet in our system
+      const userVenue = this.enmEventAddForm.get('venue')?.value;
+      const notFromAutoCompleteSuggestions = 'string'
+      if (typeof userVenue === notFromAutoCompleteSuggestions) {
+        this.addTagsNewVenue();
+        this.enmEventAddVenueForm.setControl('name', this.fb.control(userVenue));
+        this.router.navigate([ 'add-event/add-venue-city' ]);
+      } 
+      else {
+        this.addTags(); 
+        this.router.navigate(['/add-event/date']); 
+      }
     } 
   }
 
@@ -61,6 +73,16 @@ export class EnmEventVenueComponent {
       tagsArray.push(this.fb.control(cityName));
     }
   }
+
+  addTagsNewVenue() {
+    // new venues will not have city info readily available so must not be pushed into tags array yet (unlike in 'addTags()' which operates when a venue is selected from list of autocomplete suggestions)
+    const tagsArray = this.enmEventAddForm.get('tags') as FormArray;
+    const venueName = this.enmEventAddForm.get('venue')?.value;
+    if (venueName) {
+      tagsArray.push(this.fb.control(venueName));
+    }
+  }
+
   filterVenue(event: AutoCompleteCompleteEvent){
     let filtered: any[] = [];
     let query = event.query;

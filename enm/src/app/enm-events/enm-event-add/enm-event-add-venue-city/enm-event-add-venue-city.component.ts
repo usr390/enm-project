@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EnmEventAddMultipageFormService } from 'src/app/core/services/enm-event-add-multipage-form.service';
 
@@ -11,6 +11,7 @@ import { EnmEventAddMultipageFormService } from 'src/app/core/services/enm-event
 export class EnmEventAddVenueCityComponent {
 
   enmEventAddVenueForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddVenueForm;
+  enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
 
   constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private router: Router, private fb: FormBuilder){}
 
@@ -20,6 +21,7 @@ export class EnmEventAddVenueCityComponent {
 
   onSubmit() { 
     if (this.enmEventAddVenueForm.valid) { 
+      this.addCityTag();
       this.router.navigate(['/add-event/add-venue-address']); 
     } 
   }
@@ -34,4 +36,11 @@ export class EnmEventAddVenueCityComponent {
     this.router.navigate(['/']); 
   }
 
+  //# region utility
+  addCityTag() {
+    const tagsArray = this.enmEventAddForm.get('tags') as FormArray;
+    const cityName = this.enmEventAddVenueForm.get('city')?.value;
+    if (cityName) tagsArray.push(this.fb.control(cityName));
+  }
+  //# endregion
 }
