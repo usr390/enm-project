@@ -79,17 +79,17 @@ export class EnmEventVenueComponent {
   navigate() {
     /* summary
       the basis of this function is an assumption on PrimeNG's default autocomplete behavior: values from the suggestion list are Objects
-      if, then, the form control's value is a string it means the user did not select from the suggestions list and is thus attempting to enter a venue not yet in our system
-      in this case, the user will be navigated to an "offshoot" form to collect more data about the venue
+      if, then, the form control's value is not an Object it means the user did not select from the suggestions list and is thus attempting to enter a venue not yet in our system
+      in which case the user is navigated to an "offshoot" form to collect more data about the venue
     */
     const userVenue = this.enmEventAddForm.get('venue')?.value;
-    const notFromAutoCompleteSuggestions = 'string'
-    if (typeof userVenue === notFromAutoCompleteSuggestions) {
-      this.enmEventAddVenueForm.setControl('name', this.fb.control(userVenue));
-      this.router.navigate([ 'add-event/add-venue-city' ]);
+    const autoCompleteSuggestion = 'object'
+    if (typeof userVenue === autoCompleteSuggestion) {
+      this.router.navigate(['/add-event/date']); 
     } 
     else {
-      this.router.navigate(['/add-event/date']); 
+      this.enmEventAddVenueForm.setControl('name', this.fb.control(userVenue));
+      this.router.navigate([ 'add-event/add-venue-city' ]);
     }
   }
   //#endregion
