@@ -33,7 +33,10 @@ export class EnmEventVenueComponent {
   }
 
   onSubmit() { 
-    if (this.enmEventAddForm.valid) this.navigateUser();
+    if (this.enmEventAddForm.valid) {
+      this.addTags(); 
+      this.navigate();
+    } 
   }
 
   cancelForm() { 
@@ -52,23 +55,16 @@ export class EnmEventVenueComponent {
   }
   addTags() {
     const tagsArray = this.enmEventAddForm.get('tags') as FormArray;
-    const venueName = this.enmEventAddForm.get('venue')?.value.name;
-    const cityName = this.enmEventAddForm.get('venue')?.value.city;
-    if (venueName) {
-      tagsArray.push(this.fb.control(venueName));
+    const userVenue = this.enmEventAddForm.get('venue')?.value;
+    const autoCompleteSuggestion = 'object';
+
+    if (typeof userVenue === autoCompleteSuggestion) {
+      const cityName = this.enmEventAddForm.get('venue')?.value.city;
+      tagsArray.push(this.fb.control(userVenue));
       tagsArray.push(this.fb.control(cityName));
-    }
+    } 
+    else tagsArray.push(this.fb.control(userVenue));
   }
-
-  addTagsNewVenue() {
-    // new venues will not have city info readily available so must not be pushed into tags array yet (unlike in 'addTags()' which operates when a venue is selected from list of autocomplete suggestions)
-    const tagsArray = this.enmEventAddForm.get('tags') as FormArray;
-    const venueName = this.enmEventAddForm.get('venue')?.value;
-    if (venueName) {
-      tagsArray.push(this.fb.control(venueName));
-    }
-  }
-
   filterVenue(event: AutoCompleteCompleteEvent){
     let filtered: any[] = [];
     let query = event.query;
@@ -80,8 +76,7 @@ export class EnmEventVenueComponent {
 
     this.filteredVenues = filtered;
   }
-
-  navigateUser() {
+  navigate() {
     /* summary
       the basis of this function is an assumption on PrimeNG's default autocomplete behavior: values from the suggestion list are Objects
       if, then, the form control's value is a string it means the user did not select from the suggestions list and is thus attempting to enter a venue not yet in our system
@@ -90,12 +85,10 @@ export class EnmEventVenueComponent {
     const userVenue = this.enmEventAddForm.get('venue')?.value;
     const notFromAutoCompleteSuggestions = 'string'
     if (typeof userVenue === notFromAutoCompleteSuggestions) {
-      this.addTagsNewVenue();
       this.enmEventAddVenueForm.setControl('name', this.fb.control(userVenue));
       this.router.navigate([ 'add-event/add-venue-city' ]);
     } 
     else {
-      this.addTags(); 
       this.router.navigate(['/add-event/date']); 
     }
   }
