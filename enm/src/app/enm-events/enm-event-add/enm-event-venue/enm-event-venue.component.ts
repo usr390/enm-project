@@ -17,7 +17,7 @@ interface AutoCompleteCompleteEvent {
 export class EnmEventVenueComponent {
   /* summary
     adds venue information to an event.
-    cancel: EnmEventListComponent, next: EnmEventDateComponent
+    cancel: EnmEventListComponent, next: EnmEventDateComponent || EnmEventAddVenueCityComponent
   */
 
   venues: any[] | undefined;
@@ -35,7 +35,7 @@ export class EnmEventVenueComponent {
   onSubmit() { 
     if (this.enmEventAddForm.valid) {
       this.addTags(); 
-      this.navigate();
+      this.navigateToNextFormComponent();
     } 
   }
 
@@ -77,7 +77,7 @@ export class EnmEventVenueComponent {
 
     this.filteredVenues = filtered;
   }
-  navigate() {
+  navigateToNextFormComponent() {
     /* summary
       the basis of this function is an assumption on PrimeNG's default autocomplete behavior: values from the suggestion list are Objects
       if, then, the form control's value is not an Object it means the user did not select from the suggestions list and is thus attempting to enter a venue not yet in our system
