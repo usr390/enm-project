@@ -59,8 +59,9 @@ export class EnmEventVenueComponent {
     const autoCompleteSuggestion = 'object';
 
     if (typeof userVenue === autoCompleteSuggestion) {
+      const venueName = this.enmEventAddForm.get('venue')?.value.name;
       const cityName = this.enmEventAddForm.get('venue')?.value.city;
-      tagsArray.push(this.fb.control(userVenue));
+      tagsArray.push(this.fb.control(venueName));
       tagsArray.push(this.fb.control(cityName));
     } 
     else tagsArray.push(this.fb.control(userVenue));
