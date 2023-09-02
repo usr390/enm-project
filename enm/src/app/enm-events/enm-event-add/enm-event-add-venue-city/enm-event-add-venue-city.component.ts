@@ -36,7 +36,7 @@ export class EnmEventAddVenueCityComponent {
     this.router.navigate(['/']); 
   }
 
-  //# region utility
+  //#region utility
   setUpLocalFormControls() {
     this.enmEventAddVenueForm.setControl('city', this.fb.control('', Validators.required));
   }
@@ -53,5 +53,5 @@ export class EnmEventAddVenueCityComponent {
     const cityName = this.enmEventAddVenueForm.get('city')?.value;
     if (cityName) tagsArray.push(this.fb.control(cityName));
   }
-  //# endregion
+  //#endregion
 }
