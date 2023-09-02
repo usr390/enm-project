@@ -16,7 +16,7 @@ export class EnmEventAddVenueCityComponent {
   constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private router: Router, private fb: FormBuilder){}
 
   ngOnInit() {
-    this.enmEventAddVenueForm.setControl('city', this.fb.control('', Validators.required));
+    this.setUpLocalFormControls();
   }
 
   onSubmit() { 
@@ -27,16 +27,27 @@ export class EnmEventAddVenueCityComponent {
   }
 
   goBack() { 
-    this.enmEventAddVenueForm.removeControl('city');
-    this.router.navigate(['/add-event/venue']); 
+    this.tearDownLocalFormControls();
+    this.router.navigate(['/add-event/venue']);
   }
 
   cancelForm() { 
-    this.enmEventAddVenueForm.removeControl('city');
+    this.tearDownExistingFormControls();
     this.router.navigate(['/']); 
   }
 
   //# region utility
+  setUpLocalFormControls() {
+    this.enmEventAddVenueForm.setControl('city', this.fb.control('', Validators.required));
+  }
+  tearDownLocalFormControls() {
+    this.enmEventAddVenueForm.removeControl('city');
+  }
+  tearDownExistingFormControls() {
+    this.enmEventAddForm.removeControl('venue');
+    this.enmEventAddForm.removeControl('tags');
+    this.enmEventAddVenueForm.removeControl('city');
+  }
   addCityTag() {
     const tagsArray = this.enmEventAddForm.get('tags') as FormArray;
     const cityName = this.enmEventAddVenueForm.get('city')?.value;

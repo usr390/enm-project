@@ -16,7 +16,7 @@ export class EnmEventAddVenueAddressComponent {
   constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private router: Router, private fb: FormBuilder){}
 
   ngOnInit() {
-    this.enmEventAddVenueForm.setControl('address', this.fb.control('', Validators.required));
+    this.setUpLocalFormControls();
   }
 
   onSubmit() {
@@ -34,13 +34,28 @@ export class EnmEventAddVenueAddressComponent {
   }
 
   goBack() { 
-    this.enmEventAddVenueForm.removeControl('address');
+    this.tearDownLocalFormControls();
     this.router.navigate(['/add-event/add-venue-city']); 
   }
 
   cancelForm() { 
-    this.enmEventAddVenueForm.removeControl('address');
+    this.tearDownExistingFormControls();
     this.router.navigate(['/']); 
   }
+
+  //#region utility
+  setUpLocalFormControls(){
+    this.enmEventAddVenueForm.setControl('address', this.fb.control('', Validators.required));
+  }
+  tearDownLocalFormControls() {
+    this.enmEventAddVenueForm.removeControl('address');
+  }
+  tearDownExistingFormControls() {
+    this.enmEventAddForm.removeControl('venue');
+    this.enmEventAddForm.removeControl('tags');
+    this.enmEventAddVenueForm.removeControl('city');
+    this.enmEventAddVenueForm.removeControl('address');
+  }
+  //#endregion
   
 }
