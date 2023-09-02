@@ -28,8 +28,8 @@ export class EnmEventVenueComponent {
   constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
-    this.enmEventAddMultipageFormService.getVenues().then((venues) => { this.venues = venues; });
-    this.setUpLocalControls();
+    this.initializeVenueAutoCompleteSuggestions();
+    this.setUpLocalFormControls();
   }
 
   onSubmit() { 
@@ -40,16 +40,16 @@ export class EnmEventVenueComponent {
   }
 
   cancelForm() { 
-    this.tearDownExistingControls();
+    this.tearDownExistingFormControls();
     this.router.navigate(['/']); 
   }
 
   //#region utility
-  setUpLocalControls() {
+  setUpLocalFormControls() {
     this.enmEventAddForm.setControl('venue', this.fb.control('', Validators.required));
     this.enmEventAddForm.setControl('tags', this.fb.array([]));
   }
-  tearDownExistingControls() {
+  tearDownExistingFormControls() {
     this.enmEventAddForm.removeControl('venue');
     this.enmEventAddForm.removeControl('tags');
   }
@@ -65,6 +65,9 @@ export class EnmEventVenueComponent {
       tagsArray.push(this.fb.control(cityName));
     } 
     else tagsArray.push(this.fb.control(userVenue));
+  }
+  initializeVenueAutoCompleteSuggestions() {
+    this.enmEventAddMultipageFormService.getVenues().then((venues) => { this.venues = venues; });
   }
   filterVenue(event: AutoCompleteCompleteEvent){
     let filtered: any[] = [];
