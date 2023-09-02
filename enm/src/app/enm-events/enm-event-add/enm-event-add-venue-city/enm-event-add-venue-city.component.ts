@@ -21,7 +21,7 @@ export class EnmEventAddVenueCityComponent {
 
   onSubmit() { 
     if (this.enmEventAddVenueForm.valid) { 
-      this.addCityTag();
+      this.addTags();
       this.router.navigate(['/add-event/add-venue-address']); 
     } 
   }
@@ -48,7 +48,7 @@ export class EnmEventAddVenueCityComponent {
     this.enmEventAddForm.removeControl('tags');
     this.enmEventAddVenueForm.removeControl('city');
   }
-  addCityTag() {
+  addTags() {
     const tagsArray = this.enmEventAddForm.get('tags') as FormArray;
     const cityName = this.enmEventAddVenueForm.get('city')?.value;
     if (cityName) tagsArray.push(this.fb.control(cityName));
