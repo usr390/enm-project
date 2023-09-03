@@ -20,7 +20,7 @@ export class EnmEventPriceOfEntryComponent {
   constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
-    this.setUpLocalControls();
+    this.setUpLocalFormControls();
   }
 
   onSubmit() {
@@ -28,23 +28,23 @@ export class EnmEventPriceOfEntryComponent {
   }
 
   goBack() {
-    this.tearDownLocalControls();
+    this.tearDownLocalFormControls();
     this.router.navigate(['/add-event/time']);
   }
 
   cancelForm() { 
-    this.tearDownExistingControls();
+    this.tearDownExistingFormControls();
     this.router.navigate(['/']); 
   }
 
   //#region utility
-  setUpLocalControls() {
+  setUpLocalFormControls() {
     this.enmEventAddForm.setControl('priceOfEntry', this.fb.control('', [Validators.required]));
   }
-  tearDownLocalControls() {
+  tearDownLocalFormControls() {
     this.enmEventAddForm.removeControl('priceOfEntry');
   }
-  tearDownExistingControls() {
+  tearDownExistingFormControls() {
     this.enmEventAddForm.removeControl('priceOfEntry');
     this.enmEventAddForm.setControl('startTime', this.fb.control(new Date(0, 0, 0, 0, 0), [Validators.required]));
     this.enmEventAddForm.setControl('date', this.fb.control('00/00/0000', [Validators.required]));

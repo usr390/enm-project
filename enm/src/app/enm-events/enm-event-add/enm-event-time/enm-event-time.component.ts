@@ -24,7 +24,7 @@ export class EnmEventTimeComponent {
   constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
-    this.setUpLocalControls();
+    this.setUpLocalFormControls();
   }
 
   onSubmit() { 
@@ -32,23 +32,23 @@ export class EnmEventTimeComponent {
   }
 
   goBack() { 
-    this.tearDownLocalControls();
+    this.tearDownLocalFormControls();
     this.router.navigate(['/add-event/date']); 
   }
 
   cancelForm() { 
-    this.tearDownExistingControls();
+    this.tearDownExistingFormControls();
     this.router.navigate(['/']); 
   }
 
   //#region utility
-  setUpLocalControls() {
+  setUpLocalFormControls() {
     this.enmEventAddForm.setControl('startTime', this.fb.control('', [Validators.required]));
   }
-  tearDownLocalControls() {
+  tearDownLocalFormControls() {
     this.enmEventAddForm.setControl('startTime', this.fb.control(this.defaultTime, [Validators.required]));
   }
-  tearDownExistingControls() {
+  tearDownExistingFormControls() {
     this.enmEventAddForm.setControl('startTime', this.fb.control(this.defaultTime, [Validators.required]));
     this.enmEventAddForm.setControl('date', this.fb.control('00/00/0000', [Validators.required]));
     this.enmEventAddForm.removeControl('venue');
