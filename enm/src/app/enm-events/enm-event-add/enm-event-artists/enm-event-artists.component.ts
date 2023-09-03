@@ -21,8 +21,6 @@ export class EnmEventArtistsComponent {
     this.setUpLocalFormControls();
   }
 
-  ngAfterViewInit() {}
-
   onSubmit() {
     if (this.enmEventAddForm.valid) {
       this.trimArtistArrayElements();
