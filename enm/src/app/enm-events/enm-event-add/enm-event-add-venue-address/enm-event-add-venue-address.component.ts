@@ -22,13 +22,7 @@ export class EnmEventAddVenueAddressComponent {
   onSubmit() {
     if (this.enmEventAddVenueForm.valid) { 
       this.enmEventAddMultipageFormService.postVenue();
-      this.enmEventAddForm.setControl('venue', this.fb.group({
-        name: this.fb.control(this.enmEventAddVenueForm.get('name')?.value, [Validators.required]),
-        address: this.fb.control(this.enmEventAddVenueForm.get('address')?.value, [Validators.required]),
-        city: this.fb.control(this.enmEventAddVenueForm.get('city')?.value, [Validators.required]),
-        state: this.fb.control('Texas', [Validators.required]),
-        country: this.fb.control('USA', [Validators.required])
-      }));
+      this.syncEnmEventAddForm();
       this.router.navigate(['/add-event/date']) 
     } 
   }
@@ -56,6 +50,17 @@ export class EnmEventAddVenueAddressComponent {
     this.enmEventAddVenueForm.removeControl('city');
     this.enmEventAddVenueForm.removeControl('address');
   }
+  syncEnmEventAddForm() {
+    /* summary
+      with requisite information for the new venue now captured, the main form will sync w it
+    */ 
+    this.enmEventAddForm.setControl('venue', this.fb.group({
+      name: this.fb.control(this.enmEventAddVenueForm.get('name')?.value, [Validators.required]),
+      address: this.fb.control(this.enmEventAddVenueForm.get('address')?.value, [Validators.required]),
+      city: this.fb.control(this.enmEventAddVenueForm.get('city')?.value, [Validators.required]),
+      state: this.fb.control('Texas', [Validators.required]),
+      country: this.fb.control('USA', [Validators.required])
+    }));
+  }
   //#endregion
-  
 }
