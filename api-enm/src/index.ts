@@ -31,9 +31,22 @@ app.get('/api/venues', async (req: Request, res: Response) => {
   .catch(err => console.log(err)))
 })
 
-app.get('/api/login', async (req: Request, res: Response) => {
-  res.json(await UserModel.find()
-  .catch(err => console.log(err)))
+app.post('/api/login', async (req: Request, res: Response) => {
+
+  const { username, password } = req.body;
+
+  if (!username || !password) return res.status(400).json({ error: 'Username and password are required.' });
+
+  try {
+    const user = await UserModel.findOne({ username });
+    if (!user) return res.status(401).json({ error: 'Invalid credentials.' });
+    if (user.password !== password) return res.status(401).json({ error: 'Invalid credentials.' });
+    res.json({ message: 'Logged in successfully.' });
+  } 
+  catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
 });
 
 app.post('/api/enmEventTest', async (req: Request, res: Response) => {

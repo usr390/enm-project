@@ -14,7 +14,10 @@ export class LoginService {
 
   constructor(private fb: FormBuilder, private http: HttpClient) { }
 
-  getUsers() {
-    return this.http.get<User[]>(BASE_URL).subscribe();
+  postLogin() {
+    this.http.post(BASE_URL, this.userLoginForm.value)
+    .subscribe({
+      error: error => console.log(error),
+    });
   }
 }

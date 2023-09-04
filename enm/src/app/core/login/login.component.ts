@@ -17,11 +17,7 @@ export class LoginComponent {
   }
   
   onSubmit() {
-    this.getUsers();
-  }
-
-  getUsers() {
-    this.loginService.getUsers();
+    this.loginService.postLogin();
   }
 
   //#region utility
