@@ -21,6 +21,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { PasswordModule } from 'primeng/password';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
     SidebarModule,
     ToolbarModule,
     InputNumberModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    PasswordModule
   ],
   exports: [
     // enm imports
@@ -65,7 +67,8 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
     SidebarModule,
     InputNumberModule,
     ToolbarModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    PasswordModule
   ],
 })
 export class SharedModule { }

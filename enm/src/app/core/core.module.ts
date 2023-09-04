@@ -6,11 +6,13 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 // enm imports
 import { SharedModule } from '../shared/shared.module';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
   declarations: [
     SidebarComponent,
+    LoginComponent,
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule,
   ],
   exports: [
-    SidebarComponent
+    SidebarComponent,
+    LoginComponent
   ]
 })
 export class CoreModule { }
