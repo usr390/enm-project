@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { SidebarComponent } from './sidebar/sidebar.component';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 // enm imports
 import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from './login/login.component';
@@ -17,6 +19,7 @@ import { LoginComponent } from './login/login.component';
   imports: [
     CommonModule,
     HttpClientModule,
+    ReactiveFormsModule,
     // enm modules,
     SharedModule,
   ],

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../services/login.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +8,26 @@ import { LoginService } from '../services/login.service';
   styleUrls: ['./login.component.less']
 })
 export class LoginComponent {
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService, private fb: FormBuilder) {}
+
+  userLoginForm: FormGroup = this.loginService.userLoginForm;
+
+  ngOnInit() {
+    this.setUpLocalFormControls();
+  }
+  
+  onSubmit() {
+    this.getUsers();
+  }
 
   getUsers() {
     this.loginService.getUsers();
   }
+
+  //#region utility
+  setUpLocalFormControls() {
+    this.userLoginForm.setControl('username', this.fb.control('', Validators.required));
+    this.userLoginForm.setControl('password', this.fb.control('', Validators.required));
+  }
+  //#endregion
 }
