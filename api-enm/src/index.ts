@@ -5,6 +5,7 @@ import { DateTime } from "luxon";
 
 import EnmEventModel from "./models/EnmEvent";
 import VenueModel from "./models/Venue";
+import UserModel from "./models/User";
 
 const app = express(); app.use(cors({ origin: '*' })); app.use(express.json())
 const port = process.env.PORT || 3000
@@ -29,6 +30,11 @@ app.get('/api/venues', async (req: Request, res: Response) => {
   res.json(await VenueModel.find()
   .catch(err => console.log(err)))
 })
+
+app.get('/api/login', async (req: Request, res: Response) => {
+  res.json(await UserModel.find()
+  .catch(err => console.log(err)))
+});
 
 app.post('/api/enmEventTest', async (req: Request, res: Response) => {
   /* summary
