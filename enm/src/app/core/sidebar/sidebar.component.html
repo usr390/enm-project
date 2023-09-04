@@ -11,6 +11,9 @@
         </p>
     </ng-template>
     <ng-template pTemplate="footer">
+        <p>
+            <a [routerLink]="['/login']"  href="/">Log In</a>
+        </p>
         <p>Copyright @{{currentDate | date: 'y'}} All Rights Reserved</p>
     </ng-template>
 </p-sidebar>
