@@ -12,12 +12,14 @@ export class LoginService {
 
   public userLoginForm: FormGroup = this.fb.group({});
 
+  user = '';
+
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) { }
 
   postLogin() {
     this.http.post(BASE_URL, this.userLoginForm.value)
     .subscribe({
-      next: _ => this.router.navigate(['/']),
+      next: (response) => { console.log(response); this.user = 'test'; this.router.navigate(['/'])},
       error: error => console.log(error),
     });
   }
