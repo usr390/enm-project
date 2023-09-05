@@ -19,7 +19,10 @@ export class LoginService {
   postLogin() {
     this.http.post(BASE_URL, this.userLoginForm.value)
     .subscribe({
-      next: (response) => { console.log(response); this.user = 'test'; this.router.navigate(['/'])},
+      next: _ => { 
+        this.user = this.userLoginForm.value.username; 
+        this.router.navigate(['/']);
+      },
       error: error => console.log(error),
     });
   }
