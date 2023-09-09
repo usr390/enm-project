@@ -19,9 +19,9 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { InputNumberModule } from 'primeng/inputnumber';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { PasswordModule } from 'primeng/password';
+import { InputMaskModule } from 'primeng/inputmask';
 
 
 @NgModule({
@@ -45,9 +45,9 @@ import { PasswordModule } from 'primeng/password';
     InputTextModule,
     SidebarModule,
     ToolbarModule,
-    InputNumberModule,
     ScrollPanelModule,
-    PasswordModule
+    PasswordModule,
+    InputMaskModule
   ],
   exports: [
     // enm imports
@@ -65,10 +65,10 @@ import { PasswordModule } from 'primeng/password';
     CalendarModule,
     InputTextModule,
     SidebarModule,
-    InputNumberModule,
     ToolbarModule,
     ScrollPanelModule,
-    PasswordModule
+    PasswordModule,
+    InputMaskModule
   ],
 })
 export class SharedModule { }

@@ -24,7 +24,7 @@ export class EnmEventPriceOfEntryComponent {
   }
 
   onSubmit() {
-    if (this.enmEventAddForm.valid) { this.router.navigate(['/add-event/artists']); }
+    if (this.enmEventAddForm.valid) { this.processPriceOfEntry(); this.router.navigate(['/add-event/artists']); }
   }
 
   goBack() {
@@ -50,6 +50,12 @@ export class EnmEventPriceOfEntryComponent {
     this.enmEventAddForm.setControl('date', this.fb.control('00/00/0000', [Validators.required]));
     this.enmEventAddForm.removeControl('venue');
     this.enmEventAddForm.removeControl('tags');
+  }
+  processPriceOfEntry() {
+    let priceOfEntry = this.enmEventAddForm.get('priceOfEntry')?.value;
+    let priceOfEntryWithoutCurrencySymbol = priceOfEntry.slice(1, priceOfEntry.length)
+    let priceOfEntryAsNumber = parseInt(priceOfEntryWithoutCurrencySymbol);
+    this.enmEventAddForm.get('priceOfEntry')?.patchValue(priceOfEntryAsNumber);
   }
   //#endregion
 }
