@@ -6,13 +6,13 @@
                 <div class="col"><label>Username</label></div>
             </div>
             <div class="row g-0 justify-content-center input-row">
-                <div class="col-auto"><input formControlName="username" pInputText placeholder="Username"></div>
+                <div class="col-auto"><input formControlName="username" pInputText placeholder="Username" style="width: 229px;"></div>
             </div>
             <div class="row">
                 <div class="col"><label>Password</label></div>
             </div>
             <div class="row g-0 justify-content-center input-row">
-                <div class="col-auto"><p-password formControlName="password" [feedback]="false" placeholder="Password"></p-password></div>
+                <div class="col-auto"><p-password formControlName="password" [feedback]="false" placeholder="Password" [toggleMask]="true"></p-password></div>
             </div>
             <div class="row">
                 <div class="col"><p-button type="submit" label="Log In" [disabled]="userLoginForm.invalid"></p-button></div>
