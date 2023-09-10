@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import * as AuthActions from './../../state/auth/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.less']
 })
 export class LoginComponent {
-  constructor(private loginService: LoginService, private fb: FormBuilder) {}
+  constructor(private loginService: LoginService, private fb: FormBuilder, private store: Store) {}
 
   userLoginForm: FormGroup = this.loginService.userLoginForm;
 
@@ -17,7 +19,13 @@ export class LoginComponent {
   }
   
   onSubmit() {
-    this.loginService.postLogin();
+    if (this.userLoginForm.valid){
+      const credentials = {
+        username: this.userLoginForm.get('username')?.value,
+        password: this.userLoginForm.get('password')?.value,
+      }
+      this.store.dispatch(AuthActions.logInRequest({ credentials }))
+    } 
   }
 
   //#region utility

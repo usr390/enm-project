@@ -12,6 +12,9 @@ import { EnmEventModule } from './enm-events/enm-events.module';
 
 // 3rd party imports
 import { StoreModule } from '@ngrx/store';
+import { authReducer } from './state/auth/auth.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './state/auth/auth.effects';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { StoreModule } from '@ngrx/store';
     CoreModule,
     SharedModule,
     EnmEventModule,
-    StoreModule
+    StoreModule.forRoot({ auth: authReducer }),
+    EffectsModule.forRoot([ AuthEffects ]),
   ],
   providers: [],
   bootstrap: [AppComponent]

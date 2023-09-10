@@ -41,7 +41,7 @@ app.post('/api/login', async (req: Request, res: Response) => {
     const user = await UserModel.findOne({ username });
     if (!user) return res.status(401).json({ error: 'Invalid credentials.' });
     if (user.password !== password) return res.status(401).json({ error: 'Invalid credentials.' });
-    res.json({ message: 'Logged in successfuly.', username: user.username });
+    res.json({ username: user });
   } 
   catch (err) {
     console.error(err);

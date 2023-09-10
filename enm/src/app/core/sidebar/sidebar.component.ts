@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../services/login.service';
+import * as fromAuth from './../../state/auth/auth.reducer';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +11,8 @@ import { LoginService } from '../services/login.service';
 export class SidebarComponent {
   sidebarVisible: boolean = false;
   currentDate = new Date();
-  user = this.loginService.user;
 
-  constructor(private loginService: LoginService) {}
+  user$ = this.store.select(fromAuth.selectUser);
+
+  constructor(private store: Store<fromAuth.State>) {}
 }

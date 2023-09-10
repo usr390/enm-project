@@ -11,8 +11,8 @@
         </p>
     </ng-template>
     <ng-template pTemplate="footer">
-        <p *ngIf="user">Logged in as: {{user}}</p>
-        <p *ngIf="!user">
+        <p *ngIf="(user$ | async)">Logged in as: {{(user$ | async)?.username}}</p>
+        <p *ngIf="!(user$ | async)">
             <a [routerLink]="['/login']"  href="/">Log In</a>
         </p>
         <p>Copyright @{{currentDate | date: 'y'}} All Rights Reserved</p>
