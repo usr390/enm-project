@@ -10,6 +10,9 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { EnmEventModule } from './enm-events/enm-events.module';
 
+// 3rd party imports
+import { StoreModule } from '@ngrx/store';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -20,7 +23,8 @@ import { EnmEventModule } from './enm-events/enm-events.module';
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,
-    EnmEventModule
+    EnmEventModule,
+    StoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
