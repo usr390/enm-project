@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class WordifiedPriceOfEntryPipe implements PipeTransform {
 
   transform(priceOfEntry: number): string {
-    if (priceOfEntry === 0) return 'Free'; else return `$${priceOfEntry.toString()}`;
+    if (priceOfEntry === 0) return 'No Cover'; else return `$${priceOfEntry.toString()}`;
   }
 
 }
