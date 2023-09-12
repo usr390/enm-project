@@ -9,12 +9,13 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { EnmEventModule } from './enm-events/enm-events.module';
+import { authReducer } from './state/auth/auth.reducer';
+import { AuthEffects } from './state/auth/auth.effects';
 
 // 3rd party imports
 import { StoreModule } from '@ngrx/store';
-import { authReducer } from './state/auth/auth.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { EffectsModule } from '@ngrx/effects';
-import { AuthEffects } from './state/auth/auth.effects';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AuthEffects } from './state/auth/auth.effects';
     SharedModule,
     EnmEventModule,
     StoreModule.forRoot({ auth: authReducer }),
+    StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([ AuthEffects ]),
   ],
   providers: [],
