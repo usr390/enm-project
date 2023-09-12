@@ -31,9 +31,9 @@ describe('WordifiedPriceOfEntry', () => {
   });
 
   describe('on special cases', () => {
-    it('should transform 0 into Free', () => {
+    it('should transform 0 into No Cover', () => {
       const input = 0;
-      const output = 'Free';
+      const output = 'No Cover';
       expect(pipe.transform(input)).toEqual(output);
     });
   });
