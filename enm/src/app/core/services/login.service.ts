@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthLogInResponse } from 'src/app/models/logInResponse.model';
+import { logInResponse } from 'src/app/models/logInResponse.model';
 import { environment } from 'src/environments/environment';
 const BASE_URL = environment.api + '/login';
 
@@ -29,6 +29,6 @@ export class LoginService {
   }
 
   login(username: string, password: string) {
-    return this.http.post<AuthLogInResponse>(BASE_URL, { username, password });
+    return this.http.post<logInResponse>(BASE_URL, { username, password });
   }
 }

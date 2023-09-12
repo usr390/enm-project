@@ -1,5 +1,5 @@
 import { Action, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
-import { User, NullableUser } from "src/app/models/user.model";
+import { NullableUser } from "src/app/models/user.model";
 import { logInSuccess, logInFailure } from "./auth.actions";
 
 export interface State {

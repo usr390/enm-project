@@ -1,6 +1,6 @@
-import { NullableUser, User } from "./user.model";
+import { NullableUser } from "./user.model";
 
-export interface AuthLogInResponse {
+export interface logInResponse {
     
     "user": NullableUser,
 
