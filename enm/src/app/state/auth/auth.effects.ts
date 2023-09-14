@@ -14,8 +14,7 @@ export class AuthEffects {
             ofType(AuthActions.logInRequest),
             exhaustMap(
                 (action) => this.loginService.login(action.credentials.username, action.credentials.password).pipe(
-                    tap(response => console.log('LoginService response:', response)),
-                    map((logInSuccessResponse) => AuthActions.logInSuccess({ logInSuccessResponse })),
+                    map(logInSuccessResponse => AuthActions.logInSuccess({ logInSuccessResponse })),
                     catchError((error) => of(AuthActions.logInFailure({ error })))
                 ), 
             )
@@ -25,10 +24,7 @@ export class AuthEffects {
     logInSuccess$ = createEffect(() => 
         this.actions$.pipe(
             ofType(AuthActions.logInSuccess),
-            tap(({ logInSuccessResponse }) => {
-                this.router.navigate(['/']);
-                alert('Log In Successful ' + logInSuccessResponse.user?.username)
-            })
+            tap(_ => this.router.navigate(['/']))
         ),
         { dispatch: false }
     );

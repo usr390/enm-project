@@ -8,10 +8,7 @@ export interface State {
 }
 
 export const initialState: State = {
-    user: {
-        username: 'light can',
-        password: 'growler123'
-    },
+    user: null,
 }
 
 const _authReducer = createReducer(
