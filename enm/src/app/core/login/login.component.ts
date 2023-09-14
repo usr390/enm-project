@@ -3,6 +3,7 @@ import { LoginService } from '../services/login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as AuthActions from './../../state/auth/auth.actions';
+import * as fromAuth from './../../state/auth/auth.reducer';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,8 @@ import * as AuthActions from './../../state/auth/auth.actions';
 })
 export class LoginComponent {
   constructor(private loginService: LoginService, private fb: FormBuilder, private store: Store) {}
+
+  logInErrorResponse$ = this.store.select(fromAuth.selectLogInErrorResponse);
 
   userLoginForm: FormGroup = this.loginService.userLoginForm;
 

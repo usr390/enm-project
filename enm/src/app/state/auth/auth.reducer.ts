@@ -1,15 +1,16 @@
 import { Action, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { NullableUser } from "src/app/models/user.model";
-import { logInSuccess, logInFailure, logOut } from "./auth.actions";
+import { logInSuccess, logOut, logInErrorResponse } from "./auth.actions";
+import { LogInErrorResponse } from "src/app/models/logInErrorResponse.model";
 
 export interface State {
     user: NullableUser,
-    logInError?: string | null
+    logInErrorResponse: LogInErrorResponse
 }
 
 export const initialState: State = {
     user: null,
-    logInError: null,
+    logInErrorResponse: null,
 }
 
 const _authReducer = createReducer(
@@ -18,13 +19,13 @@ const _authReducer = createReducer(
         return {
             ...state,
             user: logInSuccessResponse.user,
-            logInError: null,
+            logInErrorResponse: null,
         }
     }),
-    on(logInFailure, (state, { error }) => {
+    on(logInErrorResponse, (state, { error }) => {
         return {
             ...state,
-            logInError: error,
+            logInErrorResponse: error,
             user: null
         }
     }),
@@ -32,7 +33,7 @@ const _authReducer = createReducer(
         return {
             ...state,
             user: null,
-            logInError: null
+            logInErrorResponse: null
         }
     })
 );
@@ -43,4 +44,4 @@ export function authReducer(state: State | undefined, action: Action) {
 
 export const selectAuthState = createFeatureSelector<State>('auth');
 export const selectUser = createSelector(selectAuthState, (state) => state.user)
-export const selectLogInErrorMessage = createSelector(selectAuthState, (state) => state.logInError)
+export const selectLogInErrorResponse = createSelector(selectAuthState, (state) => state.logInErrorResponse)

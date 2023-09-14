@@ -17,6 +17,7 @@
             <div class="row">
                 <div class="col"><p-button type="submit" label="Log In" [disabled]="userLoginForm.invalid"></p-button></div>
             </div>
+            <div *ngIf="logInErrorResponse$ | async">{{(logInErrorResponse$ | async)?.error?.error}}</div>
         </form>
         <p>New to Enm? <span>Create an account.</span></p>
     </div>
