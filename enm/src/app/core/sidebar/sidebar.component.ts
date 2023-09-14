@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../services/login.service';
 import * as fromAuth from './../../state/auth/auth.reducer';
 import { Store } from '@ngrx/store';
+import * as AuthActions from './../../state/auth/auth.actions';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,4 +15,8 @@ export class SidebarComponent {
   user$ = this.store.select(fromAuth.selectUser);
 
   constructor(private store: Store<fromAuth.State>) {}
+
+  onLogOut() {
+    this.store.dispatch(AuthActions.logOut());
+  }
 }
