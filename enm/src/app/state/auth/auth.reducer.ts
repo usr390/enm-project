@@ -4,11 +4,12 @@ import { logInSuccess, logInFailure, logOut } from "./auth.actions";
 
 export interface State {
     user: NullableUser,
-    logInError?: string
+    logInError?: string | null
 }
 
 export const initialState: State = {
     user: null,
+    logInError: null,
 }
 
 const _authReducer = createReducer(
@@ -16,7 +17,8 @@ const _authReducer = createReducer(
     on(logInSuccess, (state, { logInSuccessResponse }) => {
         return {
             ...state,
-            user: logInSuccessResponse.user
+            user: logInSuccessResponse.user,
+            logInError: null,
         }
     }),
     on(logInFailure, (state, { error }) => {
@@ -29,7 +31,8 @@ const _authReducer = createReducer(
     on(logOut, (state) => {
         return {
             ...state,
-            user: null
+            user: null,
+            logInError: null
         }
     })
 );
