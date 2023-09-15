@@ -22,6 +22,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { PasswordModule } from 'primeng/password';
 import { InputMaskModule } from 'primeng/inputmask';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -47,7 +49,8 @@ import { InputMaskModule } from 'primeng/inputmask';
     ToolbarModule,
     ScrollPanelModule,
     PasswordModule,
-    InputMaskModule
+    InputMaskModule,
+    ToastModule,
   ],
   exports: [
     // enm imports
@@ -68,7 +71,12 @@ import { InputMaskModule } from 'primeng/inputmask';
     ToolbarModule,
     ScrollPanelModule,
     PasswordModule,
-    InputMaskModule
+    InputMaskModule,
+    ToastModule,
   ],
+  providers: [
+    // primeng providers
+    MessageService
+  ]
 })
 export class SharedModule { }

@@ -1,3 +1,5 @@
+<div *ngIf="logInErrorResponse$ | async"></div>
+
 <div class="d-flex justify-content-center align-items-center" style="height: 85vh;">
     <div class="container text-center">
         <h2>Log in to Enm</h2>
@@ -17,8 +19,9 @@
             <div class="row">
                 <div class="col"><p-button type="submit" label="Log In" [disabled]="userLoginForm.invalid"></p-button></div>
             </div>
-            <div *ngIf="logInErrorResponse$ | async">{{(logInErrorResponse$ | async)?.error?.error}}</div>
         </form>
         <p>New to Enm? <span>Create an account</span></p>
     </div>
 </div>
+
+<p-toast position="top-right" [breakpoints]="{'920px': { width: '50%' }}"></p-toast>
