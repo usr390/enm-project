@@ -20,7 +20,6 @@ export class LoginComponent {
   );
 
   userLoginForm: FormGroup = this.loginService.userLoginForm;
-  test = 'test message'
 
   ngOnInit() {
     this.setUpLocalFormControls();
