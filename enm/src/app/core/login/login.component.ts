@@ -30,8 +30,8 @@ export class LoginComponent {
     if (this.userLoginForm.valid){
       this.applyLogInButtonCooldown();
       const credentials = {
-        username: this.userLoginForm.get('username')?.value,
-        password: this.userLoginForm.get('password')?.value,
+        username: this.userLoginForm.get('username')?.value.trim(),
+        password: this.userLoginForm.get('password')?.value.trim(),
       }
       this.store.dispatch(AuthActions.logInRequest({ credentials }))
     } 
