@@ -41,7 +41,7 @@ export class LoginComponent {
     this.userLoginForm.setControl('password', this.fb.control('', Validators.required));
   }
   showInvalidCredentialsAlert(error: string | undefined) {
-    this.messageService.add({ severity: 'error', summary: 'Oh Nooes', detail: error });
+    this.messageService.add({ severity: 'error', summary: error, detail: 'Please try again' });
   }
   //#endregion
 }

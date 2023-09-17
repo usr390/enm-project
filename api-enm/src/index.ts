@@ -35,17 +35,17 @@ app.post('/api/login', async (req: Request, res: Response) => {
 
   const { username, password } = req.body;
 
-  if (!username || !password) return res.status(400).json({ error: 'Username and password are required.' });
+  if (!username || !password) return res.status(400).json({ error: 'Username And Password Required' });
 
   try {
     const user = await UserModel.findOne({ username });
-    if (!user) return res.status(401).json({ error: 'Invalid credentials.' });
-    if (user.password !== password) return res.status(401).json({ error: 'Invalid credentials.' });
+    if (!user) return res.status(401).json({ error: 'Invalid Credentials' });
+    if (user.password !== password) return res.status(401).json({ error: 'Invalid Credentials' });
     res.json({ user });
   } 
   catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Internal server error.' });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
