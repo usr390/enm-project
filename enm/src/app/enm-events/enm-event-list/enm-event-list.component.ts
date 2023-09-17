@@ -3,9 +3,6 @@ import { combineLatest, map } from 'rxjs';
 import { EnmEventService } from './../../core/services/enm-event.service';
 import { EnmEvent } from './../enm-event.model';
 import { DateTime } from 'luxon';
-import { Store } from '@ngrx/store';
-
-import * as fromAuth from './../../state/auth/auth.reducer'
 
 @Component({
   selector: 'app-enm-event-list',
