@@ -20,6 +20,7 @@ export class LoginComponent {
   );
 
   userLoginForm: FormGroup = this.loginService.userLoginForm;
+  logInButtonCooldown = false;
 
   ngOnInit() {
     this.setUpLocalFormControls();
@@ -27,6 +28,7 @@ export class LoginComponent {
   
   onSubmit() {
     if (this.userLoginForm.valid){
+      this.applyLogInButtonCooldown();
       const credentials = {
         username: this.userLoginForm.get('username')?.value,
         password: this.userLoginForm.get('password')?.value,
@@ -42,6 +44,12 @@ export class LoginComponent {
   }
   showInvalidCredentialsAlert(error: string | undefined) {
     this.messageService.add({ severity: 'error', summary: error, detail: 'Please try again' });
+  }
+  applyLogInButtonCooldown() {
+    this.logInButtonCooldown = true;
+    setTimeout(() => {
+      this.logInButtonCooldown = false;
+    }, 2000); 
   }
   //#endregion
 }
