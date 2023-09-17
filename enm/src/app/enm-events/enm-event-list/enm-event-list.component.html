@@ -20,5 +20,11 @@
         </div>
     </div>
   </div>
+  <div class="sticky-bottom-right">
+    <div *ngIf="(user$ | async)">
+      <p-button routerLink="/add-event/venue" icon="pi pi-plus" styleClass="p-button-rounded"></p-button>
+    </div>
+    
+  </div>
 </div>
 
