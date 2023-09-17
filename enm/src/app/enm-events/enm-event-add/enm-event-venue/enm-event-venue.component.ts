@@ -39,6 +39,11 @@ export class EnmEventVenueComponent {
     } 
   }
 
+  goBack() { 
+    this.tearDownExistingFormControls();
+    this.router.navigate(['/']); 
+  }
+
   cancelForm() { 
     this.tearDownExistingFormControls();
     this.router.navigate(['/']); 
