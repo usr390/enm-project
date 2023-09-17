@@ -2,10 +2,12 @@
     <div class="row ">
         <div class="col">
             <form  [formGroup]="enmEventListFilterForm" (ngSubmit)="filterResults()">
-                <div class="p-inputgroup">
-                    <input pInputText formControlName="filter" type="text"  placeholder="Search" maxlength="20"/>
-                    <button pButton type="submit" icon="pi pi-search" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
-                    <button pButton (click)="clearFilter()" icon="pi pi-times" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
+                <div class="input-clearable">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input #searchInput pInputText formControlName="filter" type="text"  placeholder="Search" maxlength="15"/>
+                    </span>
+                    <button pButton type="button" icon="pi pi-times" class="clear-btn" (click)="clearFilter()" styleClass="p-button-sm p-button-rounded p-button-text" *ngIf="enmEventListFilterForm.controls.filter.value"></button>
                 </div>
             </form>
         </div>

@@ -1,5 +1,26 @@
 input {
-    max-width: 120px;
+    max-width: 200px;
+}
+
+.input-clearable {
+    position: relative;
+    display: inline-block;
+}
+
+.clear-btn {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #7b95af;
+}
+
+.clear-btn:hover {
+    background: none;
+    border: none;
+    color: #566472;
 }
 
 @media screen and (min-width: 576px) {

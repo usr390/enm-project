@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { EnmEventService } from './../../core/services/enm-event.service';
 
@@ -11,6 +11,8 @@ export class EnmEventListFilterComponent implements OnInit {
 
   enmEventListFilterForm = this.fb.group({ filter: '' });
 
+  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
+
   constructor(private enmEventService: EnmEventService, private fb: FormBuilder) { }
 
   ngOnInit() {}
@@ -19,7 +21,8 @@ export class EnmEventListFilterComponent implements OnInit {
 
   clearFilter() {
     this.enmEventListFilterForm.patchValue({ filter: ''});
-    this.filterResults(); 
+    this.filterResults();
+    this.searchInput.nativeElement.focus();
   }
 }
 
