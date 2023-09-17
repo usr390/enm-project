@@ -18,8 +18,6 @@ export class EnmEventListComponent implements OnInit {
     map(([enmEvents, userSuppliedFilter]) => enmEvents.filter(enmEvent => Object.values(enmEvent).toString().toLowerCase().indexOf(userSuppliedFilter.toLowerCase() ?? '') != -1 )),
   );
 
-  user$ = this.store.select(fromAuth.selectUser);
-
   groupedByDateEnmEventList$ = this.filteredEnmEventList$.pipe(
     map((events) => {
       const enmEventsGroupedByDate = new Map<string, EnmEvent[]>();
@@ -33,7 +31,7 @@ export class EnmEventListComponent implements OnInit {
     }),
   );
 
-  constructor(private enmEventService: EnmEventService, private store: Store) { }
+  constructor(private enmEventService: EnmEventService) { }
 
   ngOnInit(): void {}
 

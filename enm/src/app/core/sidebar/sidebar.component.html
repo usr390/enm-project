@@ -8,6 +8,9 @@
         </p>
     </ng-template>
     <ng-template pTemplate="footer">
+        <p *ngIf="(user$ | async)">
+            <a [routerLink]="['/add-event/venue']"  href="/">Add Event</a>
+        </p>
         <p *ngIf="(user$ | async)">Logged in as {{(user$ | async)?.username}}. <a href="/"(click)="onLogOut()">Log Out</a></p>
         <p *ngIf="!(user$ | async)">
             <a [routerLink]="['/login']"  href="/">Log In</a>
