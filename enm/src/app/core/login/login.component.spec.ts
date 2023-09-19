@@ -1,15 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { LoginComponent } from './login.component';
+import { LogInComponent } from './login.component';
 import { LoginService } from '../services/login.service';
 import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { MessageService } from 'primeng/api';
 
 describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+  let component: LogInComponent;
+  let fixture: ComponentFixture<LogInComponent>;
   let mockLoginService: jasmine.SpyObj<LoginService>;
   let mockMessageService: jasmine.SpyObj<MessageService>;
 
@@ -20,7 +20,7 @@ describe('LoginComponent', () => {
     mockMessageService = jasmine.createSpyObj('MessageService', ['']);
     TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule ],
-      declarations: [ LoginComponent ],
+      declarations: [ LogInComponent ],
       providers: [
         { provide: Store, useValue: mockStore },
         { provide: MessageService, useValue: mockMessageService },
@@ -29,7 +29,7 @@ describe('LoginComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(LogInComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   })

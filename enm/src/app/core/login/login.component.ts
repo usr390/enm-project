@@ -12,7 +12,7 @@ import { map } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less']
 })
-export class LoginComponent {
+export class LogInComponent {
   constructor(private loginService: LoginService, private fb: FormBuilder, private store: Store, private messageService: MessageService) {}
 
   logInErrorResponse$ = this.store.select(fromAuth.selectLogInErrorResponse).pipe(

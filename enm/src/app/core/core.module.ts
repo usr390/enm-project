@@ -7,14 +7,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // enm imports
 import { SharedModule } from '../shared/shared.module';
-import { LoginComponent } from './login/login.component';
+import { LogInComponent } from './login/login.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 
 @NgModule({
   declarations: [
     SidebarComponent,
-    LoginComponent,
+    LogInComponent,
   ],
   imports: [
     // angular modules
@@ -27,7 +27,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   ],
   exports: [
     SidebarComponent,
-    LoginComponent
+    LogInComponent
   ]
 })
 export class CoreModule { }
