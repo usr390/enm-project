@@ -1,25 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EnmEventPriceOfEntryComponent } from './enm-event-price-of-entry.component';
-import { EnmEventAddMultipageFormService } from './../../../core/services/enm-event-add-multipage-form.service';
+import { EnmEventCoverComponent } from './enm-event-cover.component';
+import { EnmEventAddMultipageFormService } from '../../../core/services/enm-event-add-multipage-form.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('EnmEventPriceOfEntryComponent', () => {
-  let component: EnmEventPriceOfEntryComponent;
-  let fixture: ComponentFixture<EnmEventPriceOfEntryComponent>;
+  let component: EnmEventCoverComponent;
+  let fixture: ComponentFixture<EnmEventCoverComponent>;
   let mockEnmEventAddMultipageFormService: jasmine.SpyObj<EnmEventAddMultipageFormService>;
 
   beforeEach(() => {
     mockEnmEventAddMultipageFormService = jasmine.createSpyObj('EnmEventAddMultipageFormService', ['']);
     TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule ], 
-      declarations: [ EnmEventPriceOfEntryComponent ],
+      declarations: [ EnmEventCoverComponent ],
       providers: [ EnmEventAddMultipageFormService ] 
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EnmEventPriceOfEntryComponent);
+    fixture = TestBed.createComponent(EnmEventCoverComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -28,7 +28,7 @@ export class EnmEventTimeComponent {
   }
 
   onSubmit() { 
-    if (this.enmEventAddForm.valid) { this.addDateTimeToForm(); this.dropHelperControls(); this.router.navigate(['/add-event/price']); } 
+    if (this.enmEventAddForm.valid) { this.addDateTimeToForm(); this.dropHelperControls(); this.router.navigate(['/add-event/cover']); } 
   }
 
   goBack() { 

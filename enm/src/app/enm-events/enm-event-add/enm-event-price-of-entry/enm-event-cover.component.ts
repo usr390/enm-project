@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { EnmEventAddMultipageFormService } from './../../../core/services/enm-event-add-multipage-form.service';
+import { EnmEventAddMultipageFormService } from '../../../core/services/enm-event-add-multipage-form.service';
 
 @Component({
-  selector: 'app-enm-event-price-of-entry',
-  templateUrl: './enm-event-price-of-entry.component.html',
-  styleUrls: ['./enm-event-price-of-entry.component.less']
+  selector: 'app-enm-event-cover',
+  templateUrl: './enm-event-cover.component.html',
+  styleUrls: ['./enm-event-cover.component.less']
 })
-export class EnmEventPriceOfEntryComponent {
+export class EnmEventCoverComponent {
   /* summary
     adds pricing information to an event.
     previous: EnmEventListTimeComponent, next: EnmEventAddArtistsComponent

@@ -31,7 +31,7 @@ export class EnmEventArtistsComponent {
 
   goBack() { 
     this.tearDownLocalFormControls();
-    this.router.navigate(['/add-event/price']); 
+    this.router.navigate(['/add-event/cover']); 
   }
   
   //#region utility
