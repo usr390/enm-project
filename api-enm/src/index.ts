@@ -1,8 +1,10 @@
+//  3rd party imports
 import cors from "cors";
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import { DateTime } from "luxon";
 
+// enm imports
 import EnmEventModel from "./models/EnmEvent";
 import VenueModel from "./models/Venue";
 import UserModel from "./models/User";
@@ -15,13 +17,11 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 app.get('/api/enmEvents', async (req: Request, res: Response) => {
-
-  // dt is -12 hours because it is still desirable to get EnmEvents when their dateTime has passed by only a few hours.
-  // for example, users searching for events at 9pm would probably be interested in seeing which events started at 8pm or earlier
-  let dt = DateTime.now().minus({ hours: 12 })
-  
-  // return all future EnmEvent objects (including today's)
-  res.json(await EnmEventModel.find({ dateTime: { $gte: dt } })
+  /* summary
+    dt is -12 hours because it is still desirable to get EnmEvents when their dateTime has passed by only a few hours.
+    for example, users searching for events at 9pm would probably be interested in seeing which events started at 8pm or earlier
+  */
+  res.json(await EnmEventModel.find({ dateTime: { $gte: DateTime.now().minus({ hours: 12 }) } })
   .sort({ dateTime: 1 })
   .catch(err => console.log(err)))
 })
@@ -39,8 +39,22 @@ app.post('/api/enmEvent', async (req: Request, res: Response) => {
 })
 
 app.get('/api/venues', async (req: Request, res: Response) => {
-  res.json(await VenueModel.find()
-  .catch(err => console.log(err)))
+  res.json(await VenueModel.find().catch(err => console.log(err)))
+})
+
+app.post('/api/venue', async (req: Request, res: Response) => {
+  /* summary
+    used to post new venues. for now, defaulting 'state' and 'country' to hard coded values
+  */
+  const venue = new VenueModel({
+    name: req.body.name,
+    address: req.body.address,
+    city: req.body.city,
+    state: "Texas",
+    country: "USA",
+  });
+  // persist and respond to client with created EnmEvent object
+  res.json(await venue.save());
 })
 
 app.post('/api/login', async (req: Request, res: Response) => {
@@ -60,21 +74,6 @@ app.post('/api/login', async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-app.post('/api/venue', async (req: Request, res: Response) => {
-  /* summary
-    used to post new venues. for now, defaulting 'state' and 'country' to hard coded values
-  */
-  const venue = new VenueModel({
-    name: req.body.name,
-    address: req.body.address,
-    city: req.body.city,
-    state: "Texas",
-    country: "USA",
-  });
-  // persist and respond to client with created EnmEvent object
-  res.json(await venue.save());
-})
 
 // asynchronous initialization. keeps api from processesing requests until a successful connection to db is established
 mongoose.connect(process.env.MONGO_URL || '').then(() => { app.listen(port, () => {}); })
