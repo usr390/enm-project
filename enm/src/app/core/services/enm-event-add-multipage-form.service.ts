@@ -23,7 +23,7 @@ export class EnmEventAddMultipageFormService {
 
   // in the context of the multipage form, the last page (aka last component) will call this function to deliver the form value to the API
   postEnmEvent() {
-    this.http.post(BASE_URL + '/enmEventTest', this.enmEventAddMultipageForm.value)
+    this.http.post(BASE_URL + '/enmEvent', this.enmEventAddMultipageForm.value)
     .subscribe({
       error: error => console.log(error),
     });

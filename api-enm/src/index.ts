@@ -26,6 +26,18 @@ app.get('/api/enmEvents', async (req: Request, res: Response) => {
   .catch(err => console.log(err)))
 })
 
+app.post('/api/enmEvent', async (req: Request, res: Response) => {
+  const enmEvent = new EnmEventModel({
+    tags: req.body.tags,
+    venue: req.body.venue,
+    dateTime: req.body.dateTime,
+    priceOfEntry: req.body.priceOfEntry,
+    artists: req.body.artists
+  });
+  // persist and respond to client with created EnmEvent object
+  res.json(await enmEvent.save());
+})
+
 app.get('/api/venues', async (req: Request, res: Response) => {
   res.json(await VenueModel.find()
   .catch(err => console.log(err)))
@@ -48,21 +60,6 @@ app.post('/api/login', async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-app.post('/api/enmEventTest', async (req: Request, res: Response) => {
-  /* summary
-    using this API point to slowly build up ENM-3 (feature allowing users to add their own events to the website).
-  */
-  const enmEvent = new EnmEventModel({
-    tags: req.body.tags,
-    venue: req.body.venue,
-    dateTime: req.body.dateTime,
-    priceOfEntry: req.body.priceOfEntry,
-    artists: req.body.artists
-  });
-  // persist and respond to client with created EnmEvent object
-  res.json(await enmEvent.save());
-})
 
 app.post('/api/venue', async (req: Request, res: Response) => {
   /* summary
