@@ -1,11 +1,11 @@
-import { WordifiedPriceOfEntryPipe } from './wordified-price-of-entry.pipe';
+import { WordifiedCoverPipe } from './wordified-cover.pipe';
 
 describe('WordifiedPriceOfEntry', () => {
 
-  let pipe: WordifiedPriceOfEntryPipe;
+  let pipe: WordifiedCoverPipe;
 
   beforeEach(() => {
-    pipe = new WordifiedPriceOfEntryPipe();
+    pipe = new WordifiedCoverPipe();
   });
 
   it('create an instance', () => {

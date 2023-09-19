@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 // enm imports
 import { WordifiedDateKeyPipe } from './../pipes/wordified-date-key.pipe';
-import { WordifiedPriceOfEntryPipe } from './../pipes/wordified-price-of-entry.pipe';
+import { WordifiedCoverPipe } from '../pipes/wordified-cover.pipe';
 import { DateTimeToWordifiedMonthPipe } from './../pipes/date-time-to-wordified-month.pipe';
 import { DateTimeToDayPipe } from './../pipes/date-time-to-day.pipe';
 import { DateTimeToTimePipe } from '../pipes/date-time-to-time.pipe';
@@ -30,7 +30,7 @@ import { MessageService } from 'primeng/api';
   declarations: [
     // enm imports
     WordifiedDateKeyPipe,
-    WordifiedPriceOfEntryPipe,
+    WordifiedCoverPipe,
     DateTimeToWordifiedMonthPipe,
     DateTimeToDayPipe,
     DateTimeToTimePipe,
@@ -55,7 +55,7 @@ import { MessageService } from 'primeng/api';
   exports: [
     // enm imports
     WordifiedDateKeyPipe,
-    WordifiedPriceOfEntryPipe,
+    WordifiedCoverPipe,
     DateTimeToWordifiedMonthPipe,
     DateTimeToDayPipe,
     DateTimeToTimePipe,
