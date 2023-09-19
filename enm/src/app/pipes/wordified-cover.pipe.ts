@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'wordifiedPriceOfEntry'
+  name: 'wordifiedCover'
 })
 export class WordifiedCoverPipe implements PipeTransform {
 

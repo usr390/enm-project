@@ -1,6 +1,6 @@
 import { WordifiedCoverPipe } from './wordified-cover.pipe';
 
-describe('WordifiedPriceOfEntry', () => {
+describe('WordifiedCover', () => {
 
   let pipe: WordifiedCoverPipe;
 
