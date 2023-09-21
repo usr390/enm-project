@@ -1,10 +1,4 @@
-export interface Venue {
-    "name": string,
-    "address": string,
-    "city": string,
-    "state": string,
-    "country": string
-}
+import { Venue } from "./venue.model";
 
 export interface EnmEvent {
 

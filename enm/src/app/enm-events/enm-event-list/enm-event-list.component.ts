@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { combineLatest, map } from 'rxjs';
 import { EnmEventService } from './../../core/services/enm-event.service';
-import { EnmEvent } from './../enm-event.model';
+import { EnmEvent } from '../../models/enm-event.model';
 import { DateTime } from 'luxon';
 
 @Component({
