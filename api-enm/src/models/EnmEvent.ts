@@ -22,7 +22,7 @@ const EnmEventSchema = new Schema({
     tags: [String],
     venue: VenueSchema,
     dateTime: Date,
-    priceOfEntry: Number,
+    cover: Number,
     artists: [String]
 });
 

@@ -24,7 +24,7 @@ export class EnmEventCoverComponent {
   }
 
   onSubmit() {
-    if (this.enmEventAddForm.valid) { this.processPriceOfEntry(); this.router.navigate(['/add-event/artists']); }
+    if (this.enmEventAddForm.valid) { this.processCover(); this.router.navigate(['/add-event/artists']); }
   }
 
   goBack() {
@@ -39,23 +39,23 @@ export class EnmEventCoverComponent {
 
   //#region utility
   setUpLocalFormControls() {
-    this.enmEventAddForm.setControl('priceOfEntry', this.fb.control('', [Validators.required]));
+    this.enmEventAddForm.setControl('cover', this.fb.control('', [Validators.required]));
   }
   tearDownLocalFormControls() {
-    this.enmEventAddForm.removeControl('priceOfEntry');
+    this.enmEventAddForm.removeControl('cover');
   }
   tearDownExistingFormControls() {
-    this.enmEventAddForm.removeControl('priceOfEntry');
+    this.enmEventAddForm.removeControl('cover');
     this.enmEventAddForm.setControl('startTime', this.fb.control(new Date(0, 0, 0, 0, 0), [Validators.required]));
     this.enmEventAddForm.setControl('date', this.fb.control('00/00/0000', [Validators.required]));
     this.enmEventAddForm.removeControl('venue');
     this.enmEventAddForm.removeControl('tags');
   }
-  processPriceOfEntry() {
-    let priceOfEntry = this.enmEventAddForm.get('priceOfEntry')?.value;
-    let priceOfEntryWithoutCurrencySymbol = priceOfEntry.slice(1, priceOfEntry.length)
-    let priceOfEntryAsNumber = parseInt(priceOfEntryWithoutCurrencySymbol);
-    this.enmEventAddForm.get('priceOfEntry')?.patchValue(priceOfEntryAsNumber);
+  processCover() {
+    let cover = this.enmEventAddForm.get('cover')?.value;
+    let coverWithoutCurrencySymbol = cover.slice(1, cover.length)
+    let coverAsNumber = parseInt(coverWithoutCurrencySymbol);
+    this.enmEventAddForm.get('cover')?.patchValue(coverAsNumber);
   }
   //#endregion
 }

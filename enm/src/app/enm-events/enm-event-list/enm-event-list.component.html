@@ -6,17 +6,23 @@
     <!-- date.value resolves to EnmEvent[] -->
     <div *ngFor="let enmEvent of date.value" class="card event-card" style="margin-top: 5px">
         <div class="card-body">
-          <h5 class="card-title" *ngIf="enmEvent.name">{{ enmEvent.name }}</h5>
-          <h5 class="card-title" *ngIf="enmEvent.location && enmEvent.artists">{{ enmEvent.location }} - {{ enmEvent.artists.join(', ') }}</h5>
-          <h5 class="card-title" *ngIf="enmEvent.venue && enmEvent.artists">{{ enmEvent.venue.name }} - {{ enmEvent.artists.join(', ') }}</h5>
+          <!-- synonyms -->
+            <h5 class="card-title" *ngIf="enmEvent.name">{{ enmEvent.name }}</h5>
+            <h5 class="card-title" *ngIf="enmEvent.location && enmEvent.artists">{{ enmEvent.location }} - {{ enmEvent.artists.join(', ') }}</h5>
+            <h5 class="card-title" *ngIf="enmEvent.venue && enmEvent.artists">{{ enmEvent.venue.name }} - {{ enmEvent.artists.join(', ') }}</h5>
+          <!---->
           <p class="card-text">
-            <!-- 2400 indicates military time. 2401 is a flag used at the db level to indicate startTime was not provided -->
             {{ enmEvent.dateTime | dateTimeToTime }} &middot;
             {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }} 
-            <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
+            <!-- synonyms -->
+              <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
+              <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+            <!---->
           </p>
-          <p class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</p>
-          <p class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</p>
+          <!-- synonyms -->
+            <p class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</p>
+            <p class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</p>
+          <!---->
         </div>
     </div>
   </div>

@@ -24,7 +24,10 @@ export interface EnmEvent {
     "state": string,
     "country": string,
     "dateTime": string;
+    // synonyms
     "priceOfEntry": number;
+    "cover": number,
+    //
     "artists": string[];
 
 }

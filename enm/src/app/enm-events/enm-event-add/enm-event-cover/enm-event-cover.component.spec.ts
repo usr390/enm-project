@@ -4,7 +4,7 @@ import { EnmEventCoverComponent } from './enm-event-cover.component';
 import { EnmEventAddMultipageFormService } from '../../../core/services/enm-event-add-multipage-form.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('EnmEventPriceOfEntryComponent', () => {
+describe('EnmEventCoverComponent', () => {
   let component: EnmEventCoverComponent;
   let fixture: ComponentFixture<EnmEventCoverComponent>;
   let mockEnmEventAddMultipageFormService: jasmine.SpyObj<EnmEventAddMultipageFormService>;
