@@ -1,6 +1,6 @@
 import { Action, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { NullableUser } from "src/app/models/user.model";
-import { logInSuccess, logOut, logInErrorResponse } from "./auth.actions";
+import { logInSuccessResponse, logOut, logInErrorResponse } from "./auth.actions";
 import { LogInErrorResponse } from "src/app/models/logInErrorResponse.model";
 
 export interface State {
@@ -15,7 +15,7 @@ export const initialState: State = {
 
 const _authReducer = createReducer(
     initialState,
-    on(logInSuccess, (state, { logInSuccessResponse }) => {
+    on(logInSuccessResponse, (state, { logInSuccessResponse }) => {
         return {
             ...state,
             user: logInSuccessResponse.user,
