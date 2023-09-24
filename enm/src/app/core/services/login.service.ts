@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LogInSuccessResponse } from 'src/app/models/logInResponse.model';
+import { LogInSuccessResponse } from 'src/app/models/logInSuccessResponse.model';
 import { environment } from 'src/environments/environment';
 const BASE_URL = environment.api + '/login';
 
