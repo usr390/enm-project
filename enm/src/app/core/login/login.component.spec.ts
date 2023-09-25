@@ -2,21 +2,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { LogInComponent } from './login.component';
-import { LoginService } from '../services/login.service';
+import { LogInService } from '../services/login.service';
 import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { MessageService } from 'primeng/api';
 
-describe('LoginComponent', () => {
+describe('LogInComponent', () => {
   let component: LogInComponent;
   let fixture: ComponentFixture<LogInComponent>;
-  let mockLoginService: jasmine.SpyObj<LoginService>;
+  let mockLogInService: jasmine.SpyObj<LogInService>;
   let mockMessageService: jasmine.SpyObj<MessageService>;
 
   const mockStore = { select: jasmine.createSpy().and.returnValue(of(null)), };
 
   beforeEach(() => {
-    mockLoginService = jasmine.createSpyObj('LoginService', ['']);
+    mockLogInService = jasmine.createSpyObj('LogInService', ['']);
     mockMessageService = jasmine.createSpyObj('MessageService', ['']);
     TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule ],

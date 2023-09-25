@@ -9,13 +9,13 @@ const BASE_URL = environment.api + '/login';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class LogInService {
 
-  public userLoginForm: FormGroup = this.fb.group({});
+  public userLogInForm: FormGroup = this.fb.group({});
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) { }
+  constructor(private fb: FormBuilder, private http: HttpClient) { }
 
-  login(username: string, password: string) {
+  logIn(username: string, password: string) {
     return this.http.post<LogInSuccessResponse>(BASE_URL, { username, password });
   }
 }

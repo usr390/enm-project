@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../services/login.service';
+import { LogInService } from '../services/login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as AuthActions from './../../state/auth/auth.actions';
@@ -13,13 +13,13 @@ import { map } from 'rxjs';
   styleUrls: ['./login.component.less']
 })
 export class LogInComponent {
-  constructor(private loginService: LoginService, private fb: FormBuilder, private store: Store, private messageService: MessageService) {}
+  constructor(private logInService: LogInService, private fb: FormBuilder, private store: Store, private messageService: MessageService) {}
 
   logInErrorResponse$ = this.store.select(fromAuth.selectLogInErrorResponse).pipe(
     map(error => this.showInvalidCredentialsAlert(error?.error.error))
   );
 
-  userLoginForm: FormGroup = this.loginService.userLoginForm;
+  userLogInForm: FormGroup = this.logInService.userLogInForm;
   logInButtonCooldown = false;
 
   ngOnInit() {
@@ -27,11 +27,11 @@ export class LogInComponent {
   }
   
   onSubmit() {
-    if (this.userLoginForm.valid){
+    if (this.userLogInForm.valid){
       this.applyLogInButtonCooldown();
       const credentials = {
-        username: this.userLoginForm.get('username')?.value.trim(),
-        password: this.userLoginForm.get('password')?.value.trim(),
+        username: this.userLogInForm.get('username')?.value.trim(),
+        password: this.userLogInForm.get('password')?.value.trim(),
       }
       this.store.dispatch(AuthActions.logInRequest({ credentials }))
     } 
@@ -39,8 +39,8 @@ export class LogInComponent {
 
   //#region utility
   setUpLocalFormControls() {
-    this.userLoginForm.setControl('username', this.fb.control('', Validators.required));
-    this.userLoginForm.setControl('password', this.fb.control('', Validators.required));
+    this.userLogInForm.setControl('username', this.fb.control('', Validators.required));
+    this.userLogInForm.setControl('password', this.fb.control('', Validators.required));
   }
   showInvalidCredentialsAlert(error: string | undefined) {
     this.messageService.add({ severity: 'error', summary: error, detail: 'Please try again' });
