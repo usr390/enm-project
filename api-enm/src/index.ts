@@ -8,6 +8,7 @@ import { DateTime } from "luxon";
 import EnmEventModel from "./models/EnmEvent";
 import VenueModel from "./models/Venue";
 import UserModel from "./models/User";
+import { UserDTO } from "./models/UserDTO";
 
 const app = express(); app.use(cors({ origin: '*' })); app.use(express.json())
 const port = process.env.PORT || 3000
@@ -67,7 +68,8 @@ app.post('/api/login', async (req: Request, res: Response) => {
     const user = await UserModel.findOne({ username });
     if (!user) return res.status(401).json({ error: 'Invalid Credentials' });
     if (user.password !== password) return res.status(401).json({ error: 'Invalid Credentials' });
-    res.json({ user });
+    const userDTO = new UserDTO(user.username)
+    res.json({ user: { ...userDTO } });
   } 
   catch (err) {
     console.error(err);
