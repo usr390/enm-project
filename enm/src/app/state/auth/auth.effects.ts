@@ -28,4 +28,12 @@ export class AuthEffects {
         ),
         { dispatch: false }
     );
+
+    logOut$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AuthActions.logOut),
+            tap(_ => localStorage.clear())
+        ),
+        { dispatch: false }
+    )
 }

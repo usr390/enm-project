@@ -1,5 +1,9 @@
-import { Component, Renderer2 } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { StatePersistenceService } from './core/services/state-persistence.service';
+import { Store } from '@ngrx/store';
+import { map } from 'rxjs';
+import * as fromAuth from './state/auth/auth.reducer';
+
 
 @Component({
   selector: 'app-root',
@@ -9,5 +13,13 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'enm';
 
-  constructor() { }
+  store$ = this.store.select(fromAuth.selectAuthState).pipe(
+    map((authState) => { this.statePersistenceService.persistToBrowserLocalStorage(authState) })
+  );
+
+  constructor(private statePersistenceService: StatePersistenceService, private store: Store<fromAuth.State>) { }
+
+  ngOnInit() {
+    this.statePersistenceService.rehydrateBrowserFromLocalStorage();
+  }
 }

@@ -1,6 +1,6 @@
 import { Action, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { NullableUser } from "src/app/models/user.model";
-import { logInSuccessResponse, logOut, logInErrorResponse } from "./auth.actions";
+import { logInSuccessResponse, logOut, logInErrorResponse, rehydrateFromBrowserLocalStorage } from "./auth.actions";
 import { LogInErrorResponse } from "src/app/models/logInErrorResponse.model";
 
 export interface State {
@@ -34,6 +34,13 @@ const _authReducer = createReducer(
             ...state,
             user: null,
             logInErrorResponse: null
+        }
+    }),
+    on(rehydrateFromBrowserLocalStorage, (state, { user, logInErrorResponse }) => {
+        return {
+            ...state,
+            user: user,
+            logInErrorResponse: logInErrorResponse
         }
     })
 );
