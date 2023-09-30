@@ -1,19 +1,23 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { StoreModule } from '@ngrx/store';
-import { authReducer } from './state/auth/auth.reducer';
+import { Store, StoreModule } from '@ngrx/store';
+import { of } from 'rxjs';
 
 describe('AppComponent', () => {
+  const mockStore = { select: jasmine.createSpy().and.returnValue(of(null)), };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        StoreModule.forRoot({ auth: authReducer })
       ],
       declarations: [
         AppComponent
       ],
+      providers: [
+        { provide: Store, useValue: mockStore }
+      ]
     }).compileComponents();
   });
 
