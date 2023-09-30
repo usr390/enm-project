@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { LogInComponent } from './logIn.component';
+import { LogInComponent } from './login.component';
 import { LogInService } from '../services/login.service';
 import { of } from 'rxjs';
 import { Store } from '@ngrx/store';

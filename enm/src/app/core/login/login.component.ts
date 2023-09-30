@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { LogInService } from '../services/login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import * as AuthActions from './../../state/auth/auth.actions';
-import * as fromAuth from './../../state/auth/auth.reducer';
+import * as AuthActions from '../../state/auth/auth.actions';
+import * as fromAuth from '../../state/auth/auth.reducer';
 import { MessageService } from 'primeng/api';
 import { map } from 'rxjs';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './logIn.component.html',
-  styleUrls: ['./logIn.component.less']
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.less']
 })
 export class LogInComponent {
   constructor(private logInService: LogInService, private fb: FormBuilder, private store: Store, private messageService: MessageService) {}

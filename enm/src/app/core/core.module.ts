@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // enm imports
 import { SharedModule } from '../shared/shared.module';
-import { LogInComponent } from './logIn/logIn.component';
+import { LogInComponent } from './login/login.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 
