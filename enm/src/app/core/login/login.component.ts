@@ -9,8 +9,8 @@ import { map } from 'rxjs';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.less']
+  templateUrl: './logIn.component.html',
+  styleUrls: ['./logIn.component.less']
 })
 export class LogInComponent {
   constructor(private logInService: LogInService, private fb: FormBuilder, private store: Store, private messageService: MessageService) {}
