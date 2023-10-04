@@ -53,7 +53,7 @@ export class EnmEventAddMultipageFormService {
     
     however, in cases where the venue is not yet in our system (and is therefore not presented as a 
     suggestion in EnmEventVenueComponent's autocomplete suggestion list) the multipage form's flow will look more like: 
-    venue -> venue name -> venue city -> venue address -> date -> time -> cover -> artists -> submit
+    venue -> venue city -> venue address -> date -> time -> cover -> artists -> submit
     when submitting on 'venue address', this post api call will be triggered creating and returning an actual venue object which is what the 
     multipage form will store and use
   */
