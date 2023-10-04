@@ -1,16 +1,19 @@
 import { Action, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { NullableUser } from "src/app/models/user.model";
-import { logInSuccessResponse, logOut, logInErrorResponse, rehydrateFromBrowserLocalStorage } from "./auth.actions";
+import { logInSuccessResponse, logOut, logInErrorResponse, rehydrateFromBrowserLocalStorage, updateForm } from "./auth.actions";
 import { LogInErrorResponse } from "src/app/models/logInErrorResponse.model";
+import { EnmEventAddFormState } from "src/app/models/enmEventAddFormState";
 
 export interface State {
     user: NullableUser,
-    logInErrorResponse: LogInErrorResponse
+    logInErrorResponse: LogInErrorResponse,
+    enmEventAddFormState: EnmEventAddFormState
 }
 
 export const initialState: State = {
     user: null,
     logInErrorResponse: null,
+    enmEventAddFormState: null
 }
 
 const _authReducer = createReducer(
@@ -41,6 +44,12 @@ const _authReducer = createReducer(
             ...state,
             user: user,
             logInErrorResponse: logInErrorResponse
+        }
+    }),
+    on(updateForm, (state, { formValue }) => {
+        return {
+            ...state,
+            enmEventAddFormState: formValue
         }
     })
 );

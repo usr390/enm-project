@@ -3,6 +3,10 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { EnmEventAddMultipageFormService } from '../../../core/services/enm-event-add-multipage-form.service';
+import { Store } from '@ngrx/store';
+import { map, tap } from 'rxjs';
+import * as AuthActions from '../../../state/auth/auth.actions';
+
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -25,7 +29,13 @@ export class EnmEventVenueComponent {
   enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
   enmEventAddVenueForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddVenueForm;
 
-  constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
+  enmEventAddFromAsObservable$ = this.enmEventAddMultipageFormService.enmEventAddMultipageForm.valueChanges.pipe(
+    tap(value => console.log(value)),
+    map(value => this.store.dispatch(AuthActions.updateForm({formValue: value})))
+  )
+
+
+  constructor(private store: Store, private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     this.initializeVenueAutoCompleteSuggestions();
