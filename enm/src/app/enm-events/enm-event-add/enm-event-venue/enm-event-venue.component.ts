@@ -30,8 +30,10 @@ export class EnmEventVenueComponent {
   enmEventAddVenueForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddVenueForm;
 
   enmEventAddFromAsObservable$ = this.enmEventAddMultipageFormService.enmEventAddMultipageForm.valueChanges.pipe(
-    tap(value => console.log(value)),
-    map(value => this.store.dispatch(AuthActions.updateForm({formValue: value})))
+    tap(value => {
+      console.log(value);
+      this.store.dispatch(AuthActions.updateForm({formValue: value}))
+    }),
   )
 
 
