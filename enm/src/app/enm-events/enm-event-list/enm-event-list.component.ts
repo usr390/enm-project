@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { combineLatest, map } from 'rxjs';
+import { combineLatest, map, tap } from 'rxjs';
 import { EnmEventService } from './../../core/services/enm-event.service';
 import { EnmEvent } from '../../models/enm-event.model';
 import { DateTime } from 'luxon';
@@ -12,7 +12,7 @@ import { DateTime } from 'luxon';
 export class EnmEventListComponent implements OnInit {
 
   filteredEnmEventList$ = combineLatest([this.enmEventService.enmEvents$, this.enmEventService.enmEventListFilterAction$]).pipe(
-    map(([enmEvents, userSuppliedFilter]) => enmEvents.filter(enmEvent => Object.values(enmEvent).toString().toLowerCase().indexOf(userSuppliedFilter.toLowerCase() ?? '') != -1 )),
+    map(([enmEvents, userSuppliedFilter]) => enmEvents.filter(enmEvent => Object.values([...Object.values(enmEvent.tags), ...Object.values(enmEvent.artists)]).toString().toLowerCase().indexOf(userSuppliedFilter.toLowerCase() ?? '') != -1 )),
   );
 
   groupedByDateEnmEventList$ = this.filteredEnmEventList$.pipe(
