@@ -23,5 +23,6 @@ export interface EnmEvent {
     "cover": number,
     //
     "artists": string[];
+    "creationDateTime": string
 
 }

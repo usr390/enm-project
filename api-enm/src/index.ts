@@ -33,7 +33,8 @@ app.post('/api/enmEvent', async (req: Request, res: Response) => {
     venue: req.body.venue,
     dateTime: req.body.dateTime,
     cover: req.body.cover,
-    artists: req.body.artists
+    artists: req.body.artists,
+    creationDateTime: DateTime.now()
   });
   // persist and respond to client with created EnmEvent object
   res.json(await enmEvent.save());
