@@ -4,8 +4,10 @@ import { Router } from '@angular/router';
 
 import { EnmEventAddMultipageFormService } from '../../../core/services/enm-event-add-multipage-form.service';
 import { Store } from '@ngrx/store';
-import { map, tap } from 'rxjs';
+import { Subject, map, take, takeUntil, tap } from 'rxjs';
 import * as AuthActions from '../../../state/auth/auth.actions';
+import * as fromAuth from './../../../state/auth/auth.reducer';
+
 
 
 interface AutoCompleteCompleteEvent {
@@ -28,20 +30,23 @@ export class EnmEventVenueComponent {
   filteredVenues!: any[];
   enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
   enmEventAddVenueForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddVenueForm;
+  shadowValue: string | null  = null;
 
   enmEventAddFromAsObservable$ = this.enmEventAddMultipageFormService.enmEventAddMultipageForm.valueChanges.pipe(
     tap(value => {
       console.log(value);
-      this.store.dispatch(AuthActions.updateForm({formValue: value}))
+      this.store$.dispatch(AuthActions.updateForm({formValue: value}))
     }),
   )
 
+  selectedVenue$ = this.store$.select(fromAuth.selectVenue);
 
-  constructor(private store: Store, private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
+  constructor(private store$: Store, private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     this.initializeVenueAutoCompleteSuggestions();
     this.setUpLocalFormControls();
+    this.initializeFormControl();
   }
 
   onSubmit() { 
@@ -105,13 +110,32 @@ export class EnmEventVenueComponent {
     */
     const userVenue = this.enmEventAddForm.get('venue')?.value;
     const autoCompleteSuggestion = 'object'
-    if (typeof userVenue === autoCompleteSuggestion) {
-      this.router.navigate(['/add-event/date']); 
-    } 
-    else {
-      this.enmEventAddVenueForm.setControl('name', this.fb.control(userVenue));
+
+    if (!autoCompleteSuggestion && this.shadowValue) {
+      this.enmEventAddVenueForm.setControl('name', this.fb.control(this.shadowValue));
       this.router.navigate([ 'add-event/add-venue-city' ]);
     }
+    else {
+      this.router.navigate(['/add-event/date']); 
+    }
+    // if (typeof userVenue === autoCompleteSuggestion) {
+    //   this.router.navigate(['/add-event/date']); 
+    // } 
+    // else {
+    //   this.enmEventAddVenueForm.setControl('name', this.fb.control(userVenue));
+    //   this.router.navigate([ 'add-event/add-venue-city' ]);
+    // }
+  }
+  initializeFormControl() {
+    this.selectedVenue$.pipe(take(1)).subscribe(venue => {
+      if (venue?.name) {
+        this.enmEventAddForm.get('venue')?.setValue(venue)
+      }
+      else if (venue) {
+        this.shadowValue = venue as unknown as string;
+        this.enmEventAddForm.get('venue')?.setValue({ name: venue });
+      }
+    });
   }
   //#endregion
 

@@ -61,3 +61,5 @@ export function authReducer(state: State | undefined, action: Action) {
 export const selectAuthState = createFeatureSelector<State>('auth');
 export const selectUser = createSelector(selectAuthState, (state) => state.user)
 export const selectLogInErrorResponse = createSelector(selectAuthState, (state) => state.logInErrorResponse)
+
+export const selectVenue = createSelector(selectAuthState, (state) => state.enmEventAddFormState?.venue)
