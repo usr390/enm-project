@@ -30,7 +30,6 @@ export class EnmEventVenueComponent {
   filteredVenues!: any[];
   enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
   enmEventAddVenueForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddVenueForm;
-  shadowValue: string | null  = null;
 
   enmEventAddFromAsObservable$ = this.enmEventAddMultipageFormService.enmEventAddMultipageForm.valueChanges.pipe(
     tap(value => {
@@ -111,32 +110,37 @@ export class EnmEventVenueComponent {
     const userVenue = this.enmEventAddForm.get('venue')?.value;
     const autoCompleteSuggestion = 'object'
 
-    if (!autoCompleteSuggestion && this.shadowValue) {
-      this.enmEventAddVenueForm.setControl('name', this.fb.control(this.shadowValue));
+    if (typeof userVenue != autoCompleteSuggestion){
+      this.enmEventAddMultipageFormService.dirtyVenue = userVenue;
+      this.enmEventAddVenueForm.setControl('name', this.fb.control(userVenue));
+      this.enmEventAddForm.get('venue')?.setValue(userVenue);
       this.router.navigate([ 'add-event/add-venue-city' ]);
     }
-    else {
+    else if (typeof userVenue === autoCompleteSuggestion) {
       this.router.navigate(['/add-event/date']); 
+    } 
+    else {
+      this.enmEventAddVenueForm.setControl('name', this.fb.control(userVenue));
+      this.router.navigate([ 'add-event/add-venue-city' ]);
     }
-    // if (typeof userVenue === autoCompleteSuggestion) {
-    //   this.router.navigate(['/add-event/date']); 
-    // } 
-    // else {
-    //   this.enmEventAddVenueForm.setControl('name', this.fb.control(userVenue));
-    //   this.router.navigate([ 'add-event/add-venue-city' ]);
-    // }
   }
   initializeFormControl() {
     this.selectedVenue$.pipe(take(1)).subscribe(venue => {
-      if (venue?.name) {
+      if (venue?.name && !this.enmEventAddMultipageFormService.dirtyVenue) {
+        console.log('clean venue')
         this.enmEventAddForm.get('venue')?.setValue(venue)
       }
       else if (venue) {
-        this.shadowValue = venue as unknown as string;
+        console.log('dirty venue')
+        this.enmEventAddMultipageFormService.dirtyVenue = venue as unknown as string;
+        console.log(this.enmEventAddMultipageFormService.dirtyVenue)
         this.enmEventAddForm.get('venue')?.setValue({ name: venue });
       }
+      else {
+        // do nothing, no form value is stored in NgRx Store
+      }
+      
     });
   }
   //#endregion
-
 }
