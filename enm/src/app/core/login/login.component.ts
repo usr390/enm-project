@@ -7,13 +7,15 @@ import * as fromAuth from '../../state/auth/auth.reducer';
 import { MessageService } from 'primeng/api';
 import { map } from 'rxjs';
 
+import { ElementRef, Renderer2 } from '@angular/core';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less']
 })
 export class LogInComponent {
-  constructor(private logInService: LogInService, private fb: FormBuilder, private store: Store, private messageService: MessageService) {}
+  constructor(private elRef: ElementRef, private renderer: Renderer2, private logInService: LogInService, private fb: FormBuilder, private store: Store, private messageService: MessageService) {}
 
   logInErrorResponse$ = this.store.select(fromAuth.selectLogInErrorResponse).pipe(
     map(error => this.showInvalidCredentialsAlert(error?.error.error))
@@ -24,6 +26,13 @@ export class LogInComponent {
 
   ngOnInit() {
     this.setUpLocalFormControls();
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      const element = this.elRef.nativeElement.querySelector('input');
+      this.renderer.selectRootElement(element).focus();
+    }, 1000);
   }
   
   onSubmit() {
