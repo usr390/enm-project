@@ -29,10 +29,7 @@ export class LogInComponent {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      const element = this.elRef.nativeElement.querySelector('input');
-      this.renderer.selectRootElement(element).focus();
-    }, 1000);
+    this.autoFocus();
   }
   
   onSubmit() {
@@ -59,6 +56,12 @@ export class LogInComponent {
     setTimeout(() => {
       this.logInButtonCooldown = false;
     }, 2000); 
+  }
+  autoFocus() {
+    setTimeout(() => {
+      const element = this.elRef.nativeElement.querySelector('input');
+      this.renderer.selectRootElement(element).focus();
+    }, 50);
   }
   //#endregion
 }
