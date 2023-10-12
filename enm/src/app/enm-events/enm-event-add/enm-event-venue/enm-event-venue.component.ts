@@ -4,11 +4,9 @@ import { Router } from '@angular/router';
 
 import { EnmEventAddMultipageFormService } from '../../../core/services/enm-event-add-multipage-form.service';
 import { Store } from '@ngrx/store';
-import { Subject, map, take, takeUntil, tap } from 'rxjs';
+import { take, tap } from 'rxjs';
 import * as AuthActions from '../../../state/auth/auth.actions';
 import * as fromAuth from './../../../state/auth/auth.reducer';
-
-
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -28,24 +26,20 @@ export class EnmEventVenueComponent {
 
   venues: any[] | undefined;
   filteredVenues!: any[];
-  enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
-  enmEventAddVenueForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddVenueForm;
-
-  enmEventAddFromAsObservable$ = this.enmEventAddMultipageFormService.enmEventAddMultipageForm.valueChanges.pipe(
-    tap(value => {
-      console.log(value);
-      this.store$.dispatch(AuthActions.updateForm({formValue: value}))
-    }),
-  )
-
   selectedVenue$ = this.store$.select(fromAuth.selectVenue);
+
+  enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
+  enmEventAddFormValuesActionStream$ = this.enmEventAddMultipageFormService.enmEventAddMultipageForm.valueChanges.pipe(
+    tap(value => { this.store$.dispatch(AuthActions.updateForm({ formValue: value })) }),
+  );
+  enmEventAddVenueForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddVenueForm;
 
   constructor(private store$: Store, private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     this.initializeVenueAutoCompleteSuggestions();
     this.setUpLocalFormControls();
-    this.initializeFormControl();
+    this.initializeFormControls();
   }
 
   onSubmit() { 
@@ -110,35 +104,41 @@ export class EnmEventVenueComponent {
     const userVenue = this.enmEventAddForm.get('venue')?.value;
     const autoCompleteSuggestion = 'object'
 
-    if (typeof userVenue != autoCompleteSuggestion){
-      this.enmEventAddMultipageFormService.dirtyVenue = userVenue;
-      this.enmEventAddVenueForm.setControl('name', this.fb.control(userVenue));
-      this.enmEventAddForm.get('venue')?.setValue(userVenue);
-      this.router.navigate([ 'add-event/add-venue-city' ]);
-    }
-    else if (typeof userVenue === autoCompleteSuggestion) {
+    if (typeof userVenue === autoCompleteSuggestion && userVenue._id) {
+        // it's an existing venue thus have all the info needed (address, city, etc). go directly to EEDateComp
       this.router.navigate(['/add-event/date']); 
     } 
+    else if (userVenue.name){
+        // mm, user gave us a venue we're not familiar with. better to ask them for more info. go to EEAddVenueCityComp instead
+      this.enmEventAddVenueForm.setControl('name', this.fb.control(userVenue.name));
+      this.enmEventAddForm.get('venue')?.setValue(userVenue.name);
+      this.router.navigate([ 'add-event/add-venue-city' ]);
+    }
     else {
+        // mm, user gave us a venue we're not familiar with. better to ask them for more info. go to EEAddVenueCityComp instead
+        // remark: in a sense this is a primer case (see 'priming read'). essentially does the same as above case, but needed due to some PrimeNG autocomplete weirdness
       this.enmEventAddVenueForm.setControl('name', this.fb.control(userVenue));
       this.router.navigate([ 'add-event/add-venue-city' ]);
     }
   }
-  initializeFormControl() {
+  initializeFormControls() {
     this.selectedVenue$.pipe(take(1)).subscribe(venue => {
-      if (venue?.name && !this.enmEventAddMultipageFormService.dirtyVenue) {
-        console.log('clean venue')
+      if (venue?.country) { 
+        // the ref to 'country' is arbitrary. using it as a flag. non-null implies an existing venue is emitted from NgRx store
         this.enmEventAddForm.get('venue')?.setValue(venue)
       }
       else if (venue) {
-        console.log('dirty venue')
-        this.enmEventAddMultipageFormService.dirtyVenue = venue as unknown as string;
-        console.log(this.enmEventAddMultipageFormService.dirtyVenue)
-        this.enmEventAddForm.get('venue')?.setValue({ name: venue });
+        // okay, it's not an existing venue, but it is emitted from NgRx regardless and is important to set in case the user navigates back.
+        // remark: wrapping in an object so its compatible with PrimeNG's autocomplete component (values must be objects)
+        let someVenue = venue as unknown as string
+        this.enmEventAddForm.get('venue')?.setValue({ name: someVenue });
       }
       else {
-        // do nothing, no form value is stored in NgRx Store
+        // do nothing, no venue was stored in NgRx Store. essentially means it's the user's first time on the component
       }
+
+      // remark: an 'existing' venue is one that exists in the backend as a MongoDB document (i.e., a venue we know for a fact exists in the real world). 
+      // these are typed 'Venue' in the frontend
       
     });
   }

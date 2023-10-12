@@ -1,4 +1,4 @@
-<div *ngIf="enmEventAddFromAsObservable$ | async"></div>
+<div *ngIf="enmEventAddFormValuesActionStream$ | async"></div>
 
 <div class="back-arrow">
     <p-button type="button" (click)="goBack()" icon="pi pi-arrow-left" styleClass="p-button-rounded p-button-lg p-button-text"></p-button>
@@ -16,7 +16,6 @@
             </div>
             <div class="row g-0 justify-content-center">
                 <div class="col-auto">
-                    <!-- <input pInputText formControlName="venue" [minLength]="3" [value]="selectedVenue$ | async" placeholder="Venue" [maxlength]="30"> -->
                     <p-autoComplete formControlName="venue" [suggestions]="filteredVenues" (completeMethod)="filterVenue($event)" field="name" [minLength]="3" placeholder="Venue" [maxlength]="30"></p-autoComplete>
                 </div>
                 <div class="col-auto">
