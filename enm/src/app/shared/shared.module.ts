@@ -24,6 +24,8 @@ import { PasswordModule } from 'primeng/password';
 import { InputMaskModule } from 'primeng/inputmask';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+  // directives
+  import { AutoFocusModule } from 'primeng/autofocus';
 
 
 @NgModule({
@@ -51,6 +53,7 @@ import { MessageService } from 'primeng/api';
     PasswordModule,
     InputMaskModule,
     ToastModule,
+    AutoFocusModule
   ],
   exports: [
     // enm imports
@@ -73,6 +76,7 @@ import { MessageService } from 'primeng/api';
     PasswordModule,
     InputMaskModule,
     ToastModule,
+    AutoFocusModule
   ],
   providers: [
     // primeng providers
