@@ -63,3 +63,4 @@ export const selectUser = createSelector(selectAuthState, (state) => state.user)
 export const selectLogInErrorResponse = createSelector(selectAuthState, (state) => state.logInErrorResponse)
 
 export const selectVenue = createSelector(selectAuthState, (state) => state.enmEventAddFormState?.venue)
+export const selectDate = createSelector(selectAuthState, (state) => state.enmEventAddFormState?.date)
