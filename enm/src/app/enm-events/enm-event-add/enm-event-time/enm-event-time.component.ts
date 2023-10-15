@@ -5,6 +5,12 @@ import { Router } from '@angular/router';
 import { DateTime } from "luxon";
 
 import { EnmEventAddMultipageFormService } from './../../../core/services/enm-event-add-multipage-form.service';
+import { Store } from '@ngrx/store';
+import { take, tap } from 'rxjs';
+
+import * as AuthActions from '../../../state/auth/auth.actions';
+import * as fromAuth from './../../../state/auth/auth.reducer';
+
 
 @Component({
   selector: 'app-enm-event-time',
@@ -18,17 +24,23 @@ export class EnmEventTimeComponent {
   */    
  
   enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
+  enmEventAddFormValuesActionStream$ = this.enmEventAddMultipageFormService.enmEventAddMultipageForm.valueChanges.pipe(
+    tap(value => { this.store$.dispatch(AuthActions.updateForm({ formValue: value })) }),
+  );
 
   defaultTime = new Date(0, 0, 0, 0, 0);
 
-  constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
+  selectedTime$ = this.store$.select(fromAuth.selectTime);
+
+  constructor(private store$: Store, private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     this.setUpLocalFormControls();
+    this.initializeFormControls();
   }
 
   onSubmit() { 
-    if (this.enmEventAddForm.valid) { this.addDateTimeToForm(); this.dropHelperControls(); this.router.navigate(['/add-event/cover']); } 
+    if (this.enmEventAddForm.valid) { this.addDateTimeToForm(); this.router.navigate(['/add-event/cover']); } 
   }
 
   goBack() { 
@@ -46,7 +58,6 @@ export class EnmEventTimeComponent {
     this.enmEventAddForm.setControl('startTime', this.fb.control('', [Validators.required]));
   }
   tearDownLocalFormControls() {
-    this.enmEventAddForm.setControl('startTime', this.fb.control(this.defaultTime, [Validators.required]));
   }
   tearDownExistingFormControls() {
     this.enmEventAddForm.setControl('startTime', this.fb.control(this.defaultTime, [Validators.required]));
@@ -63,9 +74,12 @@ export class EnmEventTimeComponent {
     }).toUTC().toISO()));
   }
   dropHelperControls() {
-    // controls used to build 'dateTime' property. can be reset to default values after dateTime is created
-    // .setControl as workaround to erroring .removeControl
-    this.enmEventAddForm.setControl('startTime', this.fb.control(this.defaultTime, [Validators.required]));
+  }
+  initializeFormControls() {
+    // only initializes if there's time-related state in NgRx store
+    this.selectedTime$.pipe(take(1)).subscribe(startTime => {
+      this.enmEventAddForm.get('startTime')?.setValue(startTime)
+    });
   }
   //#endregion 
 }
