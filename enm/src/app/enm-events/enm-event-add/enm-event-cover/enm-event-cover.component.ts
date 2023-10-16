@@ -70,7 +70,9 @@ export class EnmEventCoverComponent {
   initializeFormControls() {
     // only initializes if there's cover-related state in NgRx store
     this.selectedCover$.pipe(take(1)).subscribe(cover => {
-      this.enmEventAddForm.get('cover')?.setValue('$' + cover?.toString())
+      let stringifiedCover = cover?.toString();
+      if (!stringifiedCover?.startsWith('$')) stringifiedCover = '$' + stringifiedCover;
+      this.enmEventAddForm.get('cover')?.setValue(stringifiedCover);
     });
   }
   //#endregion
