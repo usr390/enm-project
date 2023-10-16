@@ -66,3 +66,5 @@ export const selectVenue = createSelector(selectAuthState, (state) => state.enmE
 export const selectDate = createSelector(selectAuthState, (state) => state.enmEventAddFormState?.date)
 export const selectTime = createSelector(selectAuthState, (state) => state.enmEventAddFormState?.startTime)
 export const selectCover = createSelector(selectAuthState, (state) => state.enmEventAddFormState?.cover)
+export const selectArtists = createSelector(selectAuthState, (state) => state.enmEventAddFormState?.artists)
+

@@ -1,3 +1,6 @@
+<div *ngIf=" enmEventAddFormValuesActionStream$ | async"></div>
+<div *ngIf=" selectedArtists$ | async"></div>
+
 <div class="back-arrow">
   <p-button type="button" (click)="goBack()" icon="pi pi-arrow-left" styleClass="p-button-rounded p-button-lg p-button-text"></p-button>
 </div>
