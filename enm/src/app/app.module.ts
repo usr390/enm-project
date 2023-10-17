@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { EnmEventModule } from './enm-events/enm-events.module';
 import { authReducer } from './state/auth/auth.reducer';
 import { AuthEffects } from './state/auth/auth.effects';
+import { formReducer } from './state/form/form.reducer';
 
 // 3rd party imports
 import { StoreModule } from '@ngrx/store';
@@ -28,7 +29,10 @@ import { EffectsModule } from '@ngrx/effects';
     CoreModule,
     SharedModule,
     EnmEventModule,
-    StoreModule.forRoot({ auth: authReducer }),
+    StoreModule.forRoot({ 
+      auth: authReducer,
+      form: formReducer
+    }),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([ AuthEffects ]),
   ],

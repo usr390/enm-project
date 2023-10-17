@@ -17,7 +17,7 @@ export class AppComponent {
     map((authState) => { this.statePersistenceService.persistToBrowserLocalStorage(authState) })
   );
 
-  constructor(private statePersistenceService: StatePersistenceService, private store: Store<fromAuth.State>) { }
+  constructor(private statePersistenceService: StatePersistenceService, private store: Store<fromAuth.AuthState>) { }
 
   ngOnInit() {
     this.statePersistenceService.rehydrateBrowserFromLocalStorage();

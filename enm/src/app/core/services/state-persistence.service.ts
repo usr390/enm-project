@@ -16,7 +16,7 @@ export class StatePersistenceService {
       - allows users to leave web app and come back without losing session
   */
 
-  constructor(private store: Store<fromAuth.State>) { }
+  constructor(private store: Store<fromAuth.AuthState>) { }
 
   persistToBrowserLocalStorage(auth: any) {
     localStorage.setItem('auth', JSON.stringify(auth))
@@ -25,7 +25,7 @@ export class StatePersistenceService {
   rehydrateBrowserFromLocalStorage() {
     const localStorageAsString = localStorage.getItem('auth');
     if (localStorageAsString) {
-      const auth: fromAuth.State = JSON.parse(localStorageAsString);
+      const auth: fromAuth.AuthState = JSON.parse(localStorageAsString);
       this.store.dispatch(AuthActions.rehydrateFromBrowserLocalStorage(auth));
     }
   }

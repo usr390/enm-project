@@ -14,7 +14,7 @@ export class SidebarComponent {
 
   user$ = this.store.select(fromAuth.selectUser);
 
-  constructor(private store: Store<fromAuth.State>) {}
+  constructor(private store: Store<fromAuth.AuthState>) {}
 
   onLogOut() {
     this.store.dispatch(AuthActions.logOut());

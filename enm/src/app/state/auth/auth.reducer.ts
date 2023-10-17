@@ -2,18 +2,15 @@ import { Action, createFeatureSelector, createReducer, createSelector, on } from
 import { NullableUser } from "src/app/models/user.model";
 import { logInSuccessResponse, logOut, logInErrorResponse, rehydrateFromBrowserLocalStorage, updateForm } from "./auth.actions";
 import { LogInErrorResponse } from "src/app/models/logInErrorResponse.model";
-import { EnmEventAddFormState } from "src/app/models/enmEventAddFormState";
 
-export interface State {
+export interface AuthState {
     user: NullableUser,
     logInErrorResponse: LogInErrorResponse,
-    enmEventAddFormState: EnmEventAddFormState
 }
 
-export const initialState: State = {
+export const initialState: AuthState = {
     user: null,
     logInErrorResponse: null,
-    enmEventAddFormState: null
 }
 
 const _authReducer = createReducer(
@@ -46,25 +43,12 @@ const _authReducer = createReducer(
             logInErrorResponse: logInErrorResponse
         }
     }),
-    on(updateForm, (state, { formValue }) => {
-        return {
-            ...state,
-            enmEventAddFormState: formValue
-        }
-    })
 );
 
-export function authReducer(state: State | undefined, action: Action) {
+export function authReducer(state: AuthState | undefined, action: Action) {
     return _authReducer(state, action)
 }
 
-export const selectAuthState = createFeatureSelector<State>('auth');
+export const selectAuthState = createFeatureSelector<AuthState>('auth');
 export const selectUser = createSelector(selectAuthState, (state) => state.user)
 export const selectLogInErrorResponse = createSelector(selectAuthState, (state) => state.logInErrorResponse)
-
-export const selectVenue = createSelector(selectAuthState, (state) => state.enmEventAddFormState?.venue)
-export const selectDate = createSelector(selectAuthState, (state) => state.enmEventAddFormState?.date)
-export const selectTime = createSelector(selectAuthState, (state) => state.enmEventAddFormState?.startTime)
-export const selectCover = createSelector(selectAuthState, (state) => state.enmEventAddFormState?.cover)
-export const selectArtists = createSelector(selectAuthState, (state) => state.enmEventAddFormState?.artists)
-

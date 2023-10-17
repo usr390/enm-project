@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 import { EnmEventAddMultipageFormService } from '../../../core/services/enm-event-add-multipage-form.service';
 import { Store } from '@ngrx/store';
 import { take, tap } from 'rxjs';
-import * as AuthActions from '../../../state/auth/auth.actions';
-import * as fromAuth from './../../../state/auth/auth.reducer';
+import * as FormActions from '../../../state/form/form.actions';
+import * as fromForm from './../../../state/form/form.reducer';
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -26,11 +26,11 @@ export class EnmEventVenueComponent {
 
   venues: any[] | undefined;
   filteredVenues!: any[];
-  selectedVenue$ = this.store$.select(fromAuth.selectVenue);
+  selectedVenue$ = this.store$.select(fromForm.selectVenue);
 
   enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
   enmEventAddFormValuesActionStream$ = this.enmEventAddMultipageFormService.enmEventAddMultipageForm.valueChanges.pipe(
-    tap(value => { this.store$.dispatch(AuthActions.updateForm({ formValue: value })) }),
+    tap(value => { this.store$.dispatch(FormActions.updateForm({ formValue: value })) }),
   );
   enmEventAddVenueForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddVenueForm;
 

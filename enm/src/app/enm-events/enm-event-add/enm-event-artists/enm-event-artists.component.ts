@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 
 import { EnmEventAddMultipageFormService } from './../../../core/services/enm-event-add-multipage-form.service';
 
-import * as AuthActions from '../../../state/auth/auth.actions';
-import * as fromAuth from './../../../state/auth/auth.reducer';
+import * as FormActions from '../../../state/form/form.actions';
+import * as fromForm from './../../../state/form/form.reducer';
 import { take, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 
@@ -20,10 +20,10 @@ export class EnmEventArtistsComponent {
 
   enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
   enmEventAddFormValuesActionStream$ = this.enmEventAddMultipageFormService.enmEventAddMultipageForm.valueChanges.pipe(
-    tap(value => { this.store$.dispatch(AuthActions.updateForm({ formValue: value })) }),
+    tap(value => { this.store$.dispatch(FormActions.updateForm({ formValue: value })) }),
   );
 
-  selectedArtists$ = this.store$.select(fromAuth.selectArtists);
+  selectedArtists$ = this.store$.select(fromForm.selectArtists);
 
   constructor(private store$: Store, private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) { }
 
