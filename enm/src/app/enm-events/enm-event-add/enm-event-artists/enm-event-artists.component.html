@@ -13,7 +13,7 @@
         <form [formGroup]="enmEventAddForm" (ngSubmit)="onSubmit()">
           <div formArrayName="artists">
             <div class="row" *ngFor="let artist of artistsArray.controls; let i = index" style="margin-bottom: 25px;">
-              <label [ngClass]="{ 'artist-label': this.artistsArray.length > 1 }">Artist {{i + 1}}</label>
+              <label [ngClass]="{ 'artist-label': this.artistsArray.length > 1 }">Artist {{i + 1}} &nbsp;<span *ngIf="i === 0">(Listed First)</span></label>
               <div class="col">
                 <input pInputText type="text" [formControlName]="i" placeholder="Artist {{i + 1}}" maxlength="50" #artistInput>
                 <button pButton *ngIf="artistsArray.controls.length > 1" type="button" (click)="removeArtistInputField(i)" icon="pi pi-times"></button>
