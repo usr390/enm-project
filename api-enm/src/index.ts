@@ -12,6 +12,7 @@ import { UserDTO } from "./models/UserDTO";
 
 const app = express(); app.use(cors({ origin: '*' })); app.use(express.json())
 const port = process.env.PORT || 3000
+const stripe = require('stripe')(process.env.STRIPE_API_KEY);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('enm-api')
@@ -76,6 +77,26 @@ app.post('/api/login', async (req: Request, res: Response) => {
     console.error(err);
     res.status(500).json({ error: 'Internal Server Error' });
   }
+});
+
+app.post('/api/create-checkout-session', async (req, res) => {
+  const session = await stripe.checkout.sessions.create({
+    line_items: [{
+      price_data: {
+        currency: 'usd',
+        product_data: {
+          name: 'T-shirt',
+        },
+        unit_amount: 2000,
+      },
+      quantity: 1,
+    }],
+    mode: 'payment',
+    ui_mode: 'embedded',
+    return_url: 'https://example.com/checkout/return?session_id={CHECKOUT_SESSION_ID}'
+  });
+
+  res.send({clientSecret: session.client_secret});
 });
 
 // asynchronous initialization. keeps api from processesing requests until a successful connection to db is established

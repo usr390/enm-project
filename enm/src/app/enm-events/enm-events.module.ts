@@ -4,6 +4,8 @@ import { EnmEventPageComponent } from './enm-event-page/enm-event-page.component
 import { EnmEventListFilterComponent } from './enm-event-list-filter/enm-event-list-filter.component';
 import { EnmEventListToolbarComponent } from './enm-event-list-toolbar/enm-event-list-toolbar.component';
 import { EnmEventRoutingModule } from './enm-events-routing.module';
+import { EnmPlusPaymentScreenComponent } from './enm-plus-payment-screen/enm-plus-payment-screen.component';
+
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from './../shared/shared.module';
 
@@ -18,6 +20,7 @@ import { NgModule } from '@angular/core';
     EnmEventListFilterComponent,
     EnmEventListToolbarComponent,
     EnmEventPageComponent,
+    EnmPlusPaymentScreenComponent,
   ],
   imports: [
     // angular modules
