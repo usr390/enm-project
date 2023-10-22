@@ -85,15 +85,15 @@ app.post('/api/create-checkout-session', async (req, res) => {
       price_data: {
         currency: 'usd',
         product_data: {
-          name: 'T-shirt',
+          name: 'ENM Plus - Monthly Subscription',
         },
-        unit_amount: 2000,
+        unit_amount: 299,
       },
       quantity: 1,
     }],
     mode: 'payment',
     ui_mode: 'embedded',
-    return_url: 'https://example.com/checkout/return?session_id={CHECKOUT_SESSION_ID}'
+    return_url: 'https://enm-project.vercel.app'
   });
 
   res.send({clientSecret: session.client_secret});
