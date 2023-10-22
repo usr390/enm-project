@@ -1,5 +1,8 @@
 #enm
 
+#environments
+enm/src/environments
+
 # Compiled output
 enm/dist
 enm/tmp
