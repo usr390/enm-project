@@ -70,7 +70,7 @@ app.post('/api/login', async (req: Request, res: Response) => {
     const user = await UserModel.findOne({ username });
     if (!user) return res.status(401).json({ error: 'Invalid Credentials' });
     if (user.password !== password) return res.status(401).json({ error: 'Invalid Credentials' });
-    const userDTO = new UserDTO(user.username)
+    const userDTO = new UserDTO(user.id, user.username, user.plus)
     res.json({ user: { ...userDTO } });
   } 
   catch (err) {
@@ -97,6 +97,20 @@ app.post('/api/create-checkout-session', async (req, res) => {
   });
 
   res.send({clientSecret: session.client_secret});
+});
+
+app.put('/api/user/:id/plusify', async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await UserModel.findByIdAndUpdate(userId, { plus: true }, { new: true });
+    if (!user) return res.status(404).send({ message: 'User not found' });
+    res.send({ 
+      message: '~~ plusified ~~', 
+      username: user.username,
+      plus: user.plus 
+    });
+  } 
+  catch (error) { res.status(500).send({ message: 'Server error' }); }
 });
 
 // asynchronous initialization. keeps api from processesing requests until a successful connection to db is established

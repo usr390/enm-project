@@ -1,3 +1,3 @@
 export class UserDTO {
-    constructor(public username: string){}
+    constructor(public id: string, public username: string, public plus: boolean){}
 }
