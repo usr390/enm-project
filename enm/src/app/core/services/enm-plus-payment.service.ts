@@ -19,8 +19,6 @@ export class EnmPlusPaymentService {
 
   plusifyUser(user: NullableUser) {
     const url = `${BASE_URL}/user/${user?.id}/plusify`;
-    this.http.put(url, {}).subscribe({
-      error: error => console.log(error),
-    });
+    return this.http.put<NullableUser>(url, {});
   }
 }

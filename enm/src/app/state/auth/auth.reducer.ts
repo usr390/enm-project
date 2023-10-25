@@ -2,6 +2,7 @@ import { Action, createFeatureSelector, createReducer, createSelector, on } from
 import { NullableUser } from "src/app/models/user.model";
 import { logInSuccessResponse, logOut, logInErrorResponse, rehydrateFromBrowserLocalStorage, updateForm } from "./auth.actions";
 import { LogInErrorResponse } from "src/app/models/logInErrorResponse.model";
+import { enmPlusMonthlySubscriptionPaymentSuccessReponse } from "../payment/payment.actions";
 
 export interface AuthState {
     user: NullableUser,
@@ -42,6 +43,18 @@ const _authReducer = createReducer(
             user: user,
             logInErrorResponse: logInErrorResponse
         }
+    }),
+    on(enmPlusMonthlySubscriptionPaymentSuccessReponse, (state, { user }) => {
+        if (user) {
+            return {
+                ...state,
+                user: {
+                    ...user,
+                    plus: true
+                }
+            };
+        }
+        return state;
     }),
 );
 

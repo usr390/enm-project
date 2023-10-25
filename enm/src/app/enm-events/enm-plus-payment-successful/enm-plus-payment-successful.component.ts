@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { EnmPlusPaymentService } from 'src/app/core/services/enm-plus-payment.service';
 import * as fromAuth from './../../state/auth/auth.reducer';
-import { concatMap, map, take } from 'rxjs';
+import { take, tap } from 'rxjs';
 
+import * as PaymentActions from '../../state/payment/payment.actions';
 
 @Component({
   selector: 'app-enm-plus-payment-successful',
@@ -12,11 +12,17 @@ import { concatMap, map, take } from 'rxjs';
 })
 export class EnmPlusPaymentSuccessfulComponent {
 
-  user$ = this.store$.select(fromAuth.selectUser).pipe(
-    take(1), 
-    map((user) => this.enmPlusPaymentService.plusifyUser(user) )
-  )
+  constructor(private store$: Store) {}
 
-  constructor(private store$: Store, private enmPlusPaymentService: EnmPlusPaymentService) {}
+  ngOnInit(): void {
+    this.plusifyUser();
+  }
+
+  plusifyUser() {
+    this.store$.select(fromAuth.selectUser).pipe(
+      take(1), 
+      tap(user => this.store$.dispatch(PaymentActions.enmPlusMonthlySubscriptionPaymentSubmission({ user })))
+    ).subscribe();
+  }
 
 }

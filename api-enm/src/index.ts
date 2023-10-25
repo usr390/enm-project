@@ -105,7 +105,7 @@ app.put('/api/user/:id/plusify', async (req, res) => {
     const user = await UserModel.findByIdAndUpdate(userId, { plus: true }, { new: true });
     if (!user) return res.status(404).send({ message: 'User not found' });
     res.send({ 
-      message: '~~ plusified ~~', 
+      id: user._id,
       username: user.username,
       plus: user.plus 
     });
