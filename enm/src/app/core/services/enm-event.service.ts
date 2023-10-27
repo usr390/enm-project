@@ -2,19 +2,24 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EnmEvent } from './../../models/enm-event.model';
 import { environment } from './../../../environments/environment';
-import { BehaviorSubject, Observable, shareReplay } from 'rxjs';
-const BASE_URL = environment.api + '/enmEvents';
+import { BehaviorSubject, Observable, shareReplay, switchMap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectUser } from 'src/app/state/auth/auth.reducer';
+const BASE_URL = environment.api + '/enmEventsRegular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EnmEventService {
 
-  enmEvents$ = this.getRecipesList(); getRecipesList(): Observable<EnmEvent[]> {
-    if (this.enmEvents$) return this.enmEvents$; else return this.http.get<EnmEvent[]>(BASE_URL).pipe(shareReplay(1));
-  }
+  enmEvents$ = this.store$.select(selectUser).pipe(
+    switchMap(user => {
+      const ENDPOINT = user?.plus ? environment.api + '/enmEventsPlus' : environment.api + '/enmEventsRegular';
+      return this.http.get<EnmEvent[]>(ENDPOINT).pipe(shareReplay(1));
+    })
+  );
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private store$: Store) { }
 
   updateEnmEventListFilter(criteria: string) { this.enmEventListFilterSubject.next(criteria); }
   private enmEventListFilterSubject = new BehaviorSubject<string>('');

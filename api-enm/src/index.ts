@@ -28,6 +28,22 @@ app.get('/api/enmEvents', async (req: Request, res: Response) => {
   .catch(err => console.log(err)))
 })
 
+app.get('/api/enmEventsRegular', async (req: Request, res: Response) => {
+  try {
+      const startOfWeek = DateTime.now().startOf('week'); // Assuming Monday is the start of the week
+      const endOfWeek = DateTime.now().endOf('week');
+
+      const events = await EnmEventModel.find({ 
+          dateTime: { $gte: startOfWeek, $lte: endOfWeek } 
+      }).sort({ dateTime: 1 });
+      
+      res.json(events);
+  } catch (err) {
+      console.log(err);
+      res.status(500).send('Internal Server Error');
+  }
+});
+
 app.post('/api/enmEvent', async (req: Request, res: Response) => {
   const enmEvent = new EnmEventModel({
     tags: req.body.tags,
@@ -93,7 +109,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
     }],
     mode: 'payment',
     ui_mode: 'embedded',
-    return_url: 'https://enm-project.vercel.app/checkout/return'
+    return_url: 'http://localhost:4200/checkout/return'
   });
 
   res.send({clientSecret: session.client_secret});
