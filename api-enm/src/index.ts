@@ -39,7 +39,7 @@ app.get('/api/enmEventsRegular', async (req: Request, res: Response) => {
       // Calculate days until Sunday
       const daysUntilSunday = (7 - currentDay) % 7; // If today is Sunday, daysUntilSunday will be 0
 
-      const endOfWeek = today.plus({ days: daysUntilSunday });
+      const endOfWeek = today.plus({ days: daysUntilSunday }).endOf('day'); // Include all of Sunday
 
       const events = await EnmEventModel.find({ 
           dateTime: { $gte: startOfWeek, $lte: endOfWeek } 
@@ -51,6 +51,7 @@ app.get('/api/enmEventsRegular', async (req: Request, res: Response) => {
       res.status(500).send('Internal Server Error');
   }
 });
+
 
 
 app.post('/api/enmEvent', async (req: Request, res: Response) => {
