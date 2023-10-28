@@ -30,16 +30,8 @@ app.get('/api/enmEvents', async (req: Request, res: Response) => {
 
 app.get('/api/enmEventsRegular', async (req: Request, res: Response) => {
   try {
-      const today = DateTime.now();
-      const startOfWeek = today;
-      
-      // Find the current day of the week (0 = Monday, 6 = Sunday)
-      const currentDay = today.weekday;
-
-      // Calculate days until Sunday
-      const daysUntilSunday = (7 - currentDay) % 7; // If today is Sunday, daysUntilSunday will be 0
-
-      const endOfWeek = today.plus({ days: daysUntilSunday }).endOf('day'); // Include all of Sunday
+      const startOfWeek = DateTime.now().minus({ hours: 12 }) // Assuming Monday is the start of the week
+      const endOfWeek = DateTime.now().endOf('week');
 
       const events = await EnmEventModel.find({ 
           dateTime: { $gte: startOfWeek, $lte: endOfWeek } 
