@@ -14,7 +14,7 @@ export class EnmEventService {
 
   enmEvents$ = this.store$.select(selectUser).pipe(
     switchMap(user => {
-      const ENDPOINT = user?.plus ? environment.api + '/enmEventsPlus' : environment.api + '/enmEventsRegular';
+      const ENDPOINT = user?.plus ? environment.api + '/enmEvents' : environment.api + '/enmEventsRegular';
       return this.http.get<EnmEvent[]>(ENDPOINT).pipe(shareReplay(1));
     })
   );
