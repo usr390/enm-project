@@ -30,21 +30,18 @@ app.get('/api/enmEvents', async (req: Request, res: Response) => {
 
 app.get('/api/enmEventsRegular', async (req: Request, res: Response) => {
   try {
-      const startOfWeek = DateTime.now().minus({ hours: 12 }) // Assuming Monday is the start of the week
-      const endOfWeek = DateTime.now().endOf('week');
-
-      const events = await EnmEventModel.find({ 
-          dateTime: { $gte: startOfWeek, $lte: endOfWeek } 
-      }).sort({ dateTime: 1 });
-      
-      res.json(events);
+    const today = DateTime.now().minus({ hours: 12 })
+    const endOfWeek = DateTime.now().endOf('week').plus({ hours: 5 })
+    const enmEvents = await EnmEventModel.find({ 
+      dateTime: { $gte: today, $lte: endOfWeek } 
+    }).sort({ dateTime: 1 });
+    
+    res.json(enmEvents);
   } catch (err) {
-      console.log(err);
-      res.status(500).send('Internal Server Error');
+    console.log(err);
+    res.status(500).send('Internal Server Error');
   }
 });
-
-
 
 app.post('/api/enmEvent', async (req: Request, res: Response) => {
   const enmEvent = new EnmEventModel({
