@@ -26,5 +26,5 @@
         </div>
     </div>
   </div>
+  <div *ngIf="!(user$ | async)?.plus" class="event-availablity-disclaimer d-flex justify-content-center align-items-center">New events listed weekly</div>
 </div>
-
