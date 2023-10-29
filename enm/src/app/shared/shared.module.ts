@@ -24,6 +24,7 @@ import { PasswordModule } from 'primeng/password';
 import { InputMaskModule } from 'primeng/inputmask';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { MessageService } from 'primeng/api';
     PasswordModule,
     InputMaskModule,
     ToastModule,
+    CardModule
   ],
   exports: [
     // enm imports
@@ -72,6 +74,7 @@ import { MessageService } from 'primeng/api';
     PasswordModule,
     InputMaskModule,
     ToastModule,
+    CardModule
   ],
   providers: [
     // primeng providers
