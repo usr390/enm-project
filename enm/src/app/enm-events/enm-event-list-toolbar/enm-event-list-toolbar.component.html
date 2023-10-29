@@ -3,7 +3,7 @@
         <app-logo></app-logo>
     </div>
     <div class="p-toolbar-group-end">
-        <app-enm-event-list-filter></app-enm-event-list-filter>
+        <div *ngIf="(user$ | async)?.plus"><app-enm-event-list-filter></app-enm-event-list-filter></div>
         <app-sidebar></app-sidebar>
     </div>
 </p-toolbar>
