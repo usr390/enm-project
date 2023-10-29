@@ -3,14 +3,9 @@
         <p>
             Enm, the valley's premium event search service
         </p>
-        <p>
-            Browse upcoming events, search for events in specific cities and venues, or look up your favorite local artists to see where they perform next
-        </p>
         <p *ngIf="(user$ | async)">
-            <a [routerLink]="['/add-event/venue']"  href="/">Add Event</a>
-        </p>
-        <p *ngIf="(user$ | async) && !(user$ | async)?.plus">
-            <a [routerLink]="['/plus']"  href="/">Enm Plus</a>
+            <a [routerLink]="['/add-event/venue']"  href="/">Add Event</a> 
+            <span *ngIf="(user$ | async) && !(user$ | async)?.plus">&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a [routerLink]="['/plus']"  href="/">Enm Plus</a></span>
         </p>
     </ng-template>
     <ng-template pTemplate="footer">
