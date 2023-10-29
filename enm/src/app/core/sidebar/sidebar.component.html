@@ -6,12 +6,15 @@
         <p>
             Browse upcoming events, search for events in specific cities and venues, or look up your favorite local artists to see where they perform next
         </p>
-    </ng-template>
-    <ng-template pTemplate="footer">
         <p *ngIf="(user$ | async)">
             <a [routerLink]="['/add-event/venue']"  href="/">Add Event</a>
         </p>
-        <p *ngIf="(user$ | async)">Logged in as {{(user$ | async)?.username}}. <a href="/"(click)="onLogOut()">Log Out</a></p>
+        <p *ngIf="(user$ | async) && !(user$ | async)?.plus">
+            <a [routerLink]="['/plus']"  href="/">Enm Plus</a>
+        </p>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <p *ngIf="(user$ | async)">Logged in as {{(user$ | async)?.username}}<span *ngIf="(user$ | async) && (user$ | async)?.plus"> ✨ </span><span *ngIf="!((user$ | async) && (user$ | async))?.plus">. &nbsp;</span> <a href="/"(click)="onLogOut()">Log Out</a></p>
         <p *ngIf="!(user$ | async)">
             <a [routerLink]="['/login']"  href="/">Log In</a>
         </p>
