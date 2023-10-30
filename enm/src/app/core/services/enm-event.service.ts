@@ -25,8 +25,8 @@ export class EnmEventService {
   private enmEventListFilterSubject = new BehaviorSubject<string>('');
   enmEventListFilterAction$ = this.enmEventListFilterSubject.asObservable();
   
-  updateEnmEventIdSpotlight(id: number) { this.updateEnmEventIdSpotlightSubject.next(id); } 
-  private updateEnmEventIdSpotlightSubject = new BehaviorSubject<number>(0);
+  updateEnmEventIdSpotlight(_id: string) { this.updateEnmEventIdSpotlightSubject.next(_id); } 
+  private updateEnmEventIdSpotlightSubject = new BehaviorSubject<string>('');
   updateEnmEventIdSpotlightAction$ = this.updateEnmEventIdSpotlightSubject.asObservable(); 
 
 }

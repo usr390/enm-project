@@ -10,7 +10,7 @@ import { EnmEventService } from './../../core/services/enm-event.service';
 export class EnmEventPageComponent implements OnInit {
 
   enmEvent$ = combineLatest([this.enmEventService.enmEvents$, this.enmEventService.updateEnmEventIdSpotlightAction$]).pipe(
-    map(([enmEvents, spotlightEnmEventId]) => enmEvents.filter(enmEvent => enmEvent.id === spotlightEnmEventId)[0]),
+    map(([enmEvents, spotlightEnmEventId]) => enmEvents.filter(enmEvent => enmEvent._id === spotlightEnmEventId)[0]),
   );
 
   constructor(private enmEventService: EnmEventService) { }

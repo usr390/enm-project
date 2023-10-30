@@ -5,6 +5,56 @@
     <h5>{{ date.key | wordifiedDateKey }}</h5>
     <!-- date.value resolves to EnmEvent[] -->
     <div *ngFor="let enmEvent of date.value" class="card event-card" style="margin-top: 5px">
+      <ng-container *ngIf="user$ | async as user">
+        <!-- plus user, has routerLink activated. should have access to event detail page -->
+        <ng-container *ngIf="user?.plus; else nonPlusEnmEventList">
+          <a [routerLink]="['/', enmEvent._id]" (click)="onEnmEventListSelection(enmEvent._id)" class="event-card-link" href="/">
+            <div class="card-body">
+              <!-- synonyms -->
+                <h5 class="card-title" *ngIf="enmEvent.name">{{ enmEvent.name }}</h5>
+                <h5 class="card-title" *ngIf="enmEvent.location && enmEvent.artists">{{ enmEvent.location }} - {{ enmEvent.artists.join(', ') }}</h5>
+                <h5 class="card-title" *ngIf="enmEvent.venue && enmEvent.artists">{{ enmEvent.venue.name }} - {{ enmEvent.artists.join(', ') }}</h5>
+              <!---->
+              <p class="card-text">
+                {{ enmEvent.dateTime | dateTimeToTime }} &middot;
+                {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }} 
+                <!-- synonyms -->
+                  <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
+                  <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+                <!---->
+              </p>
+              <!-- synonyms -->
+                <p class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</p>
+                <p class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</p>
+              <!---->
+            </div>
+          </a>
+        </ng-container>
+        <!-- non-plus user. should not have routerLink activated. should not have event detail page available -->
+        <ng-template #nonPlusEnmEventList>
+          <div class="card-body">
+            <!-- synonyms -->
+              <h5 class="card-title" *ngIf="enmEvent.name">{{ enmEvent.name }}</h5>
+              <h5 class="card-title" *ngIf="enmEvent.location && enmEvent.artists">{{ enmEvent.location }} - {{ enmEvent.artists.join(', ') }}</h5>
+              <h5 class="card-title" *ngIf="enmEvent.venue && enmEvent.artists">{{ enmEvent.venue.name }} - {{ enmEvent.artists.join(', ') }}</h5>
+            <!---->
+            <p class="card-text">
+              {{ enmEvent.dateTime | dateTimeToTime }} &middot;
+              {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }} 
+              <!-- synonyms -->
+                <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
+                <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+              <!---->
+            </p>
+            <!-- synonyms -->
+              <p class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</p>
+              <p class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</p>
+            <!---->
+          </div>
+        </ng-template>
+      </ng-container>
+      <!-- no user logged in. should not have routerLink activated. should not have event detail page available -->
+      <ng-container *ngIf="(user$ | async) === null">
         <div class="card-body">
           <!-- synonyms -->
             <h5 class="card-title" *ngIf="enmEvent.name">{{ enmEvent.name }}</h5>
@@ -24,6 +74,7 @@
             <p class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</p>
           <!---->
         </div>
+      </ng-container>
     </div>
   </div>
   <div class="disclaimer-section">

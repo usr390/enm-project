@@ -36,7 +36,10 @@ export class EnmEventListComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onEnmEventListSelection(id: number | undefined) { this.enmEventService.updateEnmEventIdSpotlight(id!); }
+  onEnmEventListSelection(_id: string | undefined) { 
+    console.log('onEnmEventListSelection fired! _id is: ' + _id)
+    this.enmEventService.updateEnmEventIdSpotlight(_id!); 
+  }
 
 }
 

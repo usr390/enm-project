@@ -8,7 +8,7 @@ export interface EnmEvent {
         seasonal music festivals
     */
 
-    "id": number,
+    "_id": string,
     "name": string,
     "location": string,
     "tags": string[],
