@@ -16,6 +16,7 @@ const VenueSchema = new Schema({
     city: String,
     state: String,
     country: String,
+    link: String,
 });
 
 const VenueModel = mongoose.model("Venue", VenueSchema);

@@ -70,6 +70,7 @@ app.post('/api/venue', async (req: Request, res: Response) => {
     city: req.body.city,
     state: "Texas",
     country: "USA",
+    link: "pending"
   });
   // persist and respond to client with created EnmEvent object
   res.json(await venue.save());

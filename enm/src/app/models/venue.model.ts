@@ -3,5 +3,6 @@ export interface Venue {
     "address": string,
     "city": string,
     "state": string,
-    "country": string
+    "country": string,
+    "link": string
 }
