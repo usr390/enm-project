@@ -12,7 +12,9 @@ import { EnmEventModule } from './enm-events/enm-events.module';
 import { authReducer } from './state/auth/auth.reducer';
 import { AuthEffects } from './state/auth/auth.effects';
 import { formReducer } from './state/form/form.reducer';
-import { PaymentEffects } from './state/payment/payment.effects'
+import { PaymentEffects } from './state/payment/payment.effects';
+import { enmEventsReducer } from './state/enmEvents/enmEvents.reducer';
+
 
 // 3rd party imports
 import { StoreModule } from '@ngrx/store';
@@ -33,11 +35,12 @@ import { EffectsModule } from '@ngrx/effects';
     StoreModule.forRoot({ 
       auth: authReducer,
       form: formReducer,
+      enmEvents: enmEventsReducer
     }),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([ 
       AuthEffects, 
-      PaymentEffects 
+      PaymentEffects
     ]),
   ],
   providers: [],

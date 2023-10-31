@@ -5,6 +5,7 @@ import { EnmEvent } from '../../models/enm-event.model';
 import { DateTime } from 'luxon';
 import { Store } from '@ngrx/store';
 import * as fromAuth from './../../state/auth/auth.reducer';
+import * as enmEventsActions from './../../state/enmEvents/enmEvents.actions';
 
 @Component({
   selector: 'app-enm-event-list',
@@ -37,7 +38,7 @@ export class EnmEventListComponent implements OnInit {
   ngOnInit(): void {}
 
   onEnmEventListSelection(_id: string | undefined) { 
-    console.log('onEnmEventListSelection fired! _id is: ' + _id)
+    this.store$.dispatch(enmEventsActions.selectEventFromEventList({_id: _id as string}))
     this.enmEventService.updateEnmEventIdSpotlight(_id!); 
   }
 
