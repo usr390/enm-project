@@ -1,3 +1,10 @@
 import { createAction, props } from '@ngrx/store'
+import { EnmEvent } from 'src/app/models/enm-event.model';
+import { EnmEventListRequestErrorResponse } from 'src/app/models/enmEventListRequestErrorResponse';
 
-export const selectEventFromEventList = createAction('[Enm Events] Select Event From Event List', props<{ _id: string }>()); 
+export const selectEventFromEventList = createAction('[Enm Events] Event Selected From Event List', props<{ _id: string }>());
+
+export const enmEventListRequest = createAction('[Enm Events] Enm Event List HTTP Request'); 
+export const enmEventListRequestSuccessResponse = createAction('[Enm Events] Enm Event List HTTP Request Success Response', props<{ enmEvents: EnmEvent[] }>()); 
+export const enmEventListRequestErrorResponse = createAction('[Enm Events] Enm Event List HTTP Request Error Response', props<{ error: EnmEventListRequestErrorResponse }>()); 
+

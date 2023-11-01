@@ -2,10 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EnmEvent } from './../../models/enm-event.model';
 import { environment } from './../../../environments/environment';
-import { BehaviorSubject, Observable, shareReplay, switchMap } from 'rxjs';
+import { BehaviorSubject, shareReplay, switchMap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectUser } from 'src/app/state/auth/auth.reducer';
-const BASE_URL = environment.api + '/enmEventsRegular';
 
 @Injectable({
   providedIn: 'root'

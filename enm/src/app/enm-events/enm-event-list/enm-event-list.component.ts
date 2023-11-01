@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { combineLatest, map, tap } from 'rxjs';
+import { combineLatest, map } from 'rxjs';
 import { EnmEventService } from './../../core/services/enm-event.service';
 import { EnmEvent } from '../../models/enm-event.model';
 import { DateTime } from 'luxon';
 import { Store } from '@ngrx/store';
 import * as fromAuth from './../../state/auth/auth.reducer';
+import * as fromEnmEvent from './../../state/enmEvents/enmEvents.selectors';
 import * as enmEventsActions from './../../state/enmEvents/enmEvents.actions';
+import { AppState } from 'src/app/state/app.state';
 
 @Component({
   selector: 'app-enm-event-list',
@@ -15,8 +17,9 @@ import * as enmEventsActions from './../../state/enmEvents/enmEvents.actions';
 export class EnmEventListComponent implements OnInit {
 
   user$ = this.store$.select(fromAuth.selectUser);
+  enmEvents$ = this.store$.select(fromEnmEvent.selectAll);
 
-  filteredEnmEventList$ = combineLatest([this.enmEventService.enmEvents$, this.enmEventService.enmEventListFilterAction$]).pipe(
+  filteredEnmEventList$ = combineLatest([this.enmEvents$, this.enmEventService.enmEventListFilterAction$]).pipe(
     map(([enmEvents, userSuppliedFilter]) => enmEvents.filter(enmEvent => Object.values([...Object.values(enmEvent.tags), ...Object.values(enmEvent.artists)]).toString().toLowerCase().indexOf(userSuppliedFilter.toLowerCase() ?? '') != -1 )),
   );
 
@@ -33,9 +36,12 @@ export class EnmEventListComponent implements OnInit {
     }),
   );
 
-  constructor(private store$: Store, private enmEventService: EnmEventService) { }
 
-  ngOnInit(): void {}
+  constructor(private store$: Store<AppState>, private enmEventService: EnmEventService) { }
+
+  ngOnInit(): void {
+    this.store$.dispatch(enmEventsActions.enmEventListRequest())
+  }
 
   onEnmEventListSelection(_id: string | undefined) { 
     this.store$.dispatch(enmEventsActions.selectEventFromEventList({_id: _id as string}))

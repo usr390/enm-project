@@ -1,15 +1,9 @@
-import { Action, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
-import { selectEventFromEventList } from "./enmEvents.actions";
+import { Action, createFeatureSelector, createReducer, on } from "@ngrx/store";
+import { enmEventListRequestErrorResponse, enmEventListRequestSuccessResponse, selectEventFromEventList } from "./enmEvents.actions";
+import { EnmEvents, EnmEventsState, initialState } from "./enmEvent.state";
 
-export interface EnmEventsState {
-    selectedEnmEvent: string,
-}
 
-export const initialState: EnmEventsState = {
-    selectedEnmEvent: '',
-}
-
-const _authReducer = createReducer(
+const _enmEventsReducer = createReducer(
     initialState,
     on(selectEventFromEventList, (state, selectEventFromEventList ) => {
         return {
@@ -17,11 +11,22 @@ const _authReducer = createReducer(
             selectedEnmEvent: selectEventFromEventList._id
         }
     }),
-
+    on(enmEventListRequestSuccessResponse, (state, { enmEvents }) => {
+        const entities: EnmEvents = {};
+        enmEvents.forEach((enmEvent) => (entities[enmEvent._id] = enmEvent));
+        return {
+          ...state,
+          entities,
+        };
+    }),
+    on(enmEventListRequestErrorResponse, (state, { error }) => {
+        return {
+            ...state,
+            enmEventListRequestErrorResponse: error,
+        }
+    }),
 );
 
 export function enmEventsReducer(state: EnmEventsState | undefined, action: Action) {
-    return _authReducer(state, action)
+    return _enmEventsReducer(state, action)
 }
-
-export const selectAuthState = createFeatureSelector<EnmEventsState>('enmEvents');

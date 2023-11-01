@@ -13,7 +13,10 @@ describe('EnmEventListComponent', () => {
   let fixture: ComponentFixture<EnmEventListComponent>;
   let mockEnmEventService: jasmine.SpyObj<EnmEventService>;
 
-  const mockStore = { select: jasmine.createSpy().and.returnValue(of(null)), };
+  const mockStore = { 
+    select: jasmine.createSpy().and.returnValue(of(null)),
+    dispatch: jasmine.createSpy(), 
+  };
 
   beforeEach(async () => {
     mockEnmEventService = jasmine.createSpyObj('EnmEventService', ['']);

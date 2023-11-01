@@ -14,6 +14,7 @@ import { AuthEffects } from './state/auth/auth.effects';
 import { formReducer } from './state/form/form.reducer';
 import { PaymentEffects } from './state/payment/payment.effects';
 import { enmEventsReducer } from './state/enmEvents/enmEvents.reducer';
+import { EnmEventsEffects } from './state/enmEvents/enmEvents.effects';
 
 
 // 3rd party imports
@@ -40,7 +41,8 @@ import { EffectsModule } from '@ngrx/effects';
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([ 
       AuthEffects, 
-      PaymentEffects
+      PaymentEffects,
+      EnmEventsEffects
     ]),
   ],
   providers: [],
