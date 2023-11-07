@@ -4,12 +4,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { EnmEventListFilterComponent } from './enm-event-list-filter.component';
 import { EnmEventService } from './../../core/services/enm-event.service';
-
+import { of } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 describe('EnmEventListFilterComponent', () => {
   let component: EnmEventListFilterComponent;
   let fixture: ComponentFixture<EnmEventListFilterComponent>;
   let mockEnmEventService: jasmine.SpyObj<EnmEventService>;
+
+  const mockStore = { 
+    select: jasmine.createSpy().and.returnValue(of(null)),
+    dispatch: jasmine.createSpy(), 
+  };
 
   beforeEach(async () => {
     mockEnmEventService = jasmine.createSpyObj('EnmEventService', ['']);
@@ -17,7 +23,10 @@ describe('EnmEventListFilterComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, HttpClientTestingModule],
       declarations: [ EnmEventListFilterComponent ],
-      providers: [{ provide: EnmEventService, useValue: mockEnmEventService }]
+      providers: [
+        { provide: EnmEventService, useValue: mockEnmEventService },
+        { provide: Store, useValue: mockStore }
+      ]
     })
     .compileComponents();
   });

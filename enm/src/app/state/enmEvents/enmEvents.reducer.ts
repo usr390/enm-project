@@ -1,5 +1,5 @@
 import { Action, createFeatureSelector, createReducer, on } from "@ngrx/store";
-import { enmEventListRequestErrorResponse, enmEventListRequestSuccessResponse, selectEventFromEventList } from "./enmEvents.actions";
+import { enmEventListRequestErrorResponse, enmEventListRequestSuccessResponse, enmEventListSearch, selectEventFromEventList } from "./enmEvents.actions";
 import { EnmEvents, EnmEventsState, initialState } from "./enmEvent.state";
 
 
@@ -25,6 +25,13 @@ const _enmEventsReducer = createReducer(
             enmEventListRequestErrorResponse: error,
         }
     }),
+    on(enmEventListSearch, (state, { text }) => ({
+        ...state,
+        filter: {
+          ...state.filter,
+          text,
+        },
+    })),
 );
 
 export function enmEventsReducer(state: EnmEventsState | undefined, action: Action) {

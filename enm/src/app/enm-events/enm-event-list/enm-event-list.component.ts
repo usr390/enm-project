@@ -17,11 +17,7 @@ import { AppState } from 'src/app/state/app.state';
 export class EnmEventListComponent implements OnInit {
 
   user$ = this.store$.select(fromAuth.selectUser);
-  enmEvents$ = this.store$.select(fromEnmEvent.selectAll);
-
-  filteredEnmEventList$ = combineLatest([this.enmEvents$, this.enmEventService.enmEventListFilterAction$]).pipe(
-    map(([enmEvents, userSuppliedFilter]) => enmEvents.filter(enmEvent => Object.values([...Object.values(enmEvent.tags), ...Object.values(enmEvent.artists)]).toString().toLowerCase().indexOf(userSuppliedFilter.toLowerCase() ?? '') != -1 )),
-  );
+  filteredEnmEventList$ = this.store$.select(fromEnmEvent.selectFiltered);
 
   groupedByDateEnmEventList$ = this.filteredEnmEventList$.pipe(
     map((events) => {
@@ -35,7 +31,6 @@ export class EnmEventListComponent implements OnInit {
       return enmEventsGroupedByDate;
     }),
   );
-
 
   constructor(private store$: Store<AppState>, private enmEventService: EnmEventService) { }
 

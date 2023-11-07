@@ -25,10 +25,7 @@ export const selectFiltered = createSelector(
   (enmEvents: EnmEvent[], filter: Filter): EnmEvent[] => {
     if (filter.text) {
       const lowercased = filter.text.toLowerCase();
-      return enmEvents.filter(
-        (event) =>
-          event.venue.name.toLowerCase().includes(lowercased)
-      );
+      return enmEvents.filter(enmEvent => Object.values([...Object.values(enmEvent.tags), ...Object.values(enmEvent.artists)]).toString().toLowerCase().indexOf(lowercased ?? '') != -1 )
     } else {
       return enmEvents;
     }
