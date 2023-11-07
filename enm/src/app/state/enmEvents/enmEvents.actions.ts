@@ -4,8 +4,8 @@ import { EnmEventListRequestErrorResponse } from 'src/app/models/enmEventListReq
 
 export const selectEventFromEventList = createAction('[Enm Events] Event Selected From Event List', props<{ _id: string }>());
 
-export const enmEventListRequest = createAction('[Enm Events] Enm Event List HTTP Request'); 
-export const enmEventListRequestSuccessResponse = createAction('[Enm Events] Enm Event List HTTP Request Success Response', props<{ enmEvents: EnmEvent[] }>()); 
-export const enmEventListRequestErrorResponse = createAction('[Enm Events] Enm Event List HTTP Request Error Response', props<{ error: EnmEventListRequestErrorResponse }>()); 
+export const enmEventListRequest = createAction('[Enm Events List Screen] Enm Event List HTTP Request'); 
+export const enmEventListRequestSuccessResponse = createAction('[Enm Events List Screen] Enm Event List HTTP Request Success Response', props<{ enmEvents: EnmEvent[] }>()); 
+export const enmEventListRequestErrorResponse = createAction('[Enm Events List Screen] Enm Event List HTTP Request Error Response', props<{ error: EnmEventListRequestErrorResponse }>()); 
 
-export const enmEventListSearch = createAction('[Enm Events] Enm Event List Search', props<{ text: string }>()); 
+export const enmEventListSearch = createAction('[Enm Events List Screen] Enm Event List Search', props<{ text: string }>()); 
