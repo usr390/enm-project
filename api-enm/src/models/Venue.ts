@@ -10,7 +10,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const VenueSchema = new Schema({
+export const VenueSchema = new Schema({
     name: String,
     address: String,
     city: String,

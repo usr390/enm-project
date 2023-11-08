@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { VenueSchema } from "./Venue";
 
 /* summary
     an enmEvent represents what users would typically consider a music event local to their area.
@@ -9,14 +10,6 @@ import mongoose from "mongoose";
 */
 
 const Schema = mongoose.Schema;
-
-const VenueSchema = new Schema({
-    name: String,
-    address: String,
-    city: String,
-    state: String,
-    country: String
-});
 
 const EnmEventSchema = new Schema({
     tags: [String],

@@ -1,11 +1,13 @@
-<div *ngIf="enmEvent$ | async as enmEvent" class="d-flex flex-column justify-content-center align-items-center" style="height: 85vh;">
-  <div class="card event-card" style="margin-top: 5px">
-    <div class="card-body">
-      <p class="card-text"><a *ngIf="enmEvent.venue.link" href="{{enmEvent.venue.link}}">{{enmEvent.venue.name}}</a></p>
-      <p *ngIf="!enmEvent.venue.link" class="card-text">{{enmEvent.venue.name}}</p>
-      <p class="card-text">${{enmEvent.cover}}</p>
-      <p class="card-text">{{ enmEvent.dateTime | dateTimeToTime }}, {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}</p>
-      <p class="card-text">{{ enmEvent.artists.join(', ') }}</p>
+<div class="container-sm">
+  <div *ngIf="enmEvent$ | async as enmEvent" class="d-flex flex-column justify-content-center align-items-center" style="height: 85vh;">
+    <div class="card event-card" style="margin-top: 5px">
+      <div class="card-body">
+        <p *ngIf="enmEvent.venue.link" class="card-text"><a href="{{enmEvent.venue.link}}">{{enmEvent.venue.name}}</a></p>
+        <p *ngIf="!enmEvent.venue.link" class="card-text">{{enmEvent.venue.name}}</p>
+        <p class="card-text">${{enmEvent.cover}}</p>
+        <p class="card-text">{{ enmEvent.dateTime | dateTimeToTime }}, {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}</p>
+        <p class="card-text">{{ enmEvent.artists.join(', ') }}</p>
+      </div>
     </div>
   </div>
 </div>
