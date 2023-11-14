@@ -3,7 +3,7 @@ import { LogInService } from '../services/login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as AuthActions from '../../state/auth/auth.actions';
-import * as fromAuth from '../../state/auth/auth.reducer';
+import * as AuthSelectors from '../../state/auth/auth.selectors';
 import { MessageService } from 'primeng/api';
 import { map } from 'rxjs';
 
@@ -17,7 +17,7 @@ import { ElementRef, Renderer2 } from '@angular/core';
 export class LogInComponent {
   constructor(private elRef: ElementRef, private renderer: Renderer2, private logInService: LogInService, private fb: FormBuilder, private store: Store, private messageService: MessageService) {}
 
-  logInErrorResponse$ = this.store.select(fromAuth.selectLogInErrorResponse).pipe(
+  logInErrorResponse$ = this.store.select(AuthSelectors.selectLogInErrorResponse).pipe(
     map(error => this.showInvalidCredentialsAlert(error?.error.error))
   );
 

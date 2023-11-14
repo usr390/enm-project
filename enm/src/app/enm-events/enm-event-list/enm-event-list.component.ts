@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { combineLatest, map } from 'rxjs';
+import { map } from 'rxjs';
 import { EnmEventService } from './../../core/services/enm-event.service';
 import { EnmEvent } from '../../models/enm-event.model';
 import { DateTime } from 'luxon';
 import { Store } from '@ngrx/store';
-import * as fromAuth from './../../state/auth/auth.reducer';
+import * as AuthSelectors from './../../state/auth/auth.selectors';
 import * as fromEnmEvent from './../../state/enmEvents/enmEvents.selectors';
 import * as enmEventsActions from './../../state/enmEvents/enmEvents.actions';
 import { AppState } from 'src/app/state/app.state';
@@ -16,7 +16,7 @@ import { AppState } from 'src/app/state/app.state';
 })
 export class EnmEventListComponent implements OnInit {
 
-  user$ = this.store$.select(fromAuth.selectUser);
+  user$ = this.store$.select(AuthSelectors.selectUser);
   filteredEnmEventList$ = this.store$.select(fromEnmEvent.selectFiltered);
 
   groupedByDateEnmEventList$ = this.filteredEnmEventList$.pipe(

@@ -1,18 +1,7 @@
-import { Action, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
-import { NullableUser } from "src/app/models/user.model";
+import { Action, createReducer, on } from "@ngrx/store";
 import { logInSuccessResponse, logOut, logInErrorResponse, rehydrateFromBrowserLocalStorage, updateForm } from "./auth.actions";
-import { LogInErrorResponse } from "src/app/models/logInErrorResponse.model";
 import { enmPlusMonthlySubscriptionPaymentSuccessReponse } from "../payment/payment.actions";
-
-export interface AuthState {
-    user: NullableUser,
-    logInErrorResponse: LogInErrorResponse,
-}
-
-export const initialState: AuthState = {
-    user: null,
-    logInErrorResponse: null,
-}
+import {AuthState, initialState} from './auth.state'
 
 const _authReducer = createReducer(
     initialState,
@@ -61,7 +50,3 @@ const _authReducer = createReducer(
 export function authReducer(state: AuthState | undefined, action: Action) {
     return _authReducer(state, action)
 }
-
-export const selectAuthState = createFeatureSelector<AuthState>('auth');
-export const selectUser = createSelector(selectAuthState, (state) => state.user)
-export const selectLogInErrorResponse = createSelector(selectAuthState, (state) => state.logInErrorResponse)

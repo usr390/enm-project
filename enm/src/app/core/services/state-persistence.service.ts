@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromAuth from '../../state/auth/auth.reducer';
 import * as AuthActions from '../../state/auth/auth.actions';
+import { AuthState } from 'src/app/state/auth/auth.state';
 
 
 
@@ -16,7 +16,7 @@ export class StatePersistenceService {
       - allows users to leave web app and come back without losing session
   */
 
-  constructor(private store: Store<fromAuth.AuthState>) { }
+  constructor(private store: Store<AuthState>) { }
 
   persistToBrowserLocalStorage(auth: any) {
     localStorage.setItem('auth', JSON.stringify(auth))
@@ -25,7 +25,7 @@ export class StatePersistenceService {
   rehydrateBrowserFromLocalStorage() {
     const localStorageAsString = localStorage.getItem('auth');
     if (localStorageAsString) {
-      const auth: fromAuth.AuthState = JSON.parse(localStorageAsString);
+      const auth: AuthState = JSON.parse(localStorageAsString);
       this.store.dispatch(AuthActions.rehydrateFromBrowserLocalStorage(auth));
     }
   }

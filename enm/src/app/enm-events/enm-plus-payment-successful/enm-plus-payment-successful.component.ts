@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromAuth from './../../state/auth/auth.reducer';
+import * as AuthSelectors from './../../state/auth/auth.selectors';
 import { take, tap } from 'rxjs';
 
 import * as PaymentActions from '../../state/payment/payment.actions';
@@ -19,7 +19,7 @@ export class EnmPlusPaymentSuccessfulComponent {
   }
 
   plusifyUser() {
-    this.store$.select(fromAuth.selectUser).pipe(
+    this.store$.select(AuthSelectors.selectUser).pipe(
       take(1), 
       tap(user => this.store$.dispatch(PaymentActions.enmPlusMonthlySubscriptionPaymentSubmission({ user })))
     ).subscribe();

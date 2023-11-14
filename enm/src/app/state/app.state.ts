@@ -1,4 +1,4 @@
-import { AuthState } from "./auth/auth.reducer";
+import { AuthState } from "./auth/auth.state";
 import { EnmEventsState } from "./enmEvents/enmEvent.state"
 import { FormState } from "./form/form.reducer";
 

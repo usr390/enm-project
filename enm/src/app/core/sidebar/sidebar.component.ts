@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import * as fromAuth from './../../state/auth/auth.reducer';
 import { Store } from '@ngrx/store';
 import * as AuthActions from './../../state/auth/auth.actions';
+import * as AuthSelectors from './../../state/auth/auth.selectors';
+import { AuthState } from 'src/app/state/auth/auth.state';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,9 +13,9 @@ export class SidebarComponent {
   sidebarVisible: boolean = false;
   currentDate = new Date();
 
-  user$ = this.store.select(fromAuth.selectUser);
+  user$ = this.store.select(AuthSelectors.selectUser);
 
-  constructor(private store: Store<fromAuth.AuthState>) {}
+  constructor(private store: Store<AuthState>) {}
 
   onLogOut() {
     this.store.dispatch(AuthActions.logOut());

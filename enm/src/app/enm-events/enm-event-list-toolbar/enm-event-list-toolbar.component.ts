@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromAuth from './../../state/auth/auth.reducer';
+import * as AuthSelectors from './../../state/auth/auth.selectors';
 
 @Component({
   selector: 'app-enm-event-list-toolbar',
@@ -9,7 +9,7 @@ import * as fromAuth from './../../state/auth/auth.reducer';
 })
 export class EnmEventListToolbarComponent {
 
-  user$ = this.store$.select(fromAuth.selectUser);
+  user$ = this.store$.select(AuthSelectors.selectUser);
 
   constructor(private store$: Store){}
 
