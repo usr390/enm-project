@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import * as AppActions from '../../state/app.actions';
 import * as AuthActions from '../../state/auth/auth.actions';
 import { AuthState } from 'src/app/state/auth/auth.state';
+import { AppState } from 'src/app/state/app.state';
 
 
 
@@ -27,6 +29,15 @@ export class StatePersistenceService {
     if (localStorageAsString) {
       const auth: AuthState = JSON.parse(localStorageAsString);
       this.store.dispatch(AuthActions.rehydrateFromBrowserLocalStorage(auth));
+    }
+  }
+
+  rehydrateBrowserFromLocalStorageTest() {
+    const localStorageAsString = localStorage.getItem('appState');
+    console.log(localStorageAsString)
+    if (localStorageAsString) {
+      const appState: AppState = JSON.parse(localStorageAsString);
+      this.store.dispatch(AppActions.rehydrateFromBrowserLocalStorage({ appState }));
     }
   }
 }

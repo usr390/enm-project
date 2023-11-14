@@ -21,6 +21,6 @@ export class AppComponent {
   constructor(private statePersistenceService: StatePersistenceService, private store: Store<AuthState>) { }
 
   ngOnInit() {
-    this.statePersistenceService.rehydrateBrowserFromLocalStorage();
+    this.statePersistenceService.rehydrateBrowserFromLocalStorageTest();
   }
 }
