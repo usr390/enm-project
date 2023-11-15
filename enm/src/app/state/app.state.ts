@@ -1,6 +1,9 @@
-import { AuthState, initialState as authInitalState } from './auth/auth.state'
-import { FormState, initialState as formInitialState } from './form/form.reducer'
-import { EnmEventsState, initialState as enmEventsInitalState } from './enmEvents/enmEvent.state'
+import { AuthState } from './auth/auth.state'
+import { FormState, formReducer } from './form/form.reducer'
+import { EnmEventsState } from './enmEvents/enmEvent.state'
+import { ActionReducerMap } from '@ngrx/store';
+import { authReducer } from './auth/auth.reducer';
+import { enmEventsReducer } from './enmEvents/enmEvents.reducer';
 
 export interface AppState {
     auth: AuthState;
@@ -8,8 +11,8 @@ export interface AppState {
     enmEvents: EnmEventsState;
 }
 
-export const initialState: AppState = {
-    auth: authInitalState,
-    form: formInitialState,
-    enmEvents: enmEventsInitalState
-}
+export const reducers: ActionReducerMap<AppState> = {
+    auth: authReducer,
+    form: formReducer,
+    enmEvents: enmEventsReducer
+};

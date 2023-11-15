@@ -9,11 +9,8 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { EnmEventModule } from './enm-events/enm-events.module';
-import { authReducer } from './state/auth/auth.reducer';
 import { AuthEffects } from './state/auth/auth.effects';
-import { formReducer } from './state/form/form.reducer';
 import { PaymentEffects } from './state/payment/payment.effects';
-import { enmEventsReducer } from './state/enmEvents/enmEvents.reducer';
 import { EnmEventsEffects } from './state/enmEvents/enmEvents.effects';
 
 
@@ -22,6 +19,7 @@ import { EnmEventsEffects } from './state/enmEvents/enmEvents.effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { EffectsModule } from '@ngrx/effects';
+import { reducers } from './state/app.state';
 
 @NgModule({
   declarations: [
@@ -34,11 +32,7 @@ import { EffectsModule } from '@ngrx/effects';
     CoreModule,
     SharedModule,
     EnmEventModule,
-    StoreModule.forRoot({ 
-      auth: authReducer,
-      form: formReducer,
-      enmEvents: enmEventsReducer,
-    }),
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([ 
       AuthEffects, 
