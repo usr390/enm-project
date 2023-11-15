@@ -28,16 +28,21 @@ export class StatePersistenceService {
     const localStorageAsString = localStorage.getItem('auth');
     if (localStorageAsString) {
       const auth: AuthState = JSON.parse(localStorageAsString);
+      console.log('prerehydrate - authState -> NgRx store: \n', auth)
       this.store.dispatch(AuthActions.rehydrateFromBrowserLocalStorage(auth));
     }
   }
 
-  rehydrateBrowserFromLocalStorageTest() {
-    const localStorageAsString = localStorage.getItem('appState');
-    console.log(localStorageAsString)
-    if (localStorageAsString) {
-      const appState: AppState = JSON.parse(localStorageAsString);
-      this.store.dispatch(AppActions.rehydrateFromBrowserLocalStorage({ appState }));
-    }
-  }
+  // persistToBrowserLocalStorageTest(appState: any) {
+  //   localStorage.setItem('state', JSON.stringify(appState))
+  // }
+
+  // rehydrateBrowserFromLocalStorageTest() {
+  //   const localStorageAsString = localStorage.getItem('state');
+  //   if (localStorageAsString) {
+  //     const appState: AppState = JSON.parse(localStorageAsString);
+  //     console.log('prerehydrate - localStorage -> NgRx store: \n', appState)
+  //     this.store.dispatch(AppActions.rehydrateFromBrowserLocalStorage({ appState }));
+  //   }
+  // }
 }

@@ -15,7 +15,6 @@ import { formReducer } from './state/form/form.reducer';
 import { PaymentEffects } from './state/payment/payment.effects';
 import { enmEventsReducer } from './state/enmEvents/enmEvents.reducer';
 import { EnmEventsEffects } from './state/enmEvents/enmEvents.effects';
-import { appReducer } from './state/app.reducer';
 
 
 
@@ -39,7 +38,6 @@ import { EffectsModule } from '@ngrx/effects';
       auth: authReducer,
       form: formReducer,
       enmEvents: enmEventsReducer,
-      app: appReducer
     }),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([ 
