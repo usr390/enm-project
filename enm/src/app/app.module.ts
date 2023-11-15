@@ -38,6 +38,7 @@ import { HydrationEffects } from './state/hydration/hydration.effects';
       AuthEffects, 
       PaymentEffects,
       EnmEventsEffects,
+      HydrationEffects
     ]),
   ],
   providers: [],

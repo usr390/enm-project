@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as AppActions from '../../state/app.actions';
 import * as AuthActions from '../../state/auth/auth.actions';
 import { AuthState } from 'src/app/state/auth/auth.state';
-import { AppState } from 'src/app/state/app.state';
 
 
 
