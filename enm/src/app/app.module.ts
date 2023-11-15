@@ -12,14 +12,14 @@ import { EnmEventModule } from './enm-events/enm-events.module';
 import { AuthEffects } from './state/auth/auth.effects';
 import { PaymentEffects } from './state/payment/payment.effects';
 import { EnmEventsEffects } from './state/enmEvents/enmEvents.effects';
-
+import { reducers, metaReducers } from './state/app.state';
 
 
 // 3rd party imports
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { EffectsModule } from '@ngrx/effects';
-import { reducers } from './state/app.state';
+import { HydrationEffects } from './state/hydration/hydration.effects';
 
 @NgModule({
   declarations: [
@@ -32,12 +32,12 @@ import { reducers } from './state/app.state';
     CoreModule,
     SharedModule,
     EnmEventModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot(reducers, {metaReducers}),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([ 
       AuthEffects, 
       PaymentEffects,
-      EnmEventsEffects
+      EnmEventsEffects,
     ]),
   ],
   providers: [],

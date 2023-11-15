@@ -1,9 +1,10 @@
 import { AuthState } from './auth/auth.state'
 import { FormState, formReducer } from './form/form.reducer'
 import { EnmEventsState } from './enmEvents/enmEvent.state'
-import { ActionReducerMap } from '@ngrx/store';
+import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { authReducer } from './auth/auth.reducer';
 import { enmEventsReducer } from './enmEvents/enmEvents.reducer';
+import { hydrationMetaReducer } from './hydration/hydration.reducer';
 
 export interface AppState {
     auth: AuthState;
@@ -16,3 +17,7 @@ export const reducers: ActionReducerMap<AppState> = {
     form: formReducer,
     enmEvents: enmEventsReducer
 };
+
+export const metaReducers: MetaReducer[] = [
+    hydrationMetaReducer,
+];
