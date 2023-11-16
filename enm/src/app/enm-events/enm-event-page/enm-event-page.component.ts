@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { combineLatest, map } from 'rxjs';
 import { EnmEventService } from './../../core/services/enm-event.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/state/app.state';
+import * as EnmEventsSelectors from './../../state/enmEvents/enmEvents.selectors';
+
 
 @Component({
   selector: 'app-enm-event-page',
@@ -9,11 +13,11 @@ import { EnmEventService } from './../../core/services/enm-event.service';
 })
 export class EnmEventPageComponent implements OnInit {
 
-  enmEvent$ = combineLatest([this.enmEventService.enmEvents$, this.enmEventService.updateEnmEventIdSpotlightAction$]).pipe(
+  enmEvent$ = combineLatest([this.enmEventService.enmEvents$, this.store$.select(EnmEventsSelectors.selectSelectedEventId)]).pipe(
     map(([enmEvents, spotlightEnmEventId]) => enmEvents.filter(enmEvent => enmEvent._id === spotlightEnmEventId)[0]),
   );
 
-  constructor(private enmEventService: EnmEventService) { }
+  constructor(private store$: Store<AppState>, private enmEventService: EnmEventService) { }
 
   ngOnInit(): void { }
 

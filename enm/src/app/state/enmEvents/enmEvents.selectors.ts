@@ -1,7 +1,7 @@
 import { createSelector } from "@ngrx/store";
 import { AppState } from "../app.state";
 import { EnmEvent } from "../../models/enm-event.model";
-import { Filter, EnmEventsState } from "./enmEvent.state"; // Assuming EnmEventsState is correctly defined
+import { Filter, EnmEventsState, EnmEvents } from "./enmEvent.state"; // Assuming EnmEventsState is correctly defined
 
 export const selectFeature = (state: AppState): EnmEventsState => state.enmEvents;
 
@@ -30,4 +30,9 @@ export const selectFiltered = createSelector(
       return enmEvents;
     }
   }
+);
+
+export const selectSelectedEventId = createSelector(
+  selectFeature,
+  (state: EnmEventsState): string => state.selectedEnmEvent
 );
