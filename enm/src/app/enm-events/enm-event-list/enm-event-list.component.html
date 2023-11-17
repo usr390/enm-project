@@ -1,8 +1,8 @@
 <app-enm-event-list-toolbar></app-enm-event-list-toolbar>
 
-<div *ngIf="listLoading$ | async" class="d-flex justify-content-center align-items-center" style="height: 85vh;">
+<!-- <div *ngIf="listLoading$ | async" class="d-flex justify-content-center align-items-center" style="height: 85vh;">
   <p-progressSpinner></p-progressSpinner>
-</div>
+</div> -->
 
 <div class="container-sm">
   <div *ngFor="let date of (groupedByDateEnmEventList$ | async | keyvalue)" style="margin-top: 20px">
