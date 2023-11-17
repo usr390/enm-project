@@ -13,7 +13,7 @@ import * as EnmEventsSelectors from './../../state/enmEvents/enmEvents.selectors
 })
 export class EnmEventPageComponent implements OnInit {
 
-  enmEvent$ = combineLatest([this.enmEventService.enmEvents$, this.store$.select(EnmEventsSelectors.selectSelectedEventId)]).pipe(
+  enmEvent$ = combineLatest([this.store$.select(EnmEventsSelectors.selectAll), this.store$.select(EnmEventsSelectors.selectSelectedEventId)]).pipe(
     map(([enmEvents, spotlightEnmEventId]) => enmEvents.filter(enmEvent => enmEvent._id === spotlightEnmEventId)[0]),
   );
 

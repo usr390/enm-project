@@ -13,7 +13,7 @@ export class EnmEventsEffects {
         this.actions$.pipe(
             ofType(enmEventActions.enmEventListRequest),
             exhaustMap(
-                _ => this.enmEventService.enmEvents$.pipe(
+                _ => this.enmEventService.getEnmEventList().pipe(
                     map(enmEvents => enmEventActions.enmEventListRequestSuccessResponse({ enmEvents })),
                     catchError((error) => of(enmEventActions.enmEventListRequestErrorResponse({ error })))
                 ), 
