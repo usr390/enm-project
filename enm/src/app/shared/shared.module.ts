@@ -25,6 +25,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { CardModule } from 'primeng/card';
     PasswordModule,
     InputMaskModule,
     ToastModule,
-    CardModule
+    CardModule,
+    ProgressSpinnerModule
   ],
   exports: [
     // enm imports
@@ -74,7 +76,8 @@ import { CardModule } from 'primeng/card';
     PasswordModule,
     InputMaskModule,
     ToastModule,
-    CardModule
+    CardModule,
+    ProgressSpinnerModule
   ],
   providers: [
     // primeng providers

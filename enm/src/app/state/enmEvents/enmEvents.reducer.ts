@@ -1,5 +1,5 @@
-import { Action, createFeatureSelector, createReducer, on } from "@ngrx/store";
-import { enmEventListRequestErrorResponse, enmEventListRequestSuccessResponse, enmEventListSearch, selectEventFromEventList } from "./enmEvents.actions";
+import { Action, createReducer, on } from "@ngrx/store";
+import { enmEventListRequest, enmEventListRequestErrorResponse, enmEventListRequestSuccessResponse, enmEventListSearch, selectEventFromEventList } from "./enmEvents.actions";
 import { EnmEvents, EnmEventsState, initialState } from "./enmEvent.state";
 
 
@@ -11,12 +11,19 @@ const _enmEventsReducer = createReducer(
             selectedEnmEvent: selectEventFromEventList._id
         }
     }),
+    on(enmEventListRequest, (state) => {
+        return {
+          ...state,
+          loading: true,
+        };
+    }),
     on(enmEventListRequestSuccessResponse, (state, { enmEvents }) => {
         const entities: EnmEvents = {};
         enmEvents.forEach((enmEvent) => (entities[enmEvent._id] = enmEvent));
         return {
           ...state,
           entities,
+          loading: false,
         };
     }),
     on(enmEventListRequestErrorResponse, (state, { error }) => {

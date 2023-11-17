@@ -36,3 +36,8 @@ export const selectSelectedEventId = createSelector(
   selectFeature,
   (state: EnmEventsState): string => state.selectedEnmEvent
 );
+
+export const selectLoading = createSelector(
+  selectFeature,
+  (state: EnmEventsState): boolean => state.loading
+);

@@ -18,6 +18,7 @@ export class EnmEventListComponent implements OnInit {
 
   user$ = this.store$.select(AuthSelectors.selectUser);
   filteredEnmEventList$ = this.store$.select(fromEnmEvent.selectFiltered);
+  listLoading$ = this.store$.select(fromEnmEvent.selectLoading);
 
   groupedByDateEnmEventList$ = this.filteredEnmEventList$.pipe(
     map((events) => {
