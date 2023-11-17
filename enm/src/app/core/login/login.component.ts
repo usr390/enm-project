@@ -45,8 +45,8 @@ export class LogInComponent {
 
   //#region utility
   setUpLocalFormControls() {
-    this.userLogInForm.setControl('username', this.fb.control('', Validators.required));
-    this.userLogInForm.setControl('password', this.fb.control('', Validators.required));
+    this.userLogInForm.setControl('username', this.fb.control('', [Validators.required, Validators.maxLength(20)]));
+    this.userLogInForm.setControl('password', this.fb.control('', [Validators.required, Validators.maxLength(20)]));
   }
   showInvalidCredentialsAlert(error: string | undefined) {
     this.messageService.add({ severity: 'error', summary: error, detail: 'Please try again' });
