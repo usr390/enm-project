@@ -1,7 +1,7 @@
 <app-enm-event-list-toolbar></app-enm-event-list-toolbar>
 
 <div *ngIf="listLoading$ | async" class="d-flex justify-content-center align-items-center" style="height: 85vh;">
-  <p-progressSpinner class="custom-spinner"></p-progressSpinner>
+  <p-progressSpinner styleClass= "w-4rem h-4rem" strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner"></p-progressSpinner>
 </div>
 
 <div *ngIf="!(listLoading$ | async)" class="container-sm">
