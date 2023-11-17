@@ -9,7 +9,7 @@
         </p>
     </ng-template>
     <ng-template pTemplate="footer">
-        <p *ngIf="(user$ | async)"><span *ngIf="!((user$ | async) && (user$ | async))?.plus">. &nbsp;</span> <a href="/"(click)="onLogOut()">Log Out</a></p>
+        <p *ngIf="(user$ | async)"><span *ngIf="!((user$ | async) && (user$ | async))?.plus"></span> <a href="/"(click)="onLogOut()">Log Out</a></p>
         <p *ngIf="(user$ | async)">Logged in as {{(user$ | async)?.username}}<span *ngIf="(user$ | async) && (user$ | async)?.plus"> ✨ </span></p>
         <p *ngIf="!(user$ | async)">
             <a [routerLink]="['/login']"  href="/">Log In</a>
