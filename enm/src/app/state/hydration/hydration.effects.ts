@@ -7,14 +7,14 @@ import * as HydrationActions from './hydration.actions';
 
 @Injectable()
 export class HydrationEffects implements OnInitEffects {
-  hydrate$ = createEffect(() =>
+  hydrateFromBrowserLocalStorageIntoNgRxStore$ = createEffect(() =>
     this.action$.pipe(
       ofType(HydrationActions.hydrate),
       map(() => {
-        const storageValue = localStorage.getItem('state');
-        if (storageValue) {
+        const localStorageState = localStorage.getItem('state');
+        if (localStorageState) {
           try {
-            const state = JSON.parse(storageValue);
+            const state = JSON.parse(localStorageState);
             return HydrationActions.hydrateSuccess({ state });
           } catch {
             localStorage.removeItem('state');
@@ -25,21 +25,21 @@ export class HydrationEffects implements OnInitEffects {
     )
   );
 
-  serialize$ = createEffect(
+  serializeNgRxStoreIntoBroswerLocalStorage$ = createEffect(
     () =>
       this.action$.pipe(
         ofType(
           HydrationActions.hydrateSuccess,
           HydrationActions.hydrateFailure
         ),
-        switchMap(() => this.store),
+        switchMap(() => this.store$),
         distinctUntilChanged(),
         tap((state) => localStorage.setItem('state', JSON.stringify(state)))
       ),
     { dispatch: false }
   );
 
-  constructor(private action$: Actions, private store: Store<AppState>) {}
+  constructor(private action$: Actions, private store$: Store<AppState>) {}
 
   ngrxOnInitEffects(): Action {
     return HydrationActions.hydrate();
