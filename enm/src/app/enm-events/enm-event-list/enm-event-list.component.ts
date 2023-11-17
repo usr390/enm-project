@@ -41,7 +41,6 @@ export class EnmEventListComponent implements OnInit {
 
   onEnmEventListSelection(_id: string | undefined) { 
     this.store$.dispatch(enmEventsActions.selectEventFromEventList({_id: _id as string}))
-    this.enmEventService.updateEnmEventIdSpotlight(_id!); 
   }
 
 }

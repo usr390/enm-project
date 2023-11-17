@@ -22,7 +22,6 @@ export class EnmEventListFilterComponent implements OnInit {
   filterResults() { 
     let text = this.enmEventListFilterForm.value.filter?.trim() as string
     this.store$.dispatch(fromEnmEvents.enmEventListSearch({ text }))
-    this.enmEventService.updateEnmEventListFilter(this.enmEventListFilterForm.value.filter?.trim() as string); 
   }
 
   clearFilter() {

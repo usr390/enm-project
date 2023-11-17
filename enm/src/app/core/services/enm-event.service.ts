@@ -20,13 +20,5 @@ export class EnmEventService {
 
   constructor(private http: HttpClient, private store$: Store) { }
 
-  updateEnmEventListFilter(criteria: string) { this.enmEventListFilterSubject.next(criteria); }
-  private enmEventListFilterSubject = new BehaviorSubject<string>('');
-  enmEventListFilterAction$ = this.enmEventListFilterSubject.asObservable();
-  
-  updateEnmEventIdSpotlight(_id: string) { this.updateEnmEventIdSpotlightSubject.next(_id); } 
-  private updateEnmEventIdSpotlightSubject = new BehaviorSubject<string>('');
-  updateEnmEventIdSpotlightAction$ = this.updateEnmEventIdSpotlightSubject.asObservable(); 
-
 }
 
