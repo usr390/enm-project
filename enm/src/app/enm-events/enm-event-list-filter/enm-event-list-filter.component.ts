@@ -28,7 +28,6 @@ export class EnmEventListFilterComponent implements OnInit {
   clearFilter() {
     this.enmEventListFilterForm.patchValue({ filter: ''});
     this.filterResults();
-    this.searchInput.nativeElement.focus();
   }
 }
 
