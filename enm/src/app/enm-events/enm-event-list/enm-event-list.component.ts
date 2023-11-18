@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs';
+import { filter, map } from 'rxjs';
 import { EnmEventService } from './../../core/services/enm-event.service';
 import { EnmEvent } from '../../models/enm-event.model';
 import { DateTime } from 'luxon';

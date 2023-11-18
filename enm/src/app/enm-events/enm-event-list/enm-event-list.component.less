@@ -2,30 +2,13 @@
     margin-bottom: 25px;
 }
 
-.date {
-    text-decoration: underline;
-    text-decoration-color: #7154f2 ;
-}
-
 .container-sm {
     margin-top: 25px
-}
-
-.event-card-link {
-    text-decoration: none;
-    color: black;
 }
 
 .card-text {
     margin-top: 0;
     margin-bottom: 8px;
-}
-
-.sticky-bottom-right {
-    position: fixed; /* This makes the position relative to the viewport */
-    bottom: 20px;       /* Stick to the bottom */
-    right: 20px;        /* Stick to the right */
-    z-index: 1000;   /* Ensure it appears above other content, adjust as needed */
 }
 
 .disclaimer-section {
@@ -36,6 +19,10 @@
 
 .disclaimer {
     margin-bottom: 5px;
+}
+
+.datekey {
+    color: #7b95af
 }
 
 :host ::ng-deep .custom-spinner .p-progress-spinner-circle {
@@ -72,4 +59,9 @@
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -124px;
     }
+}
+
+.event-card-link {
+    color: inherit; 
+    text-decoration: none; /* This removes the underline from links */
 }

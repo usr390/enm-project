@@ -26,6 +26,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { DataViewModule } from 'primeng/dataview';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     InputMaskModule,
     ToastModule,
     CardModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    DataViewModule
   ],
   exports: [
     // enm imports
@@ -77,7 +79,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     InputMaskModule,
     ToastModule,
     CardModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    DataViewModule
   ],
   providers: [
     // primeng providers

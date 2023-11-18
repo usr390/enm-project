@@ -6,83 +6,175 @@
 
 <div *ngIf="!(listLoading$ | async)" class="container-sm">
   <div *ngFor="let date of (groupedByDateEnmEventList$ | async | keyvalue)" style="margin-top: 20px">
-    <h5>{{ date.key | wordifiedDateKey }}</h5>
-    <!-- date.value resolves to EnmEvent[] -->
-    <div *ngFor="let enmEvent of date.value" class="card event-card" style="margin-top: 5px">
-      <ng-container *ngIf="user$ | async as user">
-        <!-- plus user, has routerLink activated. should have access to event detail page -->
-        <ng-container *ngIf="user?.plus; else nonPlusEnmEventList">
-          <a [routerLink]="['/', enmEvent._id]" (click)="onEnmEventListSelection(enmEvent._id)" class="event-card-link" href="/">
-            <div class="card-body">
-              <!-- synonyms -->
-                <h5 class="card-title" *ngIf="enmEvent.name">{{ enmEvent.name }}</h5>
-                <h5 class="card-title" *ngIf="enmEvent.location && enmEvent.artists">{{ enmEvent.location }} - {{ enmEvent.artists.join(', ') }}</h5>
-                <h5 class="card-title" *ngIf="enmEvent.venue && enmEvent.artists">{{ enmEvent.venue.name }} - {{ enmEvent.artists.join(', ') }}</h5>
-              <!---->
-              <p class="card-text">
-                {{ enmEvent.dateTime | dateTimeToTime }} &middot;
-                {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }} 
-                <!-- synonyms -->
-                  <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
-                  <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
-                <!---->
-              </p>
-              <!-- synonyms -->
-                <p class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</p>
-                <p class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</p>
-              <!---->
+    <h5 class="datekey">{{ date.key | wordifiedDateKey }}</h5>
+    <div class="card">
+      <p-dataView #dv [value]="date.value">
+        <!-- user logged in -->
+        <ng-container *ngIf="user$ | async as user">
+          <!-- plus user, has routerLink activated. should have access to event detail page -->
+          <ng-template *ngIf="user?.plus" let-enmEvent pTemplate="listItem">
+            <div class="col-12">
+  
+              <!-- HERE'S THE VISIBLE CONTENT -->
+  
+              <a [routerLink]="['/', enmEvent._id]" (click)="onEnmEventListSelection(enmEvent._id)" class="event-card-link .event-card-link" href="/">
+                <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                  <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                    <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                      
+                      <!-- synonyms -->
+                      <h5 *ngIf="enmEvent.name" class="text-2xl font-bold text-900">{{ enmEvent.name }}</h5>
+                      <h5 *ngIf="enmEvent.location && enmEvent.artists" class="text-2xl font-bold text-900">{{ enmEvent.location }} - {{ enmEvent.artists.join(', ') }}</h5>
+                      <h5 *ngIf="enmEvent.venue && enmEvent.artists" class="text-2xl font-bold text-900">{{ enmEvent.venue.name }} - {{ enmEvent.artists.join(', ') }}</h5>
+                      <!-- synonyms -->
+                      
+                      <div class="[TIME DATE AND COVER] flex align-items-center gap-3">
+                        <span class="flex align-items-center gap-2">
+                          <span class="font-semibold">
+                            {{ enmEvent.dateTime | dateTimeToTime }} &middot;
+                            {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
+                            <!-- synonyms -->
+                            <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
+                            <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+                            <!---->
+                          </span>
+                        </span>
+                      </div>
+  
+                      <div class="[ADDRESS] flex align-items-center gap-3">
+                        <span class="flex align-items-center gap-2">
+                          <span class="font-semibold">
+                            <!-- synonyms -->
+                            <span class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                            <span class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                            <!---->
+                          </span>
+                        </span>
+                      </div>
+  
+                    </div>
+                  </div>
+                </div>
+              </a>
+  
+  
+  
+  
+  
+  
             </div>
-          </a>
+          </ng-template>
+          <!-- non-plus user. should not have routerLink activated. should not have event detail page available -->
+          <ng-template *ngIf="!(user?.plus)" let-enmEvent pTemplate="listItem">
+            <div class="col-12">
+  
+              <!-- HERE'S THE VISIBLE CONTENT -->
+  
+                <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                  <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                    <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                      
+                      <!-- synonyms -->
+                      <h5 *ngIf="enmEvent.name" class="text-2xl font-bold text-900">{{ enmEvent.name }}</h5>
+                      <h5 *ngIf="enmEvent.location && enmEvent.artists" class="text-2xl font-bold text-900">{{ enmEvent.location }} - {{ enmEvent.artists.join(', ') }}</h5>
+                      <h5 *ngIf="enmEvent.venue && enmEvent.artists" class="text-2xl font-bold text-900">{{ enmEvent.venue.name }} - {{ enmEvent.artists.join(', ') }}</h5>
+                      <!-- synonyms -->
+                      
+                      <div class="[TIME DATE AND COVER] flex align-items-center gap-3">
+                        <span class="flex align-items-center gap-2">
+                          <span class="font-semibold">
+                            {{ enmEvent.dateTime | dateTimeToTime }} &middot;
+                            {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
+                            <!-- synonyms -->
+                            <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
+                            <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+                            <!---->
+                          </span>
+                        </span>
+                      </div>
+  
+                      <div class="[ADDRESS] flex align-items-center gap-3">
+                        <span class="flex align-items-center gap-2">
+                          <span class="font-semibold">
+                            <!-- synonyms -->
+                            <span class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                            <span class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                            <!---->
+                          </span>
+                        </span>
+                      </div>
+  
+                    </div>
+                  </div>
+                </div>
+  
+  
+  
+  
+  
+  
+            </div>
+          </ng-template>
         </ng-container>
-        <!-- non-plus user. should not have routerLink activated. should not have event detail page available -->
-        <ng-template #nonPlusEnmEventList>
-          <div class="card-body">
-            <!-- synonyms -->
-              <h5 class="card-title" *ngIf="enmEvent.name">{{ enmEvent.name }}</h5>
-              <h5 class="card-title" *ngIf="enmEvent.location && enmEvent.artists">{{ enmEvent.location }} - {{ enmEvent.artists.join(', ') }}</h5>
-              <h5 class="card-title" *ngIf="enmEvent.venue && enmEvent.artists">{{ enmEvent.venue.name }} - {{ enmEvent.artists.join(', ') }}</h5>
-            <!---->
-            <p class="card-text">
-              {{ enmEvent.dateTime | dateTimeToTime }} &middot;
-              {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }} 
-              <!-- synonyms -->
-                <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
-                <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
-              <!---->
-            </p>
-            <!-- synonyms -->
-              <p class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</p>
-              <p class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</p>
-            <!---->
-          </div>
-        </ng-template>
-      </ng-container>
-      <!-- no user logged in. should not have routerLink activated. should not have event detail page available -->
-      <ng-container *ngIf="(user$ | async) === null">
-        <div class="card-body">
-          <!-- synonyms -->
-            <h5 class="card-title" *ngIf="enmEvent.name">{{ enmEvent.name }}</h5>
-            <h5 class="card-title" *ngIf="enmEvent.location && enmEvent.artists">{{ enmEvent.location }} - {{ enmEvent.artists.join(', ') }}</h5>
-            <h5 class="card-title" *ngIf="enmEvent.venue && enmEvent.artists">{{ enmEvent.venue.name }} - {{ enmEvent.artists.join(', ') }}</h5>
-          <!---->
-          <p class="card-text">
-            {{ enmEvent.dateTime | dateTimeToTime }} &middot;
-            {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }} 
-            <!-- synonyms -->
-              <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
-              <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
-            <!---->
-          </p>
-          <!-- synonyms -->
-            <p class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</p>
-            <p class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</p>
-          <!---->
-        </div>
-      </ng-container>
+        <!-- no user logged in. should not have routerLink activated. should not have event detail page available -->
+        <ng-container *ngIf="(user$ | async) === null">
+          <ng-template let-enmEvent pTemplate="listItem">
+            <div class="col-12">
+  
+              <!-- HERE'S THE VISIBLE CONTENT -->
+  
+                <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                  <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                    <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                      
+                      <!-- synonyms -->
+                      <h5 *ngIf="enmEvent.name" class="text-2xl font-bold text-900">{{ enmEvent.name }}</h5>
+                      <h5 *ngIf="enmEvent.location && enmEvent.artists" class="text-2xl font-bold text-900">{{ enmEvent.location }} - {{ enmEvent.artists.join(', ') }}</h5>
+                      <h5 *ngIf="enmEvent.venue && enmEvent.artists" class="text-2xl font-bold text-900">{{ enmEvent.venue.name }} - {{ enmEvent.artists.join(', ') }}</h5>
+                      <!-- synonyms -->
+                      
+                      <div class="[TIME DATE AND COVER] flex align-items-center gap-3">
+                        <span class="flex align-items-center gap-2">
+                          <span class="font-semibold">
+                            {{ enmEvent.dateTime | dateTimeToTime }} &middot;
+                            {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
+                            <!-- synonyms -->
+                            <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
+                            <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+                            <!---->
+                          </span>
+                        </span>
+                      </div>
+  
+                      <div class="[ADDRESS] flex align-items-center gap-3">
+                        <span class="flex align-items-center gap-2">
+                          <span class="font-semibold">
+                            <!-- synonyms -->
+                            <span class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                            <span class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                            <!---->
+                          </span>
+                        </span>
+                      </div>
+  
+                    </div>
+                  </div>
+                </div>
+  
+  
+  
+  
+  
+  
+            </div>
+          </ng-template>
+        </ng-container>
+      </p-dataView>    
     </div>
-  </div>
+  </div>  
   <div class="disclaimer-section">
     <div *ngIf="!(user$ | async)?.plus" class="disclaimer d-flex justify-content-center align-items-center">* Events are listed for the current week only</div>
     <div class="disclaimer d-flex justify-content-center align-items-center">* Start times might be inaccurate (e.g., punk time)</div>
   </div>
 </div>
+
