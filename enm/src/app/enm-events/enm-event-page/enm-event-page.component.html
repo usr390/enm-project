@@ -4,10 +4,10 @@
 
 <div *ngIf="enmEvent$ | async as enmEvent" class="container-sm d-flex flex-column justify-content-center align-items-center" style="height: 85vh;">
   <p-card header="" styleClass="text-center">
-    <h5 *ngIf="enmEvent.venue.link" class="card-text"><a href="{{enmEvent.venue.link}}" class="m-0">{{enmEvent.venue.name}}</a></h5>
-    <h5 *ngIf="!enmEvent.venue.link" class="m-0">{{enmEvent.venue.name}}</h5>
-    <h5 class="m-0 lh-lg" [innerHTML]="enmEvent.artists.join('&nbsp;&nbsp;&nbsp; &middot; &nbsp;&nbsp;&nbsp;')"></h5>
-    <p class="m-0">${{enmEvent.cover}}</p>
+    <h2 *ngIf="enmEvent.venue.link" class="card-text"><a href="{{enmEvent.venue.link}}" class="m-0">{{enmEvent.venue.name}}</a></h2>
+    <h2 *ngIf="!enmEvent.venue.link" class="card-text">{{enmEvent.venue.name}}</h2>
+    <h5 class="m-0 lh-lg artists" [innerHTML]="enmEvent.artists.join('&nbsp;&nbsp;&nbsp; &middot; &nbsp;&nbsp;&nbsp;')"></h5>
+    <p class="m-0 cover">{{enmEvent.cover  | wordifiedCover }}</p>
     <p class="m-0">{{ enmEvent.dateTime | dateTimeToTime }}, {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}</p>
   </p-card>
 </div>
