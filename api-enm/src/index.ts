@@ -3,6 +3,8 @@ import cors from "cors";
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import { DateTime } from "luxon";
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 // enm imports
 import EnmEventModel from "./models/EnmEvent";
@@ -77,21 +79,30 @@ app.post('/api/venue', async (req: Request, res: Response) => {
 })
 
 app.post('/api/login', async (req: Request, res: Response) => {
-
   const { username, password } = req.body;
 
-  if (!username || !password) return res.status(400).json({ error: 'Username And Password Required' });
+  if (!username || !password) {
+    return res.status(400).json({ error: 'Username and password required' });
+  }
 
   try {
     const user = await UserModel.findOne({ username });
-    if (!user) return res.status(401).json({ error: 'Invalid Credentials' });
-    if (user.password !== password) return res.status(401).json({ error: 'Invalid Credentials' });
-    const userDTO = new UserDTO(user.id, user.username, user.plus)
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // Compare the provided password with the hashed password in the database
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // The passwords match, proceed with login
+    const userDTO = new UserDTO(user.id, user.username, user.plus);
     res.json({ user: { ...userDTO } });
-  } 
-  catch (err) {
+  } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
@@ -108,10 +119,13 @@ app.post('/api/create-user', async (req: Request, res: Response) => {
       return res.status(409).json({ error: 'User already exists' }); // 409 Conflict
     }
 
+    // Hashing the password before saving it to the database
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
     // Create new user document and save to the database
     const newUser = new UserModel({
       username,
-      password,
+      password: hashedPassword, // Store the hashed password
       plus: false
     });
 
