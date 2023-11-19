@@ -95,6 +95,39 @@ app.post('/api/login', async (req: Request, res: Response) => {
   }
 });
 
+app.post('/api/create-user', async (req: Request, res: Response) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.status(400).json({ error: 'Username and password required' });
+  }
+
+  try {
+    const existingUser = await UserModel.findOne({ username });
+    if (existingUser) {
+      return res.status(409).json({ error: 'User already exists' }); // 409 Conflict
+    }
+
+    // Create new user document and save to the database
+    const newUser = new UserModel({
+      username,
+      password,
+      plus: false
+    });
+
+    await newUser.save();
+
+    const userDTO = new UserDTO(newUser.id, newUser.username, newUser.plus);
+
+    res.status(201).json({ user: { ...userDTO } });
+  } 
+  catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 app.post('/api/create-checkout-session', async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items: [{
