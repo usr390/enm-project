@@ -1,1 +1,25 @@
-<p>create-user works!</p>
+
+<div class="d-flex justify-content-center align-items-center" style="height: 85vh;">
+    <div class="container text-center">
+        <h2>Create an Enm Account</h2>
+        <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col"><label>Username</label></div>
+            </div>
+            <div class="row g-0 justify-content-center input-row">
+                <div class="col-auto"><input formControlName="username" pInputText placeholder="Username" maxlength="20" style="width: 223px;"></div>
+            </div>
+            <div class="row">
+                <div class="col"><label>Password</label></div>
+            </div>
+            <div class="row g-0 justify-content-center input-row">
+                <div class="col-auto"><p-password formControlName="password" [feedback]="false" placeholder="Password" [toggleMask]="true"></p-password></div>
+            </div>
+            <div class="row">
+                <div class="col"><p-button type="submit" label="Create Account" [disabled]="createUserForm.invalid || logInButtonCooldown"></p-button></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<p-toast position="top-right" [breakpoints]="{'920px': { width: '70%' }}"></p-toast>
