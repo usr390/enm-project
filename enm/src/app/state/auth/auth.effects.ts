@@ -4,10 +4,16 @@ import { LogInService } from "src/app/core/services/login.service";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, of, exhaustMap, map, tap } from "rxjs";
 import * as AuthActions from './auth.actions';
+import { CreateUserService } from "src/app/core/services/create-user.service";
 
 @Injectable()
 export class AuthEffects {
-    constructor(private actions$: Actions, private logInService: LogInService, private router: Router) {}
+    constructor(
+        private actions$: Actions,
+        private logInService: LogInService,
+        private createUserService: CreateUserService,
+        private router: Router
+    ) {}
 
     logInRequest$ = createEffect(() => 
         this.actions$.pipe(
@@ -28,6 +34,26 @@ export class AuthEffects {
         ),
         { dispatch: false }
     );
+
+    createUserRequest$ = createEffect(() => 
+        this.actions$.pipe(
+            ofType(AuthActions.createUserRequest),
+            exhaustMap(
+                (action) => this.createUserService.createUser(action.credentials.username, action.credentials.password).pipe(
+                    map(createUserSuccessResponse => AuthActions.createUserSuccessResponse({ createUserSuccessResponse })),
+                    catchError((error) => of(AuthActions.createUserErrorResponse({ error })))
+                ), 
+            )
+        )
+    );
+
+    creatUserSuccess$ = createEffect(() => 
+    this.actions$.pipe(
+        ofType(AuthActions.createUserSuccessResponse),
+        tap(_ => this.router.navigate(['/']))
+    ),
+    { dispatch: false }
+);
 
     logOut$ = createEffect(() =>
         this.actions$.pipe(

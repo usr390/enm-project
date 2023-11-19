@@ -12,7 +12,7 @@ export const logInErrorResponse = createAction('[Log In API Endpoint] Log In Err
 
 export const createUserRequest = createAction('[Create Account Screen] Create User Request', props<{ credentials: { username: string, password: string } }>()); 
 export const createUserSuccessResponse = createAction('[Create Account Screen] Create User Success Response', props<{ createUserSuccessResponse: CreateUserSuccessResponse }>()); 
-export const createUserFailureResponse = createAction('[Create Account Screen] Create User Error Response', props<{ error: CreateUserErrorResponse }>()); 
+export const createUserErrorResponse = createAction('[Create Account Screen] Create User Error Response', props<{ error: CreateUserErrorResponse }>()); 
 
 export const logOut = createAction('[Sidebar Component] Log Out'); 
 

@@ -31,7 +31,7 @@ export class CreateUserComponent {
         username: this.createUserForm.get('username')?.value.trim(),
         password: this.createUserForm.get('password')?.value.trim(),
       }
-      // this.store$.dispatch(AuthActions.createUserRequest({ credentials }))
+      this.store$.dispatch(AuthActions.createUserRequest({ credentials }))
     } 
   }
 
