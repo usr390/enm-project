@@ -27,9 +27,6 @@ export class EnmEventPageComponent implements OnInit {
     this.router.navigate(['/']); 
   }
 
-  getArtistsNames(artists: Artist[]): string {
-    return artists.map(artist => artist.name).join('&nbsp;&nbsp;&nbsp; &middot; &nbsp;&nbsp;&nbsp;');
-  }
 
 }
 

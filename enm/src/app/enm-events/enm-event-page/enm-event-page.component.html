@@ -4,10 +4,29 @@
 
 <div *ngIf="enmEvent$ | async as enmEvent" class="container-sm d-flex flex-column justify-content-center align-items-center" style="height: 85vh;">
   <p-card header="" styleClass="text-center">
-    <h2 *ngIf="enmEvent.venue.link" class="card-text"><a href="{{enmEvent.venue.link}}" class="m-0">{{enmEvent.venue.name}}</a></h2>
-    <h2 *ngIf="!enmEvent.venue.link" class="card-text">{{enmEvent.venue.name}}</h2>
-    <h5 class="m-0 lh-lg artists" [innerHTML]="getArtistsNames(enmEvent.artists)"></h5>
-    <p class="m-0 cover">{{enmEvent.cover  | wordifiedCover }}</p>
+    <ng-container *ngIf="enmEvent.venue.link; else venueName">
+      <h2 class="card-text">
+        <a href="{{ enmEvent.venue.link }}" class="m-0">{{ enmEvent.venue.name }}</a>
+      </h2>
+    </ng-container>
+    <ng-template #venueName>
+      <h2 class="card-text">{{ enmEvent.venue.name }}</h2>
+    </ng-template>
+
+    <div class="m-0 lh-lg artists artist-name">
+      <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
+        <ng-container *ngIf="artist.link && artist.link !== 'pending'; else artistName">
+          <a href="{{ artist.link }}" target="_blank" rel="noopener noreferrer">{{ artist.name }}</a>
+        </ng-container>
+        <ng-template #artistName>
+          <span>{{ artist.name }}</span>
+        </ng-template>
+        <!-- Add separator for all but the last artist -->
+        <span *ngIf="i < enmEvent.artists.length - 1">&nbsp;&nbsp;&nbsp; &middot; &nbsp;&nbsp;&nbsp;</span>
+      </ng-container>
+    </div>
+
+    <p class="m-0 cover">{{ enmEvent.cover | wordifiedCover }}</p>
     <p class="m-0">{{ enmEvent.dateTime | dateTimeToTime }}, {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}</p>
   </p-card>
 </div>
