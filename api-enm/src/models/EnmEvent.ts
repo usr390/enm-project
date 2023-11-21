@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { VenueSchema } from "./Venue";
+import { ArtistSchema } from "./Artist";
 
 /* summary
     an enmEvent represents what users would typically consider a music event local to their area.
@@ -16,7 +17,7 @@ const EnmEventSchema = new Schema({
     venue: VenueSchema,
     dateTime: Date,
     cover: Number,
-    artists: [String],
+    artists: [ArtistSchema],
     creationDateTime: Date,
 });
 

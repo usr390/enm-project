@@ -1,3 +1,4 @@
+import { Artist } from "./artist.model";
 import { Venue } from "./venue.model";
 
 export interface EnmEvent {
@@ -22,7 +23,7 @@ export interface EnmEvent {
     "priceOfEntry": number;
     "cover": number,
     //
-    "artists": string[];
+    "artists": Artist[];
     "creationDateTime": string
 
 }

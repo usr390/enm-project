@@ -9,6 +9,7 @@ const saltRounds = 10;
 // enm imports
 import EnmEventModel from "./models/EnmEvent";
 import VenueModel from "./models/Venue";
+import ArtistModel from "./models/Artist";
 import UserModel from "./models/User";
 import { UserDTO } from "./models/UserDTO";
 
@@ -76,6 +77,10 @@ app.post('/api/venue', async (req: Request, res: Response) => {
   });
   // persist and respond to client with created EnmEvent object
   res.json(await venue.save());
+})
+
+app.get('/api/artists', async (req: Request, res: Response) => {
+  res.json(await ArtistModel.find().catch(err => console.log(err)))
 })
 
 app.post('/api/login', async (req: Request, res: Response) => {

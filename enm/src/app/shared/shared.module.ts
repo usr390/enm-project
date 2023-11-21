@@ -27,6 +27,7 @@ import { MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DataViewModule } from 'primeng/dataview';
+import { ArtistNamesPipe } from '../pipes/artist-names.pipe';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { DataViewModule } from 'primeng/dataview';
     DateTimeToDayPipe,
     DateTimeToTimePipe,
     LogoComponent,
+    ArtistNamesPipe,
   ],
   imports: [
     CommonModule,
@@ -64,6 +66,7 @@ import { DataViewModule } from 'primeng/dataview';
     DateTimeToWordifiedMonthPipe,
     DateTimeToDayPipe,
     DateTimeToTimePipe,
+    ArtistNamesPipe,
     LogoComponent,
     // primeng exports
     AvatarModule,
@@ -80,7 +83,7 @@ import { DataViewModule } from 'primeng/dataview';
     ToastModule,
     CardModule,
     ProgressSpinnerModule,
-    DataViewModule
+    DataViewModule,
   ],
   providers: [
     // primeng providers

@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import * as EnmEventsSelectors from './../../state/enmEvents/enmEvents.selectors';
 import { Router } from '@angular/router';
+import { Artist } from 'src/app/models/artist.model';
 
 
 @Component({
@@ -24,6 +25,10 @@ export class EnmEventPageComponent implements OnInit {
 
   goBack() {
     this.router.navigate(['/']); 
+  }
+
+  getArtistsNames(artists: Artist[]): string {
+    return artists.map(artist => artist.name).join('&nbsp;&nbsp;&nbsp; &middot; &nbsp;&nbsp;&nbsp;');
   }
 
 }

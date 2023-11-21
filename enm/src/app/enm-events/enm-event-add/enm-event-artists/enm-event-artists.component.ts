@@ -9,12 +9,21 @@ import * as fromForm from './../../../state/form/form.reducer';
 import { take, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 
+interface AutoCompleteCompleteEvent {
+  originalEvent: Event;
+  query: string;
+}
+
 @Component({
   selector: 'app-enm-event-artists',
   templateUrl: './enm-event-artists.component.html',
   styleUrls: ['./enm-event-artists.component.less']
 })
 export class EnmEventArtistsComponent {
+
+  artists: any[] | undefined;
+  filteredArtists!: any[];
+
   
   @ViewChildren('artistInput') artistInputs!: QueryList<ElementRef>;
 
@@ -28,13 +37,13 @@ export class EnmEventArtistsComponent {
   constructor(private store$: Store, private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() { 
+    this.initializeArtistsAutoCompleteSuggestions();
     this.setUpLocalFormControls();
     this.initializeFormControls();
   }
 
   onSubmit() {
     if (this.enmEventAddForm.valid) {
-      this.trimArtistArrayElements();
       this.enmEventAddMultipageFormService.postEnmEvent();
       this.router.navigate(['/']);
     }
@@ -70,7 +79,6 @@ export class EnmEventArtistsComponent {
   addArtistInputField() {
     // counterpart of 'removeArtistInputField'
     this.artistsArray.push(this.createArtistInputField());
-    setTimeout(() => this.artistInputs.last.nativeElement.focus(), 0);
   }
   trimArtistArrayElements() {
     this.artistsArray.controls.forEach((control) => {
@@ -95,6 +103,20 @@ export class EnmEventArtistsComponent {
         this.artistsArray.setValue(artists);
       }
     });
+  }
+  initializeArtistsAutoCompleteSuggestions() {
+    this.enmEventAddMultipageFormService.getArtists().then((artists) => { this.artists = artists; });
+  }
+  filterArtists(event: AutoCompleteCompleteEvent){
+    let filtered: any[] = [];
+    let query = event.query;
+    
+    for (let i = 0; i < (this.artists as any[]).length; i++) {
+      let artist = (this.artists as any[])[i];
+      if (artist.name.toLowerCase().indexOf(query.toLowerCase()) != -1) filtered.push(artist); 
+    }
+
+    this.filteredArtists = filtered;
   }
   //#endregion
 }
