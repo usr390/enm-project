@@ -1,6 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { EnmEventService } from './../../core/services/enm-event.service';
 import { Store } from '@ngrx/store';
 import * as fromEnmEvents from './../../state/enmEvents/enmEvents.actions'
 
@@ -9,19 +8,15 @@ import * as fromEnmEvents from './../../state/enmEvents/enmEvents.actions'
   templateUrl: './enm-event-list-filter.component.html',
   styleUrls: ['./enm-event-list-filter.component.less']
 })
-export class EnmEventListFilterComponent implements OnInit {
+export class EnmEventListFilterComponent {
 
   enmEventListFilterForm = this.fb.group({ filter: '' });
 
-  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
-
-  constructor(private store$: Store, private enmEventService: EnmEventService, private fb: FormBuilder) { }
-
-  ngOnInit() {}
+  constructor(private store$: Store, private fb: FormBuilder) { }
 
   filterResults() { 
     let text = this.enmEventListFilterForm.value.filter?.trim() as string
-    this.store$.dispatch(fromEnmEvents.enmEventListSearch({ text }))
+    this.store$.dispatch(fromEnmEvents.enmEventListFilter({ text }))
   }
 
   clearFilter() {

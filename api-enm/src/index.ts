@@ -24,7 +24,7 @@ app.get('/', (req: Request, res: Response) => {
 app.get('/api/enmEvents', async (req: Request, res: Response) => {
   /* summary
     dt is -12 hours because it is still desirable to get EnmEvents when their dateTime has passed by only a few hours.
-    for example, users searching for events at 9pm would probably be interested in seeing which events started at 8pm or earlier
+    for example, users seeing the list at ~9pm would probably be interested in events started at 8pm or possibly earlier
   */
   res.json(await EnmEventModel.find({ dateTime: { $gte: DateTime.now().minus({ hours: 12 }) } })
   .sort({ dateTime: 1 })
