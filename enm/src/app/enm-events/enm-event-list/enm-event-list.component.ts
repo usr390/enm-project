@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { filter, map } from 'rxjs';
+import { map } from 'rxjs';
 import { EnmEventService } from './../../core/services/enm-event.service';
 import { EnmEvent } from '../../models/enm-event.model';
 import { DateTime } from 'luxon';
@@ -19,6 +19,7 @@ export class EnmEventListComponent implements OnInit {
   user$ = this.store$.select(AuthSelectors.selectUser);
   filteredEnmEventList$ = this.store$.select(fromEnmEvent.selectFiltered);
   listLoading$ = this.store$.select(fromEnmEvent.selectLoading);
+  filterText$ = this.store$.select(fromEnmEvent.selectFilter)
 
   groupedByDateEnmEventList$ = this.filteredEnmEventList$.pipe(
     map((events) => {
