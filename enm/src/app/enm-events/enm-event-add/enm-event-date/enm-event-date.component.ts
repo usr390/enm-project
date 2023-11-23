@@ -1,11 +1,12 @@
+// angular
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { EnmEventAddMultipageFormService } from './../../../core/services/enm-event-add-multipage-form.service';
-
+// 3rd party
 import { take, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
+// enm
+import { EnmEventAddMultipageFormService } from './../../../core/services/enm-event-add-multipage-form.service';
 import * as FormActions from '../../../state/form/form.actions';
 import * as fromForm from './../../../state/form/form.reducer';
 
@@ -20,6 +21,13 @@ export class EnmEventDateComponent {
     adds date information to an event.
     previous: EnmEventVenueComponent, next: EnmEventTimeComponent
   */
+
+  constructor(
+    private fb: FormBuilder, // angular
+    private router: Router, // angular
+    private store$: Store, // 3rd party
+    private enmEventAddMultipageFormService: EnmEventAddMultipageFormService // enm
+  ) {}
  
   enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
   enmEventAddFormValuesActionStream$ = this.enmEventAddMultipageFormService.enmEventAddMultipageForm.valueChanges.pipe(
@@ -28,9 +36,6 @@ export class EnmEventDateComponent {
   
   today: Date = new Date();
   selectedDate$ = this.store$.select(fromForm.selectDate);
-
-
-  constructor(private store$: Store, private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     this.setUpLocalFormControls();

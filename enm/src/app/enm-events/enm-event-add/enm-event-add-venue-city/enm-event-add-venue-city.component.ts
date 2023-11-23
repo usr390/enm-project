@@ -1,6 +1,8 @@
+// angular imports
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+// enm imports
 import { EnmEventAddMultipageFormService } from 'src/app/core/services/enm-event-add-multipage-form.service';
 
 @Component({
@@ -10,10 +12,16 @@ import { EnmEventAddMultipageFormService } from 'src/app/core/services/enm-event
 })
 export class EnmEventAddVenueCityComponent {
 
+  constructor(
+    // angular
+    private fb: FormBuilder,
+    private router: Router,
+    // enm
+    private enmEventAddMultipageFormService: EnmEventAddMultipageFormService,
+  ){}
+
   enmEventAddVenueForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddVenueForm;
   enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
-
-  constructor(private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private router: Router, private fb: FormBuilder){}
 
   ngOnInit() {
     this.setUpLocalFormControls();

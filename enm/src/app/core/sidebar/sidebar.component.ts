@@ -1,8 +1,11 @@
+// angular imports
 import { Component } from '@angular/core';
+// 3rd party imports
 import { Store } from '@ngrx/store';
+// enm imports
+import { AuthState } from 'src/app/state/auth/auth.state';
 import * as AuthActions from './../../state/auth/auth.actions';
 import * as AuthSelectors from './../../state/auth/auth.selectors';
-import { AuthState } from 'src/app/state/auth/auth.state';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,14 +13,15 @@ import { AuthState } from 'src/app/state/auth/auth.state';
   styleUrls: ['./sidebar.component.less']
 })
 export class SidebarComponent {
-  sidebarVisible: boolean = false;
+
+  constructor(private store$: Store<AuthState>) {}
+
+  user$ = this.store$.select(AuthSelectors.selectUser);
+
+  sidebarVisible = false;
   currentDate = new Date();
 
-  user$ = this.store.select(AuthSelectors.selectUser);
-
-  constructor(private store: Store<AuthState>) {}
-
   onLogOut() {
-    this.store.dispatch(AuthActions.logOut());
+    this.store$.dispatch(AuthActions.logOut());
   }
 }

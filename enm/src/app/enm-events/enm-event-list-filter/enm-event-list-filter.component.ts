@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+// angular imports
+import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+// 3rd party imports
 import { Store } from '@ngrx/store';
+// enm imports
 import * as fromEnmEvents from './../../state/enmEvents/enmEvents.actions'
 
 @Component({
@@ -10,9 +13,12 @@ import * as fromEnmEvents from './../../state/enmEvents/enmEvents.actions'
 })
 export class EnmEventListFilterComponent {
 
-  enmEventListFilterForm = this.fb.group({ filter: '' });
+  constructor(
+    private fb: FormBuilder, // angular
+    private store$: Store, // 3rd party
+  ) { }
 
-  constructor(private store$: Store, private fb: FormBuilder) { }
+  enmEventListFilterForm = this.fb.group({ filter: '' });
 
   filterResults() { 
     let text = this.enmEventListFilterForm.value.filter?.trim() as string

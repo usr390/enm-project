@@ -1,8 +1,10 @@
+// angular imports
 import { Component } from '@angular/core';
+// 3rd party imports
 import { Store } from '@ngrx/store';
-import * as AuthSelectors from './../../state/auth/auth.selectors';
 import { take, tap } from 'rxjs';
-
+// enm imports
+import * as AuthSelectors from './../../state/auth/auth.selectors';
 import * as PaymentActions from '../../state/payment/payment.actions';
 
 @Component({
@@ -14,7 +16,7 @@ export class EnmPlusPaymentSuccessfulComponent {
 
   constructor(private store$: Store) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.plusifyUser();
   }
 

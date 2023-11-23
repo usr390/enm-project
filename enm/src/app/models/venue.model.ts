@@ -4,5 +4,5 @@ export interface Venue {
     "city": string,
     "state": string,
     "country": string,
-    "link": string
+    "link": string // link to instagram account
 }

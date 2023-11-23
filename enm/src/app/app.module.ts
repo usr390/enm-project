@@ -12,14 +12,13 @@ import { EnmEventModule } from './enm-events/enm-events.module';
 import { AuthEffects } from './state/auth/auth.effects';
 import { PaymentEffects } from './state/payment/payment.effects';
 import { EnmEventsEffects } from './state/enmEvents/enmEvents.effects';
+import { HydrationEffects } from './state/hydration/hydration.effects';
 import { reducers, metaReducers } from './state/app.state';
-
 
 // 3rd party imports
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { EffectsModule } from '@ngrx/effects';
-import { HydrationEffects } from './state/hydration/hydration.effects';
 
 @NgModule({
   declarations: [
@@ -41,7 +40,6 @@ import { HydrationEffects } from './state/hydration/hydration.effects';
       HydrationEffects
     ]),
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

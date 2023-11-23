@@ -14,6 +14,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
 
 @NgModule({
   declarations: [
+    // enm components
     SidebarComponent,
     LogInComponent,
     CreateUserComponent,
@@ -28,6 +29,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
     SharedModule,
   ],
   exports: [
+    // enm components
     SidebarComponent,
     LogInComponent,
     CreateUserComponent

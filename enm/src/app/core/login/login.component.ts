@@ -15,7 +15,15 @@ import { ElementRef, Renderer2 } from '@angular/core';
   styleUrls: ['./login.component.less']
 })
 export class LogInComponent {
-  constructor(private elRef: ElementRef, private renderer: Renderer2, private logInService: LogInService, private fb: FormBuilder, private store: Store, private messageService: MessageService) {}
+  
+  constructor(
+    private elRef: ElementRef,
+    private renderer: Renderer2,
+    private logInService: LogInService,
+    private fb: FormBuilder,
+    private store: Store,
+    private messageService: MessageService
+  ) {}
 
   logInErrorResponse$ = this.store.select(AuthSelectors.selectLogInErrorResponse).pipe(
     map(error => this.showInvalidCredentialsAlert(error?.error.error))

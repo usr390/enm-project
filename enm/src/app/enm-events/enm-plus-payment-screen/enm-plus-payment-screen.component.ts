@@ -1,10 +1,12 @@
+// angular imports
 import { Component } from '@angular/core';
+// 3rd party imports
 import { concatMap, take } from 'rxjs';
+// enm imports
 import { EnmPlusPaymentService } from 'src/app/core/services/enm-plus-payment.service';
 import { environment } from 'src/environments/environment';
 
 const STRIPE_KEY = environment.stripeKey;
-
 declare var Stripe: any;
 
 @Component({
@@ -14,12 +16,12 @@ declare var Stripe: any;
 })
 export class EnmPlusPaymentScreenComponent {
 
+  constructor(private enmPlusPaymentService: EnmPlusPaymentService) {}
+
   checkoutSession$ = this.enmPlusPaymentService.checkoutSession$;
 
   stripe: any;
   checkout: any;
-
-  constructor(private enmPlusPaymentService: EnmPlusPaymentService) {}
 
   ngOnInit() {
     this.initializeStripe();

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EnmEvent } from './../../models/enm-event.model';
 import { environment } from './../../../environments/environment';
-import { Observable, shareReplay, switchMap, take } from 'rxjs';
+import { Observable, switchMap, take } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as AuthSelectors from 'src/app/state/auth/auth.selectors';
 
@@ -10,6 +10,8 @@ import * as AuthSelectors from 'src/app/state/auth/auth.selectors';
   providedIn: 'root'
 })
 export class EnmEventService {
+
+  constructor(private http: HttpClient, private store$: Store) { }
 
   user$ = this.store$.select(AuthSelectors.selectUser).pipe(take(1));
 
@@ -21,8 +23,6 @@ export class EnmEventService {
       })
     );
   }
-
-  constructor(private http: HttpClient, private store$: Store) { }
 
 }
 

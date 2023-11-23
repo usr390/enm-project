@@ -1,10 +1,12 @@
+// angular imports
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
-import { EnmEventArtistsComponent } from './enm-event-artists.component';
-import { EnmEventAddMultipageFormService } from './../../../core/services/enm-event-add-multipage-form.service';
+// 3rd party imports
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
+// enm imports
+import { EnmEventArtistsComponent } from './enm-event-artists.component';
+import { EnmEventAddMultipageFormService } from './../../../core/services/enm-event-add-multipage-form.service';
 
 describe('EnmEventArtistsComponent', () => {
   let component: EnmEventArtistsComponent;

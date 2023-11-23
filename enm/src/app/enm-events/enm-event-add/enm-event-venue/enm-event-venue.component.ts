@@ -1,10 +1,12 @@
+// angular
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { EnmEventAddMultipageFormService } from '../../../core/services/enm-event-add-multipage-form.service';
+// 3rd party
 import { Store } from '@ngrx/store';
 import { take, tap } from 'rxjs';
+// enm
+import { EnmEventAddMultipageFormService } from '../../../core/services/enm-event-add-multipage-form.service';
 import * as FormActions from '../../../state/form/form.actions';
 import * as fromForm from './../../../state/form/form.reducer';
 
@@ -24,17 +26,22 @@ export class EnmEventVenueComponent {
     cancel: EnmEventListComponent, next: EnmEventDateComponent || EnmEventAddVenueCityComponent
   */
 
-  venues: any[] | undefined;
-  filteredVenues!: any[];
-  selectedVenue$ = this.store$.select(fromForm.selectVenue);
+  constructor(
+    private fb: FormBuilder, // angular
+    private router: Router, // angular
+    private store$: Store, // 3rd party
+    private enmEventAddMultipageFormService: EnmEventAddMultipageFormService // enm
+  ) {}
+
+  venues: any[] | undefined; // holds autocomplete suggestions, just for initialization
+  filteredVenues!: any[]; // holds autocomplete suggestions with respect to what the user has typed
+  selectedVenue$ = this.store$.select(fromForm.selectVenue); // for repopulating the input field after navigating away and back from component
 
   enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
   enmEventAddFormValuesActionStream$ = this.enmEventAddMultipageFormService.enmEventAddMultipageForm.valueChanges.pipe(
     tap(value => { this.store$.dispatch(FormActions.updateForm({ formValue: value })) }),
   );
   enmEventAddVenueForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddVenueForm;
-
-  constructor(private store$: Store, private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     this.initializeVenueAutoCompleteSuggestions();

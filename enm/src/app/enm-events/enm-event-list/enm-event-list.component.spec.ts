@@ -1,11 +1,13 @@
+// angular
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
+// 3rd party
+import { of } from 'rxjs';
+import { Store } from '@ngrx/store';
+// enm
 import { EnmEventListComponent } from './enm-event-list.component';
 import { EnmEventService } from './../../core/services/enm-event.service';
 import { EnmEventModule } from './../enm-events.module';
-import { of } from 'rxjs';
-import { Store } from '@ngrx/store';
 
 
 describe('EnmEventListComponent', () => {

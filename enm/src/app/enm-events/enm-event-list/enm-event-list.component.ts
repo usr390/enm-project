@@ -1,13 +1,15 @@
+// angular
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs';
-import { EnmEventService } from './../../core/services/enm-event.service';
-import { EnmEvent } from '../../models/enm-event.model';
-import { DateTime } from 'luxon';
+// 3rd party
 import { Store } from '@ngrx/store';
+import { map } from 'rxjs';
+import { DateTime } from 'luxon';
+// enm
+import { EnmEvent } from '../../models/enm-event.model';
+import { AppState } from 'src/app/state/app.state';
 import * as AuthSelectors from './../../state/auth/auth.selectors';
 import * as fromEnmEvent from './../../state/enmEvents/enmEvents.selectors';
 import * as enmEventsActions from './../../state/enmEvents/enmEvents.actions';
-import { AppState } from 'src/app/state/app.state';
 
 @Component({
   selector: 'app-enm-event-list',
@@ -16,11 +18,16 @@ import { AppState } from 'src/app/state/app.state';
 })
 export class EnmEventListComponent implements OnInit {
 
-  user$ = this.store$.select(AuthSelectors.selectUser);
-  filteredEnmEventList$ = this.store$.select(fromEnmEvent.selectFiltered);
-  listLoading$ = this.store$.select(fromEnmEvent.selectLoading);
-  filterText$ = this.store$.select(fromEnmEvent.selectFilter)
+  constructor(
+    private store$: Store<AppState>
+  ) { }
 
+  user$ = this.store$.select(AuthSelectors.selectUser); // for distinguishing between regular and plus users
+  listLoading$ = this.store$.select(fromEnmEvent.selectLoading); // for displaying loading animation
+  filterText$ = this.store$.select(fromEnmEvent.selectFilter) // for giving user feedback when filter doesn't return results
+
+  filteredEnmEventList$ = this.store$.select(fromEnmEvent.selectFiltered);
+  
   groupedByDateEnmEventList$ = this.filteredEnmEventList$.pipe(
     map((events) => {
       const enmEventsGroupedByDate = new Map<string, EnmEvent[]>();
@@ -34,9 +41,7 @@ export class EnmEventListComponent implements OnInit {
     }),
   );
 
-  constructor(private store$: Store<AppState>, private enmEventService: EnmEventService) { }
-
-  ngOnInit(): void {
+  ngOnInit() {
     this.store$.dispatch(enmEventsActions.enmEventListRequest())
   }
 

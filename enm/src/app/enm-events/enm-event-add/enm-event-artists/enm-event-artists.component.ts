@@ -1,13 +1,15 @@
-import { Component, ElementRef, ViewChildren, QueryList, ViewChild, HostListener } from '@angular/core';
+// angular imports
+import { Component, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { EnmEventAddMultipageFormService } from './../../../core/services/enm-event-add-multipage-form.service';
-
-import * as FormActions from '../../../state/form/form.actions';
-import * as fromForm from './../../../state/form/form.reducer';
+// 3rd party imports
 import { take, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
+// enm imports
+import { EnmEventAddMultipageFormService } from './../../../core/services/enm-event-add-multipage-form.service';
+import * as FormActions from '../../../state/form/form.actions';
+import * as fromForm from './../../../state/form/form.reducer';
+
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -21,20 +23,23 @@ interface AutoCompleteCompleteEvent {
 })
 export class EnmEventArtistsComponent {
 
-  artists: any[] | undefined;
-  filteredArtists!: any[];
+  constructor(
+    private fb: FormBuilder, // angular                                                  
+    private router: Router, // angular
+    private store$: Store, // 3rd party
+    private enmEventAddMultipageFormService: EnmEventAddMultipageFormService // enm
+  ) { }
 
-  
   @ViewChildren('artistInput') artistInputs!: QueryList<ElementRef>;
+  
+  artists: any[] | undefined; // the form array
+  selectedArtists$ = this.store$.select(fromForm.selectArtists); // for repopulating input fields after navigating away and back
+  filteredArtistsAutoCompleteSuggestions!: any[];
 
   enmEventAddForm: FormGroup = this.enmEventAddMultipageFormService.enmEventAddMultipageForm;
   enmEventAddFormValuesActionStream$ = this.enmEventAddMultipageFormService.enmEventAddMultipageForm.valueChanges.pipe(
     tap(value => { this.store$.dispatch(FormActions.updateForm({ formValue: value })) }),
   );
-
-  selectedArtists$ = this.store$.select(fromForm.selectArtists);
-
-  constructor(private store$: Store, private enmEventAddMultipageFormService: EnmEventAddMultipageFormService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() { 
     this.initializeArtistsAutoCompleteSuggestions();
@@ -116,7 +121,7 @@ export class EnmEventArtistsComponent {
       if (artist.name.toLowerCase().indexOf(query.toLowerCase()) != -1) filtered.push(artist); 
     }
 
-    this.filteredArtists = filtered;
+    this.filteredArtistsAutoCompleteSuggestions = filtered;
   }
   //#endregion
 }

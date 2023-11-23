@@ -7,6 +7,7 @@
 <div class="submit-button">
   <p-button type="submit" (click)="onSubmit()" [disabled]="enmEventAddForm.invalid" styleClass="p-button-link">Submit Event</p-button>
 </div>
+
 <div class="d-flex justify-content-center align-items-center" style="height: 85vh;">  
   <div class="container text-center">
       <p-scrollPanel [style]="{ width: '100%', height: '500px' }">
@@ -15,7 +16,7 @@
             <div class="row" *ngFor="let artist of artistsArray.controls; let i = index" style="margin-bottom: 25px;">
               <label [ngClass]="{ 'artist-label': this.artistsArray.length > 1 }">Artist {{i + 1}} &nbsp;<span *ngIf="i === 0">(Listed First)</span></label>
               <div class="col">
-                <p-autoComplete [formControlName]="i" [suggestions]="filteredArtists" (completeMethod)="filterArtists($event)" field="name" [minLength]="3" placeholder="Artist {{i + 1}}" [maxlength]="50" #artistInput></p-autoComplete>
+                <p-autoComplete [formControlName]="i" [suggestions]="filteredArtistsAutoCompleteSuggestions" (completeMethod)="filterArtists($event)" field="name" [minLength]="3" placeholder="Artist {{i + 1}}" [maxlength]="50" #artistInput></p-autoComplete>
                 <button pButton *ngIf="artistsArray.controls.length > 1" type="button" (click)="removeArtistInputField(i)" icon="pi pi-times"></button>
               </div>
             </div>

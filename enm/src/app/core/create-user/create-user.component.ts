@@ -12,10 +12,15 @@ import { CreateUserService } from '../services/create-user.service';
 })
 export class CreateUserComponent {
 
-  constructor(private store$: Store, private fb: FormBuilder, private createUserService: CreateUserService, private elRef: ElementRef, private renderer: Renderer2, ) {}
+  constructor(
+    private store$: Store,
+    private fb: FormBuilder,
+    private createUserService: CreateUserService,
+    private elRef: ElementRef,
+    private renderer: Renderer2
+  ) {}
 
-  createUserForm: FormGroup = this.createUserService.userLogInForm;
-  logInButtonCooldown = false;
+  createUserForm: FormGroup = this.createUserService.createUserForm;
 
   ngOnInit() {
     this.setUpLocalFormControls();
