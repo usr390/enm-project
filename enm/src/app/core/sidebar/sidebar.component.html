@@ -1,7 +1,7 @@
 <p-sidebar [(visible)]="sidebarVisible" position="right">
     <ng-template pTemplate="content">
         <p>
-            Enm, the valley's premium event search service
+            Enm, the valley's premium event listing service
         </p>
         <p *ngIf="(user$ | async)">
             <a [routerLink]="['/add-event/venue']"  href="/">Add Event</a> 
