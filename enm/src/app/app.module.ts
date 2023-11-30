@@ -21,6 +21,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { StoreModule } from '@ngrx/store';
   // written by enm team but related to parent
   import { reducers, metaReducers } from './state/app.state';
+import { RouteReuseStrategy } from '@angular/router';
+import { CustomRouteReuseStrategy } from './shared/routing';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,9 @@ import { StoreModule } from '@ngrx/store';
     ]),
     //#endregion
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
+  ]
 })
 export class AppModule { }
