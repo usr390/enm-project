@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 // 3rd party
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
+import { filter, map, take } from 'rxjs';
 import { DateTime } from 'luxon';
 // enm
 import { EnmEvent } from '../../models/enm-event.model';
@@ -25,6 +25,8 @@ export class EnmEventListComponent implements OnInit {
   user$ = this.store$.select(AuthSelectors.selectUser); // for distinguishing between regular and plus users
   listLoading$ = this.store$.select(fromEnmEvent.selectLoading); // for displaying loading animation
   filterText$ = this.store$.select(fromEnmEvent.selectFilter) // for giving user feedback when filter doesn't return results
+  listLoaded$ = this.store$.select(fromEnmEvent.selectLoaded); // for deciding whether to dispatch init action
+
 
   filteredEnmEventList$ = this.store$.select(fromEnmEvent.selectFiltered);
   
@@ -42,7 +44,9 @@ export class EnmEventListComponent implements OnInit {
   );
 
   ngOnInit() {
-    this.store$.dispatch(enmEventsActions.enmEventListRequest())
+    this.listLoaded$.pipe(take(1), filter(loaded => !loaded),).subscribe(_ => {
+      this.store$.dispatch(enmEventsActions.enmEventListRequest())
+    });
   }
 
   onEnmEventListSelection(_id: string | undefined) { 

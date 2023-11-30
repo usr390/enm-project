@@ -46,3 +46,8 @@ export const selectLoading = createSelector(
   selectFeature,
   (state: EnmEventsState): boolean => state.loading
 );
+
+export const selectLoaded = createSelector(
+  selectFeature,
+  (state: EnmEventsState): boolean => state.loaded
+);

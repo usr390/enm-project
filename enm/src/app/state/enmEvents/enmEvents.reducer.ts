@@ -14,6 +14,7 @@ const _enmEventsReducer = createReducer(
     on(enmEventListRequest, (state) => {
         return {
           ...state,
+          loaded: false,
           loading: true,
         };
     }),
@@ -23,6 +24,7 @@ const _enmEventsReducer = createReducer(
         return {
           ...state,
           entities,
+          loaded: true,
           loading: false,
         };
     }),
@@ -30,6 +32,7 @@ const _enmEventsReducer = createReducer(
         return {
             ...state,
             enmEventListRequestErrorResponse: error,
+            loaded: false
         }
     }),
     on(enmEventListFilter, (state, { text }) => ({
