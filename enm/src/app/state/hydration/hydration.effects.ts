@@ -34,7 +34,17 @@ export class HydrationEffects implements OnInitEffects {
         ),
         switchMap(() => this.store$),
         distinctUntilChanged(),
-        tap((state) => localStorage.setItem('state', JSON.stringify(state)))
+        tap((state) => {
+          const persistableState = {
+            ...state,
+            enmEvents: {
+              entities: state.enmEvents.entities,
+              filter: state.enmEvents.filter,
+              selectedEnmEvent: state.enmEvents.selectedEnmEvent,
+            },
+          };
+          localStorage.setItem('state', JSON.stringify(persistableState)); // 'persistable' not in the sense that there are parts of state that can't be persisted, it's more like 'these are the parts of state we care about persisting'
+        })
       ),
     { dispatch: false }
   );
