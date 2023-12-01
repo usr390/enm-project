@@ -51,3 +51,8 @@ export const selectLoaded = createSelector(
   selectFeature,
   (state: EnmEventsState): boolean => state.loaded
 );
+
+export const selectedFilterText = createSelector(
+  selectFeature,
+  (state: EnmEventsState): string => state.filter.text
+);

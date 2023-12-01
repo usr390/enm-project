@@ -3,8 +3,12 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 // 3rd party imports
 import { Store } from '@ngrx/store';
+import { take } from 'rxjs';
 // enm imports
+import { AppState } from 'src/app/state/app.state';
 import * as fromEnmEvents from './../../state/enmEvents/enmEvents.actions'
+import * as EnmEventsSelectors from './../../state/enmEvents/enmEvents.selectors';
+
 
 @Component({
   selector: 'app-enm-event-list-filter',
@@ -15,10 +19,15 @@ export class EnmEventListFilterComponent {
 
   constructor(
     private fb: FormBuilder, // angular
-    private store$: Store, // 3rd party
+    private store$: Store<AppState>, // 3rd party
   ) { }
 
   enmEventListFilterForm = this.fb.group({ filter: '' });
+  selectedFilterText$ = this.store$.select(EnmEventsSelectors.selectedFilterText); // for repopulating the input field after a refresh or navigation
+
+  ngOnInit() {
+    this.initializeFormControl() 
+  }
 
   filterResults() { 
     let text = this.enmEventListFilterForm.value.filter?.trim() as string
@@ -29,5 +38,10 @@ export class EnmEventListFilterComponent {
     this.enmEventListFilterForm.patchValue({ filter: ''});
     this.filterResults();
   }
+
+  initializeFormControl() {
+    this.selectedFilterText$.pipe(take(1)).subscribe(filterText => {
+      this.enmEventListFilterForm.get('filter')?.setValue(filterText)
+    });}
 }
 
