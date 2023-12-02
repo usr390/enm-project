@@ -2,8 +2,9 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { LogInService } from "src/app/core/services/login.service";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, of, exhaustMap, map, tap } from "rxjs";
+import { catchError, of, exhaustMap, map, tap, concatMap, Observable } from "rxjs";
 import * as AuthActions from './auth.actions';
+import * as EnmEventActions from './../enmEvents/enmEvents.actions'
 import { CreateUserService } from "src/app/core/services/create-user.service";
 
 @Injectable()
@@ -29,10 +30,11 @@ export class AuthEffects {
 
     logInSuccess$ = createEffect(() => 
         this.actions$.pipe(
-            ofType(AuthActions.logInSuccessResponse),
-            tap(_ => this.router.navigate(['/']))
-        ),
-        { dispatch: false }
+        ofType(AuthActions.logInSuccessResponse),
+        concatMap(_ => {
+            this.router.navigate(['/']);
+            return of(EnmEventActions.enmEventListRequest());
+        }))
     );
 
     createUserRequest$ = createEffect(() => 
