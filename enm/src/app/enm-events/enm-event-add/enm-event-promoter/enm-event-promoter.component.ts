@@ -79,7 +79,7 @@ export class EnmEventPromoterComponent {
   }
 
   setUpLocalFormControls() {
-    this.enmEventAddForm.setControl('promoter', this.fb.control('', Validators.required));
+    this.enmEventAddForm.setControl('promoter', this.fb.control(''));
   }
 
   addTags() {
