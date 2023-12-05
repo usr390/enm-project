@@ -8,6 +8,7 @@ import { EnmPlusPaymentScreenComponent } from './enm-events/enm-plus-payment-scr
 import { EnmPlusPaymentSuccessfulComponent } from './enm-events/enm-plus-payment-successful/enm-plus-payment-successful.component';
 import { EnmEventPageComponent } from './enm-events/enm-event-page/enm-event-page.component';
 import { EnmEventListComponent } from './enm-events/enm-event-list/enm-event-list.component';
+import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'events' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'plus', component: EnmPlusPaymentScreenComponent },
   { path: 'checkout/return', component: EnmPlusPaymentSuccessfulComponent },
   { path: 'add-event', loadChildren: () => import('./enm-events/enm-event-add/enm-event-add.module').then(m => m.EnmEventAddModule) },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

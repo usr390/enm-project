@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { LogInComponent } from './login/login.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
     SidebarComponent,
     LogInComponent,
     CreateUserComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     // angular modules
@@ -32,7 +34,8 @@ import { CreateUserComponent } from './create-user/create-user.component';
     // enm components
     SidebarComponent,
     LogInComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    PageNotFoundComponent
   ]
 })
 export class CoreModule { }
