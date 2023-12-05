@@ -21,6 +21,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { StoreModule } from '@ngrx/store';
   // written by enm team but related to parent
   import { reducers, metaReducers } from './state/app.state';
+import { StoreRouterConnectingModule, RouterState } from "@ngrx/router-store";
 
 @NgModule({
   declarations: [
@@ -46,6 +47,8 @@ import { StoreModule } from '@ngrx/store';
       EnmEventsEffects,
       HydrationEffects
     ]),
+    StoreRouterConnectingModule.forRoot({
+      routerState: RouterState.Minimal }),
     //#endregion
   ],
   bootstrap: [AppComponent]

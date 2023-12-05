@@ -5,17 +5,20 @@ import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { authReducer } from './auth/auth.reducer';
 import { enmEventsReducer } from './enmEvents/enmEvents.reducer';
 import { hydrationMetaReducer } from './hydration/hydration.reducer';
+import { routerReducer, RouterReducerState } from "@ngrx/router-store";
 
 export interface AppState {
     auth: AuthState;
     form: FormState;
     enmEvents: EnmEventsState;
+    router: RouterReducerState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
     auth: authReducer,
     form: formReducer,
-    enmEvents: enmEventsReducer
+    enmEvents: enmEventsReducer,
+    router: routerReducer,
 };
 
 export const metaReducers: MetaReducer[] = [

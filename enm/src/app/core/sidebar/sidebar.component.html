@@ -14,7 +14,7 @@
         <p *ngIf="!(user$ | async)">
             <a [routerLink]="['/login']"  href="/">Log In</a>
         </p>
-        <p>Copyright @{{currentDate | date: 'y'}} All Rights Reserved</p>
+        <p>Copyright {{currentDate | date: 'y'}} All Rights Reserved</p>
     </ng-template>
 </p-sidebar>
 <p-button (click)="sidebarVisible = true" icon="pi pi-bars" styleClass="p-button-sm"></p-button>
