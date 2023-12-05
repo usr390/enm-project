@@ -1,5 +1,6 @@
 import { Artist } from "./artist.model";
 import { Venue } from "./venue.model";
+import { Promoter } from "./promoter.model";
 
 export interface EnmEvent {
 
@@ -25,6 +26,7 @@ export interface EnmEvent {
     //
     "dateTime": string;
     "artists": Artist[];
-    "creationDateTime": string
+    "creationDateTime": string,
+    "promoter": Promoter,
 
 }

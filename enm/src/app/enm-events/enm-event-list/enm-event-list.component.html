@@ -31,6 +31,7 @@
                             <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
                             <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
                             <!---->
+                            <span *ngIf="enmEvent.promoter">&nbsp;&middot; {{ enmEvent.promoter.name }}</span>
                           </span>
                         </span>
                       </div>
@@ -77,6 +78,7 @@
                             <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
                             <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
                             <!---->
+                            <span *ngIf="enmEvent.promoter">&nbsp;&middot; {{ enmEvent.promoter.name }}</span>
                           </span>
                         </span>
                       </div>
@@ -124,6 +126,7 @@
                             <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
                             <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
                             <!---->
+                            <span *ngIf="enmEvent.promoter">&nbsp;&middot; {{ enmEvent.promoter.name }}</span>
                           </span>
                         </span>
                       </div>

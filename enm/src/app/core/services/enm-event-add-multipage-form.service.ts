@@ -65,6 +65,23 @@ export class EnmEventAddMultipageFormService {
       return promise;
     }
 
+    getPromoters() {
+      const promise = new Promise<any[]>((resolve, reject) => {
+        this.http.get<any[]>(BASE_URL + '/promoters').subscribe({
+          next: (res: any) => {
+            resolve(res);
+          },
+          error: (err: any) => {
+            reject(err);
+          },
+          complete: () => {
+            console.log('complete');
+          },
+        });
+      });
+      return promise;
+    }
+
   /* summary
     typically the main "flow" of this multipage form goes like this: 
     venue -> date -> time -> cover -> artists -> submit. where 'venue' is a pre-existing object value from a list we maintain in our backend system.

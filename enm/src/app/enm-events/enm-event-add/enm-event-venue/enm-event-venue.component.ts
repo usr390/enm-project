@@ -112,8 +112,8 @@ export class EnmEventVenueComponent {
     const autoCompleteSuggestion = 'object'
 
     if (typeof userVenue === autoCompleteSuggestion && userVenue._id) {
-        // it's an existing venue thus have all the info needed (address, city, etc). go directly to EEDateComp
-      this.router.navigate(['/add-event/date']); 
+        // it's an existing venue thus have all the info needed (address, city, etc). go directly to EEPromoterComp
+      this.router.navigate(['/add-event/promoter']); 
     } 
     else if (userVenue.name){
         // mm, user gave us a venue we're not familiar with. better to ask them for more info. go to EEAddVenueCityComp instead

@@ -48,7 +48,7 @@ export class EnmEventDateComponent {
 
   goBack() { 
     this.tearDownLocalFormControls();
-    this.router.navigate(['/add-event/venue']); 
+    this.router.navigate(['/add-event/promoter']); 
   }
 
   cancelForm() { 

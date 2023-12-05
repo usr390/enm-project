@@ -27,6 +27,7 @@ export function formReducer(state: FormState | undefined, action: Action) {
 export const selectAuthState = createFeatureSelector<FormState>('form');
 
 export const selectVenue = createSelector(selectAuthState, (state) => state.enmEventAddFormState?.venue)
+export const selectPromoter = createSelector(selectAuthState, (state) => state.enmEventAddFormState?.promoter)
 export const selectDate = createSelector(selectAuthState, (state) => state.enmEventAddFormState?.date)
 export const selectTime = createSelector(selectAuthState, (state) => state.enmEventAddFormState?.startTime)
 export const selectCover = createSelector(selectAuthState, (state) => state.enmEventAddFormState?.cover)

@@ -26,6 +26,18 @@
       </ng-container>
     </div>
 
+    <div *ngIf="enmEvent.promoter">
+      <ng-container *ngIf="enmEvent.promoter.link && enmEvent.promoter.link !== 'pending'; else promoterName">
+        <h6 class="card-text">
+          <a href="{{ enmEvent.promoter.link }}" class="m-0">{{ enmEvent.promoter.name }}</a>
+        </h6>
+      </ng-container>
+      <ng-template #promoterName>
+        <h6 class="card-text artist-name-non-clickable">{{ enmEvent.promoter.name }}</h6>
+      </ng-template>
+    </div>
+
+
     <p class="m-0 cover">{{ enmEvent.cover | wordifiedCover }}</p>
     <p class="m-0">{{ enmEvent.dateTime | dateTimeToTime }}, {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}</p>
   </p-card>

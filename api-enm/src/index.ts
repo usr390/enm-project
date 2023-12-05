@@ -12,6 +12,7 @@ import VenueModel from "./models/Venue";
 import ArtistModel from "./models/Artist";
 import UserModel from "./models/User";
 import { UserDTO } from "./models/UserDTO";
+import PromoterModel from "./models/Promoter";
 
 const app = express(); app.use(cors({ origin: '*' })); app.use(express.json())
 const port = process.env.PORT || 3000
@@ -53,7 +54,8 @@ app.post('/api/enmEvent', async (req: Request, res: Response) => {
     dateTime: req.body.dateTime,
     cover: req.body.cover,
     artists: req.body.artists,
-    creationDateTime: DateTime.now()
+    creationDateTime: DateTime.now(),
+    promoter: req.body.promoter,
   });
   // persist and respond to client with created EnmEvent object
   res.json(await enmEvent.save());
@@ -180,6 +182,10 @@ app.put('/api/user/:id/plusify', async (req, res) => {
   } 
   catch (error) { res.status(500).send({ message: 'Server error' }); }
 });
+
+app.get('/api/promoters', async (req: Request, res: Response) => {
+  res.json(await PromoterModel.find().catch(err => console.log(err)))
+})
 
 // asynchronous initialization. keeps api from processesing requests until a successful connection to db is established
 mongoose.connect(process.env.MONGO_URL || '').then(() => { app.listen(port, () => {}); })
