@@ -28,6 +28,7 @@ import { CardModule } from 'primeng/card';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DataViewModule } from 'primeng/dataview';
 import { ArtistNamesPipe } from '../pipes/artist-names.pipe';
+import { FieldsetModule } from 'primeng/fieldset';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ArtistNamesPipe } from '../pipes/artist-names.pipe';
     ToastModule,
     CardModule,
     ProgressSpinnerModule,
-    DataViewModule
+    DataViewModule,
+    FieldsetModule
   ],
   exports: [
     // enm imports
@@ -84,6 +86,7 @@ import { ArtistNamesPipe } from '../pipes/artist-names.pipe';
     CardModule,
     ProgressSpinnerModule,
     DataViewModule,
+    FieldsetModule
   ],
   providers: [
     // primeng providers
