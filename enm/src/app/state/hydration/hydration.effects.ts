@@ -42,6 +42,7 @@ export class HydrationEffects implements OnInitEffects {
               filter: state.enmEvents.filter,
               selectedEnmEvent: state.enmEvents.selectedEnmEvent,
             },
+            router: undefined
           };
           localStorage.setItem('state', JSON.stringify(persistableState)); // 'persistable' not in the sense that there are parts of state that can't be persisted, it's more like 'these are the parts of state we care about persisting'
         })
