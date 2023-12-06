@@ -31,6 +31,10 @@ export class EnmPlusPaymentScreenComponent {
     this.initializeStripe();
   }
 
+  ngOnDestroy() {
+    this.tearDownStripe();
+  }
+
   initializeStripe() {
     this.stripe = Stripe(STRIPE_KEY);
     this.checkoutSession$.pipe(take(1), concatMap(checkoutSession => {
@@ -40,6 +44,10 @@ export class EnmPlusPaymentScreenComponent {
       this.checkout = checkout
       this.checkout.mount('#checkout')
     });
+  }
+
+  tearDownStripe() {
+    if (this.checkout) this.checkout.destroy()
   }
 
   goBack() {
