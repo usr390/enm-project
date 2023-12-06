@@ -23,7 +23,7 @@ interface AutoCompleteCompleteEvent {
 export class EnmEventVenueComponent {
   /* summary
     adds venue information to an event.
-    cancel: EnmEventListComponent, next: EnmEventDateComponent || EnmEventAddVenueCityComponent
+    cancel: EnmEventListComponent, next: EnmEventPromoterComponent || EnmEventAddVenueCityComponent
   */
 
   constructor(
