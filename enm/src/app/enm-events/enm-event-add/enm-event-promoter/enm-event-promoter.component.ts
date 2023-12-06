@@ -51,7 +51,7 @@ export class EnmEventPromoterComponent {
 
   onSubmit() { 
     if (this.enmEventAddForm.valid) {
-      this.addTags(); 
+      if (this.enmEventAddForm.get('promoter')?.value) this.addTags(); 
       this.router.navigate(['add-event/date']); 
     } 
   }
