@@ -1,5 +1,6 @@
 // angular imports
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 // 3rd party imports
 import { concatMap, take } from 'rxjs';
 // enm imports
@@ -16,7 +17,10 @@ declare var Stripe: any;
 })
 export class EnmPlusPaymentScreenComponent {
 
-  constructor(private enmPlusPaymentService: EnmPlusPaymentService) {}
+  constructor(
+    private enmPlusPaymentService: EnmPlusPaymentService,
+    private router: Router
+  ) {}
 
   checkoutSession$ = this.enmPlusPaymentService.checkoutSession$;
 
@@ -36,5 +40,9 @@ export class EnmPlusPaymentScreenComponent {
       this.checkout = checkout
       this.checkout.mount('#checkout')
     });
+  }
+
+  goBack() {
+    this.router.navigate(['/events'])
   }
 }
