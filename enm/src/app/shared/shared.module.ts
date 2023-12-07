@@ -8,6 +8,7 @@ import { WordifiedCoverPipe } from '../pipes/wordified-cover.pipe';
 import { DateTimeToWordifiedMonthPipe } from './../pipes/date-time-to-wordified-month.pipe';
 import { DateTimeToDayPipe } from './../pipes/date-time-to-day.pipe';
 import { DateTimeToTimePipe } from '../pipes/date-time-to-time.pipe';
+import { ArtistNamesPipe } from '../pipes/artist-names.pipe';
 import { LogoComponent } from './logo/logo.component';
 
 // primeng imports
@@ -27,8 +28,7 @@ import { MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DataViewModule } from 'primeng/dataview';
-import { ArtistNamesPipe } from '../pipes/artist-names.pipe';
-import { FieldsetModule } from 'primeng/fieldset';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,7 @@ import { FieldsetModule } from 'primeng/fieldset';
     CardModule,
     ProgressSpinnerModule,
     DataViewModule,
-    FieldsetModule
+    DividerModule
   ],
   exports: [
     // enm imports
@@ -86,7 +86,7 @@ import { FieldsetModule } from 'primeng/fieldset';
     CardModule,
     ProgressSpinnerModule,
     DataViewModule,
-    FieldsetModule
+    DividerModule
   ],
   providers: [
     // primeng providers

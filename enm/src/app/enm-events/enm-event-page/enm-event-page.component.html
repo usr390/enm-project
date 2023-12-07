@@ -26,6 +26,11 @@
       </ng-container>
     </div>
 
+    <div class="custom-divider">
+      <p-divider></p-divider>
+    </div>
+
+
     <div *ngIf="enmEvent.promoter">
       <ng-container *ngIf="enmEvent.promoter.link && enmEvent.promoter.link !== 'pending'; else promoterName">
         <h6 class="card-text">
