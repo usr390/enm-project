@@ -155,7 +155,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
       price_data: {
         currency: 'usd',
         product_data: {
-          name: 'ENM Plus - Monthly Subscription',
+          name: 'Enm Plus - Monthly Subscription',
         },
         unit_amount: 299,
       },
