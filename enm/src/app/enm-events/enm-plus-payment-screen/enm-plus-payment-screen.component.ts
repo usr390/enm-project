@@ -23,6 +23,7 @@ export class EnmPlusPaymentScreenComponent {
   ) {}
 
   checkoutSession$ = this.enmPlusPaymentService.checkoutSession$;
+  furthestEventDate$ = this.enmPlusPaymentService.furthestEventDate$;
 
   stripe: any;
   checkout: any;

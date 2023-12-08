@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { WordifiedDateKeyPipe } from './../pipes/wordified-date-key.pipe';
 import { WordifiedCoverPipe } from '../pipes/wordified-cover.pipe';
 import { DateTimeToWordifiedMonthPipe } from './../pipes/date-time-to-wordified-month.pipe';
+import { DateTimeToWordifiedMonthFullPipe } from '../pipes/date-time-to-wordified-month-full.pipe';
 import { DateTimeToDayPipe } from './../pipes/date-time-to-day.pipe';
 import { DateTimeToTimePipe } from '../pipes/date-time-to-time.pipe';
 import { ArtistNamesPipe } from '../pipes/artist-names.pipe';
@@ -36,6 +37,7 @@ import { DividerModule } from 'primeng/divider';
     WordifiedDateKeyPipe,
     WordifiedCoverPipe,
     DateTimeToWordifiedMonthPipe,
+    DateTimeToWordifiedMonthFullPipe,
     DateTimeToDayPipe,
     DateTimeToTimePipe,
     LogoComponent,
@@ -86,7 +88,8 @@ import { DividerModule } from 'primeng/divider';
     CardModule,
     ProgressSpinnerModule,
     DataViewModule,
-    DividerModule
+    DividerModule,
+    DateTimeToWordifiedMonthFullPipe
   ],
   providers: [
     // primeng providers

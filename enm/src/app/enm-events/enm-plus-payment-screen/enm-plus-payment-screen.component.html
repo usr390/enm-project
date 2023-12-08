@@ -6,8 +6,8 @@
     <p-card header="Enm Plus" subheader="Monthly Subscription" [style]="{ width: '360px' }">
         <p>Features include:</p>
             <ul>
-                <li><strong>All Access</strong> - unlock our entire event listing. See upcoming shows months in advance. Updated daily</li>
-                <li><strong>Links</strong> - a dedicated page for each event; complete with links to artists' social media platforms. Perfect for discovering the Valley's music scene – from established juggernauts to budding talent</li>
+                <li><strong>All Access</strong> - unlock our entire event listing. See upcoming shows months in advance. Currently extending through <span class="furthestMonth">{{furthestEventDate$ | async | dateTimeToWordifiedMonthFull }}</span>. Updated daily</li>
+                <li><strong>Links</strong> - a dedicated page for each event, complete with direct links to artists' social media. Perfect for immersing in the Valley's music scene – from renowned stars to emerging artists</li>
                 <li><strong>Filter</strong> - an easy-to-use filter for instant event lookups. Narrow down your search by city, venue, or artist</li>
             </ul>
         <ng-template pTemplate="footer">

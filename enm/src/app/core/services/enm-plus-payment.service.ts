@@ -17,6 +17,7 @@ export class EnmPlusPaymentService {
   constructor(private http: HttpClient) { }
 
   checkoutSession$ = this.http.post<StripeCheckoutSession>(BASE_URL + '/create-checkout-session', {})
+  furthestEventDate$ = this.http.get<string>(BASE_URL + '/getFurthestEventDateTime')
 
   plusifyUser(user: NullableUser) {
     const url = `${BASE_URL}/user/${user?.id}/plusify`;

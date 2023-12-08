@@ -187,6 +187,16 @@ app.get('/api/promoters', async (req: Request, res: Response) => {
   res.json(await PromoterModel.find().catch(err => console.log(err)))
 })
 
+app.get('/api/getFurthestEventDateTime', async (req: Request, res: Response) => {
+  try {
+    const furthestEventDateTime = await EnmEventModel.findOne().sort({ dateTime: -1 }).select('dateTime -_id');
+    res.json(furthestEventDateTime.dateTime);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error fetching furthest event');
+  }
+})
+
 // asynchronous initialization. keeps api from processesing requests until a successful connection to db is established
 mongoose.connect(process.env.MONGO_URL || '').then(() => { app.listen(port, () => {}); })
 .catch((error) => {
