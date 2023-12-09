@@ -2,18 +2,20 @@
     <p-button type="button" (click)="goBack()" icon="pi pi-arrow-left" styleClass="p-button-rounded p-button-lg p-button-text"></p-button>
 </div>
 
-<div class="d-flex justify-content-center align-items-center" style="height: 85vh; margin-top: 50px; margin-bottom: 10px;">
-    <p-card header="Enm Plus" subheader="Monthly Subscription" [style]="{ width: '360px' }">
-        <p>Features include:</p>
-            <ul>
-                <li><strong>All Access</strong> - unlock our entire event listing. See upcoming shows months in advance. Currently extending through <span class="furthestMonth">{{furthestEventDate$ | async | dateTimeToWordifiedMonthFull }}</span>. Updated daily</li>
-                <li><strong>Links</strong> - a dedicated page for each event, complete with direct links to artists' social media. Perfect for immersing in the Valley's music scene – from renowned stars to emerging artists</li>
-                <li><strong>Filter</strong> - an easy-to-use filter for instant event lookups. Narrow down your search by city, venue, or artist</li>
-            </ul>
-        <ng-template pTemplate="footer">
-            Cancel any time by DMing us on <a class="ig" href="https://www.instagram.com/enmeventsss/">Instagram</a>. Absolutely zero hassle guaranteed
-        </ng-template>
-    </p-card>
+<div *ngIf="furthestEventDate$ | async as furthestEventDate">
+    <div class="d-flex justify-content-center align-items-center" style="height: 85vh; margin-top: 50px; margin-bottom: 10px;">
+        <p-card header="Enm Plus" subheader="Monthly Subscription" [style]="{ width: '360px' }">
+            <p>Features include:</p>
+                <ul>
+                    <li><strong>All Access</strong> - unlock our entire event listing. See upcoming shows months in advance. Currently extending through <span class="furthestMonth">{{furthestEventDate | dateTimeToWordifiedMonthFull }}</span>. Updated daily</li>
+                    <li><strong>Links</strong> - a dedicated page for each event, complete with direct links to artists' social media. Perfect for immersing in the Valley's music scene – from renowned stars to emerging artists</li>
+                    <li><strong>Filter</strong> - an easy-to-use filter for instant event lookups. Narrow down your search by city, venue, or artist</li>
+                </ul>
+            <ng-template pTemplate="footer">
+                Cancel any time by DMing us on <a class="ig" href="https://www.instagram.com/enmeventsss/">Instagram</a>. Absolutely zero hassle guaranteed
+            </ng-template>
+        </p-card>
+    </div>
 </div>
 
 <div id="checkout" style="margin-bottom: 20px">
