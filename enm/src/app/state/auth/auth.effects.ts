@@ -6,6 +6,7 @@ import { catchError, of, exhaustMap, map, tap, concatMap, Observable } from "rxj
 import * as AuthActions from './auth.actions';
 import * as EnmEventActions from './../enmEvents/enmEvents.actions'
 import { CreateUserService } from "src/app/core/services/create-user.service";
+import { MessageService } from "primeng/api";
 
 @Injectable()
 export class AuthEffects {
@@ -13,7 +14,8 @@ export class AuthEffects {
         private actions$: Actions,
         private logInService: LogInService,
         private createUserService: CreateUserService,
-        private router: Router
+        private router: Router,
+        private messageService: MessageService
     ) {}
 
     logInRequest$ = createEffect(() => 
@@ -52,7 +54,10 @@ export class AuthEffects {
     creatUserSuccess$ = createEffect(() => 
     this.actions$.pipe(
         ofType(AuthActions.createUserSuccessResponse),
-        tap(_ => this.router.navigate(['/']))
+        tap(createUserSuccessResponse => {
+            this.router.navigate(['/'])
+            this.messageService.add({ key: 'welcomeUser', severity: 'success', summary: createUserSuccessResponse.createUserSuccessResponse.user?.username, detail: 'Hey there!' })
+        })
     ),
     { dispatch: false }
 );
