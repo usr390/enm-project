@@ -7,6 +7,7 @@ import * as AuthActions from './auth.actions';
 import * as EnmEventActions from './../enmEvents/enmEvents.actions'
 import { CreateUserService } from "src/app/core/services/create-user.service";
 import { MessageService } from "primeng/api";
+import { LogInErrorResponse } from "src/app/models/logInErrorResponse.model";
 
 @Injectable()
 export class AuthEffects {
@@ -40,7 +41,10 @@ export class AuthEffects {
             exhaustMap(
                 (action) => this.logInService.logIn(action.credentials.username, action.credentials.password).pipe(
                     map(logInSuccessResponse => AuthActions.logInSuccessResponse({ logInSuccessResponse })),
-                    catchError((error) => of(AuthActions.logInErrorResponse({ error })))
+                    catchError((error: LogInErrorResponse) => {
+                        this.messageService.add({ key: 'logInError', severity: 'error', summary: error?.error.error, detail: 'Try again' })
+                        return of(AuthActions.logInErrorResponse({ error }))
+                    })
                 ), 
             )
         )

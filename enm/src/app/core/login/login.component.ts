@@ -29,10 +29,6 @@ export class LogInComponent {
     private messageService: MessageService
   ) {}
 
-  logInErrorResponse$ = this.store$.select(AuthSelectors.selectLogInErrorResponse).pipe(
-    map(error => this.showInvalidCredentialsAlert(error?.error.error))
-  );
-
   userLogInForm: FormGroup = this.logInService.userLogInForm;
   logInButtonCooldown = false;
   logInProcessing$ = this.store$.select(AuthSelectors.logInProcessing); // for displaying animation on 'Log In' button
