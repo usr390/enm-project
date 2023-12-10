@@ -34,8 +34,13 @@ app.get('/api/enmEvents', async (req: Request, res: Response) => {
 
 app.get('/api/enmEventsRegular', async (req: Request, res: Response) => {
   try {
-    const today = DateTime.now().minus({ hours: 12 })
-    const endOfWeek = DateTime.now().endOf('week').plus({ hours: 5 })
+    const today = DateTime.now().minus({ hours: 12 });
+    let endOfWeek = DateTime.now().endOf('week').plus({ hours: 5 });
+
+    if (today.weekday === 7) { // sunday
+      endOfWeek = today.plus({ weeks: 1 }).endOf('week').plus({ hours: 5 });
+    }
+
     const enmEvents = await EnmEventModel.find({ 
       dateTime: { $gte: today, $lte: endOfWeek } 
     }).sort({ dateTime: 1 });
