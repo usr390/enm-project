@@ -17,7 +17,13 @@
                 <div class="col-auto"><p-password formControlName="password" [feedback]="false" placeholder="Password" [toggleMask]="true"></p-password></div>
             </div>
             <div class="row">
-                <div class="col"><p-button type="submit" label="Log In" [disabled]="userLogInForm.invalid || logInButtonCooldown"></p-button></div>
+                <div class="col">
+                    <p-button type="submit" label="Log In" [disabled]="userLogInForm.invalid || logInButtonCooldown || (( logInProcessing$ | async) === true)">
+                        <div *ngIf="logInProcessing$ | async">
+                            <p-progressSpinner strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner" [style]="{width: '20px', height: '12px', margin: '0px 20px 0px 0px'}"></p-progressSpinner>
+                        </div>
+                    </p-button>
+                </div>
             </div>
         </form>
         <p>New to Enm? <span><a routerLink="/create-user">Create an account</a></span></p>

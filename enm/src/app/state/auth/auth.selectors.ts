@@ -9,6 +9,11 @@ export const selectUser = createSelector(selectAuthState, (state) => state.user)
 export const selectLogInErrorResponse = createSelector(selectAuthState, (state) => state.logInErrorResponse)
 
 export const createUserProcessing = createSelector(
-    selectFeature,
-    (state: AuthState): boolean => state.createUserProcessing
-  );
+  selectFeature,
+  (state: AuthState): boolean => state.createUserProcessing
+);
+
+export const logInProcessing = createSelector(
+  selectFeature,
+  (state: AuthState): boolean => state.logInProcessing
+);

@@ -1,22 +1,30 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { logInSuccessResponse, logOut, logInErrorResponse, rehydrateFromBrowserLocalStorage, updateForm, createUserSuccessResponse, createUserRequest, createUserErrorResponse } from "./auth.actions";
+import { logInSuccessResponse, logOut, logInErrorResponse, rehydrateFromBrowserLocalStorage, createUserSuccessResponse, createUserRequest, createUserErrorResponse, logInRequest } from "./auth.actions";
 import { enmPlusMonthlySubscriptionPaymentSuccessReponse } from "../payment/payment.actions";
 import {AuthState, initialState} from './auth.state'
 
 const _authReducer = createReducer(
     initialState,
+    on(logInRequest, (state) => {
+        return {
+            ...state,
+            logInProcessing: true
+        }
+    }),
     on(logInSuccessResponse, (state, { logInSuccessResponse }) => {
         return {
             ...state,
             user: logInSuccessResponse.user,
             logInErrorResponse: null,
+            logInProcessing: false
         }
     }),
     on(logInErrorResponse, (state, { error }) => {
         return {
             ...state,
             logInErrorResponse: error,
-            user: null
+            user: null,
+            logInProcessing: false
         }
     }),
     on(createUserRequest, (state) => {
