@@ -112,15 +112,21 @@ export class EnmEventArtistsComponent {
   initializeArtistsAutoCompleteSuggestions() {
     this.enmEventAddMultipageFormService.getArtists().then((artists) => { this.artists = artists; });
   }
-  filterArtists(event: AutoCompleteCompleteEvent){
+  filterArtists(event: AutoCompleteCompleteEvent) {
     let filtered: any[] = [];
-    let query = event.query;
-    
+    let query = event.query.toLowerCase();
+
+    const removeInitialThe = (str: any) => str.toLowerCase().startsWith('the ') ? str.substring(4) : str;
+
     for (let i = 0; i < (this.artists as any[]).length; i++) {
       let artist = (this.artists as any[])[i];
-      if (artist.name.toLowerCase().indexOf(query.toLowerCase()) != -1) filtered.push(artist); 
-    }
+      let artistName = artist.name.toLowerCase();
+      let modifiedArtistName = removeInitialThe(artistName);
 
+      if (artistName.startsWith(query) || modifiedArtistName.startsWith(query)) {
+        filtered.push(artist);
+      }
+    }
     this.filteredArtistsAutoCompleteSuggestions = filtered;
   }
   //#endregion
