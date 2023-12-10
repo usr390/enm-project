@@ -10,6 +10,22 @@ import { MessageService } from "primeng/api";
 
 @Injectable()
 export class AuthEffects {
+
+    getRandomWelcomeMessage() {
+        const welcomeMessages = [
+            "Hey there! Account created",
+            "Hey! Glad to have you. Your account's been set up",
+            "Your account's all set up. Rock on",
+            "Hey! Your account's registration was successful",
+            "All set! Account created.",
+            "Howdy! Account registration successful",
+            "Hey there! Happy to have you onboard"
+        ];
+    
+        const randomMessage = Math.floor(Math.random() * welcomeMessages.length);
+        return welcomeMessages[randomMessage];
+    }
+
     constructor(
         private actions$: Actions,
         private logInService: LogInService,
@@ -52,13 +68,13 @@ export class AuthEffects {
     );
 
     creatUserSuccess$ = createEffect(() => 
-    this.actions$.pipe(
-        ofType(AuthActions.createUserSuccessResponse),
-        tap(createUserSuccessResponse => {
-            this.router.navigate(['/'])
-            this.messageService.add({ key: 'welcomeUser', severity: 'success', summary: createUserSuccessResponse.createUserSuccessResponse.user?.username, detail: 'Hey there! Account created' })
-        })
-    ),
+        this.actions$.pipe(
+            ofType(AuthActions.createUserSuccessResponse),
+            tap(createUserSuccessResponse => {
+                this.router.navigate(['/'])
+                this.messageService.add({ key: 'welcomeUser', severity: 'success', summary: createUserSuccessResponse.createUserSuccessResponse.user?.username, detail: this.getRandomWelcomeMessage() })
+            })
+        ),
     { dispatch: false }
 );
 
