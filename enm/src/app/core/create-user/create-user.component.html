@@ -15,7 +15,13 @@
                 <div class="col-auto"><p-password formControlName="password" [feedback]="false" placeholder="Password" [toggleMask]="true"></p-password></div>
             </div>
             <div class="row">
-                <div class="col"><p-button type="submit" label="Create Account" [disabled]="createUserForm.invalid"></p-button></div>
+                <div class="col">
+                    <p-button type="submit" label="Create Account" [disabled]="createUserForm.invalid || ((createUserProcessing$ | async) === true)">
+                        <div *ngIf="createUserProcessing$ | async">
+                            <p-progressSpinner strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner" [style]="{width: '20px', height: '12px', margin: '0px 20px 0px 0px'}"></p-progressSpinner>
+                        </div>
+                    </p-button>
+                </div>
             </div>
         </form>
     </div>

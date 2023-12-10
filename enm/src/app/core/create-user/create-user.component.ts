@@ -2,8 +2,10 @@ import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
+import * as AuthSelectors from './../../state/auth/auth.selectors';
 import * as AuthActions from './../../state/auth/auth.actions'
 import { CreateUserService } from '../services/create-user.service';
+import { AppState } from 'src/app/state/app.state';
 
 @Component({
   selector: 'app-create-user',
@@ -13,7 +15,7 @@ import { CreateUserService } from '../services/create-user.service';
 export class CreateUserComponent {
 
   constructor(
-    private store$: Store,
+    private store$: Store<AppState>,
     private fb: FormBuilder,
     private createUserService: CreateUserService,
     private elRef: ElementRef,
@@ -21,6 +23,8 @@ export class CreateUserComponent {
   ) {}
 
   createUserForm: FormGroup = this.createUserService.createUserForm;
+  createUserProcessing$ = this.store$.select(AuthSelectors.createUserProcessing); // for displaying animation on 'create user' button
+
 
   ngOnInit() {
     this.setUpLocalFormControls();
