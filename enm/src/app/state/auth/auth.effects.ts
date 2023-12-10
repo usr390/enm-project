@@ -56,7 +56,7 @@ export class AuthEffects {
         ofType(AuthActions.createUserSuccessResponse),
         tap(createUserSuccessResponse => {
             this.router.navigate(['/'])
-            this.messageService.add({ key: 'welcomeUser', severity: 'success', summary: createUserSuccessResponse.createUserSuccessResponse.user?.username, detail: 'Hey there!' })
+            this.messageService.add({ key: 'welcomeUser', severity: 'success', summary: createUserSuccessResponse.createUserSuccessResponse.user?.username, detail: 'Hey there! Account created' })
         })
     ),
     { dispatch: false }
