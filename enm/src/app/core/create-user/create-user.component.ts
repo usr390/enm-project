@@ -22,6 +22,7 @@ export class CreateUserComponent {
     private renderer: Renderer2
   ) {}
 
+  createUserButtonCooldown = false
   createUserForm: FormGroup = this.createUserService.createUserForm;
   createUserProcessing$ = this.store$.select(AuthSelectors.createUserProcessing); // for displaying animation on 'create user' button
 
@@ -36,6 +37,7 @@ export class CreateUserComponent {
   
   onSubmit() {
     if (this.createUserForm.valid){
+      this.applycreateUserButtonCooldown();
       const credentials = {
         username: this.createUserForm.get('username')?.value.trim(),
         password: this.createUserForm.get('password')?.value.trim(),
@@ -49,7 +51,12 @@ export class CreateUserComponent {
     this.createUserForm.setControl('username', this.fb.control('', [Validators.required, Validators.maxLength(20)]));
     this.createUserForm.setControl('password', this.fb.control('', [Validators.required, Validators.maxLength(20)]));
   }
-
+  applycreateUserButtonCooldown() {
+    this.createUserButtonCooldown = true;
+    setTimeout(() => {
+      this.createUserButtonCooldown = false;
+    }, 2000); 
+  }
   autoFocus() {
     setTimeout(() => {
       const element = this.elRef.nativeElement.querySelector('input');

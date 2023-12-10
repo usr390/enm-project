@@ -16,7 +16,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <p-button type="submit" label="Create Account" [disabled]="createUserForm.invalid || ((createUserProcessing$ | async) === true)">
+                    <p-button type="submit" label="Create Account" [disabled]="createUserForm.invalid || createUserButtonCooldown || ((createUserProcessing$ | async) === true)">
                         <div *ngIf="createUserProcessing$ | async">
                             <p-progressSpinner strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner" [style]="{width: '20px', height: '12px', margin: '0px 20px 0px 0px'}"></p-progressSpinner>
                         </div>
