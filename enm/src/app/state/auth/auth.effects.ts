@@ -15,12 +15,11 @@ export class AuthEffects {
     getRandomWelcomeMessage() {
         const welcomeMessages = [
             "Hey there! Account created",
-            "Hey! Glad to have you. Your account's been set up",
-            "Your account's all set up. Rock on",
-            "Hey! Your account's registration was successful",
+            "Hey! Your account's been set up",
+            "Your account's set up. Rock on",
+            "Hey! Account registration successful",
             "All set! Account created.",
             "Howdy! Account registration successful",
-            "Hey there! Happy to have you onboard"
         ];
     
         const randomMessage = Math.floor(Math.random() * welcomeMessages.length);
