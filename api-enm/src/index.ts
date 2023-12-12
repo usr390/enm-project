@@ -13,6 +13,7 @@ import ArtistModel from "./models/Artist";
 import UserModel from "./models/User";
 import { UserDTO } from "./models/UserDTO";
 import PromoterModel from "./models/Promoter";
+import { checkUserPlusStatus } from "./utilty/isplus";
 
 const app = express(); app.use(cors({ origin: '*' })); app.use(express.json())
 const port = process.env.PORT || 3000
@@ -51,6 +52,47 @@ app.get('/api/enmEventsRegular', async (req: Request, res: Response) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+// app.get('/api/enmEvents', async (req, res) => {
+//   const userId = req.query.userId;
+
+//   try {
+//     const isPlusUser = await checkUserPlusStatus(userId);
+
+//     if (isPlusUser) {
+//       try {
+//         res.json(await EnmEventModel.find({ dateTime: { $gte: DateTime.now().minus({ hours: 12 }) } })
+//         .sort({ dateTime: 1 })
+//         .catch(err => console.log(err)))
+//       } catch (err) {
+//         console.log(err);
+//         res.status(500).send('Internal Server Error');
+//       }
+//     } else {
+//       try {
+//         const today = DateTime.now().minus({ hours: 12 });
+//         let endOfWeek = DateTime.now().endOf('week').plus({ hours: 5 });
+    
+//         if (today.weekday === 7) { // sunday
+//           endOfWeek = today.plus({ weeks: 1 }).endOf('week').plus({ hours: 5 });
+//         }
+    
+//         const enmEvents = await EnmEventModel.find({ 
+//           dateTime: { $gte: today, $lte: endOfWeek } 
+//         }).sort({ dateTime: 1 });
+        
+//         res.json(enmEvents);
+//       } catch (err) {
+//         console.log(err);
+//         res.status(500).send('Internal Server Error');
+//       }
+//     }
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).send('Internal Server Error');
+//   }
+// });
+
 
 app.post('/api/enmEvent', async (req: Request, res: Response) => {
   const enmEvent = new EnmEventModel({
