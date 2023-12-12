@@ -23,75 +23,75 @@ app.get('/', (req: Request, res: Response) => {
   res.send('enm-api')
 })
 
-app.get('/api/enmEvents', async (req: Request, res: Response) => {
-  /* summary
-    dt is -12 hours because it is still desirable to get EnmEvents when their dateTime has passed by only a few hours.
-    for example, users seeing the list at ~9pm would probably be interested in events started at 8pm or possibly earlier
-  */
-  res.json(await EnmEventModel.find({ dateTime: { $gte: DateTime.now().minus({ hours: 12 }) } })
-  .sort({ dateTime: 1 })
-  .catch(err => console.log(err)))
-})
+// app.get('/api/enmEvents', async (req: Request, res: Response) => {
+//   /* summary
+//     dt is -12 hours because it is still desirable to get EnmEvents when their dateTime has passed by only a few hours.
+//     for example, users seeing the list at ~9pm would probably be interested in events started at 8pm or possibly earlier
+//   */
+//   res.json(await EnmEventModel.find({ dateTime: { $gte: DateTime.now().minus({ hours: 12 }) } })
+//   .sort({ dateTime: 1 })
+//   .catch(err => console.log(err)))
+// })
 
-app.get('/api/enmEventsRegular', async (req: Request, res: Response) => {
-  try {
-    const today = DateTime.now().minus({ hours: 12 });
-    let endOfWeek = DateTime.now().endOf('week').plus({ hours: 5 });
-
-    if (today.weekday === 7) { // sunday
-      endOfWeek = today.plus({ weeks: 1 }).endOf('week').plus({ hours: 5 });
-    }
-
-    const enmEvents = await EnmEventModel.find({ 
-      dateTime: { $gte: today, $lte: endOfWeek } 
-    }).sort({ dateTime: 1 });
-    
-    res.json(enmEvents);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
-// app.get('/api/enmEvents', async (req, res) => {
-//   const userId = req.query.userId;
-
+// app.get('/api/enmEventsRegular', async (req: Request, res: Response) => {
 //   try {
-//     const isPlusUser = await checkUserPlusStatus(userId);
+//     const today = DateTime.now().minus({ hours: 12 });
+//     let endOfWeek = DateTime.now().endOf('week').plus({ hours: 5 });
 
-//     if (isPlusUser) {
-//       try {
-//         res.json(await EnmEventModel.find({ dateTime: { $gte: DateTime.now().minus({ hours: 12 }) } })
-//         .sort({ dateTime: 1 })
-//         .catch(err => console.log(err)))
-//       } catch (err) {
-//         console.log(err);
-//         res.status(500).send('Internal Server Error');
-//       }
-//     } else {
-//       try {
-//         const today = DateTime.now().minus({ hours: 12 });
-//         let endOfWeek = DateTime.now().endOf('week').plus({ hours: 5 });
-    
-//         if (today.weekday === 7) { // sunday
-//           endOfWeek = today.plus({ weeks: 1 }).endOf('week').plus({ hours: 5 });
-//         }
-    
-//         const enmEvents = await EnmEventModel.find({ 
-//           dateTime: { $gte: today, $lte: endOfWeek } 
-//         }).sort({ dateTime: 1 });
-        
-//         res.json(enmEvents);
-//       } catch (err) {
-//         console.log(err);
-//         res.status(500).send('Internal Server Error');
-//       }
+//     if (today.weekday === 7) { // sunday
+//       endOfWeek = today.plus({ weeks: 1 }).endOf('week').plus({ hours: 5 });
 //     }
+
+//     const enmEvents = await EnmEventModel.find({ 
+//       dateTime: { $gte: today, $lte: endOfWeek } 
+//     }).sort({ dateTime: 1 });
+    
+//     res.json(enmEvents);
 //   } catch (err) {
-//     console.error(err);
+//     console.log(err);
 //     res.status(500).send('Internal Server Error');
 //   }
 // });
+
+app.get('/api/enmEvents', async (req, res) => {
+  const userId = req.query.userId;
+
+  try {
+    const isPlusUser = await checkUserPlusStatus(userId);
+
+    if (isPlusUser) {
+      try {
+        res.json(await EnmEventModel.find({ dateTime: { $gte: DateTime.now().minus({ hours: 12 }) } })
+        .sort({ dateTime: 1 })
+        .catch(err => console.log(err)))
+      } catch (err) {
+        console.log(err);
+        res.status(500).send('Internal Server Error');
+      }
+    } else {
+      try {
+        const today = DateTime.now().minus({ hours: 12 });
+        let endOfWeek = DateTime.now().endOf('week').plus({ hours: 5 });
+    
+        if (today.weekday === 7) { // sunday
+          endOfWeek = today.plus({ weeks: 1 }).endOf('week').plus({ hours: 5 });
+        }
+    
+        const enmEvents = await EnmEventModel.find({ 
+          dateTime: { $gte: today, $lte: endOfWeek } 
+        }).sort({ dateTime: 1 });
+        
+        res.json(enmEvents);
+      } catch (err) {
+        console.log(err);
+        res.status(500).send('Internal Server Error');
+      }
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 
 app.post('/api/enmEvent', async (req: Request, res: Response) => {
