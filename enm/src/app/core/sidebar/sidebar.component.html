@@ -1,15 +1,15 @@
 <p-sidebar [(visible)]="sidebarVisible" position="right">
     <ng-template pTemplate="content">
         <p>
-            Enm, the valley's premium event listing service
+            The valley's premium event listing service
         </p>
         <p *ngIf="(user$ | async)">
             <a [routerLink]="['/add-event/venue']"  href="/">Add Event</a> 
-            <span *ngIf="(user$ | async) && !(user$ | async)?.plus">&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a [routerLink]="['/plus']"  href="/">Enm Plus</a></span>
+            <span *ngIf="(user$ | async) && !(user$ | async)?.plus">&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a [routerLink]="['/plus']"  href="/">Rarelygroovy+</a></span>
         </p>
     </ng-template>
     <ng-template pTemplate="footer">
-        <p><a class="ig" href="https://www.instagram.com/enmeventsss/"><i class="pi pi-instagram" style="color: inherit"></i></a></p>
+        <p><a class="ig" href="https://www.instagram.com/rarelygroovy/"><i class="pi pi-instagram" style="color: inherit"></i></a></p>
         <p *ngIf="(user$ | async)">Logged in as {{(user$ | async)?.username}}<span *ngIf="(user$ | async) && (user$ | async)?.plus"> ✨ </span><span *ngIf="!((user$ | async) && (user$ | async))?.plus">. &nbsp;</span> <a href="/"(click)="onLogOut()">Log Out</a></p>
         <p *ngIf="!(user$ | async)">
             <a [routerLink]="['/login']"  href="/">Log In</a>

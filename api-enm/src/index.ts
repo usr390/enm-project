@@ -202,7 +202,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
       price_data: {
         currency: 'usd',
         product_data: {
-          name: 'Enm Plus - Monthly Subscription',
+          name: 'Rarelygoovy+ | Monthly Subscription',
         },
         unit_amount: 299,
       },
