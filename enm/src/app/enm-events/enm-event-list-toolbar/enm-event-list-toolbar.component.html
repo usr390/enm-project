@@ -1,9 +1,19 @@
 <p-toolbar >
-    <div class="p-toolbar-group-start">
-        <app-logo></app-logo>
-    </div>
-    <div class="p-toolbar-group-end">
-        <div *ngIf="(user$ | async)?.plus"><app-enm-event-list-filter></app-enm-event-list-filter></div>
-        <app-sidebar></app-sidebar>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="p-toolbar-group-start">
+                    <app-logo></app-logo>
+                    <app-sidebar class="pull-right"></app-sidebar>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="(user$ | async)?.plus" class="row">
+            <div class="col-12">
+                <div class="p-toolbar-group-end">
+                    <div><app-enm-event-list-filter></app-enm-event-list-filter></div>
+                </div>
+            </div>
+        </div>
     </div>
 </p-toolbar>
