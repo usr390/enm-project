@@ -26,12 +26,10 @@
       </ng-container>
     </div>
 
-    <div class="custom-divider">
-      <p-divider></p-divider>
-    </div>
-
-
     <div *ngIf="enmEvent.promoter">
+      <div class="custom-divider">
+        <p-divider></p-divider>
+      </div>
       <ng-container *ngIf="enmEvent.promoter.link && enmEvent.promoter.link !== 'pending'; else promoterName">
         <h6 class="card-text">
           <a href="{{ enmEvent.promoter.link }}" target="_blank" rel="noopener noreferrer" class="m-0">{{ enmEvent.promoter.name }}</a>
