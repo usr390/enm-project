@@ -3,7 +3,7 @@
     <div class="input-clearable">
         <span class="p-input-icon-left">
             <i class="pi pi-search"></i>
-            <input #filterInput pInputText formControlName="filter" type="text"  placeholder="Artist, Venue, or City" maxlength="15"/>
+            <input #filterInput pInputText formControlName="filter" type="text"  placeholder="Artist, Venue, or City" maxlength="30"/>
         </span>
         <button pButton type="button" icon="pi pi-times" class="clear-btn" (click)="clearFilter()" styleClass="p-button-sm p-button-rounded p-button-text" *ngIf="enmEventListFilterForm.controls.filter.value"></button>
     </div>
