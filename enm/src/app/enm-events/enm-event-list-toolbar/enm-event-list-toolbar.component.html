@@ -8,12 +8,13 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="(user$ | async)?.plus" class="row">
-            <div class="col-12">
-                <div class="p-toolbar-group-end">
-                    <div><app-enm-event-list-filter></app-enm-event-list-filter></div>
-                </div>
-            </div>
-        </div>
     </div>
 </p-toolbar>
+
+<div *ngIf="(user$ | async)?.plus" class="row">
+    <div class="col-12">
+        <div class="p-toolbar-group-end">
+            <div><app-enm-event-list-filter></app-enm-event-list-filter></div>
+        </div>
+    </div>
+</div>

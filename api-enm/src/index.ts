@@ -210,7 +210,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
     }],
     mode: 'payment',
     ui_mode: 'embedded',
-    return_url: 'https://enm-project.vercel.app/checkout/return'
+    return_url: 'https://rarelygroovy.com/checkout/return'
   });
 
   res.send({clientSecret: session.client_secret});
