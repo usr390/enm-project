@@ -199,16 +199,10 @@ app.post('/api/create-user', async (req: Request, res: Response) => {
 app.post('/api/create-checkout-session', async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items: [{
-      price_data: {
-        currency: 'usd',
-        product_data: {
-          name: 'Rarelygoovy+ | Monthly Subscription',
-        },
-        unit_amount: 299,
-      },
+      price: 'price_1ONPu3CJybB30ZxsK1QzK55x',
       quantity: 1,
     }],
-    mode: 'payment',
+    mode: 'subscription',
     ui_mode: 'embedded',
     return_url: 'https://rarelygroovy.com/checkout/return'
   });
