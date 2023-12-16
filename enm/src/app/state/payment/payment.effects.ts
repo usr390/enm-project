@@ -8,6 +8,18 @@ import { EnmPlusPaymentService } from "src/app/core/services/enm-plus-payment.se
 export class PaymentEffects {
     constructor(private actions$: Actions, private enmPlusPaymentService: EnmPlusPaymentService) {}
 
+    enmPlusPaymentScreenWaitOnFurthestMonth$ = createEffect(() => 
+        this.actions$.pipe(
+            ofType(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth),
+            exhaustMap(
+                (action) => this.enmPlusPaymentService.furthestEventDate$.pipe(
+                    map(user => PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonthSuccessResponse()),
+                    catchError((error) => of(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonthErrorResponse()))
+                ), 
+            )
+        )
+    );
+
     enmPlusMonthlySubscriptionPaymentSubmission$ = createEffect(() => 
         this.actions$.pipe(
             ofType(PaymentActions.enmPlusMonthlySubscriptionPaymentSubmission),

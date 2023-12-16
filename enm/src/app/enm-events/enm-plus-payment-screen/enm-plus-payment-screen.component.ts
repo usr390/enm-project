@@ -1,11 +1,15 @@
 // angular imports
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 // 3rd party imports
 import { concatMap, take } from 'rxjs';
 // enm imports
 import { EnmPlusPaymentService } from 'src/app/core/services/enm-plus-payment.service';
+import { AppState } from 'src/app/state/app.state';
 import { environment } from 'src/environments/environment';
+import * as PaymentActions from './../../state/payment/payment.actions'
+import * as PaymentSelectors from './../../state/payment/payment.selectors'
 
 const STRIPE_KEY = environment.stripeKey;
 declare var Stripe: any;
@@ -19,17 +23,20 @@ export class EnmPlusPaymentScreenComponent {
 
   constructor(
     private enmPlusPaymentService: EnmPlusPaymentService,
-    private router: Router
+    private router: Router,
+    private store$: Store<AppState>
   ) {}
 
   checkoutSession$ = this.enmPlusPaymentService.checkoutSession$;
   furthestEventDate$ = this.enmPlusPaymentService.furthestEventDate$;
+  plusSubscriptionCardLoading$ = this.store$.select(PaymentSelectors.plusSubscriptionCardLoading)
 
   stripe: any;
   checkout: any;
 
   ngOnInit() {
     this.initializeStripe();
+    this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth())
   }
 
   ngOnDestroy() {
