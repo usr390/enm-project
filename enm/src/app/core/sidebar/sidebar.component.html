@@ -4,8 +4,7 @@
             The valley's premium event listing service
         </p>
         <p *ngIf="(user$ | async)">
-            <a [routerLink]="['/add-event/venue']"  href="/">Add Event</a> 
-            <span *ngIf="(user$ | async) && !(user$ | async)?.plus">&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a [routerLink]="['/plus']"  href="/">Rarelygroovy+</a></span>
+            <span *ngIf="(user$ | async) && !(user$ | async)?.plus"><a [routerLink]="['/plus']"  href="/">Rarelygroovy+</a></span>
         </p>
     </ng-template>
     <ng-template pTemplate="footer">
