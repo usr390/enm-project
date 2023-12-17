@@ -28,7 +28,7 @@ export class EnmPlusPaymentScreenComponent {
   ) {}
 
   checkoutSession$ = this.enmPlusPaymentService.checkoutSession$;
-  furthestEventDate$ = this.enmPlusPaymentService.furthestEventDate$;
+  furthestEventDate$ = this.store$.select(PaymentSelectors.selectFurthestMonth);
   plusSubscriptionCardLoading$ = this.store$.select(PaymentSelectors.plusSubscriptionCardLoading)
 
   stripe: any;

@@ -13,8 +13,8 @@ export class PaymentEffects {
             ofType(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth),
             exhaustMap(
                 (action) => this.enmPlusPaymentService.furthestEventDate$.pipe(
-                    map(user => PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonthSuccessResponse()),
-                    catchError((error) => of(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonthErrorResponse()))
+                    map(enmPlusPaymentScreenWaitOnFurthestMonthSuccessResponse => PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonthSuccessResponse({ enmPlusPaymentScreenWaitOnFurthestMonthSuccessResponse })),
+                    catchError((error: string) => of(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonthErrorResponse()))
                 ), 
             )
         )

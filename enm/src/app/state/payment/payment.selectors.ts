@@ -6,6 +6,11 @@ export const selectFeature = (state: AppState): PaymentState => state.payment;
 export const selectPaymentState = createFeatureSelector<PaymentState>('payment');
 
 export const plusSubscriptionCardLoading = createSelector(
-    selectFeature,
-    (state: PaymentState): boolean => state.plusSubscriptionCardLoading
-  );
+  selectFeature,
+  (state: PaymentState): boolean => state.plusSubscriptionCardLoading
+);
+
+export const selectFurthestMonth = createSelector(
+  selectFeature,
+  (state: PaymentState): string => state.furthestEventMonth
+);

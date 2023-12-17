@@ -23,9 +23,10 @@ const _paymentReducer = createReducer(
             plusSubscriptionCardLoaded: true,
         }
     }),
-    on(enmPlusPaymentScreenWaitOnFurthestMonthSuccessResponse, (state) => {
+    on(enmPlusPaymentScreenWaitOnFurthestMonthSuccessResponse, (state, { enmPlusPaymentScreenWaitOnFurthestMonthSuccessResponse }) => {
         return {
             ...state,
+            furthestEventMonth: enmPlusPaymentScreenWaitOnFurthestMonthSuccessResponse,
             plusSubscriptionCardLoading: false,
             plusSubscriptionCardLoaded: true
         }
