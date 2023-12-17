@@ -32,10 +32,10 @@
                         <div class="custom-divider">
                           <p-divider></p-divider>
                         </div>
-                        <h6 class="card-text">{{ enmEvent.promoter.name }}</h6>
+                        <h5 class="card-text promoter">{{ enmEvent.promoter.name }}</h5>
                       </div>
                       <br>
-                      <div class="[TIME DATE AND COVER] flex align-items-center gap-3">
+                      <div class="[TIME DATE AND COVER] time-date-cover flex align-items-center gap-3">
                         <span class="flex align-items-center gap-2">
                           <span class="font-semibold">
                             {{ enmEvent.dateTime | dateTimeToTime }} &middot;
@@ -47,7 +47,7 @@
                         </span>
                       </div>
   
-                      <div class="[ADDRESS] flex align-items-center gap-3">
+                      <div class="[ADDRESS] address flex align-items-center gap-3">
                         <span class="flex align-items-center gap-2">
                           <span class="font-semibold">
                             <!-- synonyms -->
