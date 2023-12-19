@@ -24,18 +24,40 @@ export const selectFiltered = createSelector(
   selectFilter,
   (enmEvents: EnmEvent[], filter: Filter): EnmEvent[] => {
     if (filter.text) {
-      const lowercased = filter.text.toLowerCase();
+      const normalizedFilter = normalizeText(filter.text);
+
       return enmEvents.filter(enmEvent =>
-        // Check if any tags match the filter text
-        Object.values(enmEvent.tags).some(tag => tag.toString().toLowerCase().includes(lowercased)) ||
-        // Check if any artist names match the filter text
-        enmEvent.artists.some(artist => artist.name.toLowerCase().includes(lowercased))
+        // check if any tags match the filter text
+        Object.values(enmEvent.tags).some(tag => 
+          normalizeText(tag.toString()).includes(normalizedFilter)
+        ) ||
+        // check if any artist names match the filter text
+        enmEvent.artists.some(artist => 
+          normalizeText(artist.name).includes(normalizedFilter)
+        )
       );
     } else {
       return enmEvents;
     }
   }
 );
+
+// function to normalize text by removing special characters, diacritics and converting to lowercase
+const normalizeText = (text: string) => {
+  const from = "öñńäáé";
+  const to   = "onnaae";
+  let normalizedText = text.toLowerCase();
+  for (let i = 0; i < from.length; i++) {
+    normalizedText = normalizedText.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+  }
+
+  // replace other non-alphanumeric characters
+  normalizedText = normalizedText.replace(/[^\w\s]/gi, '');
+
+  return normalizedText;
+};
+
+
 
 export const selectSelectedEventId = createSelector(
   selectFeature,
