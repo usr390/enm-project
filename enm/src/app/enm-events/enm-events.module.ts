@@ -32,6 +32,13 @@ import { RouterModule } from '@angular/router';
     CoreModule,
     SharedModule,
   ],
-  exports: []
+  exports: [
+    EnmEventListComponent,
+    EnmEventListFilterComponent,
+    EnmEventListToolbarComponent,
+    EnmEventPageComponent,
+    EnmPlusPaymentScreenComponent,
+    EnmPlusPaymentSuccessfulComponent,
+  ]
 })
 export class EnmEventModule { }

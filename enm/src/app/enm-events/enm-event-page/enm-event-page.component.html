@@ -3,7 +3,7 @@
 </div>
 
 
-<div *ngIf="enmEvent$ | async as enmEvent" class="container-sm d-flex flex-column justify-content-center align-items-center" style="height: 85vh;">
+<div *ngIf="enmEvent$ | async as enmEvent" class="container-sm d-flex flex-column justify-content-center align-items-center" style="height: 60vh;">
   <p-card header="" styleClass="text-center">
     <ng-container *ngIf="enmEvent.venue.link && enmEvent.venue.link !== 'pending'; else venueName">
       <h1 class="card-text">

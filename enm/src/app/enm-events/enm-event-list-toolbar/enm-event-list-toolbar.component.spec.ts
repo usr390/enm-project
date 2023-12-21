@@ -15,8 +15,14 @@ describe('EnmEventListToolbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ EnmEventModule, HttpClientTestingModule ],
-      declarations: [ EnmEventListToolbarComponent, EnmEventListFilterComponent ],
+      imports: [ 
+        EnmEventModule, 
+        HttpClientTestingModule 
+      ],
+      declarations: [ 
+        EnmEventListToolbarComponent, 
+        EnmEventListFilterComponent 
+      ],
       providers: [{ provide: Store, useValue: mockStore }]
     })
     .compileComponents();

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core'; // angular
-import { Store } from '@ngrx/store'; // 3rd party
+import { Store, select } from '@ngrx/store'; // 3rd party
 import * as AuthSelectors from './../../state/auth/auth.selectors'; // enm
+import * as RouterSelectors from './../../state/router/router.selectors'; // enm
+import { AppState } from 'src/app/state/app.state';
+import { map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-enm-event-list-toolbar',
@@ -9,8 +12,15 @@ import * as AuthSelectors from './../../state/auth/auth.selectors'; // enm
 })
 export class EnmEventListToolbarComponent {
 
-  constructor(private store$: Store){}
+  showToolbar$ = this.store$.select(RouterSelectors.selectUrl).pipe(
+    map(url => url && (url === '/events' || url.startsWith('/events/')))
+  );
+  
+  
+
+  constructor(private store$: Store<AppState>){}
 
   user$ = this.store$.select(AuthSelectors.selectUser);
+  currentRoute$ = this.store$.select(RouterSelectors.selectUrl).pipe(tap((route) => console.log('route: ', route)))
 
 }
