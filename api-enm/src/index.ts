@@ -1,5 +1,19 @@
 //  3rd party imports
 import cors from "cors";
+const allowedOrigins = [
+  'https://www.rarelygroovy.com', // Production frontend
+];
+
+const corsOptions = {
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);  // Allow the listed origins
+    } else {
+      callback(new Error('Not allowed by CORS'));  // Block other origins
+    }
+  },
+  optionsSuccessStatus: 200 // For legacy browser support
+};
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import { DateTime } from "luxon";
@@ -23,7 +37,7 @@ import { UserDTO } from "./models/UserDTO";
 import PromoterModel from "./models/Promoter";
 import { checkUserPlusStatus } from "./utilty/isplus";
 
-const app = express(); app.use(cors({ origin: '*' })); app.use(express.json()); app.use(apiLimiter)
+const app = express(); app.use(cors(corsOptions)); app.use(express.json()); app.use(apiLimiter)
 const port = process.env.PORT || 3000
 const stripe = require('stripe')(process.env.STRIPE_API_KEY);
 
