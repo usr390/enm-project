@@ -30,6 +30,7 @@ import { CardModule } from 'primeng/card';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DataViewModule } from 'primeng/dataview';
 import { DividerModule } from 'primeng/divider';
+import { ScrollTopModule } from 'primeng/scrolltop';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { DividerModule } from 'primeng/divider';
     CardModule,
     ProgressSpinnerModule,
     DataViewModule,
-    DividerModule
+    DividerModule,
+    ScrollTopModule
   ],
   exports: [
     // enm imports
@@ -71,6 +73,7 @@ import { DividerModule } from 'primeng/divider';
     DateTimeToDayPipe,
     DateTimeToTimePipe,
     ArtistNamesPipe,
+    DateTimeToWordifiedMonthFullPipe,
     LogoComponent,
     // primeng exports
     AvatarModule,
@@ -89,7 +92,7 @@ import { DividerModule } from 'primeng/divider';
     ProgressSpinnerModule,
     DataViewModule,
     DividerModule,
-    DateTimeToWordifiedMonthFullPipe
+    ScrollTopModule,
   ],
   providers: [
     // primeng providers

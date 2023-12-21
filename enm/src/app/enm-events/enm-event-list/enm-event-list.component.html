@@ -181,15 +181,15 @@
   
   
   
-  
+
   
   
             </div>
           </ng-template>
         </ng-container>
-      </p-dataView>    
+      </p-dataView>          
     </div>
-  </div>  
+  </div>
   <div *ngIf="(filteredEnmEventList$ | async)?.length !== 0" class="disclaimer-section">
     <div *ngIf="!(user$ | async)?.plus" class="disclaimer d-flex justify-content-center align-items-center">* Events are listed for the current week only</div>
     <div class="disclaimer d-flex justify-content-center align-items-center">* Start times might vary (e.g., punk time)</div>
@@ -201,3 +201,7 @@
   </div>
 </div>
 
+<div *ngIf="isVisible">
+  <p-scrollTop></p-scrollTop>
+
+</div>

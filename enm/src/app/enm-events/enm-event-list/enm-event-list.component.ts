@@ -18,6 +18,14 @@ import * as enmEventsActions from './../../state/enmEvents/enmEvents.actions';
 })
 export class EnmEventListComponent implements OnInit {
 
+  isVisible: boolean = true;
+
+  hideElementTemporarily() {
+    this.isVisible = false;
+    setTimeout(() => this.isVisible = true, 200); // 500 ms = half a second
+  }
+
+
   constructor(
     private store$: Store<AppState>
   ) { }
@@ -44,6 +52,7 @@ export class EnmEventListComponent implements OnInit {
   );
 
   ngOnInit() {
+    this.hideElementTemporarily()
     this.listLoaded$.pipe(take(1), filter(loaded => !loaded),).subscribe(_ => {
       this.store$.dispatch(enmEventsActions.enmEventListRequest())
     });
