@@ -2,6 +2,7 @@
 import cors from "cors";
 const allowedOrigins = [
   'https://www.rarelygroovy.com', // Production frontend
+  'http://localhost:4200'
 ];
 
 const corsOptions = {
