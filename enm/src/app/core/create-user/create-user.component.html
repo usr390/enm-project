@@ -6,7 +6,16 @@
                 <div class="col"><label>Username</label></div>
             </div>
             <div class="row g-0 justify-content-center input-row">
-                <div class="col-auto"><input formControlName="username" pInputText placeholder="Username" maxlength="20" style="width: 223px;"></div>
+                <div class="col-auto">
+                    <input 
+                    formControlName="username" 
+                    pInputText 
+                    placeholder="Username"
+                    maxlength="20"
+                    style="width: 223px;"
+                    pattern="^[a-zA-Z0-9_]+$"
+                    title="Username should only contain letters, numbers, and underscores.">
+                </div>
             </div>
             <div class="row">
                 <div class="col"><label>Password</label></div>
