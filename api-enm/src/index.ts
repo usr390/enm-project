@@ -5,6 +5,14 @@ import mongoose from "mongoose";
 import { DateTime } from "luxon";
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+import rateLimit from 'express-rate-limit';
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1001, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  standardHeaders: true, // return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // disable the `X-RateLimit-*` headers
+  message: 'Too many requests from this IP, please try again after 15 minutes',
+})
 
 // enm imports
 import EnmEventModel from "./models/EnmEvent";
@@ -15,43 +23,14 @@ import { UserDTO } from "./models/UserDTO";
 import PromoterModel from "./models/Promoter";
 import { checkUserPlusStatus } from "./utilty/isplus";
 
-const app = express(); app.use(cors({ origin: '*' })); app.use(express.json())
+const app = express(); app.use(cors({ origin: '*' })); app.use(express.json()); app.use(apiLimiter)
 const port = process.env.PORT || 3000
 const stripe = require('stripe')(process.env.STRIPE_API_KEY);
+
 
 app.get('/', (req: Request, res: Response) => {
   res.send('enm-api')
 })
-
-// app.get('/api/enmEvents', async (req: Request, res: Response) => {
-//   /* summary
-//     dt is -12 hours because it is still desirable to get EnmEvents when their dateTime has passed by only a few hours.
-//     for example, users seeing the list at ~9pm would probably be interested in events started at 8pm or possibly earlier
-//   */
-//   res.json(await EnmEventModel.find({ dateTime: { $gte: DateTime.now().minus({ hours: 12 }) } })
-//   .sort({ dateTime: 1 })
-//   .catch(err => console.log(err)))
-// })
-
-// app.get('/api/enmEventsRegular', async (req: Request, res: Response) => {
-//   try {
-//     const today = DateTime.now().minus({ hours: 12 });
-//     let endOfWeek = DateTime.now().endOf('week').plus({ hours: 5 });
-
-//     if (today.weekday === 7) { // sunday
-//       endOfWeek = today.plus({ weeks: 1 }).endOf('week').plus({ hours: 5 });
-//     }
-
-//     const enmEvents = await EnmEventModel.find({ 
-//       dateTime: { $gte: today, $lte: endOfWeek } 
-//     }).sort({ dateTime: 1 });
-    
-//     res.json(enmEvents);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).send('Internal Server Error');
-//   }
-// });
 
 app.get('/api/enmEvents', async (req, res) => {
   const userId = req.query.userId;
