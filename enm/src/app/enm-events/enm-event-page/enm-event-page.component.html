@@ -32,17 +32,16 @@
         <p-divider></p-divider>
       </div>
       <ng-container *ngIf="enmEvent.promoter.link && enmEvent.promoter.link !== 'pending'; else promoterName">
-        <h6 class="card-text">
-          <a href="{{ enmEvent.promoter.link }}" target="_blank" rel="noopener noreferrer" class="m-0">{{ enmEvent.promoter.name }}</a>
+        <h6 class="card-text promoter">
+          <a href="{{ enmEvent.promoter.link }}" target="_blank" rel="noopener noreferrer" class="m-0 promoter">{{ enmEvent.promoter.name }}</a>
         </h6>
       </ng-container>
       <ng-template #promoterName>
-        <h6 class="card-text artist-name-non-clickable">{{ enmEvent.promoter.name }}</h6>
+        <h6 class="card-text artist-name-non-clickable promoter">{{ enmEvent.promoter.name }}</h6>
       </ng-template>
     </div>
-
-
-    <div class="[TIME DATE AND COVER] time-date-cover flex align-items-center gap-3" style="margin-top: 20px">
+    <br>
+    <div class="[TIME DATE AND COVER] time-date-cover flex align-items-center gap-3">
       <span class="flex align-items-center gap-2">
         <span class="font-semibold">
           {{ enmEvent.dateTime | dateTimeToTime }} &middot;
