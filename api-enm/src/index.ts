@@ -193,7 +193,7 @@ app.post('/api/create-user', async (req: Request, res: Response) => {
 app.post('/api/create-checkout-session', async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items: [{
-      price: 'price_1ONPu3CJybB30ZxsK1QzK55x',
+      price: 'price_1ONPePCJybB30Zxsdnlf7CCK',
       quantity: 1,
     }],
     mode: 'subscription',
