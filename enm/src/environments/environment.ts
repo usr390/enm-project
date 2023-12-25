@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api: 'http://localhost:80/api',
-  stripeKey: 'pk_live_51O2iVICJybB30ZxsZWBmKqQXmoGZUxXA3FgYxLYnugdi1UAMocrS1WxnBWiaRvnhfVJW7bpx2DgDrFAIXMJXKw9k00RFmjKpqN'
+  stripeKey: 'pk_test_51O2iVICJybB30ZxspTgjwgPMApef8J9ctYnn0Ug6yvl2CBqTvqEMN28jqqz9luyqDy5uqfDyzqf57PVLJpi6Loqo00Af4LZ7DU'
 };
 
 /*
