@@ -42,6 +42,7 @@ const app = express(); app.use(cors(corsOptions)); app.use(apiLimiter)
 const port = process.env.PORT || 3000
 const stripe = require('stripe')(process.env.STRIPE_API_KEY);
 const stripeWebHookSecret = process.env.STRIPE_API_WEBHOOK_SECRET;
+const stripeWebHookSecretTest = process.env.STRIPE_API_WEBHOOK_SECRET_TEST;
 
 
 app.get('/', express.json(), (req: Request, res: Response) => {
@@ -210,6 +211,28 @@ app.post('/api/stripe-new-subscription-handler', express.raw({type: 'application
   try {
     // construct the event sent by Stripe
     const event = stripe.webhooks.constructEvent(req.body, sig, stripeWebHookSecret);
+    res.status(200).send('OK');
+    // plusify this hardcoded user for demo purposes: 658b3ebc4804b9dfad81d273
+    const userId = '658b3ebc4804b9dfad81d273';
+    await UserModel.findByIdAndUpdate(userId, { plus: true }, { new: true });
+
+  } catch (err) {
+    // on error, return the error message
+    console.log(`⚠️  Webhook signature verification failed.`, err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  // need to figure out how to get user id from the request
+
+});
+
+app.post('/api/stripe-new-subscription-handler-test', express.raw({type: 'application/json'}), async (req, res) => {
+
+  const sig = req.headers['stripe-signature'];
+
+  try {
+    // construct the event sent by Stripe
+    const event = stripe.webhooks.constructEvent(req.body, sig, stripeWebHookSecretTest);
     res.status(200).send('OK');
     // plusify this hardcoded user for demo purposes: 658b3ebc4804b9dfad81d273
     const userId = '658b3ebc4804b9dfad81d273';
