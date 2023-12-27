@@ -11,6 +11,7 @@ import { DateTimeToDayPipe } from './../pipes/date-time-to-day.pipe';
 import { DateTimeToTimePipe } from '../pipes/date-time-to-time.pipe';
 import { ArtistNamesPipe } from '../pipes/artist-names.pipe';
 import { LogoComponent } from './logo/logo.component';
+import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 
 // primeng imports
 import { AvatarModule } from 'primeng/avatar';
@@ -31,6 +32,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DataViewModule } from 'primeng/dataview';
 import { DividerModule } from 'primeng/divider';
 import { ScrollTopModule } from 'primeng/scrolltop';
+import { PanelModule } from 'primeng/panel';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
     DateTimeToTimePipe,
     LogoComponent,
     ArtistNamesPipe,
+    TermsOfServiceComponent,
   ],
   imports: [
     CommonModule,
@@ -63,7 +66,8 @@ import { ScrollTopModule } from 'primeng/scrolltop';
     ProgressSpinnerModule,
     DataViewModule,
     DividerModule,
-    ScrollTopModule
+    ScrollTopModule,
+    PanelModule,
   ],
   exports: [
     // enm imports
@@ -75,6 +79,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
     ArtistNamesPipe,
     DateTimeToWordifiedMonthFullPipe,
     LogoComponent,
+    TermsOfServiceComponent,
     // primeng exports
     AvatarModule,
     AvatarGroupModule,
@@ -93,6 +98,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
     DataViewModule,
     DividerModule,
     ScrollTopModule,
+    PanelModule,
   ],
   providers: [
     // primeng providers
