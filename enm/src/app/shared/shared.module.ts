@@ -33,6 +33,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { DividerModule } from 'primeng/divider';
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { PanelModule } from 'primeng/panel';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { PanelModule } from 'primeng/panel';
     LogoComponent,
     ArtistNamesPipe,
     TermsOfServiceComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -99,6 +101,7 @@ import { PanelModule } from 'primeng/panel';
     DividerModule,
     ScrollTopModule,
     PanelModule,
+    FooterComponent,
   ],
   providers: [
     // primeng providers
