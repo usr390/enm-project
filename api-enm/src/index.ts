@@ -198,33 +198,37 @@ app.post('/api/create-checkout-session', express.json(), async (req, res) => {
     }],
     mode: 'subscription',
     ui_mode: 'embedded',
-    return_url: 'https://rarelygroovy.com/checkout/return'
+    return_url: 'https://rarelygroovy.com/checkout/return',
+    // hardcoded data for demo purposes. mimics receiving userid from client
+    metadata: {
+      userid: "658ca153e96bfae37d16305b"
+    }
   });
 
   res.send({clientSecret: session.client_secret});
 });
 
-app.post('/api/stripe-new-subscription-handler', express.raw({type: 'application/json'}), async (req, res) => {
+// app.post('/api/stripe-new-subscription-handler', express.raw({type: 'application/json'}), async (req, res) => {
 
-  const sig = req.headers['stripe-signature'];
+//   const sig = req.headers['stripe-signature'];
 
-  try {
-    // construct the event sent by Stripe
-    const event = stripe.webhooks.constructEvent(req.body, sig, stripeWebHookSecret);
-    res.status(200).send('OK');
-    // plusify this hardcoded user for demo purposes: 658b3ebc4804b9dfad81d273
-    const userId = '658b3ebc4804b9dfad81d273';
-    await UserModel.findByIdAndUpdate(userId, { plus: true }, { new: true });
+//   try {
+//     // construct the event sent by Stripe
+//     const event = stripe.webhooks.constructEvent(req.body, sig, stripeWebHookSecret);
+//     res.status(200).send('OK');
+//     // plusify this hardcoded user for demo purposes: 658b3ebc4804b9dfad81d273
+//     const userId = '658b3ebc4804b9dfad81d273';
+//     await UserModel.findByIdAndUpdate(userId, { plus: true }, { new: true });
 
-  } catch (err) {
-    // on error, return the error message
-    console.log(`⚠️  Webhook signature verification failed.`, err.message);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
-  }
+//   } catch (err) {
+//     // on error, return the error message
+//     console.log(`⚠️  Webhook signature verification failed.`, err.message);
+//     return res.status(400).send(`Webhook Error: ${err.message}`);
+//   }
 
-  // need to figure out how to get user id from the request
+//   // need to figure out how to get user id from the request
 
-});
+// });
 
 app.post('/api/stripe-new-subscription-handler-test', express.raw({type: 'application/json'}), async (req, res) => {
 
@@ -234,10 +238,18 @@ app.post('/api/stripe-new-subscription-handler-test', express.raw({type: 'applic
     // construct the event sent by Stripe
     const event = stripe.webhooks.constructEvent(req.body, sig, stripeWebHookSecretTest);
     res.status(200).send('OK');
-    // plusify this hardcoded user for demo purposes: 658b3ebc4804b9dfad81d273
-    const userId = '658b3ebc4804b9dfad81d273';
-    await UserModel.findByIdAndUpdate(userId, { plus: true }, { new: true });
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object; // this is the session object
+      const userId = session.metadata.userid; // replace 'userid' with the actual key you used
 
+      if (userId) {
+        // Update the user in your database
+        console.log(userId);
+        await UserModel.findByIdAndUpdate(userId, { plus: true }, { new: true });
+      } else {
+        console.log('No userID found in metadata');
+      }
+    }
   } catch (err) {
     // on error, return the error message
     console.log(`⚠️  Webhook signature verification failed.`, err.message);

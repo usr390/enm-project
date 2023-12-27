@@ -14,17 +14,4 @@ import * as PaymentActions from '../../state/payment/payment.actions';
 })
 export class EnmPlusPaymentSuccessfulComponent {
 
-  constructor(private store$: Store) {}
-
-  ngOnInit() {
-    this.plusifyUser();
-  }
-
-  plusifyUser() {
-    this.store$.select(AuthSelectors.selectUser).pipe(
-      take(1), 
-      tap(user => this.store$.dispatch(PaymentActions.enmPlusMonthlySubscriptionPaymentSubmission({ user })))
-    ).subscribe();
-  }
-
 }
