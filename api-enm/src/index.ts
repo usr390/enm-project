@@ -38,16 +38,17 @@ import { UserDTO } from "./models/UserDTO";
 import PromoterModel from "./models/Promoter";
 import { checkUserPlusStatus } from "./utilty/isplus";
 
-const app = express(); app.use(cors(corsOptions)); app.use(express.json()); app.use(apiLimiter)
+const app = express(); app.use(cors(corsOptions)); app.use(apiLimiter)
 const port = process.env.PORT || 3000
 const stripe = require('stripe')(process.env.STRIPE_API_KEY);
+const stripeWebHookSecret = process.env.STRIPE_API_WEBHOOK_SECRET;
 
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/', express.json(), (req: Request, res: Response) => {
   res.send('enm-api')
 })
 
-app.get('/api/enmEvents', async (req, res) => {
+app.get('/api/enmEvents', express.json(), async (req, res) => {
   const userId = req.query.userId;
 
   try {
@@ -87,8 +88,7 @@ app.get('/api/enmEvents', async (req, res) => {
   }
 });
 
-
-app.post('/api/enmEvent', async (req: Request, res: Response) => {
+app.post('/api/enmEvent', express.json(), async (req: Request, res: Response) => {
   const enmEvent = new EnmEventModel({
     tags: req.body.tags,
     venue: req.body.venue,
@@ -102,11 +102,11 @@ app.post('/api/enmEvent', async (req: Request, res: Response) => {
   res.json(await enmEvent.save());
 })
 
-app.get('/api/venues', async (req: Request, res: Response) => {
+app.get('/api/venues', express.json(), async (req: Request, res: Response) => {
   res.json(await VenueModel.find().catch(err => console.log(err)))
 })
 
-app.post('/api/venue', async (req: Request, res: Response) => {
+app.post('/api/venue', express.json(), async (req: Request, res: Response) => {
   /* summary
     used to post new venues. for now, defaulting 'state' and 'country' to hard coded values
   */
@@ -122,11 +122,11 @@ app.post('/api/venue', async (req: Request, res: Response) => {
   res.json(await venue.save());
 })
 
-app.get('/api/artists', async (req: Request, res: Response) => {
+app.get('/api/artists', express.json(), async (req: Request, res: Response) => {
   res.json(await ArtistModel.find().catch(err => console.log(err)))
 })
 
-app.post('/api/login', async (req: Request, res: Response) => {
+app.post('/api/login', express.json(), async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
@@ -154,7 +154,7 @@ app.post('/api/login', async (req: Request, res: Response) => {
   }
 });
 
-app.post('/api/create-user', async (req: Request, res: Response) => {
+app.post('/api/create-user', express.json(), async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
@@ -189,11 +189,10 @@ app.post('/api/create-user', async (req: Request, res: Response) => {
   }
 });
 
-
-app.post('/api/create-checkout-session', async (req, res) => {
+app.post('/api/create-checkout-session', express.json(), async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items: [{
-      price: 'price_1ONPu3CJybB30ZxsK1QzK55x',
+      price: 'price_1ORkd9CJybB30ZxsUYIcvfLk',
       quantity: 1,
     }],
     mode: 'subscription',
@@ -204,7 +203,29 @@ app.post('/api/create-checkout-session', async (req, res) => {
   res.send({clientSecret: session.client_secret});
 });
 
-app.put('/api/user/:id/plusify', async (req, res) => {
+app.post('/api/stripe-new-subscription-handler', express.raw({type: 'application/json'}), async (req, res) => {
+
+  const sig = req.headers['stripe-signature'];
+
+  try {
+    // construct the event sent by Stripe
+    const event = stripe.webhooks.constructEvent(req.body, sig, stripeWebHookSecret);
+    res.status(200).send('OK');
+    // plusify this hardcoded user for demo purposes: 658b3ebc4804b9dfad81d273
+    const userId = '658b3ebc4804b9dfad81d273';
+    await UserModel.findByIdAndUpdate(userId, { plus: true }, { new: true });
+
+  } catch (err) {
+    // on error, return the error message
+    console.log(`⚠️  Webhook signature verification failed.`, err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  // need to figure out how to get user id from the request
+
+});
+
+app.put('/api/user/:id/plusify', express.json(), async (req, res) => {
   try {
     const userId = req.params.id;
     const user = await UserModel.findByIdAndUpdate(userId, { plus: true }, { new: true });
@@ -218,11 +239,11 @@ app.put('/api/user/:id/plusify', async (req, res) => {
   catch (error) { res.status(500).send({ message: 'Server error' }); }
 });
 
-app.get('/api/promoters', async (req: Request, res: Response) => {
+app.get('/api/promoters', express.json(), async (req: Request, res: Response) => {
   res.json(await PromoterModel.find().catch(err => console.log(err)))
 })
 
-app.get('/api/getFurthestEventDateTime', async (req: Request, res: Response) => {
+app.get('/api/getFurthestEventDateTime', express.json(), async (req: Request, res: Response) => {
   try {
     const furthestEventDateTime = await EnmEventModel.findOne().sort({ dateTime: -1 }).select('dateTime -_id');
     res.json(furthestEventDateTime.dateTime);
