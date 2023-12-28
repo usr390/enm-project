@@ -44,8 +44,8 @@ export const selectFiltered = createSelector(
 
 // function to normalize text by removing special characters, diacritics and converting to lowercase
 const normalizeText = (text: string) => {
-  const from = "öñńäáé";
-  const to   = "onnaae";
+  const from = "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ";
+  const to   = "AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn";
   let normalizedText = text.toLowerCase();
   for (let i = 0; i < from.length; i++) {
     normalizedText = normalizedText.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
