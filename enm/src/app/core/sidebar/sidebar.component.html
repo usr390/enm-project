@@ -10,11 +10,13 @@
     <ng-template pTemplate="footer">
         <p><a class="ig" href="https://www.instagram.com/rarelygroovy/" target="_blank" rel="noopener noreferrer"><i class="pi pi-instagram" style="color: inherit"></i></a></p>
         <p *ngIf="(user$ | async)">Logged in as {{(user$ | async)?.username}}<span *ngIf="(user$ | async) && (user$ | async)?.plus"> ✨ </span></p>
-        <p *ngIf="!(user$ | async)">
-            <a [routerLink]="['/login']"  href="/">Log In</a>
-        </p>
         <p>Copyright {{currentDate | date: 'y'}} All Rights Reserved</p>
-        <p><a href="https://rarelygroovy.com/termsofservice">Terms Of Service</a><span *ngIf="!((user$ | async) && (user$ | async))?.plus"></span> &nbsp;&nbsp;<a href="/"(click)="onLogOut()">Log Out</a></p>
+        <p>
+            <a href="https://rarelygroovy.com/termsofservice">Terms Of Service</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span *ngIf="!((user$ | async) && (user$ | async))?.plus"></span> 
+            <span *ngIf="(user$ | async)"><a href="/"(click)="onLogOut()">Log Out</a></span>
+            <span *ngIf="!(user$ | async)"><a [routerLink]="['/login']"  href="/">Log In</a></span>
+        </p>
     </ng-template>
 </p-sidebar>
 <i (click)="sidebarVisible = true" class="pi pi-bars clickable-icon"></i>
