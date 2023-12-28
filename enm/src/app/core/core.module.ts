@@ -11,6 +11,7 @@ import { LogInComponent } from './login/login.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     LogInComponent,
     CreateUserComponent,
     PageNotFoundComponent,
+    PrivacyPolicyComponent,
   ],
   imports: [
     // angular modules
@@ -35,7 +37,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     SidebarComponent,
     LogInComponent,
     CreateUserComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PrivacyPolicyComponent
   ]
 })
 export class CoreModule { }
