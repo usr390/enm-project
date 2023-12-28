@@ -4,7 +4,7 @@
 
 
 <div *ngIf="enmEvent$ | async as enmEvent" class="container-sm d-flex flex-column justify-content-center align-items-center" style="margin-top: 50px">
-  <span style="font-size: 2em; color: #7b95af; text-decoration: underline;">Links</span>
+  <h2 style="color: #7b95af; text-decoration: underline;">Links</h2>
   <p-card header="" styleClass="text-center">
     <ng-container *ngIf="enmEvent.venue.link && enmEvent.venue.link !== 'pending'; else venueName">
       <h1 class="card-text">
