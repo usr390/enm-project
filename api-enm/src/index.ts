@@ -191,6 +191,7 @@ app.post('/api/create-user', express.json(), async (req: Request, res: Response)
 });
 
 app.post('/api/create-checkout-session', express.json(), async (req, res) => {
+  const userid = req.body.userid;
   const session = await stripe.checkout.sessions.create({
     line_items: [{
       price: 'price_1ORkd9CJybB30ZxsUYIcvfLk',
@@ -201,7 +202,7 @@ app.post('/api/create-checkout-session', express.json(), async (req, res) => {
     return_url: 'https://rarelygroovy.com/checkout/return',
     // hardcoded data for demo purposes. mimics receiving userid from client
     metadata: {
-      userid: "658ca153e96bfae37d16305b"
+      userid: userid
     }
   });
 
@@ -244,7 +245,6 @@ app.post('/api/stripe-new-subscription-handler-test', express.raw({type: 'applic
 
       if (userId) {
         // Update the user in your database
-        console.log(userId);
         await UserModel.findByIdAndUpdate(userId, { plus: true }, { new: true });
       } else {
         console.log('No userID found in metadata');
@@ -255,9 +255,6 @@ app.post('/api/stripe-new-subscription-handler-test', express.raw({type: 'applic
     console.log(`⚠️  Webhook signature verification failed.`, err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
-
-  // need to figure out how to get user id from the request
-
 });
 
 app.put('/api/user/:id/plusify', express.json(), async (req, res) => {
