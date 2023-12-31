@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { logInSuccessResponse, logOut, logInErrorResponse, rehydrateFromBrowserLocalStorage, createUserSuccessResponse, createUserRequest, createUserErrorResponse, logInRequest } from "./auth.actions";
+import { logInSuccessResponse, logOut, logInErrorResponse, rehydrateFromBrowserLocalStorage, createUserSuccessResponse, createUserRequest, createUserErrorResponse, logInRequest, refreshUserSuccessResponse } from "./auth.actions";
 import { enmPlusMonthlySubscriptionPaymentSuccessReponse } from "../payment/payment.actions";
 import {AuthState, initialState} from './auth.state'
 
@@ -45,6 +45,12 @@ const _authReducer = createReducer(
             user: createUserSuccessResponse.user,
             logInErrorResponse: null,
             createUserProcessing: false,
+        }
+    }),
+    on(refreshUserSuccessResponse, (state, { refreshUserSuccessResponse }) => {
+        return {
+            ...state,
+            user: refreshUserSuccessResponse.user,
         }
     }),
     on(logOut, (state) => {

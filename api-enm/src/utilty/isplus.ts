@@ -2,18 +2,18 @@ import UserModel from './../models/User'; // Make sure to replace this with the 
 
 /**
  * checks if the user with the given ID is a plus user
- * @param {string} userId - the ID of the user to check
+ * @param {string} username - the ID of the user to check
  * @returns {Promise<boolean>} - true if the user is plus, false otherwise.
  */
-export async function checkUserPlusStatus(userId) {
+export async function checkUserPlusStatus(username) {
 
-  if (!userId) {
+  if (!username) {
     return false;
   }
   
   try {
     // Find the user by ID
-    const user = await UserModel.findById(userId);
+    const user = await UserModel.findOne({ username: username })
     // If user is found and the plus field is true, return true, else false
     return user ? user.plus : false;
   } catch (error) {

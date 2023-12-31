@@ -8,6 +8,8 @@ import * as EnmEventActions from './../enmEvents/enmEvents.actions'
 import { CreateUserService } from "src/app/core/services/create-user.service";
 import { MessageService } from "primeng/api";
 import { LogInErrorResponse } from "src/app/models/logInErrorResponse.model";
+import { UserService } from "src/app/core/services/user.service";
+import { RefreshUserErrorResponse } from "src/app/models/refreshUserErrorResponse";
 
 @Injectable()
 export class AuthEffects {
@@ -29,6 +31,7 @@ export class AuthEffects {
     constructor(
         private actions$: Actions,
         private logInService: LogInService,
+        private userService: UserService,
         private createUserService: CreateUserService,
         private router: Router,
         private messageService: MessageService
@@ -81,8 +84,22 @@ export class AuthEffects {
                 this.messageService.add({ key: 'welcomeUser', severity: 'success', summary: createUserSuccessResponse.createUserSuccessResponse.user?.username, detail: this.getRandomWelcomeMessage() })
             })
         ),
-    { dispatch: false }
-);
+        { dispatch: false }
+    );
+
+    refreshUserRequest$ = createEffect(() => 
+        this.actions$.pipe(
+            ofType(AuthActions.refreshUserRequest),
+            exhaustMap(
+                (action) => this.userService.getUser(action.credentials.username).pipe(
+                    map(refreshUserSuccessResponse => AuthActions.refreshUserSuccessResponse({ refreshUserSuccessResponse })),
+                    catchError((error: RefreshUserErrorResponse) => {
+                        return of(AuthActions.logInErrorResponse({ error }))
+                    })
+                ), 
+            )
+        )
+    );
 
     logOut$ = createEffect(() =>
         this.actions$.pipe(

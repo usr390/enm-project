@@ -15,22 +15,13 @@ export class EnmEventService {
 
   user$ = this.store$.select(AuthSelectors.selectUser).pipe(take(1));
 
-  // getEnmEventList(): Observable<EnmEvent[]> {
-  //   return this.user$.pipe(
-  //     switchMap(user => {
-  //       const ENDPOINT = user?.plus ? environment.api + '/enmEvents' : environment.api + '/enmEventsRegular';
-  //       return this.http.get<EnmEvent[]>(ENDPOINT);
-  //     })
-  //   );
-  // }
-
   getEnmEventList(): Observable<EnmEvent[]> {
     return this.user$.pipe(
       switchMap(user => {
         const ENDPOINT = environment.api + '/enmEvents';
         let params = new HttpParams();
-        if (user && user.id) {
-          params = params.append('userId', user.id);
+        if (user) {
+          params = params.append('username', user.username);
         }
         return this.http.get<EnmEvent[]>(ENDPOINT, { params });
       })

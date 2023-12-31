@@ -50,10 +50,10 @@ app.get('/', express.json(), (req: Request, res: Response) => {
 })
 
 app.get('/api/enmEvents', express.json(), async (req, res) => {
-  const userId = req.query.userId;
+  const username = req.query.username;
 
   try {
-    const isPlusUser = await checkUserPlusStatus(userId);
+    const isPlusUser = await checkUserPlusStatus(username);
 
     if (isPlusUser) {
       try {
@@ -284,6 +284,28 @@ app.get('/api/getFurthestEventDateTime', express.json(), async (req: Request, re
     res.status(500).send('Error fetching furthest event');
   }
 })
+
+app.get('/api/getUser/:username', express.json(), async (req, res) => {
+  try {
+    // Extract the userid from the request parameters
+    const { username } = req.params;
+
+    // Find the user by userid, excluding the password field
+    const user = await UserModel.findOne({ username: username }, 'username plus');
+
+    if (user) {
+      // Send back the user data excluding the password
+      res.json({user: user});
+    } else {
+      // If no user is found, send a 404 response
+      res.status(404).send('User not found');
+    }
+  } catch (error) {
+    // If there's an error, send a 500 response
+    res.status(500).send(error.message);
+  }
+});
+
 
 // asynchronous initialization. keeps api from processesing requests until a successful connection to db is established
 mongoose.connect(process.env.MONGO_URL || '').then(() => { app.listen(port, () => {}); })
