@@ -15,7 +15,7 @@
   
               <!-- HERE'S THE VISIBLE CONTENT -->
   
-              <a [routerLink]="['/events', enmEvent._id]" (click)="onEnmEventListSelection(enmEvent._id)" class="event-card-link .event-card-link" href="/">
+              <a [routerLink]="isCopying ? null : ['/events', enmEvent._id]" (click)="onEnmEventListSelection(enmEvent._id)" class="event-card-link .event-card-link" href="/">
                 <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
                   <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                     <div class="flex flex-column align-items-center sm:align-items-start gap-3">
@@ -33,29 +33,31 @@
                         <h6 class="card-text promoter">{{ enmEvent.promoter.name }}</h6>
                       </div>
                       <br>
-                      <div class="[TIME DATE AND COVER] time-date-cover flex align-items-center gap-3">
-                        <span class="flex align-items-center gap-2">
-                          <span class="font-semibold">
-                            {{ enmEvent.dateTime | dateTimeToTime }} &middot;
-                            {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
-                            <!-- synonyms -->
-                            <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
-                            <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+                      <div class="click-to-copy">
+                        <div class="[TIME DATE AND COVER] time-date-cover flex align-items-center gap-3">
+                          <span class="flex align-items-center gap-2">
+                            <span class="font-semibold">
+                              {{ enmEvent.dateTime | dateTimeToTime }} &middot;
+                              {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
+                              <!-- synonyms -->
+                              <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
+                              <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+                            </span>
                           </span>
-                        </span>
-                      </div>
-  
-                      <div class="[ADDRESS] address flex align-items-center gap-3">
-                        <span class="flex align-items-center gap-2">
-                          <span class="font-semibold">
-                            <!-- synonyms -->
-                            <span class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                            <span class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
-                            <!---->
+                        </div>
+    
+                        <div class="[ADDRESS] address flex align-items-center gap-3" (click)="copyAddress($event)">
+                          <span class="flex align-items-center gap-2">
+                            <span class="font-semibold">
+                              <!-- synonyms -->
+                              <span #addressText class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                              <span #venueAddressText class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                              <!---->
+                            </span>
                           </span>
-                        </span>
+                        </div>
                       </div>
-  
+
                     </div>
                   </div>
                 </div>
@@ -102,13 +104,13 @@
                           </span>
                         </span>
                       </div>
-  
-                      <div class="[ADDRESS] flex align-items-center gap-3">
+
+                      <div class="[ADDRESS] address flex align-items-center gap-3" (click)="copyAddress($event)">
                         <span class="flex align-items-center gap-2">
                           <span class="font-semibold">
                             <!-- synonyms -->
-                            <span class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                            <span class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                            <span #addressText class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                            <span #venueAddressText class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
                             <!---->
                           </span>
                         </span>
@@ -162,12 +164,12 @@
                         </span>
                       </div>
   
-                      <div class="[ADDRESS] flex align-items-center gap-3">
+                      <div class="[ADDRESS] address flex align-items-center gap-3" (click)="copyAddress($event)">
                         <span class="flex align-items-center gap-2">
                           <span class="font-semibold">
                             <!-- synonyms -->
-                            <span class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                            <span class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                            <span #addressText class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                            <span #venueAddressText class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
                             <!---->
                           </span>
                         </span>
