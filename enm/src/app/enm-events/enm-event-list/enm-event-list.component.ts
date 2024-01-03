@@ -22,6 +22,9 @@ export class EnmEventListComponent implements OnInit {
   @ViewChild('addressText') addressTextElement!: ElementRef;
   @ViewChild('venueAddressText') venueAddressElement!: ElementRef;
 
+  // Initialize lastCopyTimestamp with 0 or some suitable default value
+  lastCopyTimestamp: number = 0;
+
   isVisible: boolean = true;
   isCopying: boolean = false;
 
@@ -69,23 +72,61 @@ export class EnmEventListComponent implements OnInit {
   }
 
   copyAddress(event: MouseEvent) {
+    // prevent the click from propagating to parent elements
     event.stopPropagation();
     this.isCopying = true;
   
-    let textToCopy = this.addressTextElement?.nativeElement.innerText || this.venueAddressElement?.nativeElement.innerText;
+    const now = Date.now();
+    const timeSinceLastCopy = now - this.lastCopyTimestamp;
+  
+    // if the time since the last copy is less than 2 seconds, do nothing
+    if (timeSinceLastCopy < 2000) {
+      return;
+    }
+  
+    // update the last copy timestamp
+    this.lastCopyTimestamp = now;
+  
+    let textToCopy = '';
+  
+    // ensure that the target is an HTMLElement before trying to access innerText
+    if (event.target instanceof HTMLElement) {
+      let targetElement = event.target;
+  
+      // if the clicked element itself contains the address text
+      if (targetElement.classList.contains('card-text')) {
+        textToCopy = targetElement.innerText.trim();
+      }
+      // if a child of the clicked element contains the address text
+      else {
+        let addressElement = targetElement.querySelector('.card-text');
+        if (addressElement && addressElement instanceof HTMLElement) {
+          textToCopy = addressElement.innerText.trim();
+        }
+      }
+    }
+  
+    // proceed with copying if text was found
     if (textToCopy) {
       navigator.clipboard.writeText(textToCopy).then(() => {
         this.messageService.add({ key: 'addressCopied', severity: 'success', summary: "Success", detail: 'Address Copied To Clipboard' });
+        this.resetCopyingFlag();
       }).catch(err => {
         console.error('Failed to copy: ', err);
         this.messageService.add({ key: 'addressCopiedError', severity: 'error', summary: "Error", detail: 'Could Not Copy Address To Clipboard' });
-        alert('Unable to copy. Please manually copy the text.');
+        this.resetCopyingFlag();
       });
     } else {
       alert('No address to copy.');
+      this.resetCopyingFlag();
     }
-  
-    setTimeout(() => this.isCopying = false, 100); 
   }
+
+  private resetCopyingFlag() {
+    setTimeout(() => this.isCopying = false, 100); // reset after a short delay
+  }
+  
+  
+  
 }
 
