@@ -27,8 +27,10 @@ export class EnmEventListComponent implements OnInit {
 
   isVisible: boolean = true;
   isCopying: boolean = false;
+  isMobile!: boolean;
 
   hideElementTemporarily() {
+    this.checkDeviceType();
     this.isVisible = false;
     setTimeout(() => this.isVisible = true, 200); // 500 ms = half a second
   }
@@ -130,6 +132,14 @@ export class EnmEventListComponent implements OnInit {
   
     // reset the isCopying flag
     setTimeout(() => this.isCopying = false, 100); // Reset after a short delay
+  }
+
+  checkDeviceType(){
+    const userAgent = window.navigator.userAgent;
+    const screenWidth = window.innerWidth;
+
+    // very basic way to identify a mobile device. might want to use a more robust approach
+    this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) || screenWidth < 768;
   }
 }
 

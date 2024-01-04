@@ -34,24 +34,45 @@
                       </div>
                       <br>
 
-                      <div class="click-to-copy clickable-address">
-                        <span class="flex align-items-center gap-2" >
-                          <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)" pTooltip="Click To Copy Address" tooltipPosition="bottom">
-                            <span class="datetime">
-                              {{ enmEvent.dateTime | dateTimeToTime }} &middot; {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
-                            </span>
-                            <!-- synonyms -->
-                            <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
-                            <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
-                            <!-- synonyms, address --> <br>
-                            <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                            <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
-                            <!---->
-                          </div>
-                        </span>
+                      <!-- This will only show if the user is on a mobile device -->
+                      <div *ngIf="isMobile">
+                        <div class="click-to-copy clickable-address">
+                          <span class="flex align-items-center gap-2" >
+                            <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)">
+                              <span class="datetime">
+                                {{ enmEvent.dateTime | dateTimeToTime }} &middot; {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
+                              </span>
+                              <!-- synonyms -->
+                              <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
+                              <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+                              <!-- synonyms, address --> <br>
+                              <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                              <!---->
+                            </div>
+                          </span>
+                        </div>
                       </div>
 
-
+                      <!-- This will only show if the user is NOT on a mobile device -->
+                      <div *ngIf="!isMobile">
+                        <div class="click-to-copy clickable-address">
+                          <span class="flex align-items-center gap-2" >
+                            <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)" pTooltip="Click To Copy Address" tooltipPosition="bottom">
+                              <span class="datetime">
+                                {{ enmEvent.dateTime | dateTimeToTime }} &middot; {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
+                              </span>
+                              <!-- synonyms -->
+                              <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
+                              <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+                              <!-- synonyms, address --> <br>
+                              <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                              <!---->
+                            </div>
+                          </span>
+                        </div>
+                      </div>
 
                     </div>
                   </div>
@@ -89,21 +110,44 @@
                       </div>
                       <br>
 
-                      <div class="click-to-copy clickable-address">
-                        <span class="flex align-items-center gap-2" >
-                          <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)" pTooltip="Click To Copy Address" tooltipPosition="bottom">
-                            <span class="datetime">
-                              {{ enmEvent.dateTime | dateTimeToTime }} &middot; {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
-                            </span>
-                            <!-- synonyms -->
-                            <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
-                            <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
-                            <!-- synonyms, address --> <br>
-                            <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                            <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
-                            <!---->
-                          </div>
-                        </span>
+                      <!-- This will only show if the user is on a mobile device -->
+                      <div *ngIf="isMobile">
+                        <div class="click-to-copy clickable-address">
+                          <span class="flex align-items-center gap-2" >
+                            <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)">
+                              <span class="datetime">
+                                {{ enmEvent.dateTime | dateTimeToTime }} &middot; {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
+                              </span>
+                              <!-- synonyms -->
+                              <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
+                              <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+                              <!-- synonyms, address --> <br>
+                              <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                              <!---->
+                            </div>
+                          </span>
+                        </div>
+                      </div>
+
+                      <!-- This will only show if the user is NOT on a mobile device -->
+                      <div *ngIf="!isMobile">
+                        <div class="click-to-copy clickable-address">
+                          <span class="flex align-items-center gap-2" >
+                            <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)" pTooltip="Click To Copy Address" tooltipPosition="bottom">
+                              <span class="datetime">
+                                {{ enmEvent.dateTime | dateTimeToTime }} &middot; {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
+                              </span>
+                              <!-- synonyms -->
+                              <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
+                              <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+                              <!-- synonyms, address --> <br>
+                              <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                              <!---->
+                            </div>
+                          </span>
+                        </div>
                       </div>
   
                     </div>
@@ -143,21 +187,44 @@
                       </div>
                       <br>
                       
-                      <div class="click-to-copy clickable-address">
-                        <span class="flex align-items-center gap-2" >
-                          <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)" pTooltip="Click To Copy Address" tooltipPosition="bottom">
-                            <span class="datetime">
-                              {{ enmEvent.dateTime | dateTimeToTime }} &middot; {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
-                            </span>
-                            <!-- synonyms -->
-                            <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
-                            <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
-                            <!-- synonyms, address --> <br>
-                            <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                            <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
-                            <!---->
-                          </div>
-                        </span>
+                      <!-- This will only show if the user is on a mobile device -->
+                      <div *ngIf="isMobile">
+                        <div class="click-to-copy clickable-address">
+                          <span class="flex align-items-center gap-2" >
+                            <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)">
+                              <span class="datetime">
+                                {{ enmEvent.dateTime | dateTimeToTime }} &middot; {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
+                              </span>
+                              <!-- synonyms -->
+                              <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
+                              <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+                              <!-- synonyms, address --> <br>
+                              <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                              <!---->
+                            </div>
+                          </span>
+                        </div>
+                      </div>
+
+                      <!-- This will only show if the user is NOT on a mobile device -->
+                      <div *ngIf="!isMobile">
+                        <div class="click-to-copy clickable-address">
+                          <span class="flex align-items-center gap-2" >
+                            <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)" pTooltip="Click To Copy Address" tooltipPosition="bottom">
+                              <span class="datetime">
+                                {{ enmEvent.dateTime | dateTimeToTime }} &middot; {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
+                              </span>
+                              <!-- synonyms -->
+                              <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
+                              <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+                              <!-- synonyms, address --> <br>
+                              <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                              <!---->
+                            </div>
+                          </span>
+                        </div>
                       </div>
   
                     </div>
