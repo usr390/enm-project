@@ -50,8 +50,8 @@
                           <span class="flex align-items-center gap-2">
                             <span class="font-semibold">
                               <!-- synonyms -->
-                              <span #addressText class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                              <span #venueAddressText class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                              <span #addressText pTooltip="Click To Copy Address" tooltipPosition="top" class="card-text clickable-address" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                              <span #venueAddressText pTooltip="Click To Copy Address" tooltipPosition="top" class="card-text clickable-address" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
                               <!---->
                             </span>
                           </span>
@@ -109,8 +109,8 @@
                         <span class="flex align-items-center gap-2">
                           <span class="font-semibold">
                             <!-- synonyms -->
-                            <span #addressText class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                            <span #venueAddressText class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                            <span #addressText pTooltip="Click To Copy Address" tooltipPosition="top" class="card-text clickable-address" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                            <span #venueAddressText pTooltip="Click To Copy Address" tooltipPosition="top" class="card-text clickable-address" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
                             <!---->
                           </span>
                         </span>
@@ -168,8 +168,8 @@
                         <span class="flex align-items-center gap-2">
                           <span class="font-semibold">
                             <!-- synonyms -->
-                            <span #addressText class="card-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                            <span #venueAddressText class="card-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                            <span #addressText pTooltip="Click To Copy Address" tooltipPosition="top" class="card-text clickable-address" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                            <span #venueAddressText pTooltip="Click To Copy Address" tooltipPosition="top" class="card-text clickable-address" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
                             <!---->
                           </span>
                         </span>
@@ -205,3 +205,4 @@
   <p-scrollTop [style]="{'background-color': '#7254f3', 'color': 'white', 'border-color': '#0056b3'}"></p-scrollTop>
 
 </div>
+

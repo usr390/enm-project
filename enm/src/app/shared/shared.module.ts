@@ -34,6 +34,7 @@ import { DividerModule } from 'primeng/divider';
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { PanelModule } from 'primeng/panel';
 import { FooterComponent } from './footer/footer.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { FooterComponent } from './footer/footer.component';
     DividerModule,
     ScrollTopModule,
     PanelModule,
+    TooltipModule
   ],
   exports: [
     // enm imports
@@ -102,6 +104,7 @@ import { FooterComponent } from './footer/footer.component';
     ScrollTopModule,
     PanelModule,
     FooterComponent,
+    TooltipModule
   ],
   providers: [
     // primeng providers
