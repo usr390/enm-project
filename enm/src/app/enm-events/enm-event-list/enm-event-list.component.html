@@ -33,30 +33,25 @@
                         <h6 class="card-text promoter">{{ enmEvent.promoter.name }}</h6>
                       </div>
                       <br>
-                      <div class="click-to-copy">
-                        <div class="[TIME DATE AND COVER] time-date-cover flex align-items-center gap-3">
-                          <span class="flex align-items-center gap-2">
-                            <span class="font-semibold">
-                              {{ enmEvent.dateTime | dateTimeToTime }} &middot;
-                              {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
-                              <!-- synonyms -->
-                              <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
-                              <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+
+                      <div class="click-to-copy clickable-address">
+                        <span class="flex align-items-center gap-2" >
+                          <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)" pTooltip="Click To Copy Address" tooltipPosition="bottom">
+                            <span class="datetime">
+                              {{ enmEvent.dateTime | dateTimeToTime }} &middot; {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
                             </span>
-                          </span>
-                        </div>
-    
-                        <div class="[ADDRESS] address flex align-items-center gap-3" (click)="copyAddress($event)">
-                          <span class="flex align-items-center gap-2">
-                            <span class="font-semibold">
-                              <!-- synonyms -->
-                              <span #addressText pTooltip="Click To Copy Address" tooltipPosition="top" class="card-text clickable-address" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                              <span #venueAddressText pTooltip="Click To Copy Address" tooltipPosition="top" class="card-text clickable-address" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
-                              <!---->
-                            </span>
-                          </span>
-                        </div>
+                            <!-- synonyms -->
+                            <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
+                            <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+                            <!-- synonyms, address --> <br>
+                            <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                            <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                            <!---->
+                          </div>
+                        </span>
                       </div>
+
+
 
                     </div>
                   </div>
@@ -93,26 +88,21 @@
                         <h6 class="card-text">{{ enmEvent.promoter.name }}</h6>
                       </div>
                       <br>
-                      <div class="[TIME DATE AND COVER] flex align-items-center gap-3">
-                        <span class="flex align-items-center gap-2">
-                          <span class="font-semibold">
-                            {{ enmEvent.dateTime | dateTimeToTime }} &middot;
-                            {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
+
+                      <div class="click-to-copy clickable-address">
+                        <span class="flex align-items-center gap-2" >
+                          <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)" pTooltip="Click To Copy Address" tooltipPosition="bottom">
+                            <span class="datetime">
+                              {{ enmEvent.dateTime | dateTimeToTime }} &middot; {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
+                            </span>
                             <!-- synonyms -->
                             <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
                             <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
-                          </span>
-                        </span>
-                      </div>
-
-                      <div class="[ADDRESS] address flex align-items-center gap-3" (click)="copyAddress($event)">
-                        <span class="flex align-items-center gap-2">
-                          <span class="font-semibold">
-                            <!-- synonyms -->
-                            <span #addressText pTooltip="Click To Copy Address" tooltipPosition="top" class="card-text clickable-address" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                            <span #venueAddressText pTooltip="Click To Copy Address" tooltipPosition="top" class="card-text clickable-address" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                            <!-- synonyms, address --> <br>
+                            <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                            <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
                             <!---->
-                          </span>
+                          </div>
                         </span>
                       </div>
   
@@ -152,26 +142,21 @@
                         <h6 class="card-text">{{ enmEvent.promoter.name }}</h6>
                       </div>
                       <br>
-                      <div class="[TIME DATE AND COVER] flex align-items-center gap-3">
-                        <span class="flex align-items-center gap-2">
-                          <span class="font-semibold">
-                            {{ enmEvent.dateTime | dateTimeToTime }} &middot;
-                            {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
+                      
+                      <div class="click-to-copy clickable-address">
+                        <span class="flex align-items-center gap-2" >
+                          <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)" pTooltip="Click To Copy Address" tooltipPosition="bottom">
+                            <span class="datetime">
+                              {{ enmEvent.dateTime | dateTimeToTime }} &middot; {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
+                            </span>
                             <!-- synonyms -->
                             <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
                             <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
-                          </span>
-                        </span>
-                      </div>
-  
-                      <div class="[ADDRESS] address flex align-items-center gap-3" (click)="copyAddress($event)">
-                        <span class="flex align-items-center gap-2">
-                          <span class="font-semibold">
-                            <!-- synonyms -->
-                            <span #addressText pTooltip="Click To Copy Address" tooltipPosition="top" class="card-text clickable-address" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                            <span #venueAddressText pTooltip="Click To Copy Address" tooltipPosition="top" class="card-text clickable-address" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+                            <!-- synonyms, address --> <br>
+                            <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                            <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
                             <!---->
-                          </span>
+                          </div>
                         </span>
                       </div>
   

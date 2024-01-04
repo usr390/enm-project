@@ -72,61 +72,64 @@ export class EnmEventListComponent implements OnInit {
   }
 
   copyAddress(event: MouseEvent) {
-    // prevent the click from propagating to parent elements
-    event.stopPropagation();
-    this.isCopying = true;
+    event.stopPropagation(); // Prevent navigating to another route
   
+    // rate limiting logic
     const now = Date.now();
     const timeSinceLastCopy = now - this.lastCopyTimestamp;
-  
-    // if the time since the last copy is less than 2 seconds, do nothing
-    if (timeSinceLastCopy < 2000) {
+    if (timeSinceLastCopy < 2000) {  // 2-second limit
       return;
     }
-  
-    // update the last copy timestamp
     this.lastCopyTimestamp = now;
+    this.isCopying = true;
   
+    // initialize variables to hold the text elements
     let textToCopy = '';
+    const target = event.target as HTMLElement;
+  
+    // function to recursively search for parent with a specific class
+    function findParentWithClass(element: HTMLElement, className: string): HTMLElement | null {
+      while (element && !element.classList.contains(className)) {
+        if (element.parentElement) {
+          element = element.parentElement;
+        } else {
+          return null;
+        }
+      }
+      return element;
+    }
   
     // ensure that the target is an HTMLElement before trying to access innerText
-    if (event.target instanceof HTMLElement) {
-      let targetElement = event.target;
+    if (target) {
+      const clickableArea = findParentWithClass(target, 'click-to-copy');
   
-      // if the clicked element itself contains the address text
-      if (targetElement.classList.contains('card-text')) {
-        textToCopy = targetElement.innerText.trim();
-      }
-      // if a child of the clicked element contains the address text
-      else {
-        let addressElement = targetElement.querySelector('.card-text');
+      // check if the clicked area or its children have the address classes
+      if (clickableArea) {
+        const addressElement = clickableArea.querySelector('.card-text.address-text');
+        const venueAddressElement = clickableArea.querySelector('.card-text.venue-address-text');
+  
         if (addressElement && addressElement instanceof HTMLElement) {
           textToCopy = addressElement.innerText.trim();
+        } else if (venueAddressElement && venueAddressElement instanceof HTMLElement) {
+          textToCopy = venueAddressElement.innerText.trim();
         }
       }
     }
   
-    // proceed with copying if text was found
+    // copy the text if found
     if (textToCopy) {
       navigator.clipboard.writeText(textToCopy).then(() => {
         this.messageService.add({ key: 'addressCopied', severity: 'success', summary: "Success", detail: 'Address Copied To Clipboard' });
-        this.resetCopyingFlag();
       }).catch(err => {
         console.error('Failed to copy: ', err);
         this.messageService.add({ key: 'addressCopiedError', severity: 'error', summary: "Error", detail: 'Could Not Copy Address To Clipboard' });
-        this.resetCopyingFlag();
       });
     } else {
       alert('No address to copy.');
-      this.resetCopyingFlag();
     }
+  
+    // reset the isCopying flag
+    setTimeout(() => this.isCopying = false, 100); // Reset after a short delay
   }
-
-  private resetCopyingFlag() {
-    setTimeout(() => this.isCopying = false, 100); // reset after a short delay
-  }
-  
-  
-  
 }
 
