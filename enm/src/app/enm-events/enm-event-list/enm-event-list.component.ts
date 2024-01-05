@@ -131,7 +131,7 @@ export class EnmEventListComponent implements OnInit {
     }
   
     // reset the isCopying flag
-    setTimeout(() => this.isCopying = false, 100); // Reset after a short delay
+    setTimeout(() => this.isCopying = false, 2000); // Reset after a short delay
   }
 
   checkDeviceType(){
