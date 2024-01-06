@@ -117,7 +117,7 @@ export class EnmEventListComponent implements OnInit {
         const now = Date.now();
         if (now - this.lastToastTimestamp >= 2000) { // 2-second limit for toasts
           this.lastToastTimestamp = now;
-          this.messageService.add({ key: 'addressCopied', severity: 'success', summary: "Success", detail: 'Address Copied To Clipboard' });
+          this.messageService.add({ key: 'addressCopied', severity: 'info', summary: "Address Copied", detail: "Ready to paste" });
         }
       }).catch(err => {
         // Handle copy errors

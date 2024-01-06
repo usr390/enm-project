@@ -86,7 +86,7 @@ export class EnmEventPageComponent implements OnInit {
     // copy the text if found
     if (textToCopy) {
       navigator.clipboard.writeText(textToCopy).then(() => {
-        this.messageService.add({ key: 'addressCopied', severity: 'success', summary: "Success", detail: 'Address Copied To Clipboard' });
+        this.messageService.add({ key: 'addressCopied', severity: 'info', summary: "Address Copied", detail: 'Ready To Paste' });
       }).catch(err => {
         console.error('Failed to copy: ', err);
         this.messageService.add({ key: 'addressCopiedError', severity: 'error', summary: "Error", detail: 'Could Not Copy Address To Clipboard' });
