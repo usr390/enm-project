@@ -24,6 +24,7 @@ export class EnmEventListComponent implements OnInit {
 
   // Initialize lastCopyTimestamp with 0 or some suitable default value
   lastCopyTimestamp: number = 0;
+  lastToastTimestamp: number = 0;
 
   isVisible: boolean = true;
   isCopying: boolean = false;
@@ -74,22 +75,13 @@ export class EnmEventListComponent implements OnInit {
   }
 
   copyAddress(event: MouseEvent) {
-    event.stopPropagation(); // Prevent navigating to another route
-  
-    // rate limiting logic
-    const now = Date.now();
-    const timeSinceLastCopy = now - this.lastCopyTimestamp;
-    if (timeSinceLastCopy < 2000) {  // 2-second limit
-      return;
-    }
-    this.lastCopyTimestamp = now;
-    this.isCopying = true;
-  
-    // initialize variables to hold the text elements
+    event.stopPropagation();  // Prevent the event from bubbling up
+
+    // Initialize the text variable
     let textToCopy = '';
     const target = event.target as HTMLElement;
-  
-    // function to recursively search for parent with a specific class
+
+    // Function to recursively search for parent with a specific class
     function findParentWithClass(element: HTMLElement, className: string): HTMLElement | null {
       while (element && !element.classList.contains(className)) {
         if (element.parentElement) {
@@ -100,16 +92,16 @@ export class EnmEventListComponent implements OnInit {
       }
       return element;
     }
-  
-    // ensure that the target is an HTMLElement before trying to access innerText
+
+    // Check if the target is within the clickable area
     if (target) {
       const clickableArea = findParentWithClass(target, 'click-to-copy');
-  
-      // check if the clicked area or its children have the address classes
+
+      // Extract the text if the clicked area is correct
       if (clickableArea) {
         const addressElement = clickableArea.querySelector('.card-text.address-text');
         const venueAddressElement = clickableArea.querySelector('.card-text.venue-address-text');
-  
+
         if (addressElement && addressElement instanceof HTMLElement) {
           textToCopy = addressElement.innerText.trim();
         } else if (venueAddressElement && venueAddressElement instanceof HTMLElement) {
@@ -117,22 +109,29 @@ export class EnmEventListComponent implements OnInit {
         }
       }
     }
-  
-    // copy the text if found
+
+    // Copy the text if found
     if (textToCopy) {
       navigator.clipboard.writeText(textToCopy).then(() => {
-        this.messageService.add({ key: 'addressCopied', severity: 'success', summary: "Success", detail: 'Address Copied To Clipboard' });
+        // Display the toast only if enough time has passed
+        const now = Date.now();
+        if (now - this.lastToastTimestamp >= 2000) { // 2-second limit for toasts
+          this.lastToastTimestamp = now;
+          this.messageService.add({ key: 'addressCopied', severity: 'success', summary: "Success", detail: 'Address Copied To Clipboard' });
+        }
       }).catch(err => {
+        // Handle copy errors
         console.error('Failed to copy: ', err);
-        this.messageService.add({ key: 'addressCopiedError', severity: 'error', summary: "Error", detail: 'Could Not Copy Address To Clipboard' });
       });
     } else {
       alert('No address to copy.');
     }
-  
-    // reset the isCopying flag
-    setTimeout(() => this.isCopying = false, 2000); // Reset after a short delay
+
+    // Prevent navigation for a longer period
+    this.isCopying = true;
+    setTimeout(() => this.isCopying = false, 100);  // Match this with your toast rate limit
   }
+  
 
   checkDeviceType(){
     const userAgent = window.navigator.userAgent;
