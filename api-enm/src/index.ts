@@ -90,9 +90,11 @@ app.get('/api/enmEvents', express.json(), async (req, res) => {
 });
 
 app.post('/api/enmEvent', express.json(), async (req: Request, res: Response) => {
+  console.log(req.body)
   const enmEvent = new EnmEventModel({
     tags: req.body.tags,
     venue: req.body.venue,
+    date: req.body.date,
     dateTime: req.body.dateTime,
     cover: req.body.cover,
     artists: req.body.artists,

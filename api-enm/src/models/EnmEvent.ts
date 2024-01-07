@@ -16,6 +16,7 @@ const Schema = mongoose.Schema;
 const EnmEventSchema = new Schema({
     tags: [String],
     venue: VenueSchema,
+    date: Date,
     dateTime: Date,
     cover: Number,
     artists: [ArtistSchema],
