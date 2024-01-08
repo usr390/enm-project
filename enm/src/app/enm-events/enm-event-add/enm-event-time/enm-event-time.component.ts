@@ -60,7 +60,7 @@ export class EnmEventTimeComponent {
 
   //#region utility
   setUpLocalFormControls() {
-    this.enmEventAddForm.setControl('startTime', this.fb.control('', [Validators.required]));
+    this.enmEventAddForm.setControl('startTime', this.fb.control(''));
   }
   tearDownLocalFormControls() {
   }
@@ -73,10 +73,15 @@ export class EnmEventTimeComponent {
   addDateTimeToForm() { 
     let date = DateTime.fromJSDate(this.enmEventAddForm.get('date')!.value)
     let time = DateTime.fromJSDate(this.enmEventAddForm.get('startTime')!.value)
-    this.enmEventAddForm.setControl('dateTime', this.fb.control(date.set({ 
-      hour: time.hour, 
-      minute: time.minute 
-    }).toUTC().toISO()));
+    if (time.hour) {
+      this.enmEventAddForm.setControl('dateTime', this.fb.control(date.set({ 
+        hour: time.hour, 
+        minute: time.minute 
+      }).toUTC().toISO()));
+    } else {
+      // no time was given, just submit with date
+      this.enmEventAddForm.setControl('dateTime', this.fb.control(date.toUTC().toISO()))
+    }
   }
   dropHelperControls() {
   }

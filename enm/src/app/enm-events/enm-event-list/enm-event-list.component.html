@@ -39,9 +39,9 @@
                         <div class="click-to-copy clickable-address">
                           <span class="flex align-items-center gap-2" >
                             <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)">
-                              <span class="datetime">
-                                {{ enmEvent.dateTime | dateTimeToTime }} &middot; {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
-                              </span>
+                              <!-- this condition checks that a time was provided. it displays it if yes-->
+                              <span *ngIf="enmEvent.dateTime != enmEvent.date" class="datetime">{{ enmEvent.dateTime | dateTimeToTime }} &middot;</span>
+                              <span *ngIf="enmEvent.dateTime" class="datetime">{{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}</span>
                               <!-- synonyms -->
                               <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
                               <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
@@ -115,9 +115,9 @@
                         <div class="click-to-copy clickable-address">
                           <span class="flex align-items-center gap-2" >
                             <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)">
-                              <span class="datetime">
-                                {{ enmEvent.dateTime | dateTimeToTime }} &middot; {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
-                              </span>
+                              <!-- this condition checks that a time was provided. it displays it if yes-->
+                              <span *ngIf="enmEvent.dateTime != enmEvent.date" class="datetime">{{ enmEvent.dateTime | dateTimeToTime }} &middot;</span>
+                              <span *ngIf="enmEvent.dateTime" class="datetime">{{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}</span>
                               <!-- synonyms -->
                               <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
                               <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
@@ -135,9 +135,9 @@
                         <div class="click-to-copy clickable-address">
                           <span class="flex align-items-center gap-2" >
                             <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)" pTooltip="Click To Copy Address" tooltipPosition="bottom">
-                              <span class="datetime">
-                                {{ enmEvent.dateTime | dateTimeToTime }} &middot; {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
-                              </span>
+                              <!-- this condition checks that a time was provided. it displays it if yes-->
+                              <span *ngIf="enmEvent.dateTime != enmEvent.date" class="datetime">{{ enmEvent.dateTime | dateTimeToTime }} &middot;</span>
+                              <span *ngIf="enmEvent.dateTime" class="datetime">{{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}</span>
                               <!-- synonyms -->
                               <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
                               <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
@@ -192,9 +192,9 @@
                         <div class="click-to-copy clickable-address">
                           <span class="flex align-items-center gap-2" >
                             <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)">
-                              <span class="datetime">
-                                {{ enmEvent.dateTime | dateTimeToTime }} &middot; {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
-                              </span>
+                              <!-- this condition checks that a time was provided. it displays it if yes-->
+                              <span *ngIf="enmEvent.dateTime != enmEvent.date" class="datetime">{{ enmEvent.dateTime | dateTimeToTime }} &middot;</span>
+                              <span *ngIf="enmEvent.dateTime" class="datetime">{{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}</span>
                               <!-- synonyms -->
                               <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
                               <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
@@ -212,9 +212,9 @@
                         <div class="click-to-copy clickable-address">
                           <span class="flex align-items-center gap-2" >
                             <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)" pTooltip="Click To Copy Address" tooltipPosition="bottom">
-                              <span class="datetime">
-                                {{ enmEvent.dateTime | dateTimeToTime }} &middot; {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}
-                              </span>
+                              <!-- this condition checks that a time was provided. it displays it if yes-->
+                              <span *ngIf="enmEvent.dateTime != enmEvent.date" class="datetime">{{ enmEvent.dateTime | dateTimeToTime }} &middot;</span>
+                              <span *ngIf="enmEvent.dateTime" class="datetime">{{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }}</span>
                               <!-- synonyms -->
                               <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
                               <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
