@@ -35,6 +35,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
 import { PanelModule } from 'primeng/panel';
 import { FooterComponent } from './footer/footer.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { DoorTimeToTimePipe } from './door-time-to-time.pipe';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { TooltipModule } from 'primeng/tooltip';
     DateTimeToWordifiedMonthFullPipe,
     DateTimeToDayPipe,
     DateTimeToTimePipe,
+    DoorTimeToTimePipe,
     LogoComponent,
     ArtistNamesPipe,
     TermsOfServiceComponent,
@@ -80,6 +82,7 @@ import { TooltipModule } from 'primeng/tooltip';
     DateTimeToWordifiedMonthPipe,
     DateTimeToDayPipe,
     DateTimeToTimePipe,
+    DoorTimeToTimePipe,
     ArtistNamesPipe,
     DateTimeToWordifiedMonthFullPipe,
     LogoComponent,
