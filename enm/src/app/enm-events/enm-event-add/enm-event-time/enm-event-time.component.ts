@@ -60,12 +60,14 @@ export class EnmEventTimeComponent {
 
   //#region utility
   setUpLocalFormControls() {
+    this.enmEventAddForm.setControl('doorTime', this.fb.control(''));
     this.enmEventAddForm.setControl('startTime', this.fb.control(''));
   }
   tearDownLocalFormControls() {
   }
   tearDownExistingFormControls() {
-    this.enmEventAddForm.setControl('startTime', this.fb.control(this.defaultTime, [Validators.required]));
+    this.enmEventAddForm.setControl('doorTime', this.fb.control(this.defaultTime));
+    this.enmEventAddForm.setControl('startTime', this.fb.control(this.defaultTime));
     this.enmEventAddForm.setControl('date', this.fb.control('00/00/0000', [Validators.required]));
     this.enmEventAddForm.removeControl('venue');
     this.enmEventAddForm.removeControl('tags');

@@ -95,6 +95,7 @@ app.post('/api/enmEvent', express.json(), async (req: Request, res: Response) =>
     tags: req.body.tags,
     venue: req.body.venue,
     date: req.body.date,
+    doorTime: req.body.doorTime,
     dateTime: req.body.dateTime,
     cover: req.body.cover,
     artists: req.body.artists,

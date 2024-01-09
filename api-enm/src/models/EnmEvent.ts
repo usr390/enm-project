@@ -17,6 +17,7 @@ const EnmEventSchema = new Schema({
     tags: [String],
     venue: VenueSchema,
     date: Date,
+    doorTime: Date,
     dateTime: Date,
     cover: Number,
     artists: [ArtistSchema],

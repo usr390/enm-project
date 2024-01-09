@@ -25,6 +25,7 @@ export interface EnmEvent {
     "cover": number,
     //
     "date": string,
+    "doorTime": string,
     "dateTime": string;
     "artists": Artist[];
     "creationDateTime": string,
