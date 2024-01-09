@@ -9,7 +9,7 @@ export class DoorTimeToTimePipe implements PipeTransform {
   transform(doors: string) {
     let timeString = DateTime.fromISO(doors).toFormat('t');
     console.log(timeString);
-    return timeString.replace('AM', '').replace('PM', '').replace(' ', '');
+    return timeString.replace('AM', 'am').replace('PM', 'pm').replace(' ', '');
   }
 
 }
