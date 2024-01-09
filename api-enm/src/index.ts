@@ -51,7 +51,18 @@ app.get('/', express.json(), (req: Request, res: Response) => {
 
 app.get('/api/enmEvents', express.json(), async (req, res) => {
   const username = req.query.username;
-
+  console.log({
+    timestamp: new Date().toISOString(),
+    method: req.method,
+    url: req.url,
+    query: req.query,
+    status: res.statusCode, // Note: This might need to be logged after response is sent
+    responseTime: `${res.getHeader('X-Response-Time')}ms`, // Requires middleware to set this header
+    headers: req.headers, // Be cautious about sensitive data
+    clientIP: req.ip,
+    userAgent: req.get('User-Agent')
+    // ... any other properties you find relevant
+  });
   try {
     const isPlusUser = await checkUserPlusStatus(username);
 
