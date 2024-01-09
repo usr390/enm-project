@@ -56,7 +56,7 @@ export class EnmEventCoverComponent {
 
   //#region utility
   setUpLocalFormControls() {
-    this.enmEventAddForm.setControl('cover', this.fb.control('', [Validators.required]));
+    this.enmEventAddForm.setControl('cover', this.fb.control(''));
   }
   tearDownLocalFormControls() {
   }
