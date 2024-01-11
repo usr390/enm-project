@@ -37,7 +37,7 @@ export class EnmPlusPaymentScreenComponent {
   checkout: any;
 
   ngOnInit() {
-    this.currentUser$.pipe(take(1)).subscribe(user => { if (user) this.initializeStripe(user.id) });
+    this.currentUser$.pipe(take(1)).subscribe(user => { if (user) this.initializeStripe(user.id); else this.router.navigate(['/create-user']) });
     this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth());
   }
 
