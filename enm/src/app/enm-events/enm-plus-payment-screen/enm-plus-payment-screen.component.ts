@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 import * as PaymentActions from './../../state/payment/payment.actions'
 import * as PaymentSelectors from './../../state/payment/payment.selectors'
 import * as AuthSelectors from './../../state/auth/auth.selectors'
+import { NavigationService } from 'src/app/core/payment-screen-skipped.service';
 
 const STRIPE_KEY = environment.stripeKey;
 declare var Stripe: any;
@@ -25,7 +26,8 @@ export class EnmPlusPaymentScreenComponent {
   constructor(
     private enmPlusPaymentService: EnmPlusPaymentService,
     private router: Router,
-    private store$: Store<AppState>
+    private store$: Store<AppState>,
+    private navigationService: NavigationService
   ) {}
 
   // checkoutSession$ = this.enmPlusPaymentService.checkoutSession$;
@@ -37,7 +39,7 @@ export class EnmPlusPaymentScreenComponent {
   checkout: any;
 
   ngOnInit() {
-    this.currentUser$.pipe(take(1)).subscribe(user => { if (user) this.initializeStripe(user.id); else this.router.navigate(['/create-user'], { replaceUrl: true }) });
+    this.currentUser$.pipe(take(1)).subscribe(user => { if (user) this.initializeStripe(user.id); else {this.navigationService.page2Skipped = true;this.router.navigate(['/create-user'], { replaceUrl: true }) }});
     this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth());
   }
 

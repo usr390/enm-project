@@ -10,6 +10,7 @@ import { MessageService } from "primeng/api";
 import { LogInErrorResponse } from "src/app/models/logInErrorResponse.model";
 import { UserService } from "src/app/core/services/user.service";
 import { RefreshUserErrorResponse } from "src/app/models/refreshUserErrorResponse";
+import { NavigationService } from "src/app/core/payment-screen-skipped.service";
 
 @Injectable()
 export class AuthEffects {
@@ -34,7 +35,8 @@ export class AuthEffects {
         private userService: UserService,
         private createUserService: CreateUserService,
         private router: Router,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private navigationService: NavigationService
     ) {}
 
     logInRequest$ = createEffect(() => 
@@ -80,7 +82,12 @@ export class AuthEffects {
         this.actions$.pipe(
             ofType(AuthActions.createUserSuccessResponse),
             tap(createUserSuccessResponse => {
-                this.router.navigate(['/'], { replaceUrl: true })
+                if (this.navigationService.page2Skipped) {
+                    this.navigationService.page2Skipped = false;
+                    this.router.navigate(['/plus'], { replaceUrl: true });
+                } else {
+                    this.router.navigate(['/'], { replaceUrl: true })
+                }
                 this.messageService.add({ key: 'welcomeUser', severity: 'success', summary: createUserSuccessResponse.createUserSuccessResponse.user?.username, detail: this.getRandomWelcomeMessage() })
             })
         ),
