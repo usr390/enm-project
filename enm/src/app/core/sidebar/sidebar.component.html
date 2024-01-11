@@ -3,9 +3,10 @@
         <p>
             Rarelygroovy, the valley's premium event listing service
         </p>
-        <p *ngIf="(user$ | async)">
-            <span *ngIf="(user$ | async) && !(user$ | async)?.plus"><a [routerLink]="['/plus']"  href="/">Rarelygroovy+</a></span>
-        </p>
+        <span *ngIf="showPlusLink()">
+            <a [routerLink]="['/plus']" href="/">Rarelygroovy+</a>
+        </span>
+        
     </ng-template>
     <ng-template pTemplate="footer">
         <p><a class="ig" href="https://www.instagram.com/rarelygroovy/" target="_blank" rel="noopener noreferrer"><i class="pi pi-instagram" style="color: inherit"></i></a></p>

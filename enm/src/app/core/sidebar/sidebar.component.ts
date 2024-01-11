@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AuthState } from 'src/app/state/auth/auth.state';
 import * as AuthActions from './../../state/auth/auth.actions';
 import * as AuthSelectors from './../../state/auth/auth.selectors';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -23,5 +24,13 @@ export class SidebarComponent {
 
   onLogOut() {
     this.store$.dispatch(AuthActions.logOut());
+  }
+
+  showPlusLink(): boolean {
+    let user: any;
+    this.user$.pipe(take(1)).subscribe(u => user = u); // Subscribe to the user$ Observable to get the latest value
+
+    // Return true if user is not logged in or user is not a plus member
+    return !user || !user.plus;
   }
 }
