@@ -56,7 +56,7 @@ export class AuthEffects {
         this.actions$.pipe(
         ofType(AuthActions.logInSuccessResponse),
         concatMap(_ => {
-            this.router.navigate(['/']);
+            this.router.navigate(['/'], { replaceUrl: true });
             return of(EnmEventActions.enmEventListRequest());
         }))
     );
@@ -80,7 +80,7 @@ export class AuthEffects {
         this.actions$.pipe(
             ofType(AuthActions.createUserSuccessResponse),
             tap(createUserSuccessResponse => {
-                this.router.navigate(['/'])
+                this.router.navigate(['/'], { replaceUrl: true })
                 this.messageService.add({ key: 'welcomeUser', severity: 'success', summary: createUserSuccessResponse.createUserSuccessResponse.user?.username, detail: this.getRandomWelcomeMessage() })
             })
         ),
