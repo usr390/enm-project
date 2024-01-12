@@ -4,7 +4,7 @@
             Rarelygroovy, the valley's premium event listing service
         </p>
         <span *ngIf="showPlusLink()">
-            <a [routerLink]="['/plus']" href="/">Rarelygroovy+</a>
+            <a [routerLink]="['/plus']" href="/" (click)="closeSidebar()">Rarelygroovy+</a>
         </span>
         
     </ng-template>

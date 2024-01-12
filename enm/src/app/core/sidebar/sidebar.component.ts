@@ -33,4 +33,8 @@ export class SidebarComponent {
     // Return true if user is not logged in or user is not a plus member
     return !user || !user.plus;
   }
+  closeSidebar() {
+    this.sidebarVisible = false;
+  }
+  
 }
