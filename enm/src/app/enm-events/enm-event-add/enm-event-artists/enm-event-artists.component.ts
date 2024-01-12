@@ -50,7 +50,7 @@ export class EnmEventArtistsComponent {
   onSubmit() {
     if (this.enmEventAddForm.valid) {
       this.enmEventAddMultipageFormService.postEnmEvent();
-      this.router.navigate(['/']);
+      this.router.navigate(['/events'], { replaceUrl: true });
     }
   }
 

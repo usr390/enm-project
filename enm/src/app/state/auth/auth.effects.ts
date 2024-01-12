@@ -62,7 +62,7 @@ export class AuthEffects {
                 this.navigationService.page2Skipped = false;
                 this.router.navigate(['/plus'], { replaceUrl: true });
             } else {
-                this.router.navigate(['/'], { replaceUrl: true });
+                this.router.navigate(['/events'], { replaceUrl: true });
             }
             return of(EnmEventActions.enmEventListRequest());
         }))
@@ -116,7 +116,10 @@ export class AuthEffects {
     logOut$ = createEffect(() =>
         this.actions$.pipe(
             ofType(AuthActions.logOut),
-            tap(_ => localStorage.clear())
+            tap(_ => {
+                localStorage.clear()
+                this.router.navigate(['/'], { replaceUrl: true })
+            })
         ),
         { dispatch: false }
     )
