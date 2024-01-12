@@ -140,5 +140,11 @@ export class EnmEventListComponent implements OnInit {
     // very basic way to identify a mobile device. might want to use a more robust approach
     this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) || screenWidth < 768;
   }
+
+  refreshlist() {
+    setTimeout(() => {
+      this.store$.dispatch(enmEventsActions.enmEventListRequest())
+    }, 500);
+  }
 }
 

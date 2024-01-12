@@ -259,7 +259,6 @@
 </div>
 
 <div *ngIf="isVisible">
-  <p-scrollTop [style]="{'background-color': '#7254f3', 'color': 'white', 'border-color': '#0056b3'}"></p-scrollTop>
-
+  <p-scrollTop (click)="refreshlist()" [style]="{'background-color': '#7254f3', 'color': 'white', 'border-color': '#0056b3'}"></p-scrollTop>
 </div>
 
