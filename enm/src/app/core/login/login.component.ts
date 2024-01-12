@@ -11,7 +11,7 @@ import { LogInService } from '../services/login.service';
 import { AppState } from 'src/app/state/app.state';
 import * as AuthActions from '../../state/auth/auth.actions';
 import * as AuthSelectors from '../../state/auth/auth.selectors';
-import { NavigationService } from '../payment-screen-skipped.service';
+import { PaymentScreenSkippedService } from '../payment-screen-skipped.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +28,7 @@ export class LogInComponent {
     private store$: Store<AppState>,
     private messageService: MessageService,
     private router: Router,
-    private navigationService: NavigationService
+    private navigationService: PaymentScreenSkippedService
   ) {}
 
   userLogInForm: FormGroup = this.logInService.userLogInForm;
@@ -76,7 +76,7 @@ export class LogInComponent {
     }, 50);
   }
   navigateAndReplace() {
-    if (this.navigationService.page2Skipped) {
+    if (this.navigationService.paymentScreenSkipped) {
       this.router.navigate(['/create-user'], { replaceUrl: true });
     } else {
       this.router.navigate(['/create-user']);

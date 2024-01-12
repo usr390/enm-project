@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 import * as PaymentActions from './../../state/payment/payment.actions'
 import * as PaymentSelectors from './../../state/payment/payment.selectors'
 import * as AuthSelectors from './../../state/auth/auth.selectors'
-import { NavigationService } from 'src/app/core/payment-screen-skipped.service';
+import { PaymentScreenSkippedService } from 'src/app/core/payment-screen-skipped.service';
 
 const STRIPE_KEY = environment.stripeKey;
 declare var Stripe: any;
@@ -27,7 +27,7 @@ export class EnmPlusPaymentScreenComponent {
     private enmPlusPaymentService: EnmPlusPaymentService,
     private router: Router,
     private store$: Store<AppState>,
-    private navigationService: NavigationService
+    private navigationService: PaymentScreenSkippedService
   ) {}
 
   // checkoutSession$ = this.enmPlusPaymentService.checkoutSession$;
@@ -45,7 +45,7 @@ export class EnmPlusPaymentScreenComponent {
         this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth());
       } 
       else {
-        this.navigationService.page2Skipped = true;
+        this.navigationService.paymentScreenSkipped = true;
         this.router.navigate(['/login'], { replaceUrl: true }) 
       }});
   }

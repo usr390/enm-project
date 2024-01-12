@@ -10,7 +10,7 @@ import { MessageService } from "primeng/api";
 import { LogInErrorResponse } from "src/app/models/logInErrorResponse.model";
 import { UserService } from "src/app/core/services/user.service";
 import { RefreshUserErrorResponse } from "src/app/models/refreshUserErrorResponse";
-import { NavigationService } from "src/app/core/payment-screen-skipped.service";
+import { PaymentScreenSkippedService } from "src/app/core/payment-screen-skipped.service";
 
 @Injectable()
 export class AuthEffects {
@@ -36,7 +36,7 @@ export class AuthEffects {
         private createUserService: CreateUserService,
         private router: Router,
         private messageService: MessageService,
-        private navigationService: NavigationService
+        private paymentScreenSkippedService: PaymentScreenSkippedService
     ) {}
 
     logInRequest$ = createEffect(() => 
@@ -58,8 +58,8 @@ export class AuthEffects {
         this.actions$.pipe(
         ofType(AuthActions.logInSuccessResponse),
         concatMap(logInSuccessResponse => {
-            if (this.navigationService.page2Skipped && !logInSuccessResponse.logInSuccessResponse.user?.plus) {
-                this.navigationService.page2Skipped = false;
+            if (this.paymentScreenSkippedService.paymentScreenSkipped && !logInSuccessResponse.logInSuccessResponse.user?.plus) {
+                this.paymentScreenSkippedService.paymentScreenSkipped = false;
                 this.router.navigate(['/plus'], { replaceUrl: true });
             } else {
                 this.router.navigate(['/events'], { replaceUrl: true });
@@ -87,8 +87,8 @@ export class AuthEffects {
         this.actions$.pipe(
             ofType(AuthActions.createUserSuccessResponse),
             tap(createUserSuccessResponse => {
-                if (this.navigationService.page2Skipped) {
-                    this.navigationService.page2Skipped = false;
+                if (this.paymentScreenSkippedService.paymentScreenSkipped) {
+                    this.paymentScreenSkippedService.paymentScreenSkipped = false;
                     this.router.navigate(['/plus'], { replaceUrl: true });
                     this.messageService.add({ 
                         key: 'continueSingingUpForRarerlyGroovyPlus', 
