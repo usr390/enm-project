@@ -56,7 +56,7 @@
             <span *ngIf="enmEvent.cover !== null && enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
             <!-- synonyms, address --> <br>
             <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-            <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+            <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }} &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
             <!---->
           </div>
         </span>
@@ -77,7 +77,7 @@
             <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
             <!-- synonyms, address --> <br>
             <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-            <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }}</span>
+            <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }} &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
             <!---->
           </div>
         </span>
