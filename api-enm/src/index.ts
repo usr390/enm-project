@@ -208,13 +208,12 @@ app.post('/api/create-checkout-session', express.json(), async (req, res) => {
   const userid = req.body.userid;
   const session = await stripe.checkout.sessions.create({
     line_items: [{
-      price: 'price_1ONPePCJybB30Zxsdnlf7CCK',
+      price: 'price_1OXsJeCJybB30ZxsKnyXMpdq',
       quantity: 1,
     }],
     mode: 'subscription',
     ui_mode: 'embedded',
     return_url: 'https://rarelygroovy.com/checkout/return',
-    // hardcoded data for demo purposes. mimics receiving userid from client
     metadata: {
       userid: userid
     }
