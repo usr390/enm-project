@@ -21,6 +21,6 @@ export class EnmEventListToolbarComponent {
   constructor(private store$: Store<AppState>){}
 
   user$ = this.store$.select(AuthSelectors.selectUser);
-  currentRoute$ = this.store$.select(RouterSelectors.selectUrl).pipe(tap((route) => console.log('route: ', route)))
+  currentRoute$ = this.store$.select(RouterSelectors.selectUrl);
 
 }

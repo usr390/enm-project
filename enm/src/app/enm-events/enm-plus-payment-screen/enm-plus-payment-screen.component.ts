@@ -33,7 +33,7 @@ export class EnmPlusPaymentScreenComponent {
   // checkoutSession$ = this.enmPlusPaymentService.checkoutSession$;
   furthestEventDate$ = this.store$.select(PaymentSelectors.selectFurthestMonth);
   plusSubscriptionCardLoading$ = this.store$.select(PaymentSelectors.plusSubscriptionCardLoading);
-  currentUser$ = this.store$.select(AuthSelectors.selectUser).pipe(tap(user => console.log(user?.id)));
+  currentUser$ = this.store$.select(AuthSelectors.selectUser);
 
   stripe: any;
   checkout: any;
