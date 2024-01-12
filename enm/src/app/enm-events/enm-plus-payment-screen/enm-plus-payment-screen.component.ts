@@ -39,8 +39,15 @@ export class EnmPlusPaymentScreenComponent {
   checkout: any;
 
   ngOnInit() {
-    this.currentUser$.pipe(take(1)).subscribe(user => { if (user) this.initializeStripe(user.id); else {this.navigationService.page2Skipped = true;this.router.navigate(['/create-user'], { replaceUrl: true }) }});
-    this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth());
+    this.currentUser$.pipe(take(1)).subscribe(user => { 
+      if (user) {
+        this.initializeStripe(user.id);
+        this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth());
+      } 
+      else {
+        this.navigationService.page2Skipped = true;
+        this.router.navigate(['/login'], { replaceUrl: true }) 
+      }});
   }
 
   ngOnDestroy() {

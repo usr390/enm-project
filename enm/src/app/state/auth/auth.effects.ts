@@ -57,8 +57,13 @@ export class AuthEffects {
     logInSuccess$ = createEffect(() => 
         this.actions$.pipe(
         ofType(AuthActions.logInSuccessResponse),
-        concatMap(_ => {
-            this.router.navigate(['/'], { replaceUrl: true });
+        concatMap(logInSuccessResponse => {
+            if (this.navigationService.page2Skipped && !logInSuccessResponse.logInSuccessResponse.user?.plus) {
+                this.navigationService.page2Skipped = false;
+                this.router.navigate(['/plus'], { replaceUrl: true });
+            } else {
+                this.router.navigate(['/'], { replaceUrl: true });
+            }
             return of(EnmEventActions.enmEventListRequest());
         }))
     );

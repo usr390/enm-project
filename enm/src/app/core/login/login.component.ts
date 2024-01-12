@@ -2,16 +2,16 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ElementRef, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
 // 3rd party
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
 import { MessageService } from 'primeng/api';
 // enm
 import { LogInService } from '../services/login.service';
 import { AppState } from 'src/app/state/app.state';
 import * as AuthActions from '../../state/auth/auth.actions';
 import * as AuthSelectors from '../../state/auth/auth.selectors';
-
+import { NavigationService } from '../payment-screen-skipped.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +26,9 @@ export class LogInComponent {
     private logInService: LogInService,
     private fb: FormBuilder,
     private store$: Store<AppState>,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router,
+    private navigationService: NavigationService
   ) {}
 
   userLogInForm: FormGroup = this.logInService.userLogInForm;
@@ -72,6 +74,13 @@ export class LogInComponent {
       const element = this.elRef.nativeElement.querySelector('input');
       this.renderer.selectRootElement(element).focus();
     }, 50);
+  }
+  navigateAndReplace() {
+    if (this.navigationService.page2Skipped) {
+      this.router.navigate(['/create-user'], { replaceUrl: true });
+    } else {
+      this.router.navigate(['/create-user']);
+    }
   }
   //#endregion
 }
