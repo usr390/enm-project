@@ -39,7 +39,7 @@ export class HydrationEffects implements OnInitEffects {
             ...state,
             enmEvents: {
               entities: state.enmEvents.entities,
-              filter: state.enmEvents.filter,
+              filter: '',
               selectedEnmEvent: state.enmEvents.selectedEnmEvent,
             },
             router: undefined
