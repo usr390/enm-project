@@ -90,10 +90,17 @@ export class AuthEffects {
                 if (this.navigationService.page2Skipped) {
                     this.navigationService.page2Skipped = false;
                     this.router.navigate(['/plus'], { replaceUrl: true });
+                    this.messageService.add({ 
+                        key: 'continueSingingUpForRarerlyGroovyPlus', 
+                        severity: 'success', 
+                        summary: createUserSuccessResponse.createUserSuccessResponse.user?.username, 
+                        detail: 'Account created. Subscribe to Rarelygroovy+ below',
+                        life: 7000,
+                    })
                 } else {
-                    this.router.navigate(['/'], { replaceUrl: true })
+                    this.router.navigate(['/'], { replaceUrl: true });
+                    this.messageService.add({ key: 'welcomeUser', severity: 'success', summary: createUserSuccessResponse.createUserSuccessResponse.user?.username, detail: this.getRandomWelcomeMessage() })
                 }
-                this.messageService.add({ key: 'welcomeUser', severity: 'success', summary: createUserSuccessResponse.createUserSuccessResponse.user?.username, detail: this.getRandomWelcomeMessage() })
             })
         ),
         { dispatch: false }
