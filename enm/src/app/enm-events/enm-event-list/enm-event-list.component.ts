@@ -142,9 +142,9 @@ export class EnmEventListComponent implements OnInit {
   }
 
   refreshlist() {
-    setTimeout(() => {
-      this.store$.dispatch(enmEventsActions.enmEventListRequest())
-    }, 500);
+    // setTimeout(() => {
+    //   this.store$.dispatch(enmEventsActions.enmEventListRequest())
+    // }, 500);
   }
 }
 
