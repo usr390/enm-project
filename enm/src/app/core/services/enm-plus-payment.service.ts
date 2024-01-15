@@ -20,6 +20,11 @@ export class EnmPlusPaymentService {
     return this.http.post<StripeCheckoutSession>(BASE_URL + '/create-checkout-session', { userid })
   }
 
+  checkoutSessionTest$(userid: string) {
+    console.log('from service test', userid)
+    return this.http.post<StripeCheckoutSession>(BASE_URL + '/create-checkout-session-test', { userid })
+  }
+
   furthestEventDate$ = this.http.get<string>(BASE_URL + '/getFurthestEventDateTime')
 
   plusifyUser(user: NullableUser) {

@@ -42,6 +42,7 @@ const app = express(); app.use(cors(corsOptions)); app.use(apiLimiter)
 const port = process.env.PORT || 3000
 const stripe = require('stripe')(process.env.STRIPE_API_KEY);
 const stripeWebHookSecret = process.env.STRIPE_API_WEBHOOK_SECRET;
+const stripeTest = require('stripe')(process.env.STRIPE_API_KEY_TEST)
 const stripeWebHookSecretTest = process.env.STRIPE_API_WEBHOOK_SECRET_TEST;
 
 
@@ -222,6 +223,27 @@ app.post('/api/create-checkout-session', express.json(), async (req, res) => {
   res.send({clientSecret: session.client_secret});
 });
 
+app.post('/api/create-checkout-session-test', express.json(), async (req, res) => {
+
+  console.log('fired!')
+  const userid = req.body.userid;
+  console.log('from test create checkout session api: ', userid)
+  const session = await stripeTest.checkout.sessions.create({
+    line_items: [{
+      price: 'price_1ORkd9CJybB30ZxsUYIcvfLk',
+      quantity: 1,
+    }],
+    mode: 'subscription',
+    ui_mode: 'embedded',
+    return_url: 'https://rarelygroovy.com/checkout/return',
+    metadata: {
+      userid: userid
+    }
+  });
+
+  res.send({clientSecret: session.client_secret});
+});
+
 app.post('/api/stripe-new-subscription-handler', express.raw({type: 'application/json'}), async (req, res) => {
 
   const sig = req.headers['stripe-signature'];
@@ -233,10 +255,11 @@ app.post('/api/stripe-new-subscription-handler', express.raw({type: 'application
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object; // this is the session object
       const userId = session.metadata.userid; // replace 'userid' with the actual key you used
+      const customerId = session.customer; // stripe customer id
 
       if (userId) {
         // Update the user in your database
-        await UserModel.findByIdAndUpdate(userId, { plus: true }, { new: true });
+        await UserModel.findByIdAndUpdate(userId, { plus: true, stripeCustomerId: customerId }, { new: true });
       } else {
         console.log('No userID found in metadata');
       }
@@ -260,10 +283,12 @@ app.post('/api/stripe-new-subscription-handler-test', express.raw({type: 'applic
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object; // this is the session object
       const userId = session.metadata.userid; // replace 'userid' with the actual key you used
+      console.log('from test webhook', userId)
+      const customerId = session.customer; // stripe customer id
 
       if (userId) {
         // Update the user in your database
-        await UserModel.findByIdAndUpdate(userId, { plus: true }, { new: true });
+        await UserModel.findByIdAndUpdate(userId, { plus: true, stripeCustomerId: customerId  }, { new: true });
       } else {
         console.log('No userID found in metadata');
       }

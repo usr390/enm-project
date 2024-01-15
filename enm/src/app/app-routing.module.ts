@@ -11,6 +11,7 @@ import { EnmEventListComponent } from './enm-events/enm-event-list/enm-event-lis
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { TermsOfServiceComponent } from './shared/terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from './core/privacy-policy/privacy-policy.component';
+import { PaymentScreenTestComponent } from './enm-events/payment-screen-test/payment-screen-test.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'events' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'login', component: LogInComponent },
   { path: 'create-user', component: CreateUserComponent },
   { path: 'plus', component: EnmPlusPaymentScreenComponent },
+  { path: 'iBhLq5wrrxafte4e', component: PaymentScreenTestComponent },
   { path: 'checkout/return', component: EnmPlusPaymentSuccessfulComponent },
   { path: 'add-event', loadChildren: () => import('./enm-events/enm-event-add/enm-event-add.module').then(m => m.EnmEventAddModule) },
   { path: 'termsofservice', component: TermsOfServiceComponent },

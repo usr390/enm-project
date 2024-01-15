@@ -1,0 +1,29 @@
+<div *ngIf="currentUser$ | async"></div>
+
+<div class="back-arrow">
+    <p-button type="button" (click)="goBack()" icon="pi pi-arrow-left" styleClass="p-button-rounded p-button-lg p-button-text"></p-button>
+</div>
+
+<div *ngIf="plusSubscriptionCardLoading$ | async" class="d-flex justify-content-center align-items-center" style="height: 85vh;">
+    <p-progressSpinner styleClass= "w-4rem h-4rem" strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner"></p-progressSpinner>
+</div>
+
+<div *ngIf="furthestEventDate$ | async as furthestEventDate">
+    <div class="d-flex justify-content-center align-items-center" style="height: 85vh; margin-bottom: 10px;">
+        <p-card header="Rarelygroovy+" subheader="Monthly Subscription" [style]="{ width: '360px' }">
+            <p>Features include:</p>
+                <ul>
+                    <li><strong>All Access</strong> - unlock our entire event listing. Currently extending through <span class="furthestMonth">{{furthestEventDate | dateTimeToWordifiedMonthFull }}</span>. Updated daily</li>
+                    <li><strong>Links</strong> - a dedicated page for each event, complete with direct links to artists' social media. Perfect for immersing in the Valley's music scene – from renowned stars to emerging artists</li>
+                    <li><strong>Filter</strong> - instant event lookups. Narrow down your search by city, venue, or artist</li>
+                </ul>
+            <ng-template pTemplate="footer">
+                Cancel any time by contacting us on <a class="ig" href="https://www.instagram.com/rarelygroovy/" target="_blank" rel="noopener noreferrer">Instagram</a> or <a href="mailto:support@rarelygroovy.com">support&#64;rarelygroovy.com</a>. Absolutely zero hassle guaranteed
+            </ng-template>
+        </p-card>
+    </div>
+</div>
+
+<div id="checkout" style="margin-bottom: 20px">
+    <!-- Checkout will insert the payment form here -->
+</div>
