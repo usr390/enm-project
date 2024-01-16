@@ -4,6 +4,7 @@ import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import { catchError, of, switchMap, take } from 'rxjs';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-account',
@@ -31,7 +32,8 @@ export class MyAccountComponent {
 
   constructor(
     private store$: Store<AppState>,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   cancelSubscription() {
@@ -53,6 +55,9 @@ export class MyAccountComponent {
       console.log(response);
     });
   }
-  
+
+  goBack() {
+    this.router.navigate(['/']);
+  }
 
 }

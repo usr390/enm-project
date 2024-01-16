@@ -13,7 +13,7 @@
         <p>
             <span *ngIf="!((user$ | async) && (user$ | async))?.plus"></span> 
             <span *ngIf="!((user$ | async) && ((user$ | async))?.username === 'tisdale')"></span> 
-            <span *ngIf="(user$ | async)"><a href="/"(click)="onLogOut()">Log Out</a><a [routerLink]="['/4Nsmn93XmkD8Zin8']"  href="/">My Account</a></span>
+            <span *ngIf="(user$ | async)"><a href="/"(click)="onLogOut()">Log Out</a><a [routerLink]="['/4Nsmn93XmkD8Zin8']"  href="/" (click)="closeSidebar()">My Account</a></span>
             <span *ngIf="!(user$ | async)"><a [routerLink]="['/login']"  href="/">Log In</a></span> &nbsp;&nbsp;&nbsp;
             <a href="https://rarelygroovy.com/termsofservice">Terms Of Service</a>
         </p>
