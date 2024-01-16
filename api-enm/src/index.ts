@@ -371,6 +371,46 @@ app.get('/api/next-invoice-date/:userId', async (req, res) => {
   }
 });
 
+app.post('/api/cancel-subscription/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Retrieve the Stripe customer ID for the given user ID from your database
+    const user = await UserModel.findById(userId).select('stripeCustomerId -_id').exec();
+
+    if (!user || !user.stripeCustomerId) {
+      return res.status(404).send({ error: 'User not found or Stripe customer ID missing' });
+    }
+
+    // Retrieve the active subscription for this Stripe customer
+    const subscriptions = await stripeTest.subscriptions.list({
+      customer: user.stripeCustomerId,
+      status: 'active',
+      limit: 1
+    });
+
+    if (subscriptions.data.length === 0) {
+      return res.status(404).send({ error: 'Active subscription not found for this customer.' });
+    }
+
+    // Get the subscription ID
+    const subscriptionId = subscriptions.data[0].id;
+
+    // Cancel the subscription
+    const canceledSubscription = await stripeTest.subscriptions.cancel(subscriptionId);
+
+    // Update the user's status to 'not plus'
+    await UserModel.findByIdAndUpdate(userId, { plus: false });
+
+    // Send a response back to the client
+    res.send({ message: 'Subscription canceled and user de-plusified successfully' });
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+});
+
+
+
 
 // asynchronous initialization. keeps api from processesing requests until a successful connection to db is established
 mongoose.connect(process.env.MONGO_URL || '').then(() => { app.listen(port, () => {}); })
