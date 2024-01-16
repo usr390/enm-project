@@ -4,6 +4,9 @@ import { catchError, of, exhaustMap, map, tap } from "rxjs";
 import * as RarelygroovyPlusActions from './rarelygroovyPlus.actions';
 import { UserService } from "src/app/core/services/user.service";
 import { UpcomingSubscriptionRenewalDateErrorResponse } from "src/app/models/upcomingSubscriptionRenewalDateErrorResponse";
+import { CancelRarelygroovyPlusSubscriptionErrorResponse } from "src/app/models/cancelRarelygroovyPlusSubscriptionErrorResponse";
+import { Router } from "@angular/router";
+import { MessageService } from "primeng/api";
 
 @Injectable()
 export class RarelygroovyPlusEffects {
@@ -11,6 +14,8 @@ export class RarelygroovyPlusEffects {
     constructor(
         private actions$: Actions,
         private userService: UserService,
+        private router: Router,
+        private messageService: MessageService,
     ) {}
 
     myAccountGetUpcomingSubscriptionRenewalDate$ = createEffect(() => 
@@ -26,6 +31,37 @@ export class RarelygroovyPlusEffects {
                 ), 
             )
         )
+    );
+
+    myAccountCancelSubscription$ = createEffect(() => 
+        this.actions$.pipe(
+            ofType(RarelygroovyPlusActions.myAccountCancelSubscription),
+            exhaustMap(
+                (action) => this.userService.cancelSubscription(action.userId).pipe(
+                    map(cancelSubscriptionSuccessResponse => RarelygroovyPlusActions.myAccountCancelSubscriptionSuccessResponse({ cancelSubscriptionSuccessResponse })),
+                    catchError((error: CancelRarelygroovyPlusSubscriptionErrorResponse) => {
+                        return of()
+                    })
+                ), 
+            )
+        )
+    );
+
+    cancelSubscriptionSuccessResponse$ = createEffect(() => 
+        this.actions$.pipe(
+            ofType(RarelygroovyPlusActions.myAccountCancelSubscriptionSuccessResponse),
+            tap(myAccountCancelSubscriptionSuccessResponse => {
+                this.router.navigate(['/4Nsmn93XmkD8Zin8'], { replaceUrl: true });
+                this.messageService.add({ 
+                    key: 'unsubscribedFromRarelygroovyPlus', 
+                    severity: 'success', 
+                    summary: 'Success!', 
+                    detail: 'Unsubscribed From Rarelygroovy Plus',
+                    life: 7000,
+                })
+            })
+        ),
+        { dispatch: false }
     );
 
 }

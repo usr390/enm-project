@@ -10,6 +10,12 @@ export const isUpcomingSubscriptionRenewalDateLoading = createSelector(
   (state: RarelygroovyPlusState): boolean => state.isUpcomingSubscriptionRenewalDateLoading
 );
 
+export const isSubscriptionCanceling = createSelector(
+  selectFeature,
+  (state: RarelygroovyPlusState): boolean => state.isSubscriptionCanceling
+);
+
+
 export const selectNextRarelygroovySubscriptionInvoice = createSelector(
   selectFeature,
   (state: RarelygroovyPlusState): string | null => state.nextInvoiceDate

@@ -17,7 +17,12 @@
         <!-- Check if nextInvoice object is not null -->
         <p *ngIf="nextInvoice"><b>Subscription Renews:</b> {{ nextInvoice | date: 'medium' }}</p>
         <p *ngIf="!nextInvoice">No upcoming invoice found.</p>
-        <p-button (click)="cancelSubscription()">Unsubscribe From Rarelygroovy+</p-button>
+        <!-- <p-button (click)="cancelSubscription()">Unsubscribe From Rarelygroovy+</p-button> -->
+        <p-button (click)="cancelSubscription()" label="Unsubscribe From Rarelygroovy+" [disabled]="(( isSubscriptionCanceling$ | async) === true)">
+          <div *ngIf="isSubscriptionCanceling$ | async">
+              <p-progressSpinner strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner" [style]="{width: '20px', height: '12px', margin: '0px 20px 0px 0px'}"></p-progressSpinner>
+          </div>
+      </p-button>
       </div>
     </p-panel>
   </div>

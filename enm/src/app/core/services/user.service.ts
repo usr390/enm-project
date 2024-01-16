@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { RefreshUserSuccessResponse } from 'src/app/models/refreshUserSuccessResponse';
 import { Observable, take } from 'rxjs';
 import { UpcomingSubscriptionRenewalDateSuccessResponse } from 'src/app/models/upcomingSubscriptionRenewalDateSuccessResponse';
+import { CancelRarelygroovyPlusSubscriptionSuccessResponse } from 'src/app/models/cancelRarelygroovyPlusSubscriptionSuccessResponse';
 
 const BASE_URL = environment.api;
 
@@ -23,8 +24,8 @@ export class UserService {
     return this.http.get<UpcomingSubscriptionRenewalDateSuccessResponse>(`${BASE_URL}/next-invoice-date/${id}`);
   }
 
-  cancelSubscription(id: string): Observable<any> {
-    return this.http.post<any>(`${BASE_URL}/cancel-subscription/${id}`, {});
+  cancelSubscription(id: string) {
+    return this.http.post<CancelRarelygroovyPlusSubscriptionSuccessResponse>(`${BASE_URL}/cancel-subscription/${id}`, {});
   }
   
 }
