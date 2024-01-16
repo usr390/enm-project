@@ -1,0 +1,16 @@
+import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { RarelygroovyPlusState } from "./rarelygroovyPlus.state";
+import { AppState } from "../app.state";
+
+export const selectFeature = (state: AppState): RarelygroovyPlusState => state.rarelygroovyPlus;
+export const selectPaymentState = createFeatureSelector<RarelygroovyPlusState>('payment');
+
+export const isUpcomingSubscriptionRenewalDateLoading = createSelector(
+  selectFeature,
+  (state: RarelygroovyPlusState): boolean => state.isUpcomingSubscriptionRenewalDateLoading
+);
+
+export const selectNextRarelygroovySubscriptionInvoice = createSelector(
+  selectFeature,
+  (state: RarelygroovyPlusState): string | null => state.nextInvoiceDate
+);

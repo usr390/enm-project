@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import * as AuthSelectors from './../../state/auth/auth.selectors'
+import * as RarelygroovyPlusSelectors from './../../state/rarelygroovyPlus/rarelygroovyPlus.selectors'
+import * as RarelygroovyPlusActions from './../../state/rarelygroovyPlus/rarelygroovyPlus.actions'
 import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import { catchError, of, switchMap, take } from 'rxjs';
@@ -13,21 +15,8 @@ import { Router } from '@angular/router';
 })
 export class MyAccountComponent {
 
-  nextInvoice$ = this.store$.select(AuthSelectors.selectUser).pipe(
-    switchMap((user) => {
-      if (user && user._id) {
-        return this.userService.getNextInvoice(user._id);
-      } else {
-        return of(null); // Return an Observable that emits null if user or user._id is not available
-      }
-      }),
-    catchError(error => {
-      // Handle or log error
-      console.error(error);
-      return of(null);
-    })
-  );
-
+  nextInvoice$ = this.store$.select(RarelygroovyPlusSelectors.selectNextRarelygroovySubscriptionInvoice)
+  isUpcomingSubscriptionRenewalDateLoading$ = this.store$.select(RarelygroovyPlusSelectors.isUpcomingSubscriptionRenewalDateLoading)
   currentUser$ = this.store$.select(AuthSelectors.selectUser)
 
   constructor(
@@ -35,6 +24,15 @@ export class MyAccountComponent {
     private userService: UserService,
     private router: Router
   ) {}
+
+  ngOnInit() {
+    this.currentUser$.pipe(take(1)).subscribe(user => { 
+      if (user) {
+        let userid = user._id
+        this.store$.dispatch(RarelygroovyPlusActions.myAccountGetUpcomingSubscriptionRenewalDate({ userId: userid }));
+      }
+    })
+  }
 
   cancelSubscription() {
     this.store$.select(AuthSelectors.selectUser).pipe(

@@ -1,6 +1,5 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { 
-    myAccountNavigateTo,
     myAccountGetUpcomingSubscriptionRenewalDate,
     myAccountGetUpcomingSubscriptionRenewalDateSuccessResponse,
     myAccountGetUpcomingSubscriptionRenewalDateErrorResponse,
@@ -18,10 +17,11 @@ const _rarelygroovPlusReducer = createReducer(
             isUpcomingSubscriptionRenewalDateLoading: true
         }
     }),
-    on(myAccountGetUpcomingSubscriptionRenewalDateSuccessResponse, (state) => {
+    on(myAccountGetUpcomingSubscriptionRenewalDateSuccessResponse, (state, { upcomingSubscriptionRenewalDateSuccessResponse }) => {
         return {
             ...state,
             isUpcomingSubscriptionRenewalDateLoading: false,
+            nextInvoiceDate: upcomingSubscriptionRenewalDateSuccessResponse ? upcomingSubscriptionRenewalDateSuccessResponse.nextInvoiceDate : null
         }
     }),
     on(myAccountGetUpcomingSubscriptionRenewalDateErrorResponse, (state) => {

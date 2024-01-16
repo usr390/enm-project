@@ -8,6 +8,8 @@ import { hydrationMetaReducer } from './hydration/hydration.reducer';
 import { routerReducer, RouterReducerState } from "@ngrx/router-store";
 import { PaymentState } from './payment/payment.state';
 import { paymentReducer } from './payment/payment.reducer';
+import { RarelygroovyPlusState } from './rarelygroovyPlus/rarelygroovyPlus.state';
+import { rarelygroovyPlusReducer } from './rarelygroovyPlus/rarelygroovyPlus.reducer';
 
 export interface AppState {
     auth: AuthState;
@@ -15,6 +17,7 @@ export interface AppState {
     enmEvents: EnmEventsState;
     payment: PaymentState;
     router: RouterReducerState;
+    rarelygroovyPlus: RarelygroovyPlusState
 }
 
 export const reducers: ActionReducerMap<AppState> = {
@@ -23,6 +26,7 @@ export const reducers: ActionReducerMap<AppState> = {
     enmEvents: enmEventsReducer,
     payment: paymentReducer,
     router: routerReducer,
+    rarelygroovyPlus: rarelygroovyPlusReducer
 };
 
 export const metaReducers: MetaReducer[] = [

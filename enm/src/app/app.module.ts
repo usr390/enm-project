@@ -17,6 +17,8 @@ import { EffectsModule } from '@ngrx/effects';
   import { EnmEventsEffects } from './state/enmEvents/enmEvents.effects';
   import { HydrationEffects } from './state/hydration/hydration.effects';
   import { PaymentEffects } from './state/payment/payment.effects';
+  import { RarelygroovyPlusEffects } from './state/rarelygroovyPlus/rarelygroovyPlus.effects';
+
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { StoreModule } from '@ngrx/store';
   // written by enm team but related to parent
@@ -45,7 +47,8 @@ import { StoreRouterConnectingModule, RouterState } from "@ngrx/router-store";
       AuthEffects, 
       PaymentEffects,
       EnmEventsEffects,
-      HydrationEffects
+      HydrationEffects,
+      RarelygroovyPlusEffects
     ]),
     StoreRouterConnectingModule.forRoot({
       routerState: RouterState.Minimal }),
