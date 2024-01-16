@@ -354,7 +354,7 @@ app.get('/api/next-invoice-date/:userId', async (req, res) => {
     const userId = req.params.userId;
 
     // Inline Mongoose query to get the user and their Stripe customer ID
-    const user = await UserModel.findById(userId).exec();
+    const user = await UserModel.findById(userId).select('stripeCustomerId -_id').exec();
 
     if (!user || !user.stripeCustomerId) {
       return res.status(404).send({ error: 'User not found or Stripe customer ID missing' });

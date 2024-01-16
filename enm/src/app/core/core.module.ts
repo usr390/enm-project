@@ -12,6 +12,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { MyAccountComponent } from './my-account/my-account.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     CreateUserComponent,
     PageNotFoundComponent,
     PrivacyPolicyComponent,
+    MyAccountComponent,
   ],
   imports: [
     // angular modules
@@ -38,7 +40,8 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     LogInComponent,
     CreateUserComponent,
     PageNotFoundComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    MyAccountComponent
   ]
 })
 export class CoreModule { }

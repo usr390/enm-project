@@ -16,4 +16,9 @@ export class UserService {
   getUser(username: string){
     return this.http.get<RefreshUserSuccessResponse>(`${BASE_URL}/getUser/${username}`);
   }
+
+  getNextInvoice(id: string){
+    console.log('from user service ', id)
+    return this.http.get<any>(`${BASE_URL}/next-invoice-date/${id}`);
+  }
 }

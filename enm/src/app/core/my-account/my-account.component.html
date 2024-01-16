@@ -1,0 +1,6 @@
+<div *ngIf="(nextInvoice$ | async) as nextInvoice">
+    <!-- Check if nextInvoice object is not null -->
+    <p *ngIf="nextInvoice">Next Invoice Date: {{ nextInvoice.nextInvoiceDate | date: 'medium' }}</p>
+    <p *ngIf="!nextInvoice">No upcoming invoice found.</p>
+  </div>
+  
