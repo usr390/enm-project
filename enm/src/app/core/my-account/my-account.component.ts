@@ -12,19 +12,22 @@ import { UserService } from '../services/user.service';
 })
 export class MyAccountComponent {
 
-  nextInvoice$ = this.store$.select(AuthSelectors.selectUser).pipe(switchMap((user) => {
-    if (user && user._id) {
-      return this.userService.getNextInvoice(user._id);
-    } else {
-      return of(null); // Return an Observable that emits null if user or user._id is not available
-    }
-  }),
-  catchError(error => {
-    // Handle or log error
-    console.error(error);
-    return of(null);
-  })
-);
+  nextInvoice$ = this.store$.select(AuthSelectors.selectUser).pipe(
+    switchMap((user) => {
+      if (user && user._id) {
+        return this.userService.getNextInvoice(user._id);
+      } else {
+        return of(null); // Return an Observable that emits null if user or user._id is not available
+      }
+      }),
+    catchError(error => {
+      // Handle or log error
+      console.error(error);
+      return of(null);
+    })
+  );
+
+  currentUser$ = this.store$.select(AuthSelectors.selectUser)
 
   constructor(
     private store$: Store<AppState>,
