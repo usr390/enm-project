@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import * as AuthSelectors from './../../state/auth/auth.selectors'
 import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
-import { catchError, of, switchMap } from 'rxjs';
+import { catchError, of, switchMap, take } from 'rxjs';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -33,5 +33,26 @@ export class MyAccountComponent {
     private store$: Store<AppState>,
     private userService: UserService
   ) {}
+
+  cancelSubscription() {
+    this.store$.select(AuthSelectors.selectUser).pipe(
+      take(1),
+      switchMap((user) => {
+        if (user && user._id) {
+          return this.userService.cancelSubscription(user._id);
+        } else {
+          return of(null); // Ensure this is always returning an Observable
+        }
+      }),
+      catchError(error => {
+        console.error(error);
+        return of(null); // Return an Observable in case of an error
+      })
+    ).subscribe(response => {
+      // Handle the response here
+      console.log(response);
+    });
+  }
+  
 
 }
