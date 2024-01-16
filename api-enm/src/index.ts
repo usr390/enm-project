@@ -349,6 +349,28 @@ app.get('/api/getUser/:username', express.json(), async (req, res) => {
   }
 });
 
+app.get('/api/next-invoice-date/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Inline Mongoose query to get the user and their Stripe customer ID
+    const user = await UserModel.findById(userId).exec();
+
+    if (!user || !user.stripeCustomerId) {
+      return res.status(404).send({ error: 'User not found or Stripe customer ID missing' });
+    }
+
+    // Now that we have the Stripe customer ID, call the Stripe API
+    const upcomingInvoice = await stripeTest.invoices.retrieveUpcoming({ customer: user.stripeCustomerId });
+    const nextInvoiceDate = upcomingInvoice.next_payment_attempt;
+
+    // Send the next invoice date in the response
+    res.send({ nextInvoiceDate: nextInvoiceDate ? new Date(nextInvoiceDate * 1000) : null });
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+});
+
 
 // asynchronous initialization. keeps api from processesing requests until a successful connection to db is established
 mongoose.connect(process.env.MONGO_URL || '').then(() => { app.listen(port, () => {}); })
