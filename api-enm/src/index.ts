@@ -353,11 +353,12 @@ app.get('/api/next-invoice-date/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
 
-    // Initialize response shape with null values
+    // Initialize response shape with null values and an empty array for invoice history
     let response = {
       nextInvoiceDate: null,
       subscriptionStatus: null,
-      cancellationDate: null
+      cancellationDate: null,
+      invoiceHistory: []
     };
 
     // Retrieve the user and their Stripe customer ID
@@ -365,8 +366,8 @@ app.get('/api/next-invoice-date/:userId', async (req, res) => {
 
     // Proceed only if user and stripeCustomerId exist
     if (user && user.stripeCustomerId) {
+      // Retrieve subscription data
       try {
-        // Attempt to retrieve subscription data
         const subscriptions = await stripeTest.subscriptions.list({
           customer: user.stripeCustomerId,
           status: 'all',
@@ -377,33 +378,46 @@ app.get('/api/next-invoice-date/:userId', async (req, res) => {
           const subscription = subscriptions.data[0];
           response.subscriptionStatus = subscription.status;
 
-          // Get the cancellation date if the subscription is canceled
           if (subscription.canceled_at) {
             response.cancellationDate = new Date(subscription.canceled_at * 1000);
           }
         }
+      } catch (subscriptionError) {
+        console.error('Error fetching subscription:', subscriptionError);
+      }
 
-        // Attempt to retrieve the upcoming invoice from Stripe
-        try {
-          const upcomingInvoice = await stripeTest.invoices.retrieveUpcoming({ customer: user.stripeCustomerId });
-          response.nextInvoiceDate = upcomingInvoice.next_payment_attempt ? new Date(upcomingInvoice.next_payment_attempt * 1000) : null;
-        } catch (stripeError) {
-          if (!stripeError.message || !stripeError.message.includes('No upcoming invoices for customer')) {
-            // If the error is not about missing upcoming invoices, rethrow it
-            throw stripeError;
-          }
-          // If there are no upcoming invoices, leave nextInvoiceDate as null
+      // Retrieve the upcoming invoice
+      try {
+        const upcomingInvoice = await stripeTest.invoices.retrieveUpcoming({ customer: user.stripeCustomerId });
+        response.nextInvoiceDate = upcomingInvoice.next_payment_attempt ? new Date(upcomingInvoice.next_payment_attempt * 1000) : null;
+      } catch (invoiceError) {
+        if (!invoiceError.message || !invoiceError.message.includes('No upcoming invoices for customer')) {
+          throw invoiceError;
         }
-      } catch (internalError) {
-        // Handle errors related to Stripe operations
-        console.error(internalError);
+      }
+
+      // Retrieve invoice history
+      try {
+        const invoices = await stripeTest.invoices.list({
+          customer: user.stripeCustomerId,
+          limit: 10
+        });
+
+        response.invoiceHistory = invoices.data.map(invoice => ({
+          invoiceId: invoice.id,
+          amountPaid: invoice.amount_paid,
+          status: invoice.status,
+          billingPeriodStart: invoice.period_start ? new Date(invoice.period_start * 1000) : null,
+          billingPeriodEnd: invoice.period_end ? new Date(invoice.period_end * 1000) : null
+        }));
+      } catch (invoiceHistoryError) {
+        console.error('Error fetching invoice history:', invoiceHistoryError);
       }
     }
 
     // Send the response
     res.send(response);
   } catch (error) {
-    // Handle other server errors
     res.status(400).send({ error: error.message });
   }
 });

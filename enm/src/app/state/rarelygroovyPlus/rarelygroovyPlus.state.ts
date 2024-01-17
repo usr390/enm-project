@@ -1,6 +1,7 @@
 export interface RarelygroovyPlusState {
     nextInvoiceDate: string | null,
     subscriptionStatus: string,
+    invoiceHistory: any,
     cancellationDate: string,
     isUpcomingSubscriptionRenewalDateLoading: boolean,
     isUpcomingSubscriptionRenewalDateLoaded: boolean,
@@ -11,6 +12,7 @@ export interface RarelygroovyPlusState {
 export const initialState: RarelygroovyPlusState = {
     nextInvoiceDate: '',
     subscriptionStatus: '',
+    invoiceHistory: [],
     cancellationDate: '',
     isUpcomingSubscriptionRenewalDateLoading: false,
     isUpcomingSubscriptionRenewalDateLoaded: false,
