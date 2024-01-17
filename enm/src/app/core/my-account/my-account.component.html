@@ -29,7 +29,7 @@
               <div *ngIf="(nextInvoice$ | async) as nextInvoice">
                 <p *ngIf="nextInvoice"><b>Subscription Renews:</b> {{ nextInvoice | date: 'medium' }}</p>
                 <p *ngIf="!nextInvoice">No upcoming invoice found.</p>
-                <p-button (click)="cancelSubscription()" label="Unsubscribe From Rarelygroovy+" [disabled]="(( isSubscriptionCanceling$ | async) === true)">
+                <p-button class="primebutton" size="small" (click)="cancelSubscription()" label="Cancel Subscription" [disabled]="(( isSubscriptionCanceling$ | async) === true)">
                   <div *ngIf="isSubscriptionCanceling$ | async">
                     <p-progressSpinner strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner" [style]="{width: '20px', height: '12px', margin: '0px 20px 0px 0px'}"></p-progressSpinner>
                   </div>
@@ -38,7 +38,7 @@
             </div>
             <div *ngIf="((subscriptionStatus$ | async) === 'canceled')">
               <p><b>Subscription Cancelled On:</b> {{ (subscriptionCancellationDate$ | async) | date }}</p>
-              <p-button label="Renew Subscription" (click)="renewSubscription()"></p-button>
+              <p-button size="small" label="Renew Subscription" (click)="renewSubscription()"></p-button>
             </div>
             <div *ngIf="!((subscriptionStatus$ | async))">
               <p>No subscription information available.</p>

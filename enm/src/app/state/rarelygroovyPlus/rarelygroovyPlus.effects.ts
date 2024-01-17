@@ -64,13 +64,7 @@ export class RarelygroovyPlusEffects {
                     detail: 'Unsubscribed From Rarelygroovy Plus',
                     life: 7000,
                 });
-                // Dispatch the action to get the upcoming subscription renewal date
-                this.currentUser$.pipe(take(1)).subscribe(user => {
-                    if (user) {
-                        let userid = user._id
-                        this.store$.dispatch(RarelygroovyPlusActions.myAccountGetUpcomingSubscriptionRenewalDate({ userId: userid }));
-                    }
-                })
+                window.location.reload();
             })
         ),
         { dispatch: false }
