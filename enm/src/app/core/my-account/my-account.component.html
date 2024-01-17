@@ -15,7 +15,7 @@
           <p-panel header="General">
             <div *ngIf="(currentUser$ | async) as currentUser">
               <p><b>Username:</b> {{ currentUser.username }}</p>
-              <p><b>Account Type:</b><span *ngIf="currentUser.plus"> Rarelygroovy+</span><span *ngIf="!currentUser.plus"> Free</span></p>
+              <p><b>Account Type:</b><span *ngIf="(nextInvoice$ | async)"> Rarelygroovy+</span><span *ngIf="!(nextInvoice$ | async)"> Free</span></p>
               <p><a href="/"(click)="onLogOut()">Log Out</a></p>
             </div>
 
@@ -37,7 +37,7 @@
               </div>
             </div>
             <div *ngIf="((subscriptionStatus$ | async) === 'canceled')">
-              <p><b>Subscription Cancelled On:</b> {{ (subscriptionCancellationDate$ | async) | date}}</p>
+              <p><b>Subscription Cancelled On:</b> {{ (subscriptionCancellationDate$ | async) | date }}</p>
               <p-button label="Renew Subscription" (click)="renewSubscription()"></p-button>
             </div>
             <div *ngIf="!((subscriptionStatus$ | async))">
