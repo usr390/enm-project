@@ -1,12 +1,15 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, of, exhaustMap, map, tap } from "rxjs";
+import { catchError, of, exhaustMap, map, tap, take } from "rxjs";
 import * as RarelygroovyPlusActions from './rarelygroovyPlus.actions';
 import { UserService } from "src/app/core/services/user.service";
 import { UpcomingSubscriptionRenewalDateErrorResponse } from "src/app/models/upcomingSubscriptionRenewalDateErrorResponse";
 import { CancelRarelygroovyPlusSubscriptionErrorResponse } from "src/app/models/cancelRarelygroovyPlusSubscriptionErrorResponse";
 import { Router } from "@angular/router";
 import { MessageService } from "primeng/api";
+import { AppState } from "../app.state";
+import { Store } from "@ngrx/store";
+import * as AuthSelectors from './../auth/auth.selectors'
 
 @Injectable()
 export class RarelygroovyPlusEffects {
@@ -16,7 +19,10 @@ export class RarelygroovyPlusEffects {
         private userService: UserService,
         private router: Router,
         private messageService: MessageService,
+        private store$: Store<AppState>
     ) {}
+
+    currentUser$ = this.store$.select(AuthSelectors.selectUser)
 
     myAccountGetUpcomingSubscriptionRenewalDate$ = createEffect(() => 
         this.actions$.pipe(
@@ -58,6 +64,13 @@ export class RarelygroovyPlusEffects {
                     summary: 'Success!', 
                     detail: 'Unsubscribed From Rarelygroovy Plus',
                     life: 7000,
+                });
+                // Dispatch the action to get the upcoming subscription renewal date
+                this.currentUser$.pipe(take(1)).subscribe(user => {
+                    if (user) {
+                        let userid = user._id
+                        this.store$.dispatch(RarelygroovyPlusActions.myAccountGetUpcomingSubscriptionRenewalDate({ userId: userid }));
+                    }
                 })
             })
         ),

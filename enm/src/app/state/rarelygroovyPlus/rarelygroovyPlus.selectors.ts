@@ -15,6 +15,16 @@ export const isSubscriptionCanceling = createSelector(
   (state: RarelygroovyPlusState): boolean => state.isSubscriptionCanceling
 );
 
+export const subscriptionStatus = createSelector(
+  selectFeature,
+  (state: RarelygroovyPlusState): string => state.subscriptionStatus
+);
+
+export const subscriptionCancellationDate = createSelector(
+  selectFeature,
+  (state: RarelygroovyPlusState): string => state.cancellationDate
+);
+
 
 export const selectNextRarelygroovySubscriptionInvoice = createSelector(
   selectFeature,

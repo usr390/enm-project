@@ -22,7 +22,8 @@ const _rarelygroovPlusReducer = createReducer(
             ...state,
             isUpcomingSubscriptionRenewalDateLoading: false,
             nextInvoiceDate: upcomingSubscriptionRenewalDateSuccessResponse.nextInvoiceDate,
-            subscriptionStatus: upcomingSubscriptionRenewalDateSuccessResponse.subscriptionStatus
+            subscriptionStatus: upcomingSubscriptionRenewalDateSuccessResponse.subscriptionStatus,
+            cancellationDate: upcomingSubscriptionRenewalDateSuccessResponse.cancellationDate
         }
     }),
     on(myAccountGetUpcomingSubscriptionRenewalDateErrorResponse, (state) => {

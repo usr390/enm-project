@@ -20,20 +20,24 @@
           </p-panel>
         </div>
       </div>
-      <div class="row" style="margin-top: 10px;" *ngIf="( currentUser$ | async)?.plus">
+      <div class="row" style="margin-top: 10px;">
         <div class="col">
           <p-panel header="Rarelygroovy+">
-            <div *ngIf="(nextInvoice$ | async) as nextInvoice">
-              <!-- Check if nextInvoice object is not null -->
-              <p *ngIf="nextInvoice"><b>Subscription Renews:</b> {{ nextInvoice | date: 'medium' }}</p>
-              <p *ngIf="!nextInvoice">No upcoming invoice found.</p>
-              <!-- <p-button (click)="cancelSubscription()">Unsubscribe From Rarelygroovy+</p-button> -->
-            </div>
-            <p-button (click)="cancelSubscription()" label="Unsubscribe From Rarelygroovy+" [disabled]="(( isSubscriptionCanceling$ | async) === true)">
-              <div *ngIf="isSubscriptionCanceling$ | async">
-                <p-progressSpinner strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner" [style]="{width: '20px', height: '12px', margin: '0px 20px 0px 0px'}"></p-progressSpinner>
+            <div *ngIf="((subscriptionStatus$ | async) === 'active')">
+              <div *ngIf="(nextInvoice$ | async) as nextInvoice">
+                <p *ngIf="nextInvoice"><b>Subscription Renews:</b> {{ nextInvoice | date: 'medium' }}</p>
+                <p *ngIf="!nextInvoice">No upcoming invoice found.</p>
+                <p-button (click)="cancelSubscription()" label="Unsubscribe From Rarelygroovy+" [disabled]="(( isSubscriptionCanceling$ | async) === true)">
+                  <div *ngIf="isSubscriptionCanceling$ | async">
+                    <p-progressSpinner strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner" [style]="{width: '20px', height: '12px', margin: '0px 20px 0px 0px'}"></p-progressSpinner>
+                  </div>
+                </p-button>
               </div>
-            </p-button>
+            </div>
+            <div *ngIf="((subscriptionStatus$ | async) === 'canceled')">
+              <p><b>Subscription Cancelled On:</b> {{ (subscriptionCancellationDate$ | async) | date}}</p>
+              <p-button label="Renew Subscription" (click)="renewSubscription()"></p-button>
+            </div>
           </p-panel>
         </div>
       </div>

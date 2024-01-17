@@ -18,6 +18,9 @@ export class MyAccountComponent {
   nextInvoice$ = this.store$.select(RarelygroovyPlusSelectors.selectNextRarelygroovySubscriptionInvoice)
   isUpcomingSubscriptionRenewalDateLoading$ = this.store$.select(RarelygroovyPlusSelectors.isUpcomingSubscriptionRenewalDateLoading)
   isSubscriptionCanceling$ = this.store$.select(RarelygroovyPlusSelectors.isSubscriptionCanceling);
+  subscriptionStatus$ = this.store$.select(RarelygroovyPlusSelectors.subscriptionStatus);
+  subscriptionCancellationDate$ = this.store$.select(RarelygroovyPlusSelectors.subscriptionCancellationDate);
+
   currentUser$ = this.store$.select(AuthSelectors.selectUser)
 
   constructor(
@@ -64,6 +67,10 @@ export class MyAccountComponent {
 
   goBack() {
     this.router.navigate(['/']);
+  }
+
+  renewSubscription() {
+    this.router.navigate(['/plus']);
   }
 
 }

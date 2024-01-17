@@ -360,27 +360,44 @@ app.get('/api/next-invoice-date/:userId', async (req, res) => {
       return res.status(404).send({ error: 'User not found or Stripe customer ID missing' });
     }
 
-    // Retrieve the upcoming invoice and subscription data from Stripe
-    const upcomingInvoice = await stripeTest.invoices.retrieveUpcoming({ customer: user.stripeCustomerId });
-    const nextInvoiceDate = upcomingInvoice.next_payment_attempt;
+    let nextInvoiceDate = null;
+    let subscriptionStatus = null;
+    let cancellationDate = null;
 
-    // Retrieve subscription data (assuming there's only one active subscription)
+    // Attempt to retrieve subscription data
     const subscriptions = await stripeTest.subscriptions.list({
       customer: user.stripeCustomerId,
       status: 'all',
       limit: 1
     });
 
-    // Check if there is an active or canceled subscription
-    let subscriptionStatus = null;
     if (subscriptions.data.length > 0) {
-      subscriptionStatus = subscriptions.data[0].status;
+      const subscription = subscriptions.data[0];
+      subscriptionStatus = subscription.status;
+
+      // Get the cancellation date if the subscription is canceled
+      if (subscription.canceled_at) {
+        cancellationDate = new Date(subscription.canceled_at * 1000);
+      }
     }
 
-    // Send the response with next invoice date and subscription status
+    // Attempt to retrieve the upcoming invoice from Stripe
+    try {
+      const upcomingInvoice = await stripeTest.invoices.retrieveUpcoming({ customer: user.stripeCustomerId });
+      nextInvoiceDate = upcomingInvoice.next_payment_attempt ? new Date(upcomingInvoice.next_payment_attempt * 1000) : null;
+    } catch (stripeError) {
+      if (!stripeError.message || !stripeError.message.includes('No upcoming invoices for customer')) {
+        // If the error is not about missing upcoming invoices, rethrow it
+        throw stripeError;
+      }
+      // If there are no upcoming invoices, leave nextInvoiceDate as null
+    }
+
+    // Send the response with next invoice date, subscription status, and cancellation date
     res.send({ 
-      nextInvoiceDate: nextInvoiceDate ? new Date(nextInvoiceDate * 1000) : null,
-      subscriptionStatus: subscriptionStatus
+      nextInvoiceDate: nextInvoiceDate,
+      subscriptionStatus: subscriptionStatus,
+      cancellationDate: cancellationDate
     });
   } catch (error) {
     res.status(400).send({ error: error.message });
