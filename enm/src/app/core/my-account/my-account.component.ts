@@ -25,6 +25,8 @@ export class MyAccountComponent {
 
   currentUser$ = this.store$.select(AuthSelectors.selectUser)
 
+  founderAccounts = ['tigersblood', 'ewa', 'honestbooking', 'outinthe956', 'transcendent', 'FrankTheFreak', 'merwin']
+
   constructor(
     private store$: Store<AppState>,
     private userService: UserService,
@@ -33,7 +35,7 @@ export class MyAccountComponent {
 
   ngOnInit() {
     this.currentUser$.pipe(take(1)).subscribe(user => { 
-      if (user) {
+      if (user && !this.founderAccounts.includes(user.username)) {
         let userid = user._id || user.id;
         this.store$.dispatch(RarelygroovyPlusActions.myAccountGetUpcomingSubscriptionRenewalDate({ userId: userid }));
       }
