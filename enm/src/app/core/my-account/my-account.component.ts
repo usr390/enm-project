@@ -35,7 +35,6 @@ export class MyAccountComponent {
     this.currentUser$.pipe(take(1)).subscribe(user => { 
       if (user) {
         let userid = user._id || user.id;
-        console.log('user from component: ', user)
         this.store$.dispatch(RarelygroovyPlusActions.myAccountGetUpcomingSubscriptionRenewalDate({ userId: userid }));
       }
     })

@@ -21,7 +21,6 @@ export class EnmPlusPaymentService {
   }
 
   checkoutSessionTest$(userid: string) {
-    console.log('from service test', userid)
     return this.http.post<StripeCheckoutSession>(BASE_URL + '/create-checkout-session-test', { userid })
   }
 

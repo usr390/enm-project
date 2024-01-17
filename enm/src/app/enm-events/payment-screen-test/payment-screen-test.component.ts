@@ -40,12 +40,10 @@ export class PaymentScreenTestComponent {
   ngOnInit() {
     this.currentUser$.pipe(take(1)).subscribe(user => { 
       if (user) {
-        console.log('read as logged in')
         this.initializeStripe(user.id);
         this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth());
       } 
       else {
-        console.log('read as no user from payment test screen')
         this.navigationService.paymentScreenSkipped = true;
         this.router.navigate(['/login'], { replaceUrl: true }) 
       }});
@@ -57,7 +55,7 @@ export class PaymentScreenTestComponent {
 
   initializeStripe(userid: string) {
     this.stripe = Stripe(STRIPE_KEY);
-    this.enmPlusPaymentService.checkoutSessionTest$(userid).pipe(tap(userid => console.log(userid)), take(1), concatMap(checkoutSession => {
+    this.enmPlusPaymentService.checkoutSessionTest$(userid).pipe(take(1), concatMap(checkoutSession => {
       const clientSecret = checkoutSession.clientSecret
       return this.stripe.initEmbeddedCheckout({ clientSecret })
     })).subscribe(checkout => {

@@ -27,7 +27,6 @@ export class RarelygroovyPlusEffects {
     myAccountGetUpcomingSubscriptionRenewalDate$ = createEffect(() => 
         this.actions$.pipe(
             ofType(RarelygroovyPlusActions.myAccountGetUpcomingSubscriptionRenewalDate),
-            tap(() => console.log('hi from the effect!@')),
             exhaustMap(
                 (action) => this.userService.getNextInvoice(action.userId).pipe(
                     map(upcomingSubscriptionRenewalDateSuccessResponse => RarelygroovyPlusActions.myAccountGetUpcomingSubscriptionRenewalDateSuccessResponse({ upcomingSubscriptionRenewalDateSuccessResponse })),
