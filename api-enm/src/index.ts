@@ -353,23 +353,40 @@ app.get('/api/next-invoice-date/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
 
-    // Inline Mongoose query to get the user and their Stripe customer ID
+    // Retrieve the user and their Stripe customer ID
     const user = await UserModel.findById(userId).select('stripeCustomerId -_id').exec();
 
     if (!user || !user.stripeCustomerId) {
       return res.status(404).send({ error: 'User not found or Stripe customer ID missing' });
     }
 
-    // Now that we have the Stripe customer ID, call the Stripe API
+    // Retrieve the upcoming invoice and subscription data from Stripe
     const upcomingInvoice = await stripeTest.invoices.retrieveUpcoming({ customer: user.stripeCustomerId });
     const nextInvoiceDate = upcomingInvoice.next_payment_attempt;
 
-    // Send the next invoice date in the response
-    res.send({ nextInvoiceDate: nextInvoiceDate ? new Date(nextInvoiceDate * 1000) : null });
+    // Retrieve subscription data (assuming there's only one active subscription)
+    const subscriptions = await stripeTest.subscriptions.list({
+      customer: user.stripeCustomerId,
+      status: 'all',
+      limit: 1
+    });
+
+    // Check if there is an active or canceled subscription
+    let subscriptionStatus = null;
+    if (subscriptions.data.length > 0) {
+      subscriptionStatus = subscriptions.data[0].status;
+    }
+
+    // Send the response with next invoice date and subscription status
+    res.send({ 
+      nextInvoiceDate: nextInvoiceDate ? new Date(nextInvoiceDate * 1000) : null,
+      subscriptionStatus: subscriptionStatus
+    });
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
 });
+
 
 app.post('/api/cancel-subscription/:userId', async (req, res) => {
   try {

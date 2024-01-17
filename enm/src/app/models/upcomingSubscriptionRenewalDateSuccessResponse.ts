@@ -1,5 +1,6 @@
 interface upcomingSubscriptionRenewalDateSuccessResponse {
     "nextInvoiceDate": string,
+    "subscriptionStatus": string
 }
 
-export type UpcomingSubscriptionRenewalDateSuccessResponse = upcomingSubscriptionRenewalDateSuccessResponse | null
+export type UpcomingSubscriptionRenewalDateSuccessResponse = upcomingSubscriptionRenewalDateSuccessResponse
