@@ -4,9 +4,11 @@ import * as RarelygroovyPlusSelectors from './../../state/rarelygroovyPlus/rarel
 import * as RarelygroovyPlusActions from './../../state/rarelygroovyPlus/rarelygroovyPlus.actions'
 import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
-import { catchError, of, switchMap, take } from 'rxjs';
+import { take } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import * as AuthActions from './../../state/auth/auth.actions';
+
 
 @Component({
   selector: 'app-my-account',
@@ -32,30 +34,14 @@ export class MyAccountComponent {
   ngOnInit() {
     this.currentUser$.pipe(take(1)).subscribe(user => { 
       if (user) {
-        let userid = user._id
+        let userid = user._id || user.id;
+        console.log('user from component: ', user)
         this.store$.dispatch(RarelygroovyPlusActions.myAccountGetUpcomingSubscriptionRenewalDate({ userId: userid }));
       }
     })
   }
 
   cancelSubscription() {
-    // this.store$.select(AuthSelectors.selectUser).pipe(
-    //   take(1),
-    //   switchMap((user) => {
-    //     if (user && user._id) {
-    //       return this.userService.cancelSubscription(user._id);
-    //     } else {
-    //       return of(null); // Ensure this is always returning an Observable
-    //     }
-    //   }),
-    //   catchError(error => {
-    //     console.error(error);
-    //     return of(null); // Return an Observable in case of an error
-    //   })
-    // ).subscribe(response => {
-    //   // Handle the response here
-    //   console.log(response);
-    // });
     this.currentUser$.pipe(take(1)).subscribe(user => { 
       if (user) {
         let userid = user._id
@@ -71,6 +57,10 @@ export class MyAccountComponent {
 
   renewSubscription() {
     this.router.navigate(['/plus']);
+  }
+
+  onLogOut() {
+    this.store$.dispatch(AuthActions.logOut());
   }
 
 }

@@ -353,56 +353,61 @@ app.get('/api/next-invoice-date/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
 
+    // Initialize response shape with null values
+    let response = {
+      nextInvoiceDate: null,
+      subscriptionStatus: null,
+      cancellationDate: null
+    };
+
     // Retrieve the user and their Stripe customer ID
     const user = await UserModel.findById(userId).select('stripeCustomerId -_id').exec();
 
-    if (!user || !user.stripeCustomerId) {
-      return res.status(404).send({ error: 'User not found or Stripe customer ID missing' });
-    }
+    // Proceed only if user and stripeCustomerId exist
+    if (user && user.stripeCustomerId) {
+      try {
+        // Attempt to retrieve subscription data
+        const subscriptions = await stripeTest.subscriptions.list({
+          customer: user.stripeCustomerId,
+          status: 'all',
+          limit: 1
+        });
 
-    let nextInvoiceDate = null;
-    let subscriptionStatus = null;
-    let cancellationDate = null;
+        if (subscriptions.data.length > 0) {
+          const subscription = subscriptions.data[0];
+          response.subscriptionStatus = subscription.status;
 
-    // Attempt to retrieve subscription data
-    const subscriptions = await stripeTest.subscriptions.list({
-      customer: user.stripeCustomerId,
-      status: 'all',
-      limit: 1
-    });
+          // Get the cancellation date if the subscription is canceled
+          if (subscription.canceled_at) {
+            response.cancellationDate = new Date(subscription.canceled_at * 1000);
+          }
+        }
 
-    if (subscriptions.data.length > 0) {
-      const subscription = subscriptions.data[0];
-      subscriptionStatus = subscription.status;
-
-      // Get the cancellation date if the subscription is canceled
-      if (subscription.canceled_at) {
-        cancellationDate = new Date(subscription.canceled_at * 1000);
+        // Attempt to retrieve the upcoming invoice from Stripe
+        try {
+          const upcomingInvoice = await stripeTest.invoices.retrieveUpcoming({ customer: user.stripeCustomerId });
+          response.nextInvoiceDate = upcomingInvoice.next_payment_attempt ? new Date(upcomingInvoice.next_payment_attempt * 1000) : null;
+        } catch (stripeError) {
+          if (!stripeError.message || !stripeError.message.includes('No upcoming invoices for customer')) {
+            // If the error is not about missing upcoming invoices, rethrow it
+            throw stripeError;
+          }
+          // If there are no upcoming invoices, leave nextInvoiceDate as null
+        }
+      } catch (internalError) {
+        // Handle errors related to Stripe operations
+        console.error(internalError);
       }
     }
 
-    // Attempt to retrieve the upcoming invoice from Stripe
-    try {
-      const upcomingInvoice = await stripeTest.invoices.retrieveUpcoming({ customer: user.stripeCustomerId });
-      nextInvoiceDate = upcomingInvoice.next_payment_attempt ? new Date(upcomingInvoice.next_payment_attempt * 1000) : null;
-    } catch (stripeError) {
-      if (!stripeError.message || !stripeError.message.includes('No upcoming invoices for customer')) {
-        // If the error is not about missing upcoming invoices, rethrow it
-        throw stripeError;
-      }
-      // If there are no upcoming invoices, leave nextInvoiceDate as null
-    }
-
-    // Send the response with next invoice date, subscription status, and cancellation date
-    res.send({ 
-      nextInvoiceDate: nextInvoiceDate,
-      subscriptionStatus: subscriptionStatus,
-      cancellationDate: cancellationDate
-    });
+    // Send the response
+    res.send(response);
   } catch (error) {
+    // Handle other server errors
     res.status(400).send({ error: error.message });
   }
 });
+
 
 
 app.post('/api/cancel-subscription/:userId', async (req, res) => {
