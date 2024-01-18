@@ -57,21 +57,21 @@
                         </div>
       
                         <p style="margin-top: 20px"><b>Transaction History:</b></p>
-                        <div *ngFor="let invoice of (invoiceHistory$ | async)">
+                        <div *ngFor="let charge of (chargesHistory$ | async)">
                           <div class="card">
                             <div class="grid grid-nogutter">
                               <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
                                 <div class="flex flex-column align-items-center sm:align-items-start gap-3">
                                   <div class="text-2xl font-bold text-900"><b>Rarelygroovy+ Monthly Subscription</b></div>
-                                  <div class="text-2xl font-bold text-900">{{ invoice.billingPeriodStart | date }} - {{ invoice.billingPeriodEnd | date }}</div>
+                                  <div class="text-2xl font-bold text-900">{{ charge.created | date }} </div>
                                   <div class="flex align-items-center gap-3">
                                     <span class="flex align-items-center gap-2">
-                                      <span class="font-semibold">{{ invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1) }}</span>
+                                      <span class="font-semibold">{{ charge.status.charAt(0).toUpperCase() + charge.status.slice(1) }}</span>
                                     </span>
                                   </div>
                                 </div>
                                 <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                                  <span class="text-2xl font-semibold">{{ invoice.amountPaid / 100 | currency:'USD' }}</span>
+                                  <span class="text-2xl font-semibold">{{ charge.amount / 100 | currency:'USD' }}</span>
                                 </div>
                               </div>
                             </div>
@@ -91,21 +91,21 @@
                         <p><b>Subscription Cancelled On:</b> {{ (subscriptionCancellationDate$ | async) | date }}</p>
 
                         <p style="margin-top: 20px"><b>Transaction History:</b></p>
-                        <div *ngFor="let invoice of (invoiceHistory$ | async)">
+                        <div *ngFor="let charge of (chargesHistory$ | async)">
                           <div class="card">
                             <div class="grid grid-nogutter">
                               <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
                                 <div class="flex flex-column align-items-center sm:align-items-start gap-3">
                                   <div class="text-2xl font-bold text-900"><b>Rarelygroovy+ Monthly Subscription</b></div>
-                                  <div class="text-2xl font-bold text-900">{{ invoice.billingPeriodStart | date }} - {{ invoice.billingPeriodEnd | date }}</div>
+                                  <div class="text-2xl font-bold text-900">{{ charge.created | date }} </div>
                                   <div class="flex align-items-center gap-3">
                                     <span class="flex align-items-center gap-2">
-                                      <span class="font-semibold">{{ invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1) }}</span>
+                                      <span class="font-semibold">Charge {{ charge.status.charAt(0).toUpperCase() + charge.status.slice(1) }}</span>
                                     </span>
                                   </div>
                                 </div>
                                 <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                                  <span class="text-2xl font-semibold">{{ invoice.amountPaid / 100 | currency:'USD' }}</span>
+                                  <span class="text-2xl font-semibold">{{ charge.amount / 100 | currency:'USD' }}</span>
                                 </div>
                               </div>
                             </div>

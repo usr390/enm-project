@@ -30,6 +30,11 @@ export const selectInvoiceHistory = createSelector(
   (state: RarelygroovyPlusState): any => state.invoiceHistory
 );
 
+export const selectChargesHistory = createSelector(
+  selectFeature,
+  (state: RarelygroovyPlusState): any => state.chargesHistory
+);
+
 export const selectNextRarelygroovySubscriptionInvoice = createSelector(
   selectFeature,
   (state: RarelygroovyPlusState): string | null => state.nextInvoiceDate
