@@ -25,6 +25,10 @@ export const subscriptionCancellationDate = createSelector(
   (state: RarelygroovyPlusState): string => state.cancellationDate
 );
 
+export const selectInvoiceHistory = createSelector(
+  selectFeature,
+  (state: RarelygroovyPlusState): any => state.invoiceHistory
+);
 
 export const selectNextRarelygroovySubscriptionInvoice = createSelector(
   selectFeature,

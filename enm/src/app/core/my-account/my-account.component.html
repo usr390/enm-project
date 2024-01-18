@@ -2,82 +2,135 @@
   <p-button type="button" (click)="goBack()" icon="pi pi-arrow-left" styleClass="p-button-rounded p-button-lg p-button-text"></p-button>
 </div>
 
-<div *ngIf="currentUser$"></div>
-
-<ng-container *ngIf="(currentUser$ | async) as currentUser">
-  <!-- Content to display if the username is a founding account -->
-  <div class="d-flex justify-content-center align-items-center" style="margin-top: 20px">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <div *ngIf="founderAccounts.includes(currentUser.username); else notFoundingAccount">
-            <h2 style="color: #708da8; margin-left: 15px;">Account</h2>
-              <p-panel header="General">
-                <div *ngIf="(currentUser$ | async) as currentUser">
-                  <p><b>Username:</b> {{ currentUser.username }}</p>
-                  <p><b>Account Type:</b><span> Founder</span></p>
-                  <p>Founders are among the first people to ever use Rarelygroovy. You will forever have access to the latest and greatest features we have to offer. Thank you for seeing our vision so early on in our journey! </p>
+<div class="container-fluid" style="padding-bottom: 50px;">
+  <div class="row">
+    <div class="col">
+      <ng-container *ngIf="(currentUser$ | async) as currentUser">
+        <!-- Content to display if the username is a founding account -->
+        <div class="d-flex justify-content-center align-items-center" style="margin-top: 20px">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <div *ngIf="founderAccounts.includes(currentUser.username); else notFoundingAccount">
+                  <h2 style="color: #708da8; margin-left: 15px;">Account</h2>
+                    <p-panel header="General">
+                      <div *ngIf="(currentUser$ | async) as currentUser">
+                        <p><b>Username:</b> {{ currentUser.username }}</p>
+                        <p><b>Account Type:</b><span> Founder</span></p>
+                        <p>Founders are among the first people to ever use Rarelygroovy. You will forever have access to the latest and greatest features we have to offer. Thank you for seeing our vision so early on in our journey! </p>
+                      </div>
+                    </p-panel>
                 </div>
-              </p-panel>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Content to display if the username is NOT a founding account -->
-  <ng-template #notFoundingAccount>
-    <div *ngIf="isUpcomingSubscriptionRenewalDateLoading$ | async" class="d-flex justify-content-center align-items-center" style="height: 65vh;">
-      <p-progressSpinner styleClass= "w-4rem h-4rem" strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner"></p-progressSpinner>
-    </div>
-    
-    <div *ngIf="!(isUpcomingSubscriptionRenewalDateLoading$ | async)" class="d-flex justify-content-center align-items-center" style="height: 65vh;">
-      <div class="d-flex justify-content-center align-items-center" style="margin-top: 20px">
-        <div class="container">
-          <div class="row">
-            <div class="col">
-              <h2 style="color: #708da8; margin-left: 15px;">Account</h2>
-              <p-panel header="General">
-                <div *ngIf="(currentUser$ | async) as currentUser">
-                  <p><b>Username:</b> {{ currentUser.username }}</p>
-                  <p><b>Account Type:</b><span *ngIf="(nextInvoice$ | async)"> Rarelygroovy+</span><span *ngIf="!(nextInvoice$ | async)"> Free</span></p>
-                </div>
-    
-              </p-panel>
+              </div>
             </div>
           </div>
-          <div class="row" style="margin-top: 10px;">
-            <div class="col">
-              <p-panel header="Rarelygroovy+">
-                <div *ngIf="((subscriptionStatus$ | async) === 'active')">
-                  <div *ngIf="(nextInvoice$ | async) as nextInvoice">
-                    <p *ngIf="nextInvoice"><b>Subscription Renews:</b> {{ nextInvoice | date: 'medium' }}</p>
-                    <p *ngIf="!nextInvoice">No upcoming invoice found.</p>
-                    <p-button class="primebutton" size="small" (click)="cancelSubscription()" label="Cancel Subscription" [disabled]="(( isSubscriptionCanceling$ | async) === true)">
-                      <div *ngIf="isSubscriptionCanceling$ | async">
-                        <p-progressSpinner strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner" [style]="{width: '20px', height: '12px', margin: '0px 20px 0px 0px'}"></p-progressSpinner>
+        </div>
+      
+        <!-- Content to display if the username is NOT a founding account -->
+        <ng-template #notFoundingAccount>
+          <div *ngIf="isUpcomingSubscriptionRenewalDateLoading$ | async" class="d-flex justify-content-center align-items-center" style="height: 65vh;">
+            <p-progressSpinner styleClass= "w-4rem h-4rem" strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner"></p-progressSpinner>
+          </div>
+          
+          <div *ngIf="!(isUpcomingSubscriptionRenewalDateLoading$ | async)" class="d-flex justify-content-center align-items-center">
+            <div class="d-flex justify-content-center align-items-center" style="margin-top: 20px">
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <h2 style="color: #708da8; margin-left: 15px;">Account</h2>
+                    <p-panel header="General">
+                      <div *ngIf="(currentUser$ | async) as currentUser">
+                        <p><b>Username:</b> {{ currentUser.username }}</p>
+                        <p><b>Account Type:</b><span *ngIf="(nextInvoice$ | async)"> Rarelygroovy+</span><span *ngIf="!(nextInvoice$ | async)"> Free</span></p>
                       </div>
-                    </p-button>
+          
+                    </p-panel>
                   </div>
                 </div>
-                <div *ngIf="((subscriptionStatus$ | async) === 'canceled')">
-                  <p><b>Subscription Cancelled On:</b> {{ (subscriptionCancellationDate$ | async) | date }}</p>
-                  <p-button size="small" label="Renew Subscription" (click)="renewSubscription()"></p-button>
+                <div class="row" style="margin-top: 10px;">
+                  <div class="col">
+                    <p-panel header="Rarelygroovy+">
+                      <div *ngIf="((subscriptionStatus$ | async) === 'active')">
+                        <div *ngIf="(nextInvoice$ | async) as nextInvoice">
+                          <p *ngIf="nextInvoice"><b>Subscription Renews:</b> {{ nextInvoice | date: 'medium' }}</p>
+                          <p *ngIf="!nextInvoice">No upcoming invoice found.</p>  
+                        </div>
+      
+                        <p style="margin-top: 20px"><b>Transaction History:</b></p>
+                        <div *ngFor="let invoice of (invoiceHistory$ | async)">
+                          <div class="card">
+                            <div class="grid grid-nogutter">
+                              <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                                <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                                  <div class="text-2xl font-bold text-900"><b>Rarelygroovy+ Monthly Subscription</b></div>
+                                  <div class="text-2xl font-bold text-900">{{ invoice.billingPeriodStart | date }} - {{ invoice.billingPeriodEnd | date }}</div>
+                                  <div class="flex align-items-center gap-3">
+                                    <span class="flex align-items-center gap-2">
+                                      <span class="font-semibold">{{ invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1) }}</span>
+                                    </span>
+                                  </div>
+                                </div>
+                                <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
+                                  <span class="text-2xl font-semibold">{{ invoice.amountPaid / 100 | currency:'USD' }}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div style="margin-top: 25px">
+                          <p-button size="small" (click)="cancelSubscription()" label="Cancel Subscription" [disabled]="(( isSubscriptionCanceling$ | async) === true)">
+                            <div *ngIf="isSubscriptionCanceling$ | async">
+                              <p-progressSpinner strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner" [style]="{width: '20px', height: '12px', margin: '0px 20px 0px 0px'}"></p-progressSpinner>
+                            </div>
+                          </p-button>
+                        </div>
+                      </div>
+      
+                      <div *ngIf="((subscriptionStatus$ | async) === 'canceled')">
+                        <p><b>Subscription Cancelled On:</b> {{ (subscriptionCancellationDate$ | async) | date }}</p>
+
+                        <p style="margin-top: 20px"><b>Transaction History:</b></p>
+                        <div *ngFor="let invoice of (invoiceHistory$ | async)">
+                          <div class="card">
+                            <div class="grid grid-nogutter">
+                              <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                                <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                                  <div class="text-2xl font-bold text-900"><b>Rarelygroovy+ Monthly Subscription</b></div>
+                                  <div class="text-2xl font-bold text-900">{{ invoice.billingPeriodStart | date }} - {{ invoice.billingPeriodEnd | date }}</div>
+                                  <div class="flex align-items-center gap-3">
+                                    <span class="flex align-items-center gap-2">
+                                      <span class="font-semibold">{{ invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1) }}</span>
+                                    </span>
+                                  </div>
+                                </div>
+                                <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
+                                  <span class="text-2xl font-semibold">{{ invoice.amountPaid / 100 | currency:'USD' }}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div style="margin-top: 25px">
+                          <p-button size="small" label="Renew Subscription" (click)="renewSubscription()"></p-button>
+                        </div>
+                        
+                      </div>
+                      <div *ngIf="!((subscriptionStatus$ | async))">
+                        <p>No subscription information available.</p>
+                        <p>When you subscribe to <a routerLink="/plus">Rarelygroovy+</a>, you'll see details about your subscription here</p>
+                      </div>
+                    </p-panel>
+                  </div>
                 </div>
-                <div *ngIf="!((subscriptionStatus$ | async))">
-                  <p>No subscription information available.</p>
-                  <p>When you subscribe to <a routerLink="/plus">Rarelygroovy+</a>, you'll see details about your subscription here</p>
-                </div>
-              </p-panel>
+              </div>
             </div>
           </div>
-        </div>
-    
-    
-    
-      </div>
+        </ng-template>
+      </ng-container>
     </div>
-  </ng-template>
-</ng-container>
+  </div>
+</div>
 
 
