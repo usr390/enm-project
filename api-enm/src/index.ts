@@ -353,12 +353,13 @@ app.get('/api/next-invoice-date/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
 
-    // Initialize response shape with null values and an empty array for invoice history
+    // Initialize response shape
     let response = {
       nextInvoiceDate: null,
       subscriptionStatus: null,
       cancellationDate: null,
-      invoiceHistory: []
+      invoiceHistory: [],
+      chargesHistory: [] // Added to include charge history
     };
 
     // Retrieve the user and their Stripe customer ID
@@ -412,6 +413,25 @@ app.get('/api/next-invoice-date/:userId', async (req, res) => {
         }));
       } catch (invoiceHistoryError) {
         console.error('Error fetching invoice history:', invoiceHistoryError);
+      }
+
+      // Retrieve charge history
+      try {
+        const charges = await stripeTest.charges.list({
+          customer: user.stripeCustomerId,
+          limit: 10 // You can adjust the limit as needed
+        });
+
+        response.chargesHistory = charges.data.map(charge => ({
+          chargeId: charge.id,
+          amount: charge.amount,
+          created: new Date(charge.created * 1000),
+          status: charge.status,
+          currency: charge.currency
+          // Include any other relevant charge fields here
+        }));
+      } catch (chargeError) {
+        console.error('Error fetching charge history:', chargeError);
       }
     }
 
