@@ -7,7 +7,7 @@
     <div class="col">
       <ng-container *ngIf="(currentUser$ | async) as currentUser">
         <!-- Content to display if the username is a founding account -->
-        <div class="d-flex justify-content-center align-items-center" style="margin-top: 20px">
+        <div class="d-flex justify-content-center align-items-center">
           <div class="container">
             <div class="row">
               <div class="col">
@@ -33,7 +33,7 @@
           </div>
           
           <div *ngIf="!(isUpcomingSubscriptionRenewalDateLoading$ | async)" class="d-flex justify-content-center align-items-center">
-            <div class="d-flex justify-content-center align-items-center" style="margin-top: 20px">
+            <div class="d-flex justify-content-center align-items-center">
               <div class="container">
                 <div class="row">
                   <div class="col">
