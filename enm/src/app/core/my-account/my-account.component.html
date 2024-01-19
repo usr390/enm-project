@@ -52,7 +52,7 @@
                     <p-panel header="Rarelygroovy+">
                       <div *ngIf="((subscriptionStatus$ | async) === 'active')">
                         <div *ngIf="(nextInvoice$ | async) as nextInvoice">
-                          <p *ngIf="nextInvoice"><b>Subscription Renews:</b> {{ nextInvoice | date: 'medium' }}</p>
+                          <p *ngIf="nextInvoice"><b>Subscription Renews:</b> <br> {{ nextInvoice | date: 'medium' }}</p>
                           <p *ngIf="!nextInvoice">No upcoming invoice found.</p>  
                         </div>
       
@@ -66,7 +66,7 @@
                                   <div class="text-2xl font-bold text-900">{{ charge.created | date }} </div>
                                   <div class="flex align-items-center gap-3">
                                     <span class="flex align-items-center gap-2">
-                                      <span class="font-semibold">{{ charge.status.charAt(0).toUpperCase() + charge.status.slice(1) }}</span>
+                                      <span class="font-semibold">Payment {{ charge.status.charAt(0).toUpperCase() + charge.status.slice(1) }}</span>
                                     </span>
                                   </div>
                                 </div>
@@ -78,7 +78,7 @@
                           </div>
                         </div>
                         
-                        <div style="margin-top: 25px">
+                        <div style="margin-top: 25px; display: flex; justify-content: center;">
                           <p-button size="small" (click)="cancelSubscription()" label="Cancel Subscription" [disabled]="(( isSubscriptionCanceling$ | async) === true)">
                             <div *ngIf="isSubscriptionCanceling$ | async">
                               <p-progressSpinner strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner" [style]="{width: '20px', height: '12px', margin: '0px 20px 0px 0px'}"></p-progressSpinner>
@@ -112,7 +112,7 @@
                           </div>
                         </div>
 
-                        <div style="margin-top: 25px">
+                        <div style="margin-top: 25px; display: flex; justify-content: center;">
                           <p-button size="small" label="Renew Subscription" (click)="renewSubscription()"></p-button>
                         </div>
                         

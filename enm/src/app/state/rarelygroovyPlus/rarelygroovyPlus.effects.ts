@@ -56,7 +56,7 @@ export class RarelygroovyPlusEffects {
         this.actions$.pipe(
             ofType(RarelygroovyPlusActions.myAccountCancelSubscriptionSuccessResponse),
             tap(myAccountCancelSubscriptionSuccessResponse => {
-                this.router.navigate(['/4Nsmn93XmkD8Zin8'], { replaceUrl: true });
+                this.router.navigate(['/account'], { replaceUrl: true });
                 this.messageService.add({ 
                     key: 'unsubscribedFromRarelygroovyPlus', 
                     severity: 'success', 
