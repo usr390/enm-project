@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'login', component: LogInComponent },
   { path: 'create-user', component: CreateUserComponent },
   { path: 'plus', component: EnmPlusPaymentScreenComponent },
-  { path: '4Nsmn93XmkD8Zin8', component: MyAccountComponent },
+  { path: 'account', component: MyAccountComponent },
   { path: 'iBhLq5wrrxafte4e', component: PaymentScreenTestComponent },
   { path: 'checkout/return', component: EnmPlusPaymentSuccessfulComponent },
   { path: 'add-event', loadChildren: () => import('./enm-events/enm-event-add/enm-event-add.module').then(m => m.EnmEventAddModule) },
