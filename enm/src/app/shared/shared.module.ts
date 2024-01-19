@@ -12,6 +12,7 @@ import { DateTimeToTimePipe } from '../pipes/date-time-to-time.pipe';
 import { ArtistNamesPipe } from '../pipes/artist-names.pipe';
 import { LogoComponent } from './logo/logo.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
+import { DoorTimeToTimePipe } from './door-time-to-time.pipe';
 
 // primeng imports
 import { AvatarModule } from 'primeng/avatar';
@@ -35,7 +36,8 @@ import { ScrollTopModule } from 'primeng/scrolltop';
 import { PanelModule } from 'primeng/panel';
 import { FooterComponent } from './footer/footer.component';
 import { TooltipModule } from 'primeng/tooltip';
-import { DoorTimeToTimePipe } from './door-time-to-time.pipe';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,8 @@ import { DoorTimeToTimePipe } from './door-time-to-time.pipe';
     DividerModule,
     ScrollTopModule,
     PanelModule,
-    TooltipModule
+    TooltipModule,
+    ConfirmDialogModule,
   ],
   exports: [
     // enm imports
@@ -107,11 +110,13 @@ import { DoorTimeToTimePipe } from './door-time-to-time.pipe';
     ScrollTopModule,
     PanelModule,
     FooterComponent,
-    TooltipModule
+    TooltipModule,
+    ConfirmDialogModule
   ],
   providers: [
     // primeng providers
-    MessageService
+    MessageService,
+    ConfirmationService
   ]
 })
 export class SharedModule { }

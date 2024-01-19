@@ -52,7 +52,7 @@
                     <p-panel header="Rarelygroovy+">
                       <div *ngIf="((subscriptionStatus$ | async) === 'active')">
                         <div *ngIf="(nextInvoice$ | async) as nextInvoice">
-                          <p *ngIf="nextInvoice"><b>Subscription Renews:</b> <br> {{ nextInvoice | date }}</p>
+                          <p *ngIf="nextInvoice"><b>Subscription Renews:</b> {{ nextInvoice | date }}</p>
                           <p *ngIf="!nextInvoice">No upcoming invoice found.</p>  
                         </div>
       
@@ -79,7 +79,8 @@
                         </div>
                         
                         <div style="margin-top: 25px; display: flex; justify-content: center;">
-                          <p-button size="small" (click)="cancelSubscription()" label="Cancel Subscription" [disabled]="(( isSubscriptionCanceling$ | async) === true)">
+                          <p-confirmDialog header="Confirmation"></p-confirmDialog>
+                          <p-button size="small" (click)="confirmCancellation()" label="Cancel Subscription" [disabled]="(( isSubscriptionCanceling$ | async) === true)">
                             <div *ngIf="isSubscriptionCanceling$ | async">
                               <p-progressSpinner strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner" [style]="{width: '20px', height: '12px', margin: '0px 20px 0px 0px'}"></p-progressSpinner>
                             </div>
@@ -132,5 +133,6 @@
     </div>
   </div>
 </div>
+
 
 

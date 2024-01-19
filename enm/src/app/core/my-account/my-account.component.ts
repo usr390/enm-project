@@ -8,6 +8,7 @@ import { take } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import * as AuthActions from './../../state/auth/auth.actions';
+import { ConfirmationService } from 'primeng/api';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class MyAccountComponent {
   constructor(
     private store$: Store<AppState>,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit() {
@@ -53,6 +55,16 @@ export class MyAccountComponent {
       }
     })
     
+  }
+
+  confirmCancellation() {
+    this.confirmationService.confirm({
+      message: 'Cancel subscription?',
+      accept: () => {
+        // logic to execute when user confirms
+        this.cancelSubscription();
+      }
+    });
   }
 
   goBack() {
