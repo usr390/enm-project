@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { UserService } from '../services/user.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 describe('MyAccountComponent', () => {
   let component: MyAccountComponent;
@@ -20,6 +20,7 @@ describe('MyAccountComponent', () => {
       providers: [ 
         UserService,
         ConfirmationService,
+        MessageService,
         { provide: Store, useValue: mockStore } ] 
     });
     fixture = TestBed.createComponent(MyAccountComponent);

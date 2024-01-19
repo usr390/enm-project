@@ -57,13 +57,7 @@ export class RarelygroovyPlusEffects {
             ofType(RarelygroovyPlusActions.myAccountCancelSubscriptionSuccessResponse),
             tap(myAccountCancelSubscriptionSuccessResponse => {
                 this.router.navigate(['/account'], { replaceUrl: true });
-                this.messageService.add({ 
-                    key: 'unsubscribedFromRarelygroovyPlus', 
-                    severity: 'success', 
-                    summary: 'Success!', 
-                    detail: 'Unsubscribed From Rarelygroovy Plus',
-                    life: 7000,
-                });
+                localStorage.setItem('cancelledSubscription', 'true');
                 window.location.reload();
             })
         ),

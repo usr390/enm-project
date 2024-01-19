@@ -8,7 +8,7 @@ import { take } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import * as AuthActions from './../../state/auth/auth.actions';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 @Component({
@@ -33,9 +33,9 @@ export class MyAccountComponent {
 
   constructor(
     private store$: Store<AppState>,
-    private userService: UserService,
     private router: Router,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -45,6 +45,10 @@ export class MyAccountComponent {
         this.store$.dispatch(RarelygroovyPlusActions.myAccountGetUpcomingSubscriptionRenewalDate({ userId: userid }));
       }
     })
+  }
+
+  ngAfterViewInit() {
+    this.ifThisViewInitIsBeingTriggeredBecauseTheUserUnsubscribedFromRarelygroovyPlusThenDoThis();
   }
 
   cancelSubscription() {
@@ -77,6 +81,19 @@ export class MyAccountComponent {
 
   onLogOut() {
     this.store$.dispatch(AuthActions.logOut());
+  }
+
+  ifThisViewInitIsBeingTriggeredBecauseTheUserUnsubscribedFromRarelygroovyPlusThenDoThis() {
+    if (localStorage.getItem('cancelledSubscription') === 'true') {
+      this.messageService.add({ 
+          key: 'unsubscribedFromRarelygroovyPlus', 
+          severity: 'success', 
+          summary: 'Success!', 
+          detail: 'Unsubscribed From Rarelygroovy Plus'
+      });
+      console.log('hihi')
+      localStorage.removeItem('cancelledSubscription');
+    }
   }
 
 }
