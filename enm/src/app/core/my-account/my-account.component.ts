@@ -54,7 +54,7 @@ export class MyAccountComponent {
   cancelSubscription() {
     this.currentUser$.pipe(take(1)).subscribe(user => { 
       if (user) {
-        let userid = user._id
+        let userid = user._id || user.id
         this.store$.dispatch(RarelygroovyPlusActions.myAccountCancelSubscription({ userId: userid }))
       }
     })
@@ -89,7 +89,7 @@ export class MyAccountComponent {
           key: 'unsubscribedFromRarelygroovyPlus', 
           severity: 'success', 
           summary: 'Success!', 
-          detail: 'Unsubscribed From Rarelygroovy Plus'
+          detail: 'Unsubscribed From Rarelygroovy+'
       });
       console.log('hihi')
       localStorage.removeItem('cancelledSubscription');
