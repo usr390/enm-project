@@ -98,7 +98,7 @@ export class AuthEffects {
                         life: 7000,
                     })
                 } else {
-                    this.router.navigate(['/'], { replaceUrl: true });
+                    this.router.navigate(['/events'], { replaceUrl: true });
                     this.messageService.add({ key: 'welcomeUser', severity: 'success', summary: createUserSuccessResponse.createUserSuccessResponse.user?.username, detail: this.getRandomWelcomeMessage() })
                 }
             })
