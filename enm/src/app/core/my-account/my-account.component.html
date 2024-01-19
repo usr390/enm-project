@@ -52,7 +52,7 @@
                     <p-panel header="Rarelygroovy+">
                       <div *ngIf="((subscriptionStatus$ | async) === 'active')">
                         <div *ngIf="(nextInvoice$ | async) as nextInvoice">
-                          <p *ngIf="nextInvoice"><b>Subscription Renews:</b> <br> {{ nextInvoice | date: 'medium' }}</p>
+                          <p *ngIf="nextInvoice"><b>Subscription Renews:</b> <br> {{ nextInvoice | date }}</p>
                           <p *ngIf="!nextInvoice">No upcoming invoice found.</p>  
                         </div>
       

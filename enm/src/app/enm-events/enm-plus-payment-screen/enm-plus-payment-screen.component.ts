@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 // 3rd party imports
-import { concatMap, take, tap } from 'rxjs';
+import { concatMap, take } from 'rxjs';
 // enm imports
 import { EnmPlusPaymentService } from 'src/app/core/services/enm-plus-payment.service';
 import { AppState } from 'src/app/state/app.state';
