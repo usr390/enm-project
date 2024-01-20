@@ -29,7 +29,7 @@ export class MyAccountComponent {
 
   currentUser$ = this.store$.select(AuthSelectors.selectUser)
 
-  founderAccounts = ['tigersblood', 'ewa', 'honestbooking', 'outinthe956', 'transcendent', 'FrankTheFreak', 'merwin', 'cd']
+  founderAccounts = ['tigersblood', 'ewa', 'honestbooking', 'outinthe956', 'transcendent', 'FrankTheFreak', 'merwin', 'cd', 'sunday']
 
   constructor(
     private store$: Store<AppState>,
