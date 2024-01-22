@@ -8,6 +8,7 @@ import { take } from 'rxjs';
 import { AppState } from 'src/app/state/app.state';
 import * as fromEnmEvents from './../../state/enmEvents/enmEvents.actions'
 import * as EnmEventsSelectors from './../../state/enmEvents/enmEvents.selectors';
+import * as AuthSelectors from './../../state/auth/auth.selectors';
 
 
 @Component({
@@ -22,16 +23,20 @@ export class EnmEventListFilterComponent {
     private store$: Store<AppState>, // 3rd party
   ) { }
 
-  enmEventListFilterForm = this.fb.group({ filter: '' });
+  enmEventListFilterForm = this.fb.group({ filter: '', checked: false });
   selectedFilterText$ = this.store$.select(EnmEventsSelectors.selectedFilterText); // for repopulating the input field after a refresh or navigation
+  filter="Recently Listed"
+  currentUser$ = this.store$.select(AuthSelectors.selectUser);
+  gifted = "merwin"
 
   ngOnInit() {
-    this.initializeFormControl() 
+    this.initializeFormControl()
   }
 
   filterResults() { 
     let text = this.enmEventListFilterForm.value.filter?.trim() as string
-    this.store$.dispatch(fromEnmEvents.enmEventListFilter({ text }))
+    let recentlyListed = this.enmEventListFilterForm.value.checked as boolean
+    this.store$.dispatch(fromEnmEvents.enmEventListFilter({ text, recentlyListed }))
   }
 
   clearFilter() {

@@ -7,6 +7,7 @@ export interface EnmEvents {
 
 export interface Filter {
   text: string;
+  recentlyListed: boolean;
 }
 
 export interface EnmEventsState {
@@ -22,6 +23,7 @@ export const initialState: EnmEventsState = {
   entities: {},
   filter: {
     text: '',
+    recentlyListed: false,
   },
   loaded: false,
   loading: false,

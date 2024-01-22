@@ -22,12 +22,14 @@ export const selectFilter = createSelector(
 export const selectFiltered = createSelector(
   selectAll,
   selectFilter,
+  // Assuming you have a selector for the toggle state
   (enmEvents: EnmEvent[], filter: Filter): EnmEvent[] => {
+    let filteredEvents = enmEvents;
+
+    // Apply text filter
     if (filter.text) {
       const normalizedFilter = normalizeText(filter.text);
-
-      return enmEvents.filter(enmEvent =>
-        // check if any tags match the filter text
+      filteredEvents = filteredEvents.filter(enmEvent =>
         Object.values(enmEvent.tags).some(tag => 
           normalizeText(tag.toString()).includes(normalizedFilter)
         ) ||
@@ -36,11 +38,19 @@ export const selectFiltered = createSelector(
           normalizeText(artist.name).includes(normalizedFilter)
         )
       );
-    } else {
-      return enmEvents;
     }
+
+    // Apply creationDateTime filter if toggled on
+    if (filter.recentlyListed) {
+      filteredEvents = filteredEvents.filter(enmEvent => 
+        isWithinLastTwoDays(enmEvent.creationDateTime)
+      );
+    }
+
+    return filteredEvents;
   }
 );
+
 
 // function to normalize text by removing special characters, diacritics and converting to lowercase
 const normalizeText = (text: string) => {
@@ -78,3 +88,18 @@ export const selectedFilterText = createSelector(
   selectFeature,
   (state: EnmEventsState): string => state.filter.text
 );
+
+export const selectRecentEvents = createSelector(
+  selectAll,
+  (enmEvents: EnmEvent[]): EnmEvent[] => {
+    return enmEvents.filter(enmEvent => isWithinLastTwoDays(enmEvent.creationDateTime));
+  }
+);
+
+const isWithinLastTwoDays = (dateString: string) => {
+  const eventDate = new Date(dateString);
+  const twoDaysAgo = new Date();
+  twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+
+  return eventDate > twoDaysAgo;
+};

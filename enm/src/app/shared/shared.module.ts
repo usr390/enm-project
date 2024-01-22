@@ -38,6 +38,7 @@ import { FooterComponent } from './footer/footer.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { ConfirmationService } from 'primeng/api';
     PanelModule,
     TooltipModule,
     ConfirmDialogModule,
+    ToggleButtonModule
   ],
   exports: [
     // enm imports
@@ -111,7 +113,8 @@ import { ConfirmationService } from 'primeng/api';
     PanelModule,
     FooterComponent,
     TooltipModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ToggleButtonModule
   ],
   providers: [
     // primeng providers
