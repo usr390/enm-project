@@ -55,6 +55,12 @@ export class EnmEventListFilterComponent {
   initializeFormControl() {
     this.selectedFilterText$.pipe(take(1)).subscribe(filterText => {
       this.enmEventListFilterForm.get('filter')?.setValue(filterText)
-    });}
+    });
+    // Assuming you have a selector like `selectToggleState`
+    this.store$.select(EnmEventsSelectors.selectFilter).pipe(take(1)).subscribe(filter => {
+      this.enmEventListFilterForm.get('checked')?.setValue(filter.recentlyListed);
+    });
+
+  }
 }
 
