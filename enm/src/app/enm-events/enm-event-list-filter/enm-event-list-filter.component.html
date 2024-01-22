@@ -9,5 +9,6 @@
     </div>
     <div *ngIf="(currentUser$ | async)?.username === gifted" style="margin-top: 10px;">
         <p-toggleButton formControlName="checked" onLabel="{{filter}}" offLabel="{{ filter }}" [style]="{ width: '10em', height: '2em' }"></p-toggleButton>
+        <span *ngIf="(filter$ | async)?.recentlyListed" style="color: #718eaa; margin-bottom: 30px; font-size: .9em;"> &nbsp; * Listed In The Last 48 Hours</span>
     </div>
 </form>

@@ -28,6 +28,7 @@ export class EnmEventListFilterComponent {
   filter="Recently Listed"
   currentUser$ = this.store$.select(AuthSelectors.selectUser);
   gifted = "merwin"
+  filter$ = this.store$.select(EnmEventsSelectors.selectFilter);
 
   ngOnInit() {
     this.initializeFormControl();
