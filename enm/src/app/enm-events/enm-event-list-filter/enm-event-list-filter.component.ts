@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 // 3rd party imports
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs';
+import { debounceTime, distinctUntilChanged, take } from 'rxjs';
 // enm imports
 import { AppState } from 'src/app/state/app.state';
 import * as fromEnmEvents from './../../state/enmEvents/enmEvents.actions'
@@ -30,7 +30,15 @@ export class EnmEventListFilterComponent {
   gifted = "merwin"
 
   ngOnInit() {
-    this.initializeFormControl()
+    this.initializeFormControl();
+    this.enmEventListFilterForm.valueChanges.pipe(
+      debounceTime(100), // Adjust the debounce time as needed
+      distinctUntilChanged(),
+    )
+    .subscribe(values => {
+      this.filterResults();
+    });
+
   }
 
   filterResults() { 
