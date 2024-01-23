@@ -14,10 +14,24 @@ export class EnmEventsEffects {
             ofType(enmEventActions.enmEventListRequest),
             exhaustMap(
                 _ => this.enmEventService.getEnmEventList().pipe(
+                    map(enmEvents => this.processEvents(enmEvents)),
                     map(enmEvents => enmEventActions.enmEventListRequestSuccessResponse({ enmEvents })),
                     catchError((error) => of(enmEventActions.enmEventListRequestErrorResponse({ error })))
                 ), 
             )
         )
     );
+
+    private processEvents(events: any[]): any[] {
+        const twoDaysAgo = new Date();
+        twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+
+        return events.map(event => {
+            const eventDate = new Date(event.creationDateTime);
+            return {
+              ...event,
+              isRecentlyListed: eventDate > twoDaysAgo
+            };
+        });
+    }
 }

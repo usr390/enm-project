@@ -107,14 +107,5 @@ export class EnmEventPageComponent implements OnInit {
     this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) || screenWidth < 768;
   }
 
-    // In your component
-    isRecentlyListed(creationDateTime: string): boolean {
-      const eventDate = new Date(creationDateTime);
-      const twoDaysAgo = new Date();
-      twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
-  
-      return eventDate > twoDaysAgo;
-    }
-
 }
 

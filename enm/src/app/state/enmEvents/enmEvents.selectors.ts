@@ -40,11 +40,8 @@ export const selectFiltered = createSelector(
       );
     }
 
-    // Apply creationDateTime filter if toggled on
     if (filter.recentlyListed) {
-      filteredEvents = filteredEvents.filter(enmEvent => 
-        isWithinLastTwoDays(enmEvent.creationDateTime)
-      );
+      filteredEvents = filteredEvents.filter(enmEvent => enmEvent.isRecentlyListed);
     }
 
     return filteredEvents;
@@ -92,14 +89,6 @@ export const selectedFilterText = createSelector(
 export const selectRecentEvents = createSelector(
   selectAll,
   (enmEvents: EnmEvent[]): EnmEvent[] => {
-    return enmEvents.filter(enmEvent => isWithinLastTwoDays(enmEvent.creationDateTime));
+    return enmEvents.filter(enmEvent => enmEvent.isRecentlyListed);
   }
 );
-
-const isWithinLastTwoDays = (dateString: string) => {
-  const eventDate = new Date(dateString);
-  const twoDaysAgo = new Date();
-  twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
-
-  return eventDate > twoDaysAgo;
-};
