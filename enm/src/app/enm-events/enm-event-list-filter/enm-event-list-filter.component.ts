@@ -25,7 +25,7 @@ export class EnmEventListFilterComponent {
 
   enmEventListFilterForm = this.fb.group({ filter: '', checked: false });
   selectedFilterText$ = this.store$.select(EnmEventsSelectors.selectedFilterText); // for repopulating the input field after a refresh or navigation
-  filter="Recently Listed"
+  filter="Just Listed"
   currentUser$ = this.store$.select(AuthSelectors.selectUser);
   gifted = "merwin"
   filter$ = this.store$.select(EnmEventsSelectors.selectFilter);
