@@ -19,10 +19,10 @@
                 <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
                   <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                     <div class="flex flex-column align-items-center sm:align-items-start gap-3">
-                      <h1 *ngIf="enmEvent.venue" class="text-2xl font-bold text-900">{{ enmEvent.venue.name }}</h1>
+                      <h1 *ngIf="enmEvent.venue" class="text-2xl font-bold text-900" [innerHTML]="enmEvent.venue.name | highlightPipe: (filterText$ | async)?.text">{{ enmEvent.venue.name }}</h1>
                       <div class="m-0 lh-lg artists artist-name">
                         <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
-                          <span class="artist-name">{{ artist.name }}</span>
+                          <span class="artist-name" [innerHTML]="artist.name | highlightPipe: (filterText$ | async)?.text">{{ artist.name }}</span>
                           <span *ngIf="i < enmEvent.artists.length - 1">&nbsp;&nbsp;&nbsp; &middot; &nbsp;&nbsp;&nbsp;</span>
                         </ng-container>
                       </div>
@@ -30,7 +30,7 @@
                         <div class="custom-divider">
                           <p-divider></p-divider>
                         </div>
-                        <h6 class="card-text promoter">{{ enmEvent.promoter.name }}</h6>
+                        <h6 class="card-text promoter" [innerHTML]="enmEvent.promoter.name | highlightPipe: (filterText$ | async)?.text">{{ enmEvent.promoter.name }}</h6>
                       </div>
                       <br>
 
@@ -48,7 +48,7 @@
                               <span *ngIf="enmEvent.cover !== null && enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
                               <!-- synonyms, address --> <br>
                               <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }} &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
+                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, <span [innerHTML]="enmEvent.venue.city | highlightPipe: (filterText$ | async)?.text">{{ enmEvent.venue.city }}</span> &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
                               <!---->
                             </div>
                           </span>
@@ -68,7 +68,7 @@
                               <span *ngIf="enmEvent.cover !== null && enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
                               <!-- synonyms, address --> <br>
                               <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }} &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
+                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, <span [innerHTML]="enmEvent.venue.city | highlightPipe: (filterText$ | async)?.text">{{ enmEvent.venue.city }}</span> &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
                               <!---->
                             </div>
                           </span>

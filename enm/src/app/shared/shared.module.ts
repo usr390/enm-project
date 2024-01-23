@@ -39,6 +39,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { HighlightPipePipe } from './highlight-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     ArtistNamesPipe,
     TermsOfServiceComponent,
     FooterComponent,
+    HighlightPipePipe,
   ],
   imports: [
     CommonModule,
@@ -92,6 +94,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     DateTimeToWordifiedMonthFullPipe,
     LogoComponent,
     TermsOfServiceComponent,
+    HighlightPipePipe,
     // primeng exports
     AvatarModule,
     AvatarGroupModule,
