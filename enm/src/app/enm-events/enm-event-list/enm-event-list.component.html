@@ -11,11 +11,13 @@
         <ng-container *ngIf="user$ | async as user" class="event-details">
           <!-- plus user, has routerLink activated. should have access to event detail page -->
           <ng-template *ngIf="user?.plus" let-enmEvent pTemplate="listItem">
-            <!-- <span *ngIf="enmEvent.isRecentlyListed"><p-tag  class="recently-listed-badge" value="New" [style]="{ 'font-size': '.7em'}"></p-tag></span> -->
             <div class="col-12">
-  
+              <div *ngIf="enmEvent.isRecentlyListed" class="recently-listed-badge">
+                <p-tag value="Just Listed"></p-tag>
+              </div>
+              
               <!-- HERE'S THE VISIBLE CONTENT -->
-  
+              
               <a [routerLink]="isCopying ? null : ['/events', enmEvent._id]" (click)="onEnmEventListSelection(enmEvent._id)" class="event-card-link .event-card-link" href="/">
                 <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
                   <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
@@ -85,13 +87,12 @@
   
   
   
-  
             </div>
           </ng-template>
+
           <!-- non-plus user. should not have routerLink activated. should not have event detail page available -->
           <ng-template *ngIf="!(user?.plus)" let-enmEvent pTemplate="listItem">
-            <div class="col-12">
-  
+            <div class="col-12">  
               <!-- HERE'S THE VISIBLE CONTENT -->
   
                 <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
