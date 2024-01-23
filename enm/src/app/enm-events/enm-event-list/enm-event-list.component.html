@@ -11,7 +11,7 @@
         <ng-container *ngIf="user$ | async as user" class="event-details">
           <!-- plus user, has routerLink activated. should have access to event detail page -->
           <ng-template *ngIf="user?.plus" let-enmEvent pTemplate="listItem">
-            <p-tag *ngIf="isRecentlyListed(enmEvent.creationDateTime)" class="recently-listed-badge" value="Just Listed"></p-tag>
+            <p-tag *ngIf="isRecentlyListed(enmEvent.creationDateTime)" class="recently-listed-badge" value="Just Listed" [style]="{ 'font-size': '.7em'}"></p-tag>
             <div class="col-12">
   
               <!-- HERE'S THE VISIBLE CONTENT -->
