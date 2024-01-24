@@ -25,8 +25,13 @@
                       <h1 *ngIf="enmEvent.venue" class="text-2xl font-bold text-900" [innerHTML]="enmEvent.venue.name | highlightPipe: (filterText$ | async)?.text">{{ enmEvent.venue.name }}</h1>
                       <div class="m-0 lh-lg artists artist-name">
                         <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
-                          <span class="artist-name" [innerHTML]="artist.name | highlightPipe: (filterText$ | async)?.text">{{ artist.name }}</span><span *ngIf="(artist.location) && (artist.location != 'RGV')" style="margin-bottom: 10px;">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>
-                          <span *ngIf="i < enmEvent.artists.length - 1">&nbsp;&nbsp;&nbsp; &middot; &nbsp;&nbsp;&nbsp;</span>
+                          <div class="artist-container">
+                            <span class="artist-name">{{ artist.name }}</span>
+                            <span *ngIf="(artist.location) && (artist.location != 'RGV')">
+                              <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>
+                            </span>
+                          </div>
+                          <span *ngIf="i < enmEvent.artists.length - 1">&middot;</span>
                         </ng-container>
                       </div>
                       <div *ngIf="enmEvent.promoter">
@@ -103,8 +108,13 @@
                       <h1 *ngIf="enmEvent.venue" class="text-2xl font-bold text-900">{{ enmEvent.venue.name }}</h1>
                       <div class="m-0 lh-lg artists artist-name">
                         <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
-                          <span class="artist-name">{{ artist.name }}</span><span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>
-                          <span *ngIf="i < enmEvent.artists.length - 1">&nbsp;&nbsp;&nbsp; &middot; &nbsp;&nbsp;&nbsp;</span>
+                          <div class="artist-container">
+                            <span class="artist-name">{{ artist.name }}</span>
+                            <span *ngIf="(artist.location) && (artist.location != 'RGV')">
+                              <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>
+                            </span>
+                          </div>
+                          <span *ngIf="i < enmEvent.artists.length - 1">&middot;</span>
                         </ng-container>
                       </div>
                       <div *ngIf="enmEvent.promoter">
@@ -184,8 +194,13 @@
                       <h1 *ngIf="enmEvent.venue" class="text-2xl font-bold text-900">{{ enmEvent.venue.name }}</h1>
                       <div class="m-0 lh-lg artists artist-name">
                         <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
-                          <span class="artist-name">{{ artist.name }}</span><span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>
-                          <span *ngIf="i < enmEvent.artists.length - 1"></span>&nbsp;&nbsp;&nbsp; &middot; &nbsp;&nbsp;&nbsp;
+                          <div class="artist-container">
+                            <span class="artist-name">{{ artist.name }}</span>
+                            <span *ngIf="(artist.location) && (artist.location != 'RGV')">
+                              <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>
+                            </span>
+                          </div>
+                          <span *ngIf="i < enmEvent.artists.length - 1">&middot;</span>
                         </ng-container>
                       </div>
                       <div *ngIf="enmEvent.promoter">
