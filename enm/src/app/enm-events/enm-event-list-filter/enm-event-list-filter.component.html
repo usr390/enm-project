@@ -7,7 +7,8 @@
         </span>
         <button pButton type="button" icon="pi pi-times" class="clear-btn" (click)="clearFilter()" styleClass="p-button-sm p-button-rounded p-button-text" *ngIf="enmEventListFilterForm.controls.filter.value"></button>
     </div>
-    <div style="margin-top: 10px;">
-        <p-toggleButton formControlName="checked" [onLabel]="filter" [offLabel]="filter" [style]="{ width: '10em', height: '2em' }"></p-toggleButton>
-    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 10px;">
+        <span style="margin-right: 25px;"><p-toggleButton formControlName="checked" [onLabel]="filter" [offLabel]="filter" [style]="{ width: '10em', height: '2em' }"></p-toggleButton></span>
+        <span *ngIf="(currentUser$ | async)?.username === 'merwin'" style="margin-right: 5px;"><p-toggleButton formControlName="touring" [onLabel]="touring" [offLabel]="touring" [style]="{ width: '10em', height: '2em' }"></p-toggleButton></span>
+    </div>    
 </form>

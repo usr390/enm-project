@@ -8,4 +8,4 @@ export const enmEventListRequest = createAction('[Enm Events List Screen] Enm Ev
 export const enmEventListRequestSuccessResponse = createAction('[Enm Events List Screen] Enm Event List HTTP Request Success Response', props<{ enmEvents: EnmEvent[] }>()); 
 export const enmEventListRequestErrorResponse = createAction('[Enm Events List Screen] Enm Event List HTTP Request Error Response', props<{ error: EnmEventListRequestErrorResponse }>()); 
 
-export const enmEventListFilter = createAction('[Enm Events List Screen] Enm Event List Filter', props<{ text: string, recentlyListed: boolean }>()); 
+export const enmEventListFilter = createAction('[Enm Events List Screen] Enm Event List Filter', props<{ text: string, recentlyListed: boolean, touring: boolean }>()); 

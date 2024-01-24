@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 // 3rd party imports
 import { Store } from '@ngrx/store';
-import { debounceTime, distinctUntilChanged, take } from 'rxjs';
+import { debounceTime, distinctUntilChanged, take, tap } from 'rxjs';
 // enm imports
 import { AppState } from 'src/app/state/app.state';
 import * as fromEnmEvents from './../../state/enmEvents/enmEvents.actions'
@@ -23,9 +23,10 @@ export class EnmEventListFilterComponent {
     private store$: Store<AppState>, // 3rd party
   ) { }
 
-  enmEventListFilterForm = this.fb.group({ filter: '', checked: false });
+  enmEventListFilterForm = this.fb.group({ filter: '', checked: false, touring: false });
   selectedFilterText$ = this.store$.select(EnmEventsSelectors.selectedFilterText); // for repopulating the input field after a refresh or navigation
   filter="Just Listed"
+  touring="Touring"
   currentUser$ = this.store$.select(AuthSelectors.selectUser);
   gifted = "merwin"
   filter$ = this.store$.select(EnmEventsSelectors.selectFilter);
@@ -45,7 +46,8 @@ export class EnmEventListFilterComponent {
   filterResults() { 
     let text = this.enmEventListFilterForm.value.filter?.trim() as string
     let recentlyListed = this.enmEventListFilterForm.value.checked as boolean
-    this.store$.dispatch(fromEnmEvents.enmEventListFilter({ text, recentlyListed }))
+    let touring = this.enmEventListFilterForm.value.touring as boolean
+    this.store$.dispatch(fromEnmEvents.enmEventListFilter({ text, recentlyListed, touring }))
   }
 
   clearFilter() {
@@ -60,6 +62,10 @@ export class EnmEventListFilterComponent {
     // Assuming you have a selector like `selectToggleState`
     this.store$.select(EnmEventsSelectors.selectFilter).pipe(take(1)).subscribe(filter => {
       this.enmEventListFilterForm.get('checked')?.setValue(filter.recentlyListed);
+    });
+    // Assuming you have a selector like `selectToggleState`
+    this.store$.select(EnmEventsSelectors.selectFilter).pipe(take(1)).subscribe(filter => {
+      this.enmEventListFilterForm.get('touring')?.setValue(filter.touring);
     });
 
   }

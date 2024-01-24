@@ -35,12 +35,13 @@ const _enmEventsReducer = createReducer(
             loaded: false
         }
     }),
-    on(enmEventListFilter, (state, { text, recentlyListed }) => ({
+    on(enmEventListFilter, (state, { text, recentlyListed, touring }) => ({
         ...state,
         filter: {
           ...state.filter,
           text,
-          recentlyListed
+          recentlyListed,
+          touring
         },
     })),
 );

@@ -44,6 +44,12 @@ export const selectFiltered = createSelector(
       filteredEvents = filteredEvents.filter(enmEvent => enmEvent.isRecentlyListed);
     }
 
+    if (filter.touring) {
+      filteredEvents = filteredEvents.filter(enmEvent => 
+        enmEvent.artists.some(artist => artist.location && artist.location !== 'RGV')
+      );
+    }
+
     return filteredEvents;
   }
 );

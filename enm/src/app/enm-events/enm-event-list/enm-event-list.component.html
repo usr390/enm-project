@@ -26,7 +26,7 @@
                       <div class="m-0 lh-lg artists artist-name">
                         <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
                           <div class="artist-container">
-                            <span class="artist-name">{{ artist.name }}</span>&nbsp;&nbsp;
+                            <span class="artist-name" [innerHTML]="artist.name | highlightPipe: (filterText$ | async)?.text">{{ artist.name }}</span>&nbsp;&nbsp;
                             <span *ngIf="(artist.location) && (artist.location != 'RGV')">
                               <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;&nbsp;
                             </span>
