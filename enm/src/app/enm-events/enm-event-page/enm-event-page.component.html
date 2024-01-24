@@ -21,15 +21,26 @@
     <div class="m-0 lh-lg artists artist-name">
       <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
         <ng-container *ngIf="artist.link && artist.link !== 'pending'; else artistName">
-          <a href="{{ artist.link }}" target="_blank" rel="noopener noreferrer">{{ artist.name }}</a><span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>
+          <div class="artist-container">
+            <a href="{{ artist.link }}" target="_blank" rel="noopener noreferrer">{{ artist.name }}</a><span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>
+          </div>
         </ng-container>
         <ng-template #artistName>
-          <span class="artist-name-non-clickable">{{ artist.name }}</span><span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>
+          <div class="artist-container">
+            <span class="artist-name-non-clickable">{{ artist.name }}</span><span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>
+          </div>
         </ng-template>
         <!-- Add separator for all but the last artist -->
         <span *ngIf="i < enmEvent.artists.length - 1">&nbsp;&nbsp;&nbsp; &middot; &nbsp;&nbsp;&nbsp;</span>
       </ng-container>
     </div>
+
+    <!-- <div class="artist-container">
+      <span class="artist-name">{{ artist.name }}</span>&nbsp;&nbsp;
+      <span *ngIf="(artist.location) && (artist.location != 'RGV')">
+        <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;&nbsp;
+      </span>
+    </div> -->
 
     <div *ngIf="enmEvent.promoter">
       <div class="custom-divider">
