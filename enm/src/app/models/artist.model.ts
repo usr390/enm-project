@@ -7,6 +7,7 @@ export interface Artist {
 
     "_id": string,
     "name": string,
-    "link": string
+    "link": string,
+    "location": string
 
 }
