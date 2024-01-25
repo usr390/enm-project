@@ -8,7 +8,8 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="((user$ | async)?.plus) && ((currentRoute$ | async) === '/events')" class="row">
+        <!-- (currentRoute$ | async)?.startsWith('/events?')) covers a weird instagram browser edgecase-->
+        <div *ngIf="((user$ | async)?.plus) && ((currentRoute$ | async)?.startsWith('/events') || (currentRoute$ | async)?.startsWith('/events?'))"  class="row">
             <div class="col-12">
                 <div class="p-toolbar-group-end">
                     <div><app-enm-event-list-filter></app-enm-event-list-filter></div>
