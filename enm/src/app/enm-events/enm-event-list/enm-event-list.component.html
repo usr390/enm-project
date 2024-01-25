@@ -93,94 +93,10 @@
   
   
             </div>
-          </ng-template>
-
-          <!-- non-plus user. should not have routerLink activated. should not have event detail page available -->
-          <ng-template *ngIf="!(user?.plus)" let-enmEvent pTemplate="listItem">
-            <div class="col-12">  
-              <!-- HERE'S THE VISIBLE CONTENT -->
-                <div *ngIf="enmEvent.isRecentlyListed" class="recently-listed-badge">
-                  <p-tag value="Just Listed"></p-tag>
-                </div>
-                <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
-                  <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
-                    <div class="flex flex-column align-items-center sm:align-items-start gap-3">
-                      <h1 *ngIf="enmEvent.venue" class="text-2xl font-bold text-900">{{ enmEvent.venue.name }}</h1>
-                      <div class="m-0 lh-lg artists artist-name">
-                        <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
-                          <div class="artist-container">
-                            <span class="artist-name">{{ artist.name }}</span>&nbsp;&nbsp;
-                            <span *ngIf="(artist.location) && (artist.location != 'RGV')">
-                              <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;&nbsp;
-                            </span>
-                          </div>
-                          <span *ngIf="i < enmEvent.artists.length - 1">&middot;</span>&nbsp;
-                        </ng-container>
-                      </div>
-                      <div *ngIf="enmEvent.promoter">
-                        <div class="custom-divider">
-                          <hr style="width: 40px;">
-                        </div>
-                        <h6 class="card-text">{{ enmEvent.promoter.name }}</h6>
-                      </div>
-                      <br>
-
-                      <!-- This will only show if the user is on a mobile device -->
-                      <div *ngIf="isMobile">
-                        <div class="click-to-copy clickable-address">
-                          <span class="flex align-items-center gap-2" >
-                            <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)">
-                              <!-- this condition checks that a time was provided. it displays it if yes-->
-                              <span *ngIf="enmEvent.doorTime" class="doortime">doors {{ enmEvent.doorTime | doorTimeToTime }} </span>
-                              <span *ngIf="enmEvent.dateTime != enmEvent.date" class="datetime">{{ enmEvent.dateTime | dateTimeToTime }} &middot; </span>
-                              <span *ngIf="enmEvent.dateTime" class="datetime">{{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }} </span>
-                              <!-- synonyms -->
-                              <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
-                              <span *ngIf="enmEvent.cover !== null && enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
-                              <!-- synonyms, address --> <br>
-                              <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }} &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
-                              <!---->
-                            </div>
-                          </span>
-                        </div>
-                      </div>
-
-                      <!-- This will only show if the user is NOT on a mobile device -->
-                      <div *ngIf="!isMobile">
-                        <div class="click-to-copy clickable-address">
-                          <span class="flex align-items-center gap-2" >
-                            <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)" pTooltip="Click To Copy Address" tooltipPosition="bottom">
-                              <!-- this condition checks that a time was provided. it displays it if yes-->
-                              <span *ngIf="enmEvent.doorTime" class="doortime">doors {{ enmEvent.doorTime | doorTimeToTime }} </span>
-                              <span *ngIf="enmEvent.dateTime != enmEvent.date" class="datetime">{{ enmEvent.dateTime | dateTimeToTime }} &middot; </span>
-                              <span *ngIf="enmEvent.dateTime" class="datetime">{{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }} </span>
-                              <!-- synonyms -->
-                              <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
-                              <span *ngIf="enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
-                              <!-- synonyms, address --> <br>
-                              <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }} &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
-                              <!---->
-                            </div>
-                          </span>
-                        </div>
-                      </div>
-  
-                    </div>
-                  </div>
-                </div>
-  
-  
-  
-  
-  
-  
-            </div>
-          </ng-template>
+          </ng-template> 
         </ng-container>
-        <!-- no user logged in. should not have routerLink activated. should not have event detail page available -->
-        <ng-container *ngIf="(user$ | async) === null">
+        <!-- no user logged in or non-plus user logged in. should not have routerLink activated. should not have event detail page available -->
+        <ng-container *ngIf="((user$ | async) === null) || (!(user$ | async)?.plus)">
           <ng-template let-enmEvent pTemplate="listItem">
             <div class="col-12">
   
