@@ -9,6 +9,6 @@
     </div>
     <div style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 10px;">
         <span style="margin-right: 25px;"><p-toggleButton formControlName="checked" [onLabel]="filter" [offLabel]="filter" [style]="{ width: '10em', height: '2em' }"></p-toggleButton></span>
-        <span *ngIf="(currentUser$ | async)?.username === 'merwin'" style="margin-right: 5px;"><p-toggleButton formControlName="touring" [onLabel]="touring" [offLabel]="touring" [style]="{ width: '10em', height: '2em' }"></p-toggleButton></span>
+        <span style="margin-right: 5px;"><p-toggleButton formControlName="touring" [onLabel]="touring" [offLabel]="touring" [style]="{ width: '10em', height: '2em' }"></p-toggleButton></span>
     </div>    
 </form>
