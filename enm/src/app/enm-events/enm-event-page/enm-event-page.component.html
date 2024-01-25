@@ -44,7 +44,7 @@
 
     <div *ngIf="enmEvent.promoter">
       <div class="custom-divider">
-        <p-divider></p-divider>
+        <hr style="width: 40px;">
       </div>
       <ng-container *ngIf="enmEvent.promoter.link && enmEvent.promoter.link !== 'pending'; else promoterName">
         <h6 class="card-text promoter">
