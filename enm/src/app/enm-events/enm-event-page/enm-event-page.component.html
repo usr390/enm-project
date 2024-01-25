@@ -11,7 +11,7 @@
     </div>
     <ng-container *ngIf="enmEvent.venue.link && enmEvent.venue.link !== 'pending'; else venueName">
       <h1 class="card-text">
-        <a href="{{ enmEvent.venue.link }}" target="_blank" rel="noopener noreferrer" class="m-0">{{ enmEvent.venue.name }}</a>
+        <a href="{{ enmEvent.venue.link }}" target="_blank" rel="noopener noreferrer" class="m-0">{{ enmEvent.venue.name }}&nbsp;<i class="pi pi-link"></i></a>
       </h1>
     </ng-container>
     <ng-template #venueName>
@@ -22,7 +22,7 @@
       <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
         <ng-container *ngIf="artist.link && artist.link !== 'pending'; else artistName">
           <div class="artist-container">
-            <a href="{{ artist.link }}" target="_blank" rel="noopener noreferrer">{{ artist.name }}</a><span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>
+            <a href="{{ artist.link }}" target="_blank" rel="noopener noreferrer">{{ artist.name }}<span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>&nbsp;<i class="pi pi-link"></i></a>
           </div>
         </ng-container>
         <ng-template #artistName>
@@ -48,7 +48,7 @@
       </div>
       <ng-container *ngIf="enmEvent.promoter.link && enmEvent.promoter.link !== 'pending'; else promoterName">
         <h6 class="card-text promoter">
-          <a href="{{ enmEvent.promoter.link }}" target="_blank" rel="noopener noreferrer" class="m-0 promoter">{{ enmEvent.promoter.name }}</a>
+          <a href="{{ enmEvent.promoter.link }}" target="_blank" rel="noopener noreferrer" class="m-0 promoter">{{ enmEvent.promoter.name }}&nbsp;<i class="pi pi-link"></i></a>
         </h6>
       </ng-container>
       <ng-template #promoterName>
