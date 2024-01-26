@@ -10,3 +10,21 @@ export interface Product {
     image?: string;
     rating?: number;
 }
+
+export interface RarelygroovyPlusCard {
+    title?: string;
+    subtitle?: string;
+    overviewHeader?: string;
+    allAccessFeature?: string;
+    linksFeature?: number;
+    filterFeature?: number;
+    extraInfo?: string;
+}
+
+export interface RarelygroovyPlusFeatures {
+    name?: string;
+    description?: string;
+    image?: string;
+}
+
+export type CarouselStuff = Product | RarelygroovyPlusCard | RarelygroovyPlusFeatures

@@ -7,6 +7,26 @@ export class ProductService {
     getProductsData() {
         return [
             {
+                name: 'All Access',
+                description: 'All Access - unlock our entire event listing. Currently extending through May. Updated daily',
+                image: 'black-watch.jpg',
+            },
+            {
+                name: 'Links',
+                description: 'Links - direct links to artists social media. Perfect for immersing in the Valleys music scene',
+                image: 'black-watch.jpg',
+            },
+            {
+                name: 'Filter',
+                description: 'Filter - instant event lookups. Narrow down your search by city, venue, or artist',
+                image: 'black-watch.jpg',
+            },
+        ];
+    }
+
+    getProductsData2() {
+        return [
+            {
                 id: '1000',
                 code: 'f230fh0g3',
                 name: 'Bamboo Watch',

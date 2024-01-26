@@ -8,56 +8,44 @@
     <p-progressSpinner styleClass= "w-4rem h-4rem" strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner"></p-progressSpinner>
 </div>
 
-<div *ngIf="furthestEventDate$ | async as furthestEventDate">
-    <div class="d-flex justify-content-center align-items-center" style="height: 85vh; margin-bottom: 10px;">
-        <p-card header="Rarelygroovy+" subheader="Monthly Subscription" [style]="{ width: '360px' }">
-            <p>Features include:</p>
-                <ul>
-                    <li><strong>All Access</strong> - unlock our entire event listing. Currently extending through <span class="furthestMonth">{{furthestEventDate | dateTimeToWordifiedMonthFull }}</span>. Updated daily</li>
-                    <li><strong>Links</strong> - a dedicated page for each event, complete with direct links to artists' social media. Perfect for immersing in the Valley's music scene – from renowned stars to emerging artists</li>
-                    <li><strong>Filter</strong> - instant event lookups. Narrow down your search by city, venue, or artist</li>
-                </ul>
-            <ng-template pTemplate="footer">
-                Cancel any time by contacting us on <a class="ig" href="https://www.instagram.com/rarelygroovy/" target="_blank" rel="noopener noreferrer">Instagram</a> or <a href="mailto:support@rarelygroovy.com">support&#64;rarelygroovy.com</a>. Absolutely zero hassle guaranteed
-            </ng-template>
-        </p-card>
-    </div>
 
-    <div class="card">
-        <p-carousel [value]="products" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+<div *ngIf="furthestEventDate$ | async as furthestEventDate">
+    <p-card class="card flex justify-content-center wrapper" header="Rarelygroovy+" subheader="Montly Subscription" [ngStyle]="{'border': 'none'}">
+        <p-carousel [value]="products" [numVisible]="1" [numScroll]="1" [responsiveOptions]="responsiveOptions" paginatorPosition="top">
             <ng-template let-product pTemplate="item">
-                <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
-                    <div class="mb-3">
-                        <img src="https://primefaces.org/cdn/primeng/images/demo/product/{{ product.image }}" [alt]="product.name" class="w-6 shadow-2" />
-                    </div>
-                    <div>
-                        <h4 class="mb-1">{{ product.name }}</h4>
-                        <h6 class="mt-0 mb-3">{{ '$' + product.price }}</h6>
-                        <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag>
-                        <div class="mt-5 flex align-items-center justify-content-center gap-2">
-                        <p-button icon="pi pi-search"/>
-                        <p-button icon="pi pi-star-fill"severity="secondary"/>
-                    </div>
-                    </div>
+                <div class="product-item">
+                        <div class="product-item">
+                            <div class="product-item-content">
+                                <h4 class="mb-1 d-flex justify-content-center align-items-center">{{product.name}}</h4>
+                                <div class="mb-3 d-flex justify-content-center align-items-center">
+                                    <img src="https://primefaces.org/cdn/primeng/images/demo/product/{{ product.image }}"[alt]="product.name" class="product-image" />
+                                </div>
+                                <div>
+                                    <h6 class="mt-0 mb-3">{{product.description}}</h6>
+                                    <div class="mt-5 flex align-items-center justify-content-center gap-2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </ng-template>
         </p-carousel>
-    </div>
+    </p-card>
+    
+    <ng-container *ngIf="currentUser$ | async">
+        <div id="checkout" style="margin-bottom: 20px">
+            <!-- Checkout will insert the payment form here -->
+        </div>
+    </ng-container>
+    
+    <ng-container *ngIf="(currentUser$ | async) === null">
+        <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 20px;">
+            <p-button label="Log In To Susbcribe" icon="pi pi-arrow-right" iconPos="right" (click)="navigateToLogInPage()"></p-button>
+        </div>
+    
+        <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 20px;">
+            <p>New to Rarelygroovy? <a routerLink="/create-user">Create an account</a></p>
+        </div>
+    
+    </ng-container>
 </div>
-
-<ng-container *ngIf="currentUser$ | async">
-    <div id="checkout" style="margin-bottom: 20px">
-        <!-- Checkout will insert the payment form here -->
-    </div>
-</ng-container>
-
-<ng-container *ngIf="(currentUser$ | async) === null">
-    <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 20px;">
-        <p-button label="Log In To Susbcribe" icon="pi pi-arrow-right" iconPos="right" (click)="navigateToLogInPage()"></p-button>
-    </div>
-
-    <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 20px;">
-        <p>New to Rarelygroovy? <a routerLink="/create-user">Create an account</a></p>
-    </div>
-
-</ng-container>

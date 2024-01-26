@@ -12,7 +12,7 @@ import * as PaymentActions from './../../state/payment/payment.actions'
 import * as PaymentSelectors from './../../state/payment/payment.selectors'
 import * as AuthSelectors from './../../state/auth/auth.selectors'
 import { PaymentScreenSkippedService } from 'src/app/core/payment-screen-skipped.service';
-import { Product } from 'src/app/models/product';
+import { CarouselStuff, Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/core/services/product-service.service';
 
 const STRIPE_KEY = environment.stripeKeyTest;
@@ -28,6 +28,8 @@ export class PaymentScreenTestComponent {
   products: Product[] = [];
 
   responsiveOptions: any[] | undefined;
+
+  
 
   constructor(
     private enmPlusPaymentService: EnmPlusPaymentService,
