@@ -18,7 +18,7 @@
                             <div class="product-item-content">
                                 <h4 class="mb-1 d-flex justify-content-center align-items-center">{{product.name}}</h4>
                                 <div class="mb-3 d-flex justify-content-center align-items-center">
-                                    <img src="https://primefaces.org/cdn/primeng/images/demo/product/{{ product.image }}"[alt]="product.name" class="product-image" />
+                                    <img *ngIf="product.image" src="./../../../assets/images/{{product.image}}"[alt]="product.name" class="product-image" />
                                 </div>
                                 <div>
                                     <h6 class="mt-0 mb-3">{{product.description}}</h6>

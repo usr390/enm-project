@@ -9,17 +9,17 @@ export class ProductService {
             {
                 name: 'All Access',
                 description: 'All Access - unlock our entire event listing. Currently extending through May. Updated daily',
-                image: 'black-watch.jpg',
+                image: 'fulllist.gif',
             },
             {
                 name: 'Links',
                 description: 'Links - direct links to artists social media. Perfect for immersing in the Valleys music scene',
-                image: 'black-watch.jpg',
+                image: 'links.gif'
             },
             {
                 name: 'Filter',
                 description: 'Filter - instant event lookups. Narrow down your search by city, venue, or artist',
-                image: 'black-watch.jpg',
+                image: 'filter.gif',
             },
         ];
     }
