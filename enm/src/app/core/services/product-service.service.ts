@@ -18,7 +18,7 @@ export class ProductService {
             },
             {
                 name: 'Filter',
-                description: 'Filter - instant event lookups. Narrow down your search by city, venue, or artist',
+                description: 'Filter - Narrow down your search by artist, venue, city, or even by toggling our Touring filter which list events only if they are headlined by touring artists and bands',
                 image: 'filter.gif',
             },
         ];
