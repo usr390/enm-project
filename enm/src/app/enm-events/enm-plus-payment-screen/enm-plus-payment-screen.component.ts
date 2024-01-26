@@ -46,7 +46,6 @@ export class EnmPlusPaymentScreenComponent {
       } 
       else {
         this.navigationService.paymentScreenSkipped = true;
-        this.router.navigate(['/login'], { replaceUrl: true }) 
       }});
   }
 
@@ -71,5 +70,9 @@ export class EnmPlusPaymentScreenComponent {
 
   goBack() {
     this.router.navigate(['/events'])
+  }
+
+  navigateToLogInPage() {
+    this.router.navigate(['/login']);
   }
 }
