@@ -45,7 +45,6 @@ export class PaymentScreenTestComponent {
       } 
       else {
         this.navigationService.paymentScreenSkipped = true;
-        this.router.navigate(['/login'], { replaceUrl: true }) 
       }});
   }
 
@@ -70,5 +69,9 @@ export class PaymentScreenTestComponent {
 
   goBack() {
     this.router.navigate(['/events'])
+  }
+
+  navigateToLogInPage(){
+    this.router.navigate(['/login']);
   }
 }
