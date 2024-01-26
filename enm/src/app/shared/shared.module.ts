@@ -42,6 +42,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { HighlightPipePipe } from './highlight-pipe.pipe';
 import { TagModule } from 'primeng/tag';
 import { CarouselModule } from 'primeng/carousel';
+import { ListedHowLongAgoPipe } from './listed-how-long-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { CarouselModule } from 'primeng/carousel';
     TermsOfServiceComponent,
     FooterComponent,
     HighlightPipePipe,
+    ListedHowLongAgoPipe,
   ],
   imports: [
     CommonModule,
@@ -123,7 +125,8 @@ import { CarouselModule } from 'primeng/carousel';
     ConfirmDialogModule,
     ToggleButtonModule,
     TagModule,
-    CarouselModule
+    CarouselModule,
+    ListedHowLongAgoPipe
   ],
   providers: [
     // primeng providers

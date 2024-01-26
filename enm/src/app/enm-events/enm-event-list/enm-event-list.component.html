@@ -13,7 +13,9 @@
           <ng-template *ngIf="user?.plus" let-enmEvent pTemplate="listItem">
             <div class="col-12">
               <div *ngIf="enmEvent.isRecentlyListed" class="recently-listed-badge">
-                <p-tag value="Just Listed"></p-tag>
+                <p-tag>
+                  Listed<span *ngIf="enmEvent.creationDateTime | listedHowLongAgo as listedTime">&nbsp;{{ listedTime }}</span>
+                </p-tag>
               </div>
               
               <!-- HERE'S THE VISIBLE CONTENT -->
@@ -102,7 +104,9 @@
   
               <!-- HERE'S THE VISIBLE CONTENT -->
                 <div *ngIf="enmEvent.isRecentlyListed" class="recently-listed-badge">
-                  <p-tag value="Just Listed"></p-tag>
+                  <p-tag>
+                    Listed<span *ngIf="enmEvent.creationDateTime | listedHowLongAgo as listedTime">&nbsp;{{ listedTime }}</span>
+                  </p-tag>
                 </div>
                 <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
                   <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
