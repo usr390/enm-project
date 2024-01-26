@@ -12,6 +12,8 @@ import * as PaymentActions from './../../state/payment/payment.actions'
 import * as PaymentSelectors from './../../state/payment/payment.selectors'
 import * as AuthSelectors from './../../state/auth/auth.selectors'
 import { PaymentScreenSkippedService } from 'src/app/core/payment-screen-skipped.service';
+import { Product } from 'src/app/models/product';
+import { ProductService } from 'src/app/core/services/product-service.service';
 
 const STRIPE_KEY = environment.stripeKeyTest;
 declare var Stripe: any;
@@ -22,11 +24,17 @@ declare var Stripe: any;
   styleUrls: ['./payment-screen-test.component.less']
 })
 export class PaymentScreenTestComponent {
+
+  products: Product[] = [];
+
+  responsiveOptions: any[] | undefined;
+
   constructor(
     private enmPlusPaymentService: EnmPlusPaymentService,
     private router: Router,
     private store$: Store<AppState>,
-    private navigationService: PaymentScreenSkippedService
+    private navigationService: PaymentScreenSkippedService,
+    private productService: ProductService
   ) {}
 
   // checkoutSession$ = this.enmPlusPaymentService.checkoutSession$;
@@ -38,6 +46,28 @@ export class PaymentScreenTestComponent {
   checkout: any;
 
   ngOnInit() {
+    this.productService.getProductsSmall().then((products) => {
+      this.products = products;
+    });
+
+    this.responsiveOptions = [
+      {
+          breakpoint: '1199px',
+          numVisible: 1,
+          numScroll: 1
+      },
+      {
+          breakpoint: '991px',
+          numVisible: 2,
+          numScroll: 1
+      },
+      {
+          breakpoint: '767px',
+          numVisible: 1,
+          numScroll: 1
+      }
+  ];
+
     this.currentUser$.pipe(take(1)).subscribe(user => { 
       if (user) {
         this.initializeStripe(user.id);
@@ -73,5 +103,18 @@ export class PaymentScreenTestComponent {
 
   navigateToLogInPage(){
     this.router.navigate(['/login']);
+  }
+
+  getSeverity(status: string) {
+    switch (status) {
+      case 'INSTOCK':
+        return 'success';
+      case 'LOWSTOCK':
+        return 'warning';
+      case 'OUTOFSTOCK':
+        return 'danger';
+      default:
+        return 'success'
+    }
   }
 }

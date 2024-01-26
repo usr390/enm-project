@@ -41,6 +41,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { HighlightPipePipe } from './highlight-pipe.pipe';
 import { TagModule } from 'primeng/tag';
+import { CarouselModule } from 'primeng/carousel';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { TagModule } from 'primeng/tag';
     TooltipModule,
     ConfirmDialogModule,
     ToggleButtonModule,
-    TagModule
+    TagModule,
+    CarouselModule
   ],
   exports: [
     // enm imports
@@ -120,7 +122,8 @@ import { TagModule } from 'primeng/tag';
     TooltipModule,
     ConfirmDialogModule,
     ToggleButtonModule,
-    TagModule
+    TagModule,
+    CarouselModule
   ],
   providers: [
     // primeng providers
