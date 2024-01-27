@@ -9,8 +9,13 @@
 </div>
 
 <div *ngIf="furthestEventDate$ | async as furthestEventDate">
-    <div class="d-flex justify-content-center align-items-center" >
-        <p-card class="card flex justify-content-center wrapper" header="Rarelygroovy+" subheader="Montly Subscription" [ngStyle]="{'border': 'none', 'max-width': '500px'}">
+    <div class="d-flex justify-content-center align-items-center">
+        <p-card class="card wrapper position-relative" header="Rarelygroovy+" subheader="Monthly Subscription" [ngStyle]="{'border': 'none', 'max-width': '500px'}">
+            <ng-container *ngIf="(currentUser$ | async) === null">
+                <div class="login-subscribe-wrapper">
+                    <p-button label="Log In" icon="pi pi-arrow-right" iconPos="right" size="small" (click)="navigateToLogInPage()" class="login-button"></p-button>
+                </div>
+            </ng-container>
             <p-carousel [value]="products" [numVisible]="1" [numScroll]="1" [responsiveOptions]="responsiveOptions">
                 <ng-template let-product pTemplate="item">
                     <div class="product-item">
@@ -37,15 +42,9 @@
         </div>
     </ng-container>
     
-    <ng-container *ngIf="(currentUser$ | async) === null">
-        <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 20px;">
-            <p-button label="Log In To Susbcribe" icon="pi pi-arrow-right" iconPos="right" (click)="navigateToLogInPage()"></p-button>
-        </div>
-    
-        <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 20px;">
-            <p>New to Rarelygroovy? <a routerLink="/create-user">Create an account</a></p>
-        </div>
-    
-    </ng-container>
 </div>
+
+
+
+
 
