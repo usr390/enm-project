@@ -6,26 +6,29 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ListedHowLongAgoPipe implements PipeTransform {
 
   transform(value: string): string | null {
-    // Parse the input value to a Date object
     const listedDate = new Date(value);
-    // Get the current date
     const now = new Date();
-    // Calculate the difference in milliseconds
-    const diffMs = now.getTime() - listedDate.getTime();
-    // Convert milliseconds to hours
-    const diffHours = diffMs / (1000 * 60 * 60);
-
-    if (diffHours < 24) {
-      // If less than 24 hours, return the hours
-      return `${Math.floor(diffHours)} hours ago`;
-    } else if (diffHours < 48) {
-      // If between 24 and 48 hours, return "1 day"
-      return '1 day ago';
-    } else if (diffHours < 72) {
-      // If between 48 and 72 hours, return "2 days"
-      return '2 days ago';
+  
+    // Check if the date is 'today'
+    if (listedDate.getDate() === now.getDate() &&
+        listedDate.getMonth() === now.getMonth() &&
+        listedDate.getFullYear() === now.getFullYear()) {
+      return 'Today';
     }
-    // If more than 48 hours, return nothing
+  
+    // Calculate the difference in hours
+    const diffMs = now.getTime() - listedDate.getTime();
+    const diffHours = diffMs / (1000 * 60 * 60);
+  
+    if (diffHours < 24) {
+      // If less than 24 hours but not today, return '1 day ago'
+      return '1 Day Ago';
+    } else if (diffHours < 48) {
+      // If between 24 and 48 hours, return '2 days ago'
+      return '2 Days Ago';
+    }
+    // If more than 48 hours, return null
     return null;
   }
+  
 }
