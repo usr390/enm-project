@@ -26,6 +26,9 @@ export class ListedHowLongAgoPipe implements PipeTransform {
     } else if (diffHours < 48) {
       // If between 24 and 48 hours, return '2 days ago'
       return '2 Days Ago';
+    } else if (diffHours < 72) {
+      // If between 48 and 72 hours, return '3 days ago'
+      return '3 Days Ago';
     }
     // If more than 48 hours, return null
     return null;
