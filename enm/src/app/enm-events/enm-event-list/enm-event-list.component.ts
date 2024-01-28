@@ -49,6 +49,7 @@ export class EnmEventListComponent implements OnInit {
 
 
   filteredEnmEventList$ = this.store$.select(fromEnmEvent.selectFiltered);
+  filteredEventCount$ = this.store$.select(fromEnmEvent.selectFilteredEventCount);
   
   groupedByDateEnmEventList$ = this.filteredEnmEventList$.pipe(
     map((events) => {

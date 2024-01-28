@@ -98,3 +98,10 @@ export const selectRecentEvents = createSelector(
     return enmEvents.filter(enmEvent => enmEvent.isRecentlyListed);
   }
 );
+
+export const selectFilteredEventCount = createSelector(
+  selectFiltered,
+  (filteredEvents: EnmEvent[]): number => {
+    return filteredEvents.length;
+  }
+);
