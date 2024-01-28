@@ -196,9 +196,7 @@
     <div class="disclaimer d-flex justify-content-center align-items-center">* Start times might vary (e.g., punk time)</div>
   </div>
   <div *ngIf="(filteredEnmEventList$ | async)?.length == 0" class="d-flex justify-content-center align-items-center text-center no-results-text" style="height: 70vh;">
-    No results for "{{ (filterText$ | async)?.text }}"
-    <br>
-    Try filtering by another artist, venue, or city name
+    No results
   </div>
 </div>
 
