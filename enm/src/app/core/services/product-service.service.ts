@@ -9,7 +9,7 @@ export class ProductService {
             {
                 name: 'All Access',
                 description: 'All Access - unlock our entire event listing. Currently extending through May. Updated daily',
-                image: 'fulllist.gif',
+                image: 'fulllist2.gif',
             },
             {
                 name: 'Links',
