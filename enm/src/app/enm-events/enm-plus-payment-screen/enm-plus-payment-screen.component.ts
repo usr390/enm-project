@@ -46,6 +46,17 @@ export class EnmPlusPaymentScreenComponent {
   checkout: any;
 
   ngOnInit() {
+    this.currentUser$.pipe(take(1)).subscribe(user => { 
+      if (user) {
+        this.initializeStripe(user.id);
+        this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth());
+      } 
+      else {
+        this.navigationService.paymentScreenSkipped = true;
+        this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth());
+      }}
+    );
+
     this.productService.getProductsSmall().then((products) => {
       this.products = products;
     });
@@ -66,15 +77,8 @@ export class EnmPlusPaymentScreenComponent {
           numVisible: 1,
           numScroll: 1
       }
-  ];
-    this.currentUser$.pipe(take(1)).subscribe(user => { 
-      if (user) {
-        this.initializeStripe(user.id);
-        this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth());
-      } 
-      else {
-        this.navigationService.paymentScreenSkipped = true;
-      }});
+    ];
+
   }
 
   ngOnDestroy() {
