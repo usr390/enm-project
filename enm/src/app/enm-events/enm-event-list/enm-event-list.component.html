@@ -192,8 +192,8 @@
     </div>
   </div>
   <div *ngIf="(filteredEnmEventList$ | async)?.length !== 0" class="disclaimer-section">
-    <div *ngIf="!(user$ | async)?.plus" class="disclaimer d-flex justify-content-center align-items-center">* Events are listed for the current week only</div>
-    <div class="disclaimer d-flex justify-content-center align-items-center">* Start times might vary (e.g., punk time)</div>
+    <div *ngIf="!(user$ | async)?.plus" class="disclaimer d-flex">* Events are listed for the current week only</div>
+    <div class="disclaimer d-flex">* Start times might vary (e.g., punk time)</div>
   </div>
   <div *ngIf="(filteredEnmEventList$ | async)?.length == 0" class="d-flex justify-content-center align-items-center text-center no-results-text" style="height: 70vh;">
     No results
