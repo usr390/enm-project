@@ -3,11 +3,15 @@
 </div>
 
 <div *ngIf="!(listLoading$ | async)" class="container-sm  text-center">
-  <div *ngIf="filteredEventCount$ | async as count">
-    <span class="numberOfEvents">Events listed: {{ count }}</span>
-  </div>
-  <div *ngFor="let date of (groupedByDateEnmEventList$ | async | keyvalue)">
-    <h2 class="datekey">{{ date.key | wordifiedDateKey }}</h2>
+  <div *ngFor="let date of (groupedByDateEnmEventList$ | async | keyvalue); let isFirst = first">
+    <ng-container *ngIf="filteredEventCount$ | async as count">
+      <h2 class="datekey">
+        {{ date.key | wordifiedDateKey }}
+        <span class="numberOfEvents" *ngIf="isFirst">
+          Events listed: {{ count }}
+        </span>
+      </h2>
+    </ng-container>
     <div class="card">
       <p-dataView #dv [value]="date.value">
         <!-- user logged in -->
