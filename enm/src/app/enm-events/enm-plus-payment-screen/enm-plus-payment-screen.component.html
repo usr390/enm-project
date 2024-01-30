@@ -6,11 +6,6 @@
 </div>
 
 <div *ngIf="furthestEventDate$ | async as furthestEventDate">
-    <ng-container *ngIf="currentUser$ | async">
-        <div id="checkout" style="margin-bottom: 20px">
-            <!-- Checkout will insert the payment form here -->
-        </div>
-    </ng-container>
     <div class="d-flex justify-content-center align-items-center">
         <p-card class="card wrapper position-relative" header="Rarelygroovy+" subheader="Monthly Subscription" [ngStyle]="{'border': 'none', 'max-width': '500px'}">
             <ng-container *ngIf="(currentUser$ | async) === null">
@@ -35,4 +30,9 @@
             </p-carousel>
         </p-card>
     </div>
+    <ng-container *ngIf="currentUser$ | async">
+        <div id="checkout" style="margin-bottom: 20px">
+            <!-- Checkout will insert the payment form here -->
+        </div>
+    </ng-container>
 </div>
