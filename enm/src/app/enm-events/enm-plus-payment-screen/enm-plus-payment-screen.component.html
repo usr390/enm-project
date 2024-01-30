@@ -26,8 +26,6 @@
                             </div>
                             <div>
                                 <h6 class="mt-0 mb-3" style="padding: 0 10px">{{product.description}}</h6>
-                                <div class="mt-5 flex align-items-center justify-content-center gap-2">
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -36,11 +34,13 @@
         </p-card>
     </div>
 
-    <ng-container *ngIf="currentUser$ | async">
-        <div id="checkout" style="margin-bottom: 20px">
-            <!-- Checkout will insert the payment form here -->
-        </div>
-    </ng-container>
+    <div>
+        <ng-container *ngIf="currentUser$ | async">
+            <div id="checkout" style="margin-bottom: 20px">
+                <!-- Checkout will insert the payment form here -->
+            </div>
+        </ng-container>
+    </div>
     
 </div>
 
