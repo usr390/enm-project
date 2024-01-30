@@ -100,10 +100,6 @@ export class EnmPlusPaymentScreenComponent {
     if (this.checkout) this.checkout.destroy()
   }
 
-  goBack() {
-    this.router.navigate(['/events'])
-  }
-
   navigateToLogInPage() {
     this.router.navigate(['/login']);
   }

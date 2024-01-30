@@ -1,8 +1,5 @@
-<div *ngIf="currentUser$ | async"></div>
 
-<div class="back-arrow">
-    <p-button type="button" (click)="goBack()" icon="pi pi-arrow-left" styleClass="p-button-rounded p-button-lg p-button-text"></p-button>
-</div>
+<div *ngIf="currentUser$ | async"></div>
 
 <div *ngIf="plusSubscriptionCardLoading$ | async" class="d-flex justify-content-center align-items-center" style="height: 85vh;">
     <p-progressSpinner styleClass= "w-4rem h-4rem" strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner"></p-progressSpinner>
@@ -39,8 +36,3 @@
         </p-card>
     </div>
 </div>
-
-
-
-
-
