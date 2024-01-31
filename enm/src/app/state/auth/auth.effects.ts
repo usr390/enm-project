@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { LogInService } from "src/app/core/services/login.service";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, of, exhaustMap, map, tap, concatMap, Observable } from "rxjs";
+import { catchError, of, exhaustMap, map, tap, concatMap, Observable, take } from "rxjs";
 import * as AuthActions from './auth.actions';
 import * as EnmEventActions from './../enmEvents/enmEvents.actions'
 import { CreateUserService } from "src/app/core/services/create-user.service";
@@ -11,6 +11,12 @@ import { LogInErrorResponse } from "src/app/models/logInErrorResponse.model";
 import { UserService } from "src/app/core/services/user.service";
 import { RefreshUserErrorResponse } from "src/app/models/refreshUserErrorResponse";
 import { PaymentScreenSkippedService } from "src/app/core/payment-screen-skipped.service";
+import { AppState } from "../app.state";
+import { Store } from "@ngrx/store";
+import * as PaymentActions from './../../state/payment/payment.actions'
+import * as AuthSelectors from './../../state/auth/auth.selectors';
+
+
 
 @Injectable()
 export class AuthEffects {
@@ -29,6 +35,9 @@ export class AuthEffects {
         return welcomeMessages[randomMessage];
     }
 
+    currentUser$ = this.store$.select(AuthSelectors.selectUser)
+
+
     constructor(
         private actions$: Actions,
         private logInService: LogInService,
@@ -36,7 +45,8 @@ export class AuthEffects {
         private createUserService: CreateUserService,
         private router: Router,
         private messageService: MessageService,
-        private paymentScreenSkippedService: PaymentScreenSkippedService
+        private paymentScreenSkippedService: PaymentScreenSkippedService,
+        private store$: Store<AppState>
     ) {}
 
     logInRequest$ = createEffect(() => 
@@ -60,6 +70,12 @@ export class AuthEffects {
         concatMap(logInSuccessResponse => {
             if (this.paymentScreenSkippedService.paymentScreenSkipped && !logInSuccessResponse.logInSuccessResponse.user?.plus) {
                 this.paymentScreenSkippedService.paymentScreenSkipped = false;
+                this.currentUser$.pipe(take(1)).subscribe(user => {
+                    if (user) {
+                        let userid = user._id || user.id;
+                        this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnStripeCheckoutResponse({ userId: userid }));
+                    }
+                  })
                 this.router.navigate(['/plus'], { replaceUrl: true });
             } else {
                 this.router.navigate(['/events'], { replaceUrl: true });
@@ -89,6 +105,12 @@ export class AuthEffects {
             tap(createUserSuccessResponse => {
                 if (this.paymentScreenSkippedService.paymentScreenSkipped) {
                     this.paymentScreenSkippedService.paymentScreenSkipped = false;
+                    this.currentUser$.pipe(take(1)).subscribe(user => {
+                        if (user) {
+                            let userid = user._id || user.id;
+                            this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnStripeCheckoutResponse({ userId: userid }));
+                        }
+                      })
                     this.router.navigate(['/plus'], { replaceUrl: true });
                     this.messageService.add({ 
                         key: 'continueSingingUpForRarerlyGroovyPlus', 

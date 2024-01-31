@@ -1,9 +1,13 @@
 export interface PaymentState {
     plusSubscriptionCardLoading: boolean,
-    furthestEventMonth: string
+    furthestEventMonth: string,
+    checkoutScreenLoading: boolean,
+    checkoutScreenLoaded: boolean
 }
 
 export const initialState: PaymentState = {
     plusSubscriptionCardLoading: false,
     furthestEventMonth: '',
+    checkoutScreenLoading: false,
+    checkoutScreenLoaded: false
 }

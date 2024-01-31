@@ -3,7 +3,10 @@ import { PaymentState, initialState } from './payment.state'
 import { 
     enmPlusPaymentScreenWaitOnFurthestMonth, 
     enmPlusPaymentScreenWaitOnFurthestMonthSuccessResponse, 
-    enmPlusPaymentScreenWaitOnFurthestMonthErrorResponse 
+    enmPlusPaymentScreenWaitOnFurthestMonthErrorResponse,
+    enmPlusPaymentScreenWaitOnStripeCheckoutResponse,
+    enmPlusPaymentScreenWaitOnStripeCheckoutSuccessResponse,
+    enmPlusPaymentScreenWaitOnStripeCheckoutErrorResponse
 } from "../payment/payment.actions";
 
 
@@ -29,6 +32,27 @@ const _paymentReducer = createReducer(
             furthestEventMonth: enmPlusPaymentScreenWaitOnFurthestMonthSuccessResponse,
             plusSubscriptionCardLoading: false,
             plusSubscriptionCardLoaded: true
+        }
+    }),
+    on(enmPlusPaymentScreenWaitOnStripeCheckoutResponse, (state) => {
+        return {
+            ...state,
+            checkoutScreenLoading: true,
+            checkoutScreenLoaded: false
+        }
+    }),
+    on(enmPlusPaymentScreenWaitOnStripeCheckoutErrorResponse, (state) => {
+        return {
+            ...state,
+            checkoutScreenLoading: false,
+            checkoutScreenLoaded: true,
+        }
+    }),
+    on(enmPlusPaymentScreenWaitOnStripeCheckoutSuccessResponse, (state) => {
+        return {
+            ...state,
+            checkoutScreenLoading: false,
+            checkoutScreenLoaded: true
         }
     }),
 );

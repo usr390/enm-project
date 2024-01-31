@@ -11,3 +11,10 @@ export const enmPlusMonthlySubscriptionPaymentSubmission = createAction('[Enm Pl
 export const enmPlusMonthlySubscriptionPaymentSuccessReponse = createAction('[Enm Plus Payment Screen] Enm Plus Monthly Subscription Payment Sucess Reponse', props<{ user: NullableUser }>());
 export const enmPlusMonthlySubscriptionPaymentErrorResponse = createAction('[Enm Plus Payment Screen] Enm Plus Monthly Subscription Payment Error Response');
 
+export const enmPlusPaymentScreenWaitOnStripeCheckoutResponse = createAction('[Enm Plus Payment Screen] Wait On Stripe Checkout Response', props<{ userId: string }>());
+
+interface StripeCheckoutSession {
+    clientSecret: string
+  }
+export const enmPlusPaymentScreenWaitOnStripeCheckoutSuccessResponse = createAction('[Enm Plus Payment Screen] Wait On Stripe Checkout Success Response', props<{ enmPlusPaymentScreenWaitOnStripeCheckoutSuccessResponse: StripeCheckoutSession }>());
+export const enmPlusPaymentScreenWaitOnStripeCheckoutErrorResponse = createAction('[Enm Plus Payment Screen] Wait On Stripe Checkout Error Response');

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { NullableUser } from 'src/app/models/user.model';
 import { environment } from 'src/environments/environment';
 
@@ -19,6 +20,11 @@ export class EnmPlusPaymentService {
   checkoutSession$(userid: string) {
     return this.http.post<StripeCheckoutSession>(BASE_URL + '/create-checkout-session', { userid })
   }
+
+  checkoutSessionToAppeaseEffect(userid: string): Observable<StripeCheckoutSession> {
+    return this.http.post<StripeCheckoutSession>(BASE_URL + '/create-checkout-session', { userid })
+  }
+  
 
   checkoutSessionTest$(userid: string) {
     return this.http.post<StripeCheckoutSession>(BASE_URL + '/create-checkout-session-test', { userid })
