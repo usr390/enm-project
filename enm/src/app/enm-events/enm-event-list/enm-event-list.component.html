@@ -31,11 +31,11 @@
                 <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
                   <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                     <div class="flex flex-column align-items-center sm:align-items-start gap-3">
-                      <h1 *ngIf="enmEvent.venue" class="text-2xl font-bold text-900" [innerHTML]="enmEvent.venue.name | highlightPipe: (filterText$ | async)?.text">{{ enmEvent.venue.name }}</h1>
+                      <h1 *ngIf="enmEvent.venue" class="text-2xl font-bold text-900" [innerHTML]="enmEvent.venue.name | highlightPipe: (filter$ | async)?.text">{{ enmEvent.venue.name }}</h1>
                       <div class="m-0 lh-lg artists artist-name">
                         <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
                           <div class="artist-container">
-                            <span class="artist-name" [innerHTML]="artist.name | highlightPipe: (filterText$ | async)?.text">{{ artist.name }}</span>&nbsp;&nbsp;
+                            <span class="artist-name" [innerHTML]="artist.name | highlightPipe: (filter$ | async)?.text">{{ artist.name }}</span>&nbsp;&nbsp;
                             <span *ngIf="(artist.location) && (artist.location != 'RGV')">
                               <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;&nbsp;
                             </span>
@@ -47,7 +47,7 @@
                         <div class="custom-divider">
                           <hr style="width: 40px;">
                         </div>
-                        <h6 class="card-text promoter" [innerHTML]="enmEvent.promoter.name | highlightPipe: (filterText$ | async)?.text">{{ enmEvent.promoter.name }}</h6>
+                        <h6 class="card-text promoter" [innerHTML]="enmEvent.promoter.name | highlightPipe: (filter$ | async)?.text">{{ enmEvent.promoter.name }}</h6>
                       </div>
                       <br>
 
@@ -65,7 +65,7 @@
                               <span *ngIf="enmEvent.cover !== null && enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
                               <!-- synonyms, address --> <br>
                               <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, <span [innerHTML]="enmEvent.venue.city | highlightPipe: (filterText$ | async)?.text">{{ enmEvent.venue.city }}</span> &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
+                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, <span [innerHTML]="enmEvent.venue.city | highlightPipe: (filter$ | async)?.text">{{ enmEvent.venue.city }}</span> &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
                               <!---->
                             </div>
                           </span>
@@ -85,7 +85,7 @@
                               <span *ngIf="enmEvent.cover !== null && enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
                               <!-- synonyms, address --> <br>
                               <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, <span [innerHTML]="enmEvent.venue.city | highlightPipe: (filterText$ | async)?.text">{{ enmEvent.venue.city }}</span> &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
+                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, <span [innerHTML]="enmEvent.venue.city | highlightPipe: (filter$ | async)?.text">{{ enmEvent.venue.city }}</span> &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
                               <!---->
                             </div>
                           </span>
@@ -194,10 +194,29 @@
     <div class="disclaimer d-flex">* Start times might vary (e.g., punk time)</div>
   </div>
   <div *ngIf="(filteredEnmEventList$ | async)?.length == 0" class="d-flex justify-content-center align-items-center text-center no-results-text" style="height: 70vh;">
-    No results
+    <ng-container *ngIf="filter$ | async as filters">
+      <div *ngIf="(filteredEnmEventList$ | async)?.length === 0" class="d-flex justify-content-center align-items-center text-center no-results-text" style="height: 70vh;">
+        <p>
+          <span>No results found</span>
+          <ng-container *ngIf="filters.text || filters.recentlyListed || filters.touring">
+            <span *ngIf="filters.text"> for "{{ filters.text }}"</span>
+            <ng-container *ngIf="filters.recentlyListed || filters.touring">
+              <span>&nbsp; with</span>
+              <span *ngIf="filters.recentlyListed">&nbsp;the "Just Listed" filter</span>
+              <span *ngIf="filters.recentlyListed && filters.touring">&nbsp;and</span>
+              <span *ngIf="filters.touring">&nbsp;the "Touring" filter</span>
+            </ng-container>
+          </ng-container>
+          <span>.</span>
+        </p>
+      </div>
+    </ng-container>
   </div>
-</div>
 
+
+
+    
+  </div>
 <div *ngIf="isVisible">
   <p-scrollTop (click)="refreshlist()" [style]="{'background-color': '#7254f3', 'color': 'white', 'border-color': '#0056b3'}"></p-scrollTop>
 </div>

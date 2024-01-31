@@ -45,7 +45,7 @@ export class EnmEventListComponent implements OnInit {
   user$ = this.store$.select(AuthSelectors.selectUser); // for distinguishing between regular and plus users
   listLoading$ = this.store$.select(fromEnmEvent.selectLoading); // for displaying loading animation
   listLoaded$ = this.store$.select(fromEnmEvent.selectLoaded); // for deciding whether to dispatch init action
-  filterText$ = this.store$.select(fromEnmEvent.selectFilter) // for giving user feedback when filter doesn't return results
+  filter$ = this.store$.select(fromEnmEvent.selectFilter) // for giving user feedback when filter doesn't return results
 
 
   filteredEnmEventList$ = this.store$.select(fromEnmEvent.selectFiltered);
