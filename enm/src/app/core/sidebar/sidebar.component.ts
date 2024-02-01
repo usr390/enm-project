@@ -7,6 +7,7 @@ import { AuthState } from 'src/app/state/auth/auth.state';
 import * as AuthActions from './../../state/auth/auth.actions';
 import * as AuthSelectors from './../../state/auth/auth.selectors';
 import { take } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,7 +16,7 @@ import { take } from 'rxjs';
 })
 export class SidebarComponent {
 
-  constructor(private store$: Store<AuthState>) {}
+  constructor(private store$: Store<AuthState>, private router: Router) {}
 
   user$ = this.store$.select(AuthSelectors.selectUser);
 
@@ -34,6 +35,7 @@ export class SidebarComponent {
     return !user || !user.plus;
   }
   closeSidebar() {
+    this.router.navigate(['/plus'], { replaceUrl: true });
     this.sidebarVisible = false;
   }
   
