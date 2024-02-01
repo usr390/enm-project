@@ -101,6 +101,6 @@ export class EnmPlusPaymentScreenComponent {
   }
 
   navigateToLogInPage() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login'], { replaceUrl: true });
   }
 }
