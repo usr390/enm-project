@@ -40,6 +40,7 @@ export class MyAccountComponent {
 
   ngOnInit() {
     this.currentUser$.pipe(take(1)).subscribe(user => { 
+      if (user === null || !user) this.router.navigate(['/events'], {replaceUrl: true})
       if (user && !this.founderAccounts.includes(user.username)) {
         let userid = user._id || user.id;
         this.store$.dispatch(RarelygroovyPlusActions.myAccountGetUpcomingSubscriptionRenewalDate({ userId: userid }));
