@@ -17,7 +17,7 @@ export class AppComponent {
 
   currentUser$ = this.store$.select(AuthSelectors.selectUser)
   private lastTime!: number;
-  private readonly inactivityThreshold = 10000;
+  private readonly inactivityThreshold = 300000; // 5 minutes of inactivity
 
   constructor(private store$: Store<AppState>, private userService: UserService) {}
 
