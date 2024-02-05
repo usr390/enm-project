@@ -18,6 +18,7 @@ import { EffectsModule } from '@ngrx/effects';
   import { HydrationEffects } from './state/hydration/hydration.effects';
   import { PaymentEffects } from './state/payment/payment.effects';
   import { RarelygroovyPlusEffects } from './state/rarelygroovyPlus/rarelygroovyPlus.effects';
+  import { ArtistDirectoryEffects } from './state/artistDirectory/artistDirectory.effects';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { StoreModule } from '@ngrx/store';
@@ -48,7 +49,8 @@ import { StoreRouterConnectingModule, RouterState } from "@ngrx/router-store";
       PaymentEffects,
       EnmEventsEffects,
       HydrationEffects,
-      RarelygroovyPlusEffects
+      RarelygroovyPlusEffects,
+      ArtistDirectoryEffects
     ]),
     StoreRouterConnectingModule.forRoot({
       routerState: RouterState.Minimal }),

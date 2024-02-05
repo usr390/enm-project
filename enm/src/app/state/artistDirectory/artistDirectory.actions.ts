@@ -1,0 +1,8 @@
+import { createAction, props } from '@ngrx/store'
+import { ArtistDirectoryErrorResponse } from 'src/app/models/artistDirectoryErrorResponse.model';
+import { ArtistDirectorySuccessResponse } from 'src/app/models/artistDirectorySuccessReponse.model';
+
+
+export const artistDirectoryRequest = createAction('[Artist Directory Screen] Artist Directory Request'); 
+export const artistDirectoryRequestSuccessResponse = createAction('[Artist Directory Screen] Artist Directory Request Success Response', props<{ artistDirectorySuccessResponse: ArtistDirectorySuccessResponse }>()); 
+export const artistDirectoryRequestErrorResponse = createAction('[Artist Directory Screen] Artist Directory Request Error Response', props<{ artistDirectoryErrorResponse: ArtistDirectoryErrorResponse }>()); 
