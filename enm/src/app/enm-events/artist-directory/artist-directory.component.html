@@ -1,1 +1,12 @@
 <p>artist-directory works!</p>
+
+<div *ngFor="let artist of artists$ | async">
+    <ng-container *ngIf="artist.link && artist.link !== 'pending'; else noLink">
+      <a href="{{artist.link}}" style="color: blue;">{{ artist.name }}</a>
+    </ng-container>
+    <ng-template #noLink>
+      <span style="color: gray;">{{ artist.name }}</span>
+    </ng-template>
+  </div>
+  
+  
