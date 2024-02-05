@@ -1,16 +1,20 @@
 import { Artist } from "src/app/models/artist.model"
 
+export interface Artists {
+    [id: string]: Artist;
+}
+
 export interface ArtistDirectoryFilter {
     text: string;
-  }
+}
 
 export interface ArtistDirectoryState {
-    artists: Artist[],
+    entities: Artists,
     artistDirectoryFilter: ArtistDirectoryFilter
 }
 
 export const initialState: ArtistDirectoryState = {
-    artists: [],
+    entities: {},
     artistDirectoryFilter: {
         text: ''
     }

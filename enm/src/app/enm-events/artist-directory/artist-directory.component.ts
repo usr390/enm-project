@@ -14,7 +14,7 @@ import * as ArtistDirectorySelectors from './../../state/artistDirectory/artistD
 })
 export class ArtistDirectoryComponent {
 
-  artists$ = this.store$.select(ArtistDirectorySelectors.selectArtists)
+  artists$ = this.store$.select(ArtistDirectorySelectors.selectAll)
 
   constructor(private store$: Store<AppState>) {}
 
