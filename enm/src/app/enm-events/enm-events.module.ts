@@ -13,6 +13,7 @@ import { CoreModule } from '../core/core.module';
 import { SharedModule } from './../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { PaymentScreenTestComponent } from './payment-screen-test/payment-screen-test.component';
+import { ArtistDirectoryComponent } from './artist-directory/artist-directory.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { PaymentScreenTestComponent } from './payment-screen-test/payment-screen
     EnmPlusPaymentScreenComponent,
     EnmPlusPaymentSuccessfulComponent,
     PaymentScreenTestComponent,
+    ArtistDirectoryComponent,
   ],
   imports: [
     // angular modules
@@ -42,6 +44,7 @@ import { PaymentScreenTestComponent } from './payment-screen-test/payment-screen
     EnmPlusPaymentScreenComponent,
     EnmPlusPaymentSuccessfulComponent,
     PaymentScreenTestComponent,
+    ArtistDirectoryComponent,
   ]
 })
 export class EnmEventModule { }
