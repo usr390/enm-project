@@ -1,12 +1,23 @@
-<p>artist-directory works!</p>
+<div *ngFor="let artist of artists$ | async"></div>
 
-<div *ngFor="let artist of artists$ | async">
-    <ng-container *ngIf="artist.link && artist.link !== 'pending'; else noLink">
-      <a href="{{artist.link}}" style="color: blue;">{{ artist.name }}</a>
-    </ng-container>
-    <ng-template #noLink>
-      <span style="color: gray;">{{ artist.name }}</span>
-    </ng-template>
+<div class="container-sm text-center" style="margin: 20px 0">
+  <h2>Artist Directory</h2>
+
+  <div class="card">
+    <p-dataView #dv [value]="(artists$ | async) ?? []">
+      <ng-template let-artist pTemplate="listItem">
+        <div class="col-12" style="padding: 20px 0">
+          <!-- HERE'S THE VISIBLE CONTENT -->
+          <ng-container *ngIf="artist.link && artist.link !== 'pending'; else noLink">
+            <a href="{{artist.link}}" target="_blank" rel="noopener noreferrer">{{ artist.name }}&nbsp;<i class="pi pi-link"></i></a>
+          </ng-container>
+          <ng-template #noLink>
+            <span style="color: gray;">{{ artist.name }}</span>
+          </ng-template>
+        </div>
+      </ng-template>
+    </p-dataView>
   </div>
-  
-  
+</div>
+
+
