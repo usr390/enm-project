@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import {ArtistDirectoryState, initialState} from './artistDirectory.state'
-import { artistDirectoryRequestSuccessResponse } from "./artistDirectory.actions";
+import { artistDirectoryFilter, artistDirectoryRequestSuccessResponse } from "./artistDirectory.actions";
 
 const _artistDirectoryReducer = createReducer(
     initialState,
@@ -10,6 +10,13 @@ const _artistDirectoryReducer = createReducer(
             artists: artistDirectorySuccessResponse.artists
         }
     }),
+    on(artistDirectoryFilter, (state, { text }) => ({
+        ...state,
+        filter: {
+          ...state.artistDirectoryFilter,
+          text,
+        },
+    })),
 );
 
 export function artistDirectoryReducer(state: ArtistDirectoryState | undefined, action: Action) {

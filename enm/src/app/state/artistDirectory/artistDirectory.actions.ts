@@ -6,3 +6,5 @@ import { ArtistDirectorySuccessResponse } from 'src/app/models/artistDirectorySu
 export const artistDirectoryRequest = createAction('[Artist Directory Screen] Artist Directory Request'); 
 export const artistDirectoryRequestSuccessResponse = createAction('[Artist Directory Screen] Artist Directory Request Success Response', props<{ artistDirectorySuccessResponse: ArtistDirectorySuccessResponse }>()); 
 export const artistDirectoryRequestErrorResponse = createAction('[Artist Directory Screen] Artist Directory Request Error Response', props<{ artistDirectoryErrorResponse: ArtistDirectoryErrorResponse }>()); 
+
+export const artistDirectoryFilter = createAction('[Artist Directory Screen] Artists Directory Filter', props<{ text: string }>()); 
