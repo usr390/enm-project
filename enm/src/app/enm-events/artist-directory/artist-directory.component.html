@@ -16,7 +16,7 @@
           <!-- HERE'S THE VISIBLE CONTENT -->
           <ng-container *ngIf="artist.link && artist.link !== 'pending'; else noLink">
             <a href="{{artist.link}}" target="_blank" rel="noopener noreferrer">
-              {{ artist.name }}
+              <span class="artist-name">{{ artist.name }}</span>&nbsp;
               <span *ngIf="(artist.location) && (artist.location != 'RGV')">
                 <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;
               </span>
@@ -24,7 +24,12 @@
             </a>
           </ng-container>
           <ng-template #noLink>
-            <span style="color: gray;">{{ artist.name }}</span>
+            <span style="color: gray;">
+              {{ artist.name }}&nbsp;
+              <span *ngIf="(artist.location) && (artist.location != 'RGV')">
+                <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;
+              </span>
+            </span>
           </ng-template>
         </div>
       </ng-template>
