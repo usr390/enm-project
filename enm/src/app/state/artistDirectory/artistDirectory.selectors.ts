@@ -55,3 +55,10 @@ const normalizeText = (text: string) => {
 
   return normalizedText;
 };
+
+export const selectFilteredArtistDirectoryCount = createSelector(
+  selectFiltered,
+  (filteredArtistDirectory: Artist[]): number => {
+    return filteredArtistDirectory.length;
+  }
+);

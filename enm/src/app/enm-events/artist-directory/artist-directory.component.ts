@@ -16,6 +16,7 @@ import { tap } from 'rxjs';
 export class ArtistDirectoryComponent {
 
   artists$ = this.store$.select(ArtistDirectorySelectors.selectFiltered)
+  count$ = this.store$.select(ArtistDirectorySelectors.selectFilteredArtistDirectoryCount)
 
   constructor(private store$: Store<AppState>) {}
 
