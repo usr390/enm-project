@@ -72,13 +72,18 @@ export class EnmEventListFilterComponent {
   }
 
   filterArtistDirectoryResults(){
-    let text = this.enmEventListFilterForm.value.filter?.trim() as string
+    let text = this.artistDirectoryFilterForm.value.filter?.trim() as string
     this.store$.dispatch(ArtistDirectoryActions.artistDirectoryFilter({ text }))
   }
 
   clearFilter() {
     this.enmEventListFilterForm.patchValue({ filter: ''});
     this.filterResults();
+  }
+
+  clearArtistDirectoryFilter() {
+    this.artistDirectoryFilterForm.patchValue({ filter: ''});
+    this.filterArtistDirectoryResults();
   }
 
   initializeFormControl() {
@@ -93,10 +98,6 @@ export class EnmEventListFilterComponent {
     this.store$.select(EnmEventsSelectors.selectFilter).pipe(take(1)).subscribe(filter => {
       this.enmEventListFilterForm.get('touring')?.setValue(filter.touring);
     });
-
-  }
-
-  showArtistFilter() {
 
   }
 }

@@ -4,6 +4,7 @@ import { AppState } from 'src/app/state/app.state';
 
 import * as ArtistDirectoryActions from './../../state/artistDirectory/artistDirectory.actions';
 import * as ArtistDirectorySelectors from './../../state/artistDirectory/artistDirectory.selectors';
+import { tap } from 'rxjs';
 
 
 
@@ -14,7 +15,7 @@ import * as ArtistDirectorySelectors from './../../state/artistDirectory/artistD
 })
 export class ArtistDirectoryComponent {
 
-  artists$ = this.store$.select(ArtistDirectorySelectors.selectAll)
+  artists$ = this.store$.select(ArtistDirectorySelectors.selectFiltered)
 
   constructor(private store$: Store<AppState>) {}
 

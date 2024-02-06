@@ -14,7 +14,7 @@ const _artistDirectoryReducer = createReducer(
     }),
     on(artistDirectoryFilter, (state, { text }) => ({
         ...state,
-        filter: {
+        artistDirectoryFilter: {
           ...state.artistDirectoryFilter,
           text,
         },

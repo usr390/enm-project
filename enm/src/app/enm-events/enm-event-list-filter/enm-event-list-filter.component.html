@@ -22,7 +22,7 @@
                 <i class="pi pi-search"></i>
                 <input #filterInput pInputText formControlName="filter" type="text"  placeholder="Filter Artists" maxlength="30" name="search" role="search" autocomplete="off"/>
             </span>
-            <button pButton type="button" icon="pi pi-times" class="clear-btn" (click)="clearFilter()" styleClass="p-button-sm p-button-rounded p-button-text" *ngIf="enmEventListFilterForm.controls.filter.value"></button>
+            <button pButton type="button" icon="pi pi-times" class="clear-btn" (click)="clearArtistDirectoryFilter()" styleClass="p-button-sm p-button-rounded p-button-text" *ngIf="artistDirectoryFilterForm.controls.filter.value"></button>
         </div>
     </form>
 </div>
