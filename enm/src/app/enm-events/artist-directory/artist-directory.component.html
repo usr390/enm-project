@@ -24,6 +24,9 @@
                   <span *ngIf="(artist.location) && (artist.location !== 'RGV')">
                     <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;
                   </span>
+                  <span *ngIf="(artist.status) && (artist.status === 'inactive')">
+                    <p-tag value="inactive" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': 'gray'}"></p-tag>&nbsp;
+                  </span>
                 </span>
                 
                 <div *ngIf="artist.links" class="social-links" style="margin-top: 15px">
