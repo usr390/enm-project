@@ -24,17 +24,20 @@
             </a>
             <br><br>
             <div *ngIf="artist.links" class="social-links">
+              <a *ngIf="artist.links.spotify" href="{{artist.links.spotify}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                <i class="fab fa-spotify"></i>
+              </a>
               <a *ngIf="artist.links.apple" href="{{artist.links.apple}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                 <i class="fab fa-apple"></i>
               </a>
               <a *ngIf="artist.links.bandcamp" href="{{artist.links.bandcamp}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                 <i class="fab fa-bandcamp"></i>
               </a>
-              <a *ngIf="artist.links.spotify" href="{{artist.links.spotify}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                <i class="fab fa-spotify"></i>
-              </a>
               <a *ngIf="artist.links.youtube" href="{{artist.links.youtube}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                 <i class="fab fa-youtube"></i>
+              </a>
+              <a *ngIf="artist.links.facebook" href="{{artist.links.facebook}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                <i class="fab fa-facebook"></i>
               </a>
             </div>
           </ng-container>
