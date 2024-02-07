@@ -1,58 +1,73 @@
-<div class="container-sm text-center" style="margin: 20px 0">
-  <ng-container *ngIf="count$ | async as count">
-    <h2 class="datekey">
-      Artist Directory
-      <span class="numberOfEvents">
-        Listed: {{ count }}
-      </span>
-    </h2>
-  </ng-container>
+<div class="d-flex justify-content-center align-items-center">
+  <div class="container-sm text-center" style="margin: 20px 0">
+    <ng-container *ngIf="count$ | async as count">
+      <h2 class="datekey">
+        Artist Directory
+        <span class="numberOfEvents">
+          Listed: {{ count }}
+        </span>
+      </h2>
+    </ng-container>
+  
+  
+    <div class="card">
+      <p-dataView #dv [value]="(artists$ | async) ?? []">
+        <ng-template let-artist pTemplate="listItem">
+          <div class="col" style="padding: 20px 0">
+            <div class="row">
+              <!-- HERE'S THE VISIBLE CONTENT -->
+                <span>
+                  <span class="artist-name">{{ artist.name }}</span>&nbsp;
+                  <span *ngIf="(artist.medium) && (artist.medium === 'collective')">
+                    <p-tag value="{{artist.medium}}" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#99ccff'}"></p-tag>&nbsp;
+                  </span>
+                  <span *ngIf="(artist.location) && (artist.location !== 'RGV')">
+                    <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;
+                  </span>
+                </span>
+                
+                <div *ngIf="artist.links" class="social-links" style="margin-top: 15px">
+                  <a *ngIf="artist.links.spotify && (artist.links.spotify !== 'pending')" href="{{artist.links.spotify}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                    <i class="fab fa-spotify"></i>
+                  </a>
+                  <a *ngIf="artist.links.apple && (artist.links.apple !== 'pending')" href="{{artist.links.apple}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                    <i class="fab fa-apple social-icon"></i>
+                  </a>
+                  <a *ngIf="artist.links.bandcamp && (artist.links.bandcamp !== 'pending')" href="{{artist.links.bandcamp}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                    <i class="fab fa-bandcamp social-icon"></i>
+                  </a>
+                  <a *ngIf="artist.links.youtube && (artist.links.youtube !== 'pending')" href="{{artist.links.youtube}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                    <i class="fab fa-youtube social-icon"></i>
+                  </a>
+                  <a *ngIf="artist.links.facebook && (artist.links.facebook !== 'pending')" href="{{artist.links.facebook}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                    <i class="fab fa-facebook social-icon"></i>
+                  </a>
+                  <a *ngIf="artist.links.instagram && (artist.links.instagram !== 'pending')" href="{{artist.links.instagram}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                    <i class="fab fa-instagram social-icon"></i>
+                  </a>
+                </div>
 
-
-  <div class="card">
-    <p-dataView #dv [value]="(artists$ | async) ?? []">
-      <ng-template let-artist pTemplate="listItem">
-        <div class="col-12" style="padding: 20px 0">
-          <!-- HERE'S THE VISIBLE CONTENT -->
-          <ng-container *ngIf="artist.link && artist.link !== 'pending'; else noLink">
-            <a href="{{artist.link}}" target="_blank" rel="noopener noreferrer">
-              <span class="artist-name">{{ artist.name }}</span>&nbsp;
-              <span *ngIf="(artist.location) && (artist.location != 'RGV')">
-                <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;
-              </span>
-              <i class="pi pi-link"></i>
-            </a>
-            <br><br>
-            <div *ngIf="artist.links" class="social-links">
-              <a *ngIf="artist.links.spotify" href="{{artist.links.spotify}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                <i class="fab fa-spotify"></i>
-              </a>
-              <a *ngIf="artist.links.apple" href="{{artist.links.apple}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                <i class="fab fa-apple"></i>
-              </a>
-              <a *ngIf="artist.links.bandcamp" href="{{artist.links.bandcamp}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                <i class="fab fa-bandcamp"></i>
-              </a>
-              <a *ngIf="artist.links.youtube" href="{{artist.links.youtube}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                <i class="fab fa-youtube"></i>
-              </a>
-              <a *ngIf="artist.links.facebook" href="{{artist.links.facebook}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                <i class="fab fa-facebook"></i>
-              </a>
+                <div class="row" *ngIf="artist.medium === 'collective'" style="padding-top: 30px">
+                  <div *ngFor="let artist of artist.artists">
+                    <ng-container *ngIf="artist.link && artist.link !== 'pending'; else artistName">
+                      <div class="artist-container">
+                        <a href="{{ artist.link }}" target="_blank" rel="noopener noreferrer">{{ artist.name }}<span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>&nbsp;<i class="pi pi-link"></i></a>
+                      </div>
+                    </ng-container>
+                    <ng-template #artistName>
+                      <div class="artist-container">
+                        <span class="artist-name-non-clickable">{{ artist.name }}</span><span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
             </div>
-          </ng-container>
-          <ng-template #noLink>
-            <span style="color: gray;">
-              {{ artist.name }}&nbsp;
-              <span *ngIf="(artist.location) && (artist.location != 'RGV')">
-                <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;
-              </span>
-            </span>
-          </ng-template>
-        </div>
-      </ng-template>
-    </p-dataView>
+          </div>
+        </ng-template>
+      </p-dataView>
+    </div>
   </div>
 </div>
+
 
 
