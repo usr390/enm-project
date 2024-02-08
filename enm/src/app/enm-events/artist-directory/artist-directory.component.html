@@ -54,6 +54,12 @@
                   <a *ngIf="artist.links.tiktok && (artist.links.tiktok !== 'pending')" href="{{artist.links.tiktok}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                     <i class="fa-brands fa-tiktok social-icon">Tik Tok</i>
                   </a>
+                  <a *ngIf="artist.links.x && (artist.links.x !== 'pending')" href="{{artist.links.x}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                    <i class="fa-brands fa-tiktok social-icon">X</i>
+                  </a>
+                  <a *ngIf="artist.links.threads && (artist.links.threads !== 'pending')" href="{{artist.links.threads}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                    <i class="social-icon">Threads</i>
+                  </a>
                 </div>
 
                 <div class="row" *ngIf="artist.medium === 'collective'" style="padding-top: 30px">
