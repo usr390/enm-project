@@ -334,7 +334,7 @@ app.get('/api/getUser/:username', express.json(), async (req, res) => {
     const { username } = req.params;
 
     // Find the user by userid, excluding the password field
-    const user = await UserModel.findOne({ username: username }, 'username plus');
+    const user = await UserModel.findOne({ username: username }, 'username plus expires');
 
     if (user) {
       // Send back the user data excluding the password

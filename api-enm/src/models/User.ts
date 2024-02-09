@@ -6,7 +6,8 @@ const UserSchema = new Schema({
     username: String,
     password: String,
     plus: Boolean,
-    stripeCustomerId: String
+    stripeCustomerId: String,
+    expires: String,
 });
 
 const UserModel = mongoose.model("User", UserSchema);
