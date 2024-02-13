@@ -26,11 +26,11 @@ export const selectSortedArtistsWithEnhancedSorting = createSelector(
       if (!aIsLocal && bIsLocal) return 1; // Prioritize local artist b over non-local artist a
 
       // Check for Spotify, Bandcamp, or Apple Music links next, excluding 'pending'
-      const aHasSpotifyOrBandcampOrAppleMusic = (a.links && ((a.links.spotify && a.links.spotify !== 'pending') || (a.links.bandcamp && a.links.bandcamp !== 'pending') || (a.links.apple && a.links.apple !== 'pending')));
-      const bHasSpotifyOrBandcampOrAppleMusic = (b.links && ((b.links.spotify && b.links.spotify !== 'pending') || (b.links.bandcamp && b.links.bandcamp !== 'pending') || (b.links.apple && b.links.apple !== 'pending')));
+      const aHasSpotifyOrBandcampOrAppleMusicOrSoundcloud = (a.links && ((a.links.spotify && a.links.spotify !== 'pending') || (a.links.bandcamp && a.links.bandcamp !== 'pending') || (a.links.apple && a.links.apple !== 'pending') || (a.links.soundcloud && a.links.soundcloud !== 'pending')));
+      const bHasSpotifyOrBandcampOrAppleMusicOrSoundcloud = (b.links && ((b.links.spotify && b.links.spotify !== 'pending') || (b.links.bandcamp && b.links.bandcamp !== 'pending') || (b.links.apple && b.links.apple !== 'pending') || (b.links.soundcloud && b.links.soundcloud !== 'pending')));
 
-      if (aHasSpotifyOrBandcampOrAppleMusic && !bHasSpotifyOrBandcampOrAppleMusic) return -1;
-      if (!aHasSpotifyOrBandcampOrAppleMusic && bHasSpotifyOrBandcampOrAppleMusic) return 1;
+      if (aHasSpotifyOrBandcampOrAppleMusicOrSoundcloud && !bHasSpotifyOrBandcampOrAppleMusicOrSoundcloud) return -1;
+      if (!aHasSpotifyOrBandcampOrAppleMusicOrSoundcloud && bHasSpotifyOrBandcampOrAppleMusicOrSoundcloud) return 1;
 
       // Then, handle the case for artists both in RGV or both not in RGV
       // This includes prioritizing by specific links, pending status, and name
