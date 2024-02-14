@@ -14,6 +14,7 @@ import { PrivacyPolicyComponent } from './core/privacy-policy/privacy-policy.com
 import { PaymentScreenTestComponent } from './enm-events/payment-screen-test/payment-screen-test.component';
 import { MyAccountComponent } from './core/my-account/my-account.component';
 import { ArtistDirectoryComponent } from './enm-events/artist-directory/artist-directory.component';
+import { FaqComponent } from './enm-events/faq/faq.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'events' },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'termsofservice', component: TermsOfServiceComponent },
   { path: 'privacypolicy', component: PrivacyPolicyComponent },
   { path: 'iBhlq5wrrxefte1e', component: ArtistDirectoryComponent },
+  { path: 'faq', component: FaqComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

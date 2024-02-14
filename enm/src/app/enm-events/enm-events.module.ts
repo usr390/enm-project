@@ -14,6 +14,7 @@ import { SharedModule } from './../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { PaymentScreenTestComponent } from './payment-screen-test/payment-screen-test.component';
 import { ArtistDirectoryComponent } from './artist-directory/artist-directory.component';
+import { FaqComponent } from './faq/faq.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { ArtistDirectoryComponent } from './artist-directory/artist-directory.co
     EnmPlusPaymentSuccessfulComponent,
     PaymentScreenTestComponent,
     ArtistDirectoryComponent,
+    FaqComponent,
   ],
   imports: [
     // angular modules
@@ -45,6 +47,7 @@ import { ArtistDirectoryComponent } from './artist-directory/artist-directory.co
     EnmPlusPaymentSuccessfulComponent,
     PaymentScreenTestComponent,
     ArtistDirectoryComponent,
+    FaqComponent,
   ]
 })
 export class EnmEventModule { }
