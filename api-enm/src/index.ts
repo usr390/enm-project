@@ -69,7 +69,7 @@ app.get('/api/enmEvents', express.json(), async (req, res) => {
 
     if (isPlusUser) {
       try {
-        res.json(await EnmEventModel.find({ dateTime: { $gte: DateTime.now().startOf('day') } })
+        res.json(await EnmEventModel.find({ dateTime: { $gte: DateTime.now().minus({ hours: 12 }) } })
         .sort({ dateTime: 1 })
         .catch(err => console.log(err)))
       } catch (err) {
@@ -78,7 +78,7 @@ app.get('/api/enmEvents', express.json(), async (req, res) => {
       }
     } else {
       try {
-        const today = DateTime.now().startOf('day');
+        const today = DateTime.now().minus({ hours: 12 });
 
         let endOfWeek = DateTime.now().endOf('week').plus({ hours: 5 });
     
