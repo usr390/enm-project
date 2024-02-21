@@ -17,45 +17,66 @@ export const selectAll = createSelector(selectEntities, (entities): Artist[] =>
 export const selectSortedArtistsWithEnhancedSorting = createSelector(
   selectAll,
   (artists: Artist[]): Artist[] => {
-    return artists.slice().sort((a, b) => {
-      // Separate local (RGV) from non-local artists first
-      const aIsLocal = a.location === 'RGV';
-      const bIsLocal = b.location === 'RGV';
-      
-      if (aIsLocal && !bIsLocal) return -1; // Prioritize local artist a over non-local artist b
-      if (!aIsLocal && bIsLocal) return 1; // Prioritize local artist b over non-local artist a
-
-      // Check for Spotify, Bandcamp, or Apple Music links next, excluding 'pending'
-      const aHasSpotifyOrBandcampOrAppleMusicOrSoundcloud = (a.links && ((a.links.spotify && a.links.spotify !== 'pending') || (a.links.bandcamp && a.links.bandcamp !== 'pending') || (a.links.apple && a.links.apple !== 'pending') || (a.links.mixcloud && a.links.mixcloud !== 'pending') || (a.links.soundcloud && a.links.soundcloud !== 'pending')));
-      const bHasSpotifyOrBandcampOrAppleMusicOrSoundcloud = (b.links && ((b.links.spotify && b.links.spotify !== 'pending') || (b.links.bandcamp && b.links.bandcamp !== 'pending') || (b.links.apple && b.links.apple !== 'pending') || (b.links.mixcloud && b.links.mixcloud !== 'pending') || (b.links.soundcloud && b.links.soundcloud !== 'pending')));
-
-      if (aHasSpotifyOrBandcampOrAppleMusicOrSoundcloud && !bHasSpotifyOrBandcampOrAppleMusicOrSoundcloud) return -1;
-      if (!aHasSpotifyOrBandcampOrAppleMusicOrSoundcloud && bHasSpotifyOrBandcampOrAppleMusicOrSoundcloud) return 1;
-
-      // Then, handle the case for artists both in RGV or both not in RGV
-      // This includes prioritizing by specific links, pending status, and name
-      if (aIsLocal && bIsLocal) {
-        const aHasPriorityLink = ['spotify', 'apple', 'bandcamp', 'soundcloud', 'mixcloud'].some(service => a.links && a.links[service]);
-        const bHasPriorityLink = ['spotify', 'apple', 'bandcamp', 'soundcloud', 'mixcloud'].some(service => b.links && b.links[service]);
-
-        if (aHasPriorityLink && !bHasPriorityLink) return -1;
-        if (!aHasPriorityLink && bHasPriorityLink) return 1;
-
-        const aIsPending = a.links && a.links.spotify === 'pending';
-        const bIsPending = b.links && b.links.spotify === 'pending';
-        if (aIsPending !== bIsPending) {
-          return aIsPending ? 1 : -1;
+    // Check if the artist has a non-pending streaming platform link
+    const isStreamingArtist = (artist: Artist): boolean => {
+      for (const key in artist.links) {
+        if (artist.links[key] !== 'pending' &&
+            (key === 'spotify' || key === 'apple' || key === 'bandcamp' ||
+             key === 'soundcloud' || key === 'mixcloud')) {
+          return true;
         }
-
-        return a.name.localeCompare(b.name);
       }
+      return false;
+    };
 
-      // For non-RGV artists or those without priority links, sort by name
-      // Since location is already handled, we directly compare names
-      return a.name.localeCompare(b.name);
+    // Check if the artist has a non-pending social media link
+    const isSocialMediaArtist = (artist: Artist): boolean => {
+      for (const key in artist.links) {
+        if (artist.links[key] !== 'pending' &&
+            (key === 'instagram' || key === 'facebook' || key === 'youtube')) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    // Prioritize artists based on location, streaming, and social media presence
+    return artists.sort((a, b) => {
+      const aIsFromRGV = a.location === 'RGV';
+      const bIsFromRGV = b.location === 'RGV';
+      const aIsStreaming = isStreamingArtist(a);
+      const bIsStreaming = isStreamingArtist(b);
+      const aIsSocialMedia = isSocialMediaArtist(a);
+      const bIsSocialMedia = isSocialMediaArtist(b);
+
+      // Prioritize RGV artists first
+      if (aIsFromRGV && !bIsFromRGV) {
+        return -1; // a before b
+      } else if (!aIsFromRGV && bIsFromRGV) {
+        return 1; // b before a
+      } else {
+        // If both are from RGV or both are not, proceed with previous priorities
+        if (aIsStreaming && !bIsStreaming) {
+          return -1;
+        } else if (!aIsStreaming && bIsStreaming) {
+          return 1;
+        } else if (!aIsStreaming && !bIsStreaming && aIsSocialMedia && !bIsSocialMedia) {
+          return -1;
+        } else if (!aIsStreaming && !bIsStreaming && !aIsSocialMedia && bIsSocialMedia) {
+          return 1;
+        } else {
+          // Alphabetically sort if both are in the same category
+          return a.name.localeCompare(b.name);
+        }
+      }
     });
   }
 );
+
+
+
+
+
 
 
 
@@ -75,7 +96,6 @@ export const selectFiltered = createSelector(
   (artists: Artist[], filter: ArtistDirectoryFilter): Artist[] => {
     let filteredArtists = artists;
 
-    console.log(filteredArtists, ' <- filtered artists')
     // Apply text filter
     if (filter.text) {
       const normalizedFilter = normalizeText(filter.text);
