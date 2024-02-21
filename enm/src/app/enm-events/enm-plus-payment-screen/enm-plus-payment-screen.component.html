@@ -9,9 +9,11 @@
     <div class="d-flex justify-content-center align-items-center">
         <p-card class="card wrapper position-relative" header="Rarelygroovy+" subheader="Monthly Subscription" [ngStyle]="{'border': 'none', 'max-width': '500px'}">
             <ng-container *ngIf="(currentUser$ | async) === null">
-                <div class="login-subscribe-wrapper">
-                    <p-button label="Log In" icon="pi pi-arrow-right" iconPos="right" size="small" (click)="navigateToLogInPage()" class="login-button"></p-button>
+                <div class="login-subscribe-wrapper d-flex justify-content-center align-items-center">
+                    <p-button label="Log In" size="small" (click)="navigateToLogInPage()" [style]="{'width': '120px', 'height': '35px', 'font-size': '.9em'}" class="login-button"></p-button>
+                    <p style="font-size: .9em; margin-top: -2px">or <a routerLink="/create-user">create an account</a></p>
                 </div>
+
             </ng-container>
             <p-carousel [value]="products" [numVisible]="1" [numScroll]="1" [responsiveOptions]="responsiveOptions">
                 <ng-template let-product pTemplate="item">
