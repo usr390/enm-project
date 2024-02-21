@@ -99,13 +99,21 @@ export const selectFiltered = createSelector(
     // Apply text filter
     if (filter.text) {
       const normalizedFilter = normalizeText(filter.text);
-      filteredArtists = filteredArtists.filter(artist => 
-        normalizeText(artist.name).includes(normalizedFilter)
-      );
+      filteredArtists = filteredArtists.filter(artist => {
+        // Check if filter text is in artist's name
+        const nameMatch = normalizeText(artist.name).includes(normalizedFilter);
+        // Check if any of artist's links match the filter text as a platform, assuming non-'pending'
+        const platformMatch = Object.entries(artist.links).some(([key, value]) =>
+          normalizeText(key).includes(normalizedFilter) && value !== 'pending'
+        );  
+        return nameMatch || platformMatch;
+      });
     }
+
     return filteredArtists;
   }
 );
+
 
 
 // function to normalize text by removing special characters, diacritics and converting to lowercase
