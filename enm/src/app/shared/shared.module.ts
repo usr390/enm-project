@@ -43,6 +43,7 @@ import { HighlightPipePipe } from './highlight-pipe.pipe';
 import { TagModule } from 'primeng/tag';
 import { CarouselModule } from 'primeng/carousel';
 import { ListedHowLongAgoPipe } from './listed-how-long-ago.pipe';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { ListedHowLongAgoPipe } from './listed-how-long-ago.pipe';
     ConfirmDialogModule,
     ToggleButtonModule,
     TagModule,
-    CarouselModule
+    CarouselModule,
+    OverlayPanelModule
   ],
   exports: [
     // enm imports
@@ -126,7 +128,8 @@ import { ListedHowLongAgoPipe } from './listed-how-long-ago.pipe';
     ToggleButtonModule,
     TagModule,
     CarouselModule,
-    ListedHowLongAgoPipe
+    ListedHowLongAgoPipe,
+    OverlayPanelModule
   ],
   providers: [
     // primeng providers

@@ -1,9 +1,13 @@
 <div class="d-flex justify-content-center align-items-center">
   <div class="container-sm text-center" style="margin: 20px 0">
     <ng-container *ngIf="count$ | async as count">
-      <p>hiii :33 I'm still experimenting with this feature but it's good enough for y'all to checkout. You might see some changes to this page in the near future as I sort out its kinks. hope you get something out of it in the meantime </p>
       <h2 class="datekey">
-        Artist Directory
+        <span>Artist Directory
+          <p-overlayPanel [style]="{'width': '200px', 'margin-right': '300px'}" #op>
+            <p>Artists with recorded material (accessible through Spotify, Apple Music, Bandcamp, etc) are listed first</p>
+          </p-overlayPanel>
+          <p-button (click)="op.toggle($event)" icon="pi pi-question-circle" [style]="{'width': '30px', 'height': '30px', 'font-size': '.9em', 'background-color': 'white', 'color': '#043d75', 'border-color': 'white'}"></p-button>
+        </span>
         <span class="numberOfEvents">
           Listed: {{ count }}
         </span>
