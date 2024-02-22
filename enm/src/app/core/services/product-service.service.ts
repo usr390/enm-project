@@ -16,6 +16,11 @@ export class ProductService {
                 description: 'Filter events by artist, venue, promoter, and a bunch more',
                 image: 'filter.gif',
             },
+            {
+                name: 'Artist Directory',
+                description: 'List of valley artists',
+                image: 'ad.gif',
+            },
         ];
     }
 
