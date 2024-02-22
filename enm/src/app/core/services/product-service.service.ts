@@ -12,11 +12,6 @@ export class ProductService {
                 image: 'fulllist2.gif',
             },
             {
-                name: 'Links',
-                description: 'Links - direct links to artists social media. Perfect for immersing in the Valleys music scene',
-                image: 'links.gif'
-            },
-            {
                 name: 'Filter',
                 description: 'Filter - Narrow down your search by artist, venue, city, or even by toggling our Touring filter which list events only if they are headlined by touring artists and bands',
                 image: 'filter.gif',
