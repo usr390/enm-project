@@ -9,6 +9,8 @@
     <div class="d-flex justify-content-center align-items-center">
         <p-card class="card wrapper position-relative" header="Rarelygroovy+" subheader="$2 per month" [ngStyle]="{'border': 'none', 'max-width': '500px'}">
             <ng-container *ngIf="(currentUser$ | async) === null">
+                <p>Watch an overview of Rg+ <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/YDN-rWhVBDo">here</a></p>
+
                 <p>Comes with:</p>
                 <div class="login-subscribe-wrapper d-flex justify-content-center align-items-center">
                     <p-button label="Get Started" size="small" (click)="navigateToLogInPage()" [style]="{'width': '150px', 'height': '35px', 'font-size': '.9em'}" class="login-button"></p-button>
