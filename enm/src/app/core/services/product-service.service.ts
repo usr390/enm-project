@@ -7,13 +7,13 @@ export class ProductService {
     getProductsData() {
         return [
             {
-                name: 'All Access',
-                description: 'Unlock our entire event listing. Currently extending through May.',
+                name: 'Our FULL Event List',
+                description: 'The entire thing. Currently extending through May!',
                 image: 'fulllist2.gif',
             },
             {
-                name: 'Filter',
-                description: 'Filter events by artist, venue, promoter, and more',
+                name: 'Filters! Filters! Filters!',
+                description: 'Filter events by artist, venue, promoter, and a bunch more',
                 image: 'filter.gif',
             },
         ];
