@@ -7,11 +7,10 @@
 
 <div *ngIf="furthestEventDate$ | async as furthestEventDate">
     <div class="d-flex justify-content-center align-items-center">
-        <p-card class="card wrapper position-relative" header="Rarelygroovy+" subheader="Monthly Subscription" [ngStyle]="{'border': 'none', 'max-width': '500px'}">
+        <p-card class="card wrapper position-relative" header="Rarelygroovy+" subheader="$2 per month" [ngStyle]="{'border': 'none', 'max-width': '500px'}">
             <ng-container *ngIf="(currentUser$ | async) === null">
                 <div class="login-subscribe-wrapper d-flex justify-content-center align-items-center">
-                    <p-button label="Log In" size="small" (click)="navigateToLogInPage()" [style]="{'width': '120px', 'height': '35px', 'font-size': '.9em'}" class="login-button"></p-button>
-                    <p style="font-size: .9em; margin-top: -2px">or <a routerLink="/create-user">create an account</a></p>
+                    <p-button label="Get Started" size="small" (click)="navigateToLogInPage()" [style]="{'width': '120px', 'height': '35px', 'font-size': '.9em'}" class="login-button"></p-button>
                 </div>
 
             </ng-container>
