@@ -9,8 +9,9 @@
     <div class="d-flex justify-content-center align-items-center">
         <p-card class="card wrapper position-relative" header="Rarelygroovy+" subheader="$2 per month" [ngStyle]="{'border': 'none', 'max-width': '500px'}">
             <ng-container *ngIf="(currentUser$ | async) === null">
+                <p>Features include:</p>
                 <div class="login-subscribe-wrapper d-flex justify-content-center align-items-center">
-                    <p-button label="Get Started" size="small" (click)="navigateToLogInPage()" [style]="{'width': '120px', 'height': '35px', 'font-size': '.9em'}" class="login-button"></p-button>
+                    <p-button icon="pi pi-arrow-right" iconPos="right" size="small" label="Get Started" size="small" (click)="navigateToLogInPage()" [style]="{'width': '150px', 'height': '35px', 'font-size': '.9em'}" class="login-button"></p-button>
                 </div>
 
             </ng-container>
@@ -19,12 +20,13 @@
                     <div class="product-item">
                         <div class="product-item-content">
                             <h4 class="mb-1 d-flex justify-content-center align-items-center">{{product.name}}</h4>
-                            <div class="mb-3 d-flex justify-content-center align-items-center">
-                                <img *ngIf="product.image" src="./../../../assets/images/{{product.image}}"[alt]="product.name" class="product-image" />
-                            </div>
                             <div>
                                 <h6 class="mt-0 mb-3" style="padding: 0 10px">{{product.description}}</h6>
                             </div>
+                            <div class="mb-3 d-flex justify-content-center align-items-center">
+                                <img *ngIf="product.image" src="./../../../assets/images/{{product.image}}"[alt]="product.name" class="product-image" />
+                            </div>
+
                         </div>
                     </div>
                 </ng-template>

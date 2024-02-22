@@ -8,12 +8,12 @@ export class ProductService {
         return [
             {
                 name: 'All Access',
-                description: 'All Access - unlock our entire event listing. Currently extending through May. Updated daily',
+                description: 'Unlock our entire event listing. Currently extending through May.',
                 image: 'fulllist2.gif',
             },
             {
                 name: 'Filter',
-                description: 'Filter - Narrow down your search by artist, venue, city, or even by toggling our Touring filter which list events only if they are headlined by touring artists and bands',
+                description: 'Filter events by artist, venue, promoter, and more',
                 image: 'filter.gif',
             },
         ];
