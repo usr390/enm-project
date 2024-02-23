@@ -8,11 +8,11 @@ export class ProductService {
         return [
             {
                 name: 'Our FULL Event List',
-                description: 'The entire thing. Currently extending through May!',
+                description: 'The entire thing. Currently extending through June!',
                 image: 'fulllist2.gif',
             },
             {
-                name: 'Filters! Filters! Filters!',
+                name: 'Filters!',
                 description: 'Filter events by artist, venue, promoter, and a bunch more',
                 image: 'filter.gif',
             },
