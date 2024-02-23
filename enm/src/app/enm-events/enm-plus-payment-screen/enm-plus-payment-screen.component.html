@@ -9,7 +9,6 @@
     <div class="d-flex justify-content-center align-items-center">
         <p-card class="card wrapper position-relative" header="Rarelygroovy+" subheader="$2 per month" [ngStyle]="{'border': 'none', 'max-width': '500px'}">
             <ng-container *ngIf="(currentUser$ | async) === null">
-                <p>Watch an overview of Rg+ <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/YDN-rWhVBDo">here</a></p>
 
                 <p>Comes with:</p>
                 <div class="login-subscribe-wrapper d-flex justify-content-center align-items-center">
@@ -32,7 +31,10 @@
                         </div>
                     </div>
                 </ng-template>
+
             </p-carousel>
+            <p class="d-flex justify-content-center align-items-center"><span>Watch an oveview of Rg+ on our <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/YDN-rWhVBDo">YouTube</a> channel</span></p>
+            
         </p-card>
     </div>
     <ng-container *ngIf="currentUser$ | async">
