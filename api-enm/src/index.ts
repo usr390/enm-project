@@ -370,7 +370,7 @@ app.get('/api/next-invoice-date/:userId', async (req, res) => {
     if (user && user.stripeCustomerId) {
       // Retrieve subscription data
       try {
-        const subscriptions = await stripeTest.subscriptions.list({
+        const subscriptions = await stripe.subscriptions.list({
           customer: user.stripeCustomerId,
           status: 'all',
           limit: 1
@@ -390,7 +390,7 @@ app.get('/api/next-invoice-date/:userId', async (req, res) => {
 
       // Retrieve the upcoming invoice
       try {
-        const upcomingInvoice = await stripeTest.invoices.retrieveUpcoming({ customer: user.stripeCustomerId });
+        const upcomingInvoice = await stripe.invoices.retrieveUpcoming({ customer: user.stripeCustomerId });
         response.nextInvoiceDate = upcomingInvoice.next_payment_attempt ? new Date(upcomingInvoice.next_payment_attempt * 1000) : null;
       } catch (invoiceError) {
         if (!invoiceError.message || !invoiceError.message.includes('No upcoming invoices for customer')) {
@@ -418,7 +418,7 @@ app.get('/api/next-invoice-date/:userId', async (req, res) => {
 
       // Retrieve charge history
       try {
-        const charges = await stripeTest.charges.list({
+        const charges = await stripe.charges.list({
           customer: user.stripeCustomerId,
           limit: 10 // You can adjust the limit as needed
         });
@@ -457,7 +457,7 @@ app.post('/api/cancel-subscription/:userId', async (req, res) => {
     }
 
     // Retrieve the active subscription for this Stripe customer
-    const subscriptions = await stripeTest.subscriptions.list({
+    const subscriptions = await stripe.subscriptions.list({
       customer: user.stripeCustomerId,
       status: 'active',
       limit: 1
@@ -471,7 +471,7 @@ app.post('/api/cancel-subscription/:userId', async (req, res) => {
     const subscriptionId = subscriptions.data[0].id;
 
     // Cancel the subscription
-    const canceledSubscription = await stripeTest.subscriptions.cancel(subscriptionId);
+    const canceledSubscription = await stripe.subscriptions.cancel(subscriptionId);
 
     // Update the user's status to 'not plus'
     await UserModel.findByIdAndUpdate(userId, { plus: false });
