@@ -24,6 +24,11 @@
                   Listed<span *ngIf="enmEvent.creationDateTime | listedHowLongAgo as listedTime">&nbsp;{{ listedTime }}</span>
                 </p-tag>
               </div>
+              <div *ngIf="enmEvent.canceled" class="tags">
+                <p-tag [style]="{'background-color': '#829bb4'}">
+                  <span *ngIf="enmEvent.canceled">Canceled</span>
+                </p-tag>
+              </div>
               
               <!-- HERE'S THE VISIBLE CONTENT -->
               
@@ -113,6 +118,11 @@
                 <div *ngIf="enmEvent.isRecentlyListed" class="recently-listed-badge">
                   <p-tag>
                     Listed<span *ngIf="enmEvent.creationDateTime | listedHowLongAgo as listedTime">&nbsp;{{ listedTime }}</span>
+                  </p-tag>
+                </div>
+                <div *ngIf="enmEvent.canceled" class="tags">
+                  <p-tag [style]="{'background-color': '#829bb4'}">
+                    <span *ngIf="enmEvent.canceled">Canceled</span>
                   </p-tag>
                 </div>
               <a [routerLink]="isCopying ? null : ['/events', enmEvent._id]" (click)="onEnmEventListSelection(enmEvent._id)" class="event-card-link .event-card-link" href="/">
