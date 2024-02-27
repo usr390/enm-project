@@ -16,6 +16,7 @@ export class ArtistDirectoryComponent {
   artists$ = this.store$.select(ArtistDirectorySelectors.selectFiltered)
   count$ = this.store$.select(ArtistDirectorySelectors.selectFilteredArtistDirectoryCount)
   filter$ = this.store$.select(ArtistDirectorySelectors.selectFilter) // for giving user feedback when filter doesn't return results
+  loading$ = this.store$.select(ArtistDirectorySelectors.selectLoading)
 
 
   constructor(private store$: Store<AppState>) {}

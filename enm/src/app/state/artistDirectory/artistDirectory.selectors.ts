@@ -73,7 +73,10 @@ export const selectSortedArtistsWithEnhancedSorting = createSelector(
   }
 );
 
-
+export const selectLoading = createSelector(
+  selectFeature,
+  (state: ArtistDirectoryState): boolean => state.loading
+);
 
 
 

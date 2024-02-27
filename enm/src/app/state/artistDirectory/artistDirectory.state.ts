@@ -10,12 +10,16 @@ export interface ArtistDirectoryFilter {
 
 export interface ArtistDirectoryState {
     entities: Artists,
-    artistDirectoryFilter: ArtistDirectoryFilter
+    artistDirectoryFilter: ArtistDirectoryFilter,
+    loading: boolean,
+    loaded: boolean,
 }
 
 export const initialState: ArtistDirectoryState = {
     entities: {},
     artistDirectoryFilter: {
         text: ''
-    }
+    },
+    loading: false,
+    loaded: false,
 }
