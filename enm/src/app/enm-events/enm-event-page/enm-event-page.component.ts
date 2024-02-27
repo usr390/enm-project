@@ -3,11 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // 3rd party imports
 import { Store } from '@ngrx/store';
-import { combineLatest, map } from 'rxjs';
+import { combineLatest, map, take } from 'rxjs';
 // enm imports
 import { AppState } from 'src/app/state/app.state';
 import * as EnmEventsSelectors from './../../state/enmEvents/enmEvents.selectors';
+import * as RouterSelectors from './../../state/router/router.selectors';
 import { MessageService } from 'primeng/api';
+import * as enmEventsActions from './../../state/enmEvents/enmEvents.actions';
+
 
 @Component({
   selector: 'app-enm-event-page',
@@ -31,7 +34,18 @@ export class EnmEventPageComponent implements OnInit {
   );
 
   ngOnInit(): void { 
-    this.checkDeviceType()
+    this.checkDeviceType();
+    this.store$.select(RouterSelectors.selectCurrentRoute)
+    .pipe(
+      take(1),
+      map(route => route && route.params['id']),
+    )
+    .subscribe(eventId => {
+      if (eventId) {
+        this.store$.dispatch(enmEventsActions.selectEventFromEventList({_id: eventId as string}))
+      }
+    });
+    this.store$.dispatch(enmEventsActions.enmEventListRequest())
   }
 
   goBack() {
