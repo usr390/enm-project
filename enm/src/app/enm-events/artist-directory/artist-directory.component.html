@@ -58,6 +58,9 @@
                     <a *ngIf="artist.links.youtube && (artist.links.youtube !== 'pending')" href="{{artist.links.youtube}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                       <i class="fab fa-youtube social-icon"></i>
                     </a>
+                    <a *ngIf="artist.links.twitch && (artist.links.twitch !== 'pending')" href="{{artist.links.twitch}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                      <i class="fa-brands fa-twitch social-icon"></i>
+                    </a>
                     <a *ngIf="artist.links.facebook && (artist.links.facebook !== 'pending')" href="{{artist.links.facebook}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                       <i class="fab fa-facebook social-icon"></i>
                     </a>
