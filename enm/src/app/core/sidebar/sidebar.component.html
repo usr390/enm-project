@@ -3,6 +3,7 @@
         <p>
             Rarelygroovy, the valley's premium event listing service
         </p>
+        <p><span><a routerLink="/events" (click)="closeSidebar()">Events</a></span></p>
         <p><span *ngIf="((user$ | async) && (user$ | async))?.plus"><a routerLink="iBhlq5wrrxefte1e" (click)="closeSidebar()">Artist Directory</a></span></p>
         <span *ngIf="showPlusLink()">
             <a [routerLink]="['/plus']" href="/" (click)="closeSidebar()">Get Rarelygroovy+</a><br>
