@@ -17,7 +17,7 @@
             <span *ngIf="!(user$ | async)"><a [routerLink]="['/login']"  href="/">Log In</a></span> &nbsp;
             <span *ngIf="(((user$ | async)))"><a [routerLink]="['/account']"  (click)="closeSidebar()" href="/">Account</a></span> &nbsp;
 
-            <a href="https://rarelygroovy.com/termsofservice">Terms Of Service</a>
+            <a href="/termsofservice">Terms Of Service</a>
         </p>
         <p>Copyright {{currentDate | date: 'y'}} All Rights Reserved</p>
         <p><a class="ig" href="https://www.instagram.com/rarelygroovy/" target="_blank" rel="noopener noreferrer"><i class="pi pi-instagram" style="color: inherit"></i></a></p>
