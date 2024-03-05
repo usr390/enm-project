@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'add-event', loadChildren: () => import('./enm-events/enm-event-add/enm-event-add.module').then(m => m.EnmEventAddModule) },
   { path: 'termsofservice', component: TermsOfServiceComponent },
   { path: 'privacypolicy', component: PrivacyPolicyComponent },
-  { path: 'iBhlq5wrrxefte1e', component: ArtistDirectoryComponent },
+  { path: 'artist-directory', component: ArtistDirectoryComponent },
   { path: 'faq', component: FaqComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
