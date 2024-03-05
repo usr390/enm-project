@@ -15,6 +15,7 @@ import { PaymentScreenTestComponent } from './enm-events/payment-screen-test/pay
 import { MyAccountComponent } from './core/my-account/my-account.component';
 import { ArtistDirectoryComponent } from './enm-events/artist-directory/artist-directory.component';
 import { FaqComponent } from './enm-events/faq/faq.component';
+import { ArtistDirectoryGuardService } from './artist-directory-guard.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'events' },
@@ -29,7 +30,7 @@ const routes: Routes = [
   { path: 'add-event', loadChildren: () => import('./enm-events/enm-event-add/enm-event-add.module').then(m => m.EnmEventAddModule) },
   { path: 'termsofservice', component: TermsOfServiceComponent },
   { path: 'privacypolicy', component: PrivacyPolicyComponent },
-  { path: 'artist-directory', component: ArtistDirectoryComponent },
+  { path: 'artist-directory', component: ArtistDirectoryComponent, canActivate: [ArtistDirectoryGuardService] },
   { path: 'faq', component: FaqComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
