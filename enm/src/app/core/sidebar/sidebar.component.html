@@ -3,16 +3,12 @@
         <p>
             Rarelygroovy, the valley's premium event listing service
         </p>
-        <p><span><a routerLink="/events" (click)="closeSidebar()">Events</a></span></p>
-        <p><span *ngIf="((user$ | async) && (user$ | async))?.plus"><a routerLink="iBhlq5wrrxefte1e" (click)="closeSidebar()">Artist Directory</a></span></p>
+        <p routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"><span><a routerLink="/events" (click)="closeSidebar()">Events</a></span></p>
+        <p *ngIf="((user$ | async) && (user$ | async))?.plus" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"><span><a routerLink="/iBhlq5wrrxefte1e" (click)="closeSidebar()">Artist Directory</a></span></p>
         <span *ngIf="showPlusLink()">
-            <a [routerLink]="['/plus']" href="/" (click)="closeSidebar()">Get Rarelygroovy+</a><br>
-            <div style="margin-top: 100px">
-                <a class="token" routerLink="/iBhLq5wrrxafte4e" (click)="closeSidebar()">Rarelygroovy+ Test</a>
-                <a class="token" routerLink="/iBhlq5wrrxefte1e" (click)="closeSidebar()">Rarelygroovy+ Test</a>
-            </div>
+            <p routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/plus']" routerLinkActive="active-link" (click)="closeSidebar()">Get Rarelygroovy+</a></p><br>
+            <!-- Additional links here -->
         </span>
-        
     </ng-template>
     <ng-template pTemplate="footer">
         <p *ngIf="(user$ | async)">Logged in as {{(user$ | async)?.username}}<span *ngIf="(user$ | async) && (user$ | async)?.plus"> ✨ </span></p>
