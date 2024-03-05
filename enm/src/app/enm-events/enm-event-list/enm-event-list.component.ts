@@ -147,5 +147,18 @@ export class EnmEventListComponent implements OnInit {
       this.store$.dispatch(enmEventsActions.enmEventListRequest())
     }, 500);
   }
+
+  // Method to check the dateTime condition
+  shouldDisplayDateTime(enmEvent: any): boolean {
+    // Assuming enmEvent.dateTime is a string in ISO format or similar
+    const dateTime = new Date(enmEvent.dateTime);
+    const dateOnly = new Date(enmEvent.dateTime);
+    dateOnly.setHours(0, 0, 0, 0); // Reset time part to midnight for date comparison
+    
+    const isDifferentDate = dateTime > dateOnly; // Check if dateTime includes a time part different from midnight
+    const isNotElevenFiftyNine = dateTime.getHours() !== 23 || dateTime.getMinutes() !== 59; // Check if time is not 11:59 PM
+
+    return isDifferentDate && isNotElevenFiftyNine;
+  }
 }
 

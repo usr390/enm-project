@@ -81,8 +81,11 @@ export class EnmEventTimeComponent {
         minute: time.minute 
       }).toUTC().toISO()));
     } else {
-      // no time was given, just submit with date
-      this.enmEventAddForm.setControl('dateTime', this.fb.control(date.toUTC().toISO()))
+      // no time was given, just submit with date and final minute of the date
+      this.enmEventAddForm.setControl('dateTime', this.fb.control(date.set({ 
+        hour: 23, 
+        minute: 59 
+      }).toUTC().toISO()));
     }
   }
   dropHelperControls() {
