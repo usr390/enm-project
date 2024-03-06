@@ -18,7 +18,26 @@ export const selectSortedArtistsWithEnhancedSorting2 = createSelector(
   selectAll,
   (artists: Artist[]): Artist[] => {
     // Example of priorityArtists array
-    const priorityArtists = ['The Blowupdollz', 'Havrath', 'Inconvenient Truth', 'Glare', 'Bummertrash', 'Italia', 'Cat Bully Club'];
+    const priorityArtists = [
+      'The Blowupdollz',
+      'Havrath',
+      'Inconvenient Truth',
+      'SKA',
+      'Toro Bravo',
+      'Glare', 
+      'Brag',
+      'Milklace',
+      'Supermarket',
+      'Lil Duende',
+      'Bummertrash',
+      'Violetta',
+      'Worst Behavior',
+      'Italia',
+      'Cat Bully Club',
+      'Queen Killah Bee',
+      'Riley!',
+      'The Polybius Cabinet'
+    ];
 
     // Check if the artist has a non-pending streaming platform link
     const isStreamingArtist = (artist: Artist): boolean => {
