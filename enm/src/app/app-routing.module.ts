@@ -16,6 +16,7 @@ import { MyAccountComponent } from './core/my-account/my-account.component';
 import { ArtistDirectoryComponent } from './enm-events/artist-directory/artist-directory.component';
 import { FaqComponent } from './enm-events/faq/faq.component';
 import { ArtistDirectoryGuardService } from './artist-directory-guard.guard';
+import { ArtistDirectoryForVendingEventsComponent } from './enm-events/artist-directory-for-vending-events/artist-directory-for-vending-events.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'events' },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'termsofservice', component: TermsOfServiceComponent },
   { path: 'privacypolicy', component: PrivacyPolicyComponent },
   { path: 'artist-directory', component: ArtistDirectoryComponent, canActivate: [ArtistDirectoryGuardService] },
+  { path: 'iBhLq5wrrxafte4a', component: ArtistDirectoryForVendingEventsComponent, canActivate: [ArtistDirectoryGuardService] },
   { path: 'faq', component: FaqComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
