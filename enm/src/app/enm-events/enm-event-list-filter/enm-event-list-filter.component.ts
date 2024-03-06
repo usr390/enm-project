@@ -31,7 +31,7 @@ export class EnmEventListFilterComponent {
   );
 
   showArtistFilter$ = this.store$.select(RouterSelectors.selectUrl).pipe(
-    map(url => url && url.startsWith('/artist-directory') )
+    map(url => url && (url.startsWith('/artist-directory') || url.startsWith('/iBhLq5wrrxafte4a')) )
   );
 
   enmEventListFilterForm = this.fb.group({ filter: '', checked: false, touring: false });
