@@ -18,7 +18,7 @@ export class ProductService {
             },
             {
                 name: 'Artist Directory',
-                description: 'Take a look at our meticulosity curated list of 250+ local artists!',
+                description: 'Take a look at our meticulously curated list of 250+ local artists!',
                 image: 'ad.gif',
             },
         ];
