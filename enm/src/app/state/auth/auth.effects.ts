@@ -88,7 +88,7 @@ export class AuthEffects {
         this.actions$.pipe(
             ofType(AuthActions.createUserRequest),
             exhaustMap(
-                (action) => this.createUserService.createUser(action.credentials.username, action.credentials.password).pipe(
+                (action) => this.createUserService.createUser(action.credentials.username, action.credentials.password, action.credentials.promoCode).pipe(
                     map(createUserSuccessResponse => AuthActions.createUserSuccessResponse({ createUserSuccessResponse })),
                     catchError((error) => {
                         this.messageService.add({ key: 'createUserError', severity: 'error', summary: error?.error.error, detail: 'Try again' })

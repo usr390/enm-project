@@ -16,7 +16,7 @@ export const logInRequest = createAction('[Log In Screen] Log In Request', props
 export const logInSuccessResponse = createAction('[Log In API Endpoint] Log In Succes Response', props<{ logInSuccessResponse: LogInSuccessResponse }>()); 
 export const logInErrorResponse = createAction('[Log In API Endpoint] Log In Error Response', props<{ error: LogInErrorResponse }>()); 
 
-export const createUserRequest = createAction('[Create Account Screen] Create User Request', props<{ credentials: { username: string, password: string } }>()); 
+export const createUserRequest = createAction('[Create Account Screen] Create User Request', props<{ credentials: { username: string, password: string, promoCode: string } }>()); 
 export const createUserSuccessResponse = createAction('[Create Account Screen] Create User Success Response', props<{ createUserSuccessResponse: CreateUserSuccessResponse }>()); 
 export const createUserErrorResponse = createAction('[Create Account Screen] Create User Error Response', props<{ error: CreateUserErrorResponse }>()); 
 

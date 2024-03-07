@@ -6,6 +6,7 @@ import * as AuthSelectors from './../../state/auth/auth.selectors';
 import * as AuthActions from './../../state/auth/auth.actions'
 import { CreateUserService } from '../services/create-user.service';
 import { AppState } from 'src/app/state/app.state';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-user',
@@ -19,7 +20,8 @@ export class CreateUserComponent {
     private fb: FormBuilder,
     private createUserService: CreateUserService,
     private elRef: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private route: ActivatedRoute // Inject ActivatedRoute here
   ) {}
 
   createUserButtonCooldown = false
@@ -29,6 +31,7 @@ export class CreateUserComponent {
 
   ngOnInit() {
     this.setUpLocalFormControls();
+    this.checkForPromoCode();
   }
 
   ngAfterViewInit() {
@@ -41,6 +44,7 @@ export class CreateUserComponent {
       const credentials = {
         username: this.createUserForm.get('username')?.value.trim(),
         password: this.createUserForm.get('password')?.value.trim(),
+        promoCode: this.createUserForm.get('promoCode')?.value
       }
       this.store$.dispatch(AuthActions.createUserRequest({ credentials }))
     } 
@@ -48,8 +52,11 @@ export class CreateUserComponent {
 
   //#region utility
   setUpLocalFormControls() {
-    this.createUserForm.setControl('username', this.fb.control('', [Validators.required, Validators.maxLength(20)]));
-    this.createUserForm.setControl('password', this.fb.control('', [Validators.required, Validators.maxLength(20)]));
+    this.createUserForm = this.fb.group({
+      username: ['', [Validators.required, Validators.maxLength(20)]],
+      password: ['', [Validators.required, Validators.maxLength(20)]],
+      promoCode: ['65c89dd3411ee8f8']
+    });
   }
   applycreateUserButtonCooldown() {
     this.createUserButtonCooldown = true;
@@ -62,6 +69,13 @@ export class CreateUserComponent {
       const element = this.elRef.nativeElement.querySelector('input');
       this.renderer.selectRootElement(element).focus();
     }, 50);
+  }
+  checkForPromoCode() {
+    // Subscribe to query params to extract 'promoCode', if any
+    this.route.queryParams.subscribe(params => {
+      const promoCode = params['promoCode'] || ''; // Default to an empty string if not present
+      this.createUserForm.get('promoCode')?.setValue(promoCode);
+    });
   }
   //#endregion
 

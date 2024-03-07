@@ -17,8 +17,8 @@ export class CreateUserService {
 
   public createUserForm: FormGroup = this.fb.group({});
 
-  createUser(username: string, password: string) {
-    return this.http.post<CreateUserSuccessResponse>(BASE_URL, { username, password });
+  createUser(username: string, password: string, promoCode: string) {
+    return this.http.post<CreateUserSuccessResponse>(BASE_URL, { username, password, promoCode });
   }
 
 }
