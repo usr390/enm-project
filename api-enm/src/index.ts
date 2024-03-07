@@ -209,7 +209,7 @@ app.post('/api/create-user', express.json(), async (req: Request, res: Response)
         promo.activatedAt = now;
         const expiresAt = new Date(now);
         expiresAt.setMonth(expiresAt.getMonth() + 1);
-        promo.expiresAt = expiresAt;
+        promo.expiresAt = expiresAt;  
 
         await promo.save();
       } else {
@@ -226,6 +226,25 @@ app.post('/api/create-user', express.json(), async (req: Request, res: Response)
   catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/api/get-promo-code/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const promoCode = await PromoCodeModel.findOne({ userId: userId });
+
+    if (promoCode) {
+      res.json({ 
+        success: true, 
+        promoCode: promoCode,
+      });
+    } else {
+      res.status(404).json({ success: false, message: 'No available promo code found for this user.' });
+    }
+  } catch (error) {
+    console.error('Error retrieving promo code:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
 

@@ -6,42 +6,20 @@
   <div class="row">
     <div class="col">
       <ng-container *ngIf="(currentUser$ | async) as currentUser">
-        <!-- Use *ngIf with an else block -->
-        <div *ngIf="currentUser.expires; else elseBlock">
+        <!-- Content to display if the username is a founding account -->
+        <div *ngIf="founderAccounts.includes(currentUser.username); else notFoundingAccount">
           <div class="d-flex justify-content-center align-items-center">
             <div class="container">
               <div class="row">
                 <div class="col">
-                    <h2 style="color: #708da8; margin-left: 15px;">Account</h2>
-                      <p-panel header="General">
-                        <p><b>Username:</b> {{ currentUser.username }}</p>
-                        <p><b>Account Type:</b><span> Rarelygroovy+</span></p>
-                      </p-panel>
-                      <br>
-                      <p-panel header="Rarelygroovy+">
-                        <p>Access to Rarelygroovy+ expires {{currentUser.expires}}</p>
-                      </p-panel>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Define the else block -->
-        <ng-template #elseBlock>
-                  <!-- Content to display if the username is a founding account -->
-        <div class="d-flex justify-content-center align-items-center">
-          <div class="container">
-            <div class="row">
-              <div class="col">
-                <div *ngIf="founderAccounts.includes(currentUser.username); else notFoundingAccount">
                   <h2 style="color: #708da8; margin-left: 15px;">Account</h2>
-                    <p-panel header="General">
-                      <div *ngIf="(currentUser$ | async) as currentUser">
-                        <p><b>Username:</b> {{ currentUser.username }}</p>
-                        <p><b>Account Type:</b><span> Founder</span></p>
-                        <p>Founders are among the first people to ever use Rarelygroovy. You will forever have access to the latest and greatest features we have to offer. Thank you for seeing our vision so early on in our journey! </p>
-                      </div>
-                    </p-panel>
+                  <p-panel header="General">
+                    <div *ngIf="(currentUser$ | async) as currentUser">
+                      <p><b>Username:</b> {{ currentUser.username }}</p>
+                      <p><b>Account Type:</b><span> Founder</span></p>
+                      <p>Founders are among the first people to ever use Rarelygroovy. You will forever have access to the latest and greatest features we have to offer. Thank you for seeing our vision so early on in our journey! </p>
+                    </div>
+                  </p-panel>
                 </div>
               </div>
             </div>
@@ -153,7 +131,6 @@
               </div>
             </div>
           </div>
-        </ng-template>
         </ng-template>
       </ng-container>
     </div>
