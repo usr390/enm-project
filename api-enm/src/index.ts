@@ -402,7 +402,8 @@ app.get('/api/next-invoice-date/:userId', async (req, res) => {
       subscriptionStatus: null,
       cancellationDate: null,
       invoiceHistory: [],
-      chargesHistory: [] // Added to include charge history
+      chargesHistory: [], // Added to include charge history
+      promoCode: null
     };
 
     // Retrieve the user and their Stripe customer ID
@@ -477,6 +478,30 @@ app.get('/api/next-invoice-date/:userId', async (req, res) => {
         console.error('Error fetching charge history:', chargeError);
       }
     }
+
+    //promoCode
+    try {
+      const promoCode = await PromoCodeModel.findOne({
+        userId: userId, // Make sure this matches the field and type stored in your PromoCode schema
+      }).exec();
+
+      if (promoCode) {
+        // Constructing a simplified object with promo code details. Adjust according to what details you need.
+        const promoCodeDetails = {
+          activatedAt: promoCode.activatedAt,
+          expiresAt: promoCode.expiresAt,
+          // Add any other relevant fields you need
+        };
+    
+        // Add it to your response object
+        response.promoCode = promoCodeDetails; 
+      } 
+    }
+    catch (chargeError) {
+      console.error('Error fetching charge history:', chargeError);
+    }
+    
+
 
     // Send the response
     res.send(response);
