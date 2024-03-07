@@ -49,6 +49,14 @@ export class AppComponent {
       const currentTime = new Date().getTime();
       if (currentTime - this.lastTime > this.inactivityThreshold) {
         // If the difference is more than your set threshold, refresh the event list
+        this.currentUser$.pipe(take(1)).subscribe(user => {
+          if (user) {
+            const credentials = {
+              username: user.username
+            }
+            this.store$.dispatch(AuthActions.refreshUserRequest({ credentials }))
+          }
+        })
         this.store$.dispatch(enmEventsActions.enmEventListRequest())
       }
     }

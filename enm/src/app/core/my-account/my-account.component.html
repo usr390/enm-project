@@ -63,7 +63,10 @@
                     <p-panel header="General">
                       <div *ngIf="(currentUser$ | async) as currentUser">
                         <p><b>Username:</b> {{ currentUser.username }}</p>
-                        <p><b>Account Type:</b><span *ngIf="(nextInvoice$ | async)"> Rarelygroovy+</span><span *ngIf="!(nextInvoice$ | async)"> Free</span></p>
+                        <p>
+                          <b>Account Type:</b>
+                          <span *ngIf="(nextInvoice$ | async) || (currentUser$ | async)?.plus"> Rarelygroovy+</span>
+                          <span *ngIf="!(nextInvoice$ | async) && !(currentUser$ | async)?.plus"> Free</span></p>
                       </div>
           
                     </p-panel>
