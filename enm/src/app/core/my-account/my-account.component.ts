@@ -25,6 +25,8 @@ export class MyAccountComponent {
   subscriptionCancellationDate$ = this.store$.select(RarelygroovyPlusSelectors.subscriptionCancellationDate);
   invoiceHistory$ = this.store$.select(RarelygroovyPlusSelectors.selectInvoiceHistory);
   chargesHistory$ = this.store$.select(RarelygroovyPlusSelectors.selectChargesHistory);
+  promoActivationDate$ = this.store$.select(RarelygroovyPlusSelectors.promoActivationDate);
+  promoExpirationDate$ = this.store$.select(RarelygroovyPlusSelectors.promoExpirationDate);
 
 
   currentUser$ = this.store$.select(AuthSelectors.selectUser)

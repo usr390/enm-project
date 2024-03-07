@@ -39,3 +39,13 @@ export const selectNextRarelygroovySubscriptionInvoice = createSelector(
   selectFeature,
   (state: RarelygroovyPlusState): string | null => state.nextInvoiceDate
 );
+
+export const promoActivationDate = createSelector(
+  selectFeature,
+  (state: RarelygroovyPlusState): string => state.promoCode.activatedAt
+);
+
+export const promoExpirationDate = createSelector(
+  selectFeature,
+  (state: RarelygroovyPlusState): string => state.promoCode.expiresAt
+);

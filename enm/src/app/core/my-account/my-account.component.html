@@ -43,8 +43,9 @@
                         <p><b>Username:</b> {{ currentUser.username }}</p>
                         <p>
                           <b>Account Type:</b>
-                          <span *ngIf="(nextInvoice$ | async) || (currentUser$ | async)?.plus"> Rarelygroovy+</span>
-                          <span *ngIf="!(nextInvoice$ | async) && !(currentUser$ | async)?.plus"> Free</span></p>
+                          <span *ngIf="(nextInvoice$ | async) || (currentUser$ | async)?.plus"> Rarelygroovy+</span><span *ngIf="(promoExpirationDate$ | async) as promoExpirationDate"> (1 month promo, expires {{ promoExpirationDate | date:'MMMM d' }})</span>
+                          <span *ngIf="!(nextInvoice$ | async) && !(currentUser$ | async)?.plus"> Free</span>
+                        </p>
                       </div>
           
                     </p-panel>
