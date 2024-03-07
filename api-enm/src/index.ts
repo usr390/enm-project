@@ -37,6 +37,7 @@ import UserModel from "./models/User";
 import { UserDTO } from "./models/UserDTO";
 import PromoterModel from "./models/Promoter";
 import { checkUserPlusStatus } from "./utilty/isplus";
+import PromoCodeModel from "./models/PromoCode";
 
 const app = express(); app.use(cors(corsOptions)); app.use(apiLimiter)
 const port = process.env.PORT || 3000
@@ -172,7 +173,7 @@ app.post('/api/login', express.json(), async (req: Request, res: Response) => {
 });
 
 app.post('/api/create-user', express.json(), async (req: Request, res: Response) => {
-  const { username, password } = req.body;
+  const { username, password, promoCode } = req.body;
 
   if (!username || !password) {
     return res.status(400).json({ error: 'Username and password required' });
@@ -193,6 +194,28 @@ app.post('/api/create-user', express.json(), async (req: Request, res: Response)
       password: hashedPassword, // Store the hashed password
       plus: false
     });
+
+    // Promo code redemption logic
+    if (promoCode) {
+      const promo = await PromoCodeModel.findOne({ promoCode: promoCode, isUsed: false });
+      if (promo) {
+        // Logic to apply the promo to the newUser
+        newUser.plus = true; // Example adjustment based on your promo
+
+        // Update the promo code as used
+        promo.isUsed = true;
+        promo.userId = newUser._id; // assuming _id is the field for user ID
+        const now = new Date();
+        promo.activatedAt = now;
+        const expiresAt = new Date(now);
+        expiresAt.setMonth(expiresAt.getMonth() + 1);
+        promo.expiresAt = expiresAt;
+
+        await promo.save();
+      } else {
+        // Optionally handle invalid promo code scenario
+      }
+    }
 
     await newUser.save();
 
