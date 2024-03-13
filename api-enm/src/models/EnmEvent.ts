@@ -23,7 +23,8 @@ const EnmEventSchema = new Schema({
     artists: [ArtistSchema],
     creationDateTime: Date,
     promoter: PromoterSchema,
-    canceled: Boolean
+    canceled: Boolean,
+    flyer: String
 });
 
 const EnmEventModel = mongoose.model("EnmEvent", EnmEventSchema);

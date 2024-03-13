@@ -133,6 +133,10 @@ export class EnmEventListComponent implements OnInit {
     setTimeout(() => this.isCopying = false, 100);  // Match this with your toast rate limit
   }
   
+  openFlyer(event: MouseEvent) {
+    event.stopPropagation();  // Prevent the event from bubbling up
+  }
+  
 
   checkDeviceType(){
     const userAgent = window.navigator.userAgent;

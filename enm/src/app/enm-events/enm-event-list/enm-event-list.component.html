@@ -77,6 +77,9 @@
                             </div>
                           </span>
                         </div>
+                        <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" (click)="openFlyer($event)">
+                          <a style="color: inherit" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><i style="font-size: 2em; margin-top: 15px" class="fa-solid fa-newspaper"></i></a>
+                        </div>
                       </div>
 
                       <!-- This will only show if the user is NOT on a mobile device -->
@@ -97,17 +100,14 @@
                             </div>
                           </span>
                         </div>
+                        <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" (click)="openFlyer($event)" pTooltip="Go To Flyer" tooltipPosition="bottom">
+                          <a style="color: inherit" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><i style="font-size: 2em; margin-top: 15px" class="fa-solid fa-newspaper"></i></a>
+                        </div>
                       </div>
-
                     </div>
                   </div>
                 </div>
               </a>
-  
-  
-  
-  
-  
             </div>
           </ng-template> 
         </ng-container>
@@ -173,6 +173,9 @@
                             </div>
                           </span>
                         </div>
+                        <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" (click)="openFlyer($event)">
+                          <a style="color: inherit" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><i style="font-size: 2em; margin-top: 15px" class="fa-solid fa-newspaper"></i></a>
+                        </div>
                       </div>
 
                       <!-- This will only show if the user is NOT on a mobile device -->
@@ -194,8 +197,10 @@
                             </div>
                           </span>
                         </div>
+                        <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" (click)="openFlyer($event)" pTooltip="Go To Flyer" tooltipPosition="bottom">
+                          <a style="color: inherit" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><i style="font-size: 2em; margin-top: 15px" class="fa-solid fa-newspaper"></i></a>
+                        </div>
                       </div>
-  
                     </div>
                   </div>
                 </div>

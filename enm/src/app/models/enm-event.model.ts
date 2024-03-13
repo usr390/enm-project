@@ -31,6 +31,7 @@ export interface EnmEvent {
     "creationDateTime": string,
     "promoter": Promoter,
     "isRecentlyListed": boolean,
-    "canceled": boolean
+    "canceled": boolean,
+    "flyer": string
 
 }
