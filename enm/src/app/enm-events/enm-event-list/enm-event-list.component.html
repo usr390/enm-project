@@ -56,10 +56,12 @@
                         </div>
                         <h6 class="card-text promoter" [innerHTML]="enmEvent.promoter.name | highlightPipe: (filter$ | async)?.text">{{ enmEvent.promoter.name }}</h6>
                       </div>
-                      <br>
 
                       <!-- This will only show if the user is on a mobile device -->
                       <div *ngIf="isMobile">
+                        <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" (click)="openFlyer($event)" style="margin-bottom: 15px;">
+                          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i></a>
+                        </div>
                         <div class="click-to-copy clickable-address">
                           <span class="flex align-items-center gap-2" >
                             <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)">
@@ -77,13 +79,13 @@
                             </div>
                           </span>
                         </div>
-                        <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" (click)="openFlyer($event)">
-                          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i></a>
-                        </div>
                       </div>
 
                       <!-- This will only show if the user is NOT on a mobile device -->
                       <div *ngIf="!isMobile">
+                        <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" (click)="openFlyer($event)" style="margin-bottom: 15px;">
+                          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><i pTooltip="Go To Flyer" tooltipPosition="bottom" style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i></a>
+                        </div>
                         <div class="click-to-copy clickable-address">
                           <span class="flex align-items-center gap-2" >
                             <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)" pTooltip="Copy Address" tooltipPosition="bottom">
@@ -99,9 +101,6 @@
                               <!---->
                             </div>
                           </span>
-                        </div>
-                        <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" (click)="openFlyer($event)" pTooltip="Go To Flyer" tooltipPosition="bottom">
-                          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i></a>
                         </div>
                       </div>
                     </div>
@@ -156,6 +155,9 @@
                       
                       <!-- This will only show if the user is on a mobile device -->
                       <div *ngIf="isMobile">
+                        <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" style="margin-bottom: 15px;">
+                          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i></a>
+                        </div>
                         <div class="click-to-copy clickable-address">
                           <span class="flex align-items-center gap-2" >
                             <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)">
@@ -173,13 +175,13 @@
                             </div>
                           </span>
                         </div>
-                        <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" (click)="openFlyer($event)">
-                          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i></a>
-                        </div>
                       </div>
 
                       <!-- This will only show if the user is NOT on a mobile device -->
                       <div *ngIf="!isMobile">
+                        <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" (click)="openFlyer($event)" style="margin-bottom: 15px;">
+                          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines" pTooltip="Go To Flyer" tooltipPosition="bottom" ></i></a>
+                        </div>
                         <div class="click-to-copy clickable-address">
                           <span class="flex align-items-center gap-2" >
                             <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)" pTooltip="Copy Address" tooltipPosition="bottom">
@@ -196,9 +198,6 @@
                               <!---->
                             </div>
                           </span>
-                        </div>
-                        <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" (click)="openFlyer($event)" pTooltip="Go To Flyer" tooltipPosition="bottom">
-                          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i></a>
                         </div>
                       </div>
                     </div>
