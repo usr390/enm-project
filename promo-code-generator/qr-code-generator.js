@@ -49,7 +49,7 @@ async function downloadQRCodeImages(promoCodes) {
         const requestData = {
             frame_name: 'no-frame',
             qr_code_text: `https://rarelygroovy.com/create-user?promoCode=${promoCode}`,
-            image_format: 'JPG'
+            image_format: 'PNG'
         };
     
         axios.post(apiUrl + '?access-token=' + accessToken, requestData, { responseType: 'stream' })

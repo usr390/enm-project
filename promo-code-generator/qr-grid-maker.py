@@ -32,9 +32,9 @@ def create_multipage_pdf(folder_path, grid_size, image_size, output_path, margin
 
 # Hardcoded parameters
 folder_path = "promo_codes"  # Update this path to where your QR codes are stored
-grid_width = 8  # How many QR codes per row
-grid_height = 10  # How many QR codes per column
-image_size = 100  # Resize QR codes to 100x100 pixels
+grid_width = 4  # How many QR codes per row
+grid_height = 5  # How many QR codes per column
+image_size = 250  # Resize QR codes to 100x100 pixels
 margin = 10  # Margin around each image and page border
 output_path = "printables.pdf"  # Update this to where you want to save the PDF
 
