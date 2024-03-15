@@ -14,8 +14,11 @@ import * as ArtistDirectorySelectors from './../../state/artistDirectory/artistD
 export class ArtistDirectoryComponent {
 
   artists$ = this.store$.select(ArtistDirectorySelectors.selectFiltered)
-  recentlyTouredArtists$ = this.store$.select(ArtistDirectorySelectors.selectFilteredRecentlyTouredForVendingEvents)
   count$ = this.store$.select(ArtistDirectorySelectors.selectFilteredArtistDirectoryCount)
+
+  recentlyTouredArtists$ = this.store$.select(ArtistDirectorySelectors.selectFilteredRecentlyTouredForVendingEvents)
+  countRecentlyTouredArtists$ = this.store$.select(ArtistDirectorySelectors.selectFilteredArtistDirectoryCountForRecentlyTouredArtists)
+  
   filter$ = this.store$.select(ArtistDirectorySelectors.selectFilter) // for giving user feedback when filter doesn't return results
   loading$ = this.store$.select(ArtistDirectorySelectors.selectLoading)
 
