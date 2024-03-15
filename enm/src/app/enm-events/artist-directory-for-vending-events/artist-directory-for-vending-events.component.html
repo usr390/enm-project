@@ -5,7 +5,7 @@
   <div *ngIf="!(loading$ | async)">
     <div class="d-flex justify-content-center align-items-center">
       <div class="container-sm text-center" style="margin: 20px 0">
-        <ng-container *ngIf="count$ | async as count">
+        <ng-container>
           <h2 class="datekey">
             <span>Artist Directory
               <p-overlayPanel [style]="{'width': '200px', 'margin-right': '300px'}" #op>
@@ -13,7 +13,7 @@
               </p-overlayPanel>
               <p-button (click)="op.toggle($event)" icon="pi pi-question-circle" [style]="{'width': '20px', 'height': '28px', 'font-size': '.9em', 'background-color': 'white', 'color': '#043d75', 'border-color': 'white'}"></p-button>
             </span>
-            <span class="numberOfEvents">
+            <span class="numberOfEvents" *ngIf="count$ | async as count">
               Listed: {{ count }}
             </span>
           </h2>
