@@ -358,6 +358,30 @@ export const selectFiltered = createSelector(
   }
 );
 
+export const selectFilteredRecentlyTouredArtists = createSelector(
+  selectSortedArtistsWithEnhancedSortingNonRGV,
+  selectFilter,
+  (artists: Artist[], filter: ArtistDirectoryFilter): Artist[] => {
+    let filteredArtists = artists;
+
+    // Apply text filter
+    if (filter.text) {
+      const normalizedFilter = normalizeText(filter.text);
+      filteredArtists = filteredArtists.filter(artist => {
+        // Check if filter text is in artist's name
+        const nameMatch = normalizeText(artist.name).includes(normalizedFilter);
+        // Check if any of artist's links match the filter text as a platform, assuming non-'pending'
+        const platformMatch = Object.entries(artist.links).some(([key, value]) =>
+          normalizeText(key).includes(normalizedFilter) && value !== 'pending'
+        );  
+        return nameMatch || platformMatch;
+      });
+    }
+
+    return filteredArtists;
+  }
+);
+
 export const selectFilteredForVendingEvents = createSelector(
   selectSortedArtistsWithEnhancedSorting2,
   selectFilter,
@@ -448,6 +472,13 @@ const normalizeText = (text: string) => {
 
 export const selectFilteredArtistDirectoryCount = createSelector(
   selectFiltered,
+  (filteredArtistDirectory: Artist[]): number => {
+    return filteredArtistDirectory.length;
+  }
+);
+
+export const selectFilteredArtistDirectoryCountForRecentlyTouredArtists = createSelector(
+  selectFilteredRecentlyTouredArtists,
   (filteredArtistDirectory: Artist[]): number => {
     return filteredArtistDirectory.length;
   }

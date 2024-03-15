@@ -106,6 +106,9 @@
             </p-overlayPanel>
             <p-button (click)="op.toggle($event)" icon="pi pi-question-circle" [style]="{'width': '20px', 'height': '28px', 'font-size': '.9em', 'background-color': 'white', 'color': '#043d75', 'border-color': 'white'}"></p-button>
           </span>
+          <span class="numberOfEvents" *ngIf="countRecentlyTouredArtists$ | async as count">
+            Listed: {{ count }}
+          </span>
         </h2>
         <div class="card">
           <p-dataView #dv [value]="(recentlyTouredArtists$ | async) ?? []">
