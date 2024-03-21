@@ -8,6 +8,7 @@ import { debounceTime, distinctUntilChanged, map, take, tap } from 'rxjs';
 import { AppState } from 'src/app/state/app.state';
 import * as fromEnmEvents from './../../state/enmEvents/enmEvents.actions'
 import * as ArtistDirectoryActions from './../../state/artistDirectory/artistDirectory.actions'
+import * as ArtistDirectorySelectors from './../../state/artistDirectory/artistDirectory.selectors'
 import * as EnmEventsSelectors from './../../state/enmEvents/enmEvents.selectors';
 import * as AuthSelectors from './../../state/auth/auth.selectors';
 import * as RouterSelectors from './../../state/router/router.selectors'; // enm
@@ -37,6 +38,7 @@ export class EnmEventListFilterComponent {
   enmEventListFilterForm = this.fb.group({ filter: '', checked: false, touring: false });
   artistDirectoryFilterForm = this.fb.group({ filter: '' });
   selectedFilterText$ = this.store$.select(EnmEventsSelectors.selectedFilterText); // for repopulating the input field after a refresh or navigation
+  selectedArtistDirectoryFilterText$ = this.store$.select(ArtistDirectorySelectors.selectFilterText); // for repopulating the input field after a refresh or navigation
   filter="Just Listed"
   touring="Touring"
   currentUser$ = this.store$.select(AuthSelectors.selectUser);
@@ -45,6 +47,7 @@ export class EnmEventListFilterComponent {
 
   ngOnInit() {
     this.initializeFormControl();
+    this.initializeArtistDirectoryFormControl()
     this.enmEventListFilterForm.valueChanges.pipe(
       debounceTime(100), // Adjust the debounce time as needed
       distinctUntilChanged(),
@@ -99,6 +102,12 @@ export class EnmEventListFilterComponent {
       this.enmEventListFilterForm.get('touring')?.setValue(filter.touring);
     });
 
+  }
+
+  initializeArtistDirectoryFormControl() {
+    this.selectedArtistDirectoryFilterText$.pipe(take(1)).subscribe(filterText => {
+      this.artistDirectoryFilterForm.get('filter')?.setValue(filterText)
+    });
   }
 }
 

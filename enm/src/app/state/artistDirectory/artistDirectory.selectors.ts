@@ -330,6 +330,11 @@ export const selectFilter = createSelector(
   (state: ArtistDirectoryState): ArtistDirectoryFilter => state.artistDirectoryFilter
 );
 
+export const selectFilterText = createSelector(
+  selectFeature,
+  (state: ArtistDirectoryState): string => state.artistDirectoryFilter.text
+);
+
 export const selectArtistDirectoryState = createFeatureSelector<ArtistDirectoryState>('artistDirectory');
 
 export const selectArtists = createSelector(selectArtistDirectoryState, (state) => state.entities)
