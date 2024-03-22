@@ -92,7 +92,6 @@
                     </a>
                   </div>
   
-                  <div class="row" *ngIf="artist.medium === 'collective'" style="padding-top: 30px">
                     <div *ngFor="let artist of artist.artists">
                       <ng-container *ngIf="artist.link && artist.link !== 'pending'; else artistName">
                         <div class="artist-container">
@@ -105,7 +104,6 @@
                         </div>
                       </ng-template>
                     </div>
-                  </div>
               </div>
             </div>
           </ng-template>
@@ -184,7 +182,6 @@
                     </a>
                   </div>
   
-                  <div class="row" *ngIf="artist.medium === 'collective'" style="padding-top: 30px">
                     <div *ngFor="let artist of artist.artists">
                       <ng-container *ngIf="artist.link && artist.link !== 'pending'; else artistName">
                         <div class="artist-container">
@@ -197,7 +194,6 @@
                         </div>
                       </ng-template>
                     </div>
-                  </div>
               </div>
             </div>
           </ng-template>
