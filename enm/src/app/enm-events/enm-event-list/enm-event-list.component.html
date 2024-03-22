@@ -41,10 +41,10 @@
                           <div class="artist-container">
                             <span class="artist-name" [innerHTML]="artist.name | highlightPipe: (filter$ | async)?.text">{{ artist.name }}</span>&nbsp;&nbsp;
                             <span *ngIf="(artist.location) && (artist.location != 'RGV')">
-                              <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;&nbsp;
+                              <p-tag value="{{artist.location | lowercase}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;&nbsp;
                             </span>
                             <span *ngIf="artist.debut">
-                              <p-tag value="DEBUT" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
+                              <p-tag value="debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
                             </span>
                           </div>
                           <span *ngIf="i < enmEvent.artists.length - 1">&middot;</span>&nbsp;
@@ -134,13 +134,14 @@
                       <div class="m-0 lh-lg artists artist-name">
                         <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
                           <div class="artist-container">
-                            <span class="artist-name">{{ artist.name }}</span>&nbsp;&nbsp;
-                            <span *ngIf="(artist.location) && (artist.location != 'RGV')">
-                              <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;&nbsp;
-                            </span>
-                            <span *ngIf="artist.debut" class="tags">
-                              <p-tag value="DEBUT" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
-                            </span>
+                            <span class="artist-name">{{ artist.name }}
+                              <span *ngIf="(artist.location) && (artist.location != 'RGV')">
+                                <p-tag value="{{artist.location | lowercase}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;&nbsp;
+                              </span>
+                              <span *ngIf="artist.debut" class="tags">
+                                <p-tag value="debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
+                              </span></span>&nbsp;&nbsp;
+
                           </div>
                           <span *ngIf="i < enmEvent.artists.length - 1">&middot;</span>&nbsp;
                         </ng-container>
