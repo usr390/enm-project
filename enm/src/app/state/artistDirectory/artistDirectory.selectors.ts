@@ -19,12 +19,18 @@ export const selectSortedArtistsWithEnhancedSorting2 = createSelector(
   (artists: Artist[]): Artist[] => {
     // Example of priorityArtists array
     const priorityArtists = [
-      'The Blowupdollz',
       'Havrath',
+      'Glare', 
+      'Twin Tribes',
+      'Dios Del Ghetto',
+      'EDWINVOYAGER',
+      'Chulita Vinyl Club',
       'Inconvenient Truth',
       'SKA',
       'Toro Bravo',
-      'Glare', 
+      'Maere (Mære)',
+      'Bison',
+      'The Objects',
       'Brag',
       'Milklace',
       'Supermarket',
@@ -172,12 +178,18 @@ export const selectSortedArtistsWithEnhancedSorting2NonRGV = createSelector(
   (artists: Artist[]): Artist[] => {
     // Example of priorityArtists array
     const priorityArtists = [
-      'The Blowupdollz',
       'Havrath',
+      'Glare', 
+      'Twin Tribes',
+      'Dios Del Ghetto',
+      'EDWINVOYAGER',
+      'Chulita Vinyl Club',
       'Inconvenient Truth',
       'SKA',
       'Toro Bravo',
-      'Glare', 
+      'Maere (Mære)',
+      'Bison',
+      'The Objects',
       'Brag',
       'Milklace',
       'Supermarket',
