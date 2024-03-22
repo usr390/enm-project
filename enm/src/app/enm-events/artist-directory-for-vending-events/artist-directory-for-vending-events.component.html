@@ -36,15 +36,15 @@
 
                   <span>
                     <span *ngIf="artist.hometownheroes">
-                      <p-tag value="hometown heroes" [style]="{'font-size': '.7em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#DAA520', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                      <p-tag value="hometown heroes" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#DAA520', 'background-color': 'transparent'}"></p-tag>&nbsp;
                     </span>
 
                     <span *ngIf="(artist.medium) && (artist.medium !== 'band')">
-                      <p-tag value="{{artist.medium}}" [style]="{'font-size': '.7em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#FF7ED4', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                      <p-tag value="{{artist.medium}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#FF7ED4', 'background-color': 'transparent'}"></p-tag>&nbsp;
                     </span>                    
 
                     <span *ngIf="artist.genre && !(artist.genre.length === 1 && artist.genre[0] === 'pending')">
-                      <p-tag value="{{artist.genre | genreListPipe:' · '}}" [style]="{'font-size': '.7em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#043d75', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                      <p-tag value="{{artist.genre | genreListPipe:' · '}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#043d75', 'background-color': 'transparent'}"></p-tag>&nbsp;
                     </span>
                   </span>
 
