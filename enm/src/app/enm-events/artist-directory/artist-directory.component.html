@@ -35,6 +35,9 @@
                   </span>
 
                   <span>
+                    <span *ngIf="artist.hometownheroes ">
+                      <p-tag value="hometown heroes" [style]="{'font-size': '.7em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#DAA520'}"></p-tag>&nbsp;
+                    </span>
 
                     <span *ngIf="(artist.medium) && (artist.medium === 'collective')">
                       <p-tag value="collective" [style]="{'font-size': '.7em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#FF7ED4'}"></p-tag>&nbsp;
