@@ -44,6 +44,7 @@ import { TagModule } from 'primeng/tag';
 import { CarouselModule } from 'primeng/carousel';
 import { ListedHowLongAgoPipe } from './listed-how-long-ago.pipe';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { GenreListPipePipe } from '../genre-list-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     FooterComponent,
     HighlightPipePipe,
     ListedHowLongAgoPipe,
+    GenreListPipePipe,
   ],
   imports: [
     CommonModule,
@@ -103,6 +105,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     LogoComponent,
     TermsOfServiceComponent,
     HighlightPipePipe,
+    GenreListPipePipe,
     // primeng exports
     AvatarModule,
     AvatarGroupModule,

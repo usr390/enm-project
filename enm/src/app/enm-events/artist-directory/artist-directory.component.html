@@ -36,6 +36,11 @@
                       <p-tag value="inactive" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': 'lightgray'}"></p-tag>&nbsp;
                     </span>
                   </span>
+
+                  <div *ngIf="artist.genre && !(artist.genre.length === 1 && artist.genre[0] === 'pending')">
+                    <p-tag value="{{artist.genre | genreListPipe:' · '}}" [style]="{'font-size': '.7em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#4CCD99'}"></p-tag>&nbsp;
+                  </div>
+                  
                   
                   <div *ngIf="artist.links" class="social-links" style="margin-top: 15px">
                     <a *ngIf="artist.links.spotify && (artist.links.spotify !== 'pending')" href="{{artist.links.spotify}}" target="_blank" rel="noopener noreferrer" class="social-icon">
