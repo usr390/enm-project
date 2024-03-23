@@ -39,7 +39,7 @@
                       <p-tag value="hometown heroes" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#DAA520', 'background-color': 'transparent'}"></p-tag>&nbsp;
                     </span>
 
-                    <span *ngIf="(artist.medium) && (artist.medium !== 'band')">
+                    <span *ngIf="(artist.medium)">
                       <p-tag value="{{artist.medium}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#FF7ED4', 'background-color': 'transparent'}"></p-tag>&nbsp;
                     </span>                    
 
