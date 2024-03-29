@@ -60,7 +60,7 @@
                       <!-- This will only show if the user is on a mobile device -->
                       <div *ngIf="isMobile">
                         <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" style="margin-bottom: 15px;">
-                          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><span (click)="openFlyer($event)"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines" pTooltip="Go To Flyer" tooltipPosition="bottom" ></i> <span> Flyer</span></span></a>
+                          <a  pTooltip="Go To Flyer" tooltipPosition="bottom" class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><span (click)="openFlyer($event)"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> <span> Flyer</span></span></a>
                         </div>
                         <div class="click-to-copy clickable-address">
                           <span class="flex align-items-center gap-2" >
@@ -84,7 +84,7 @@
                       <!-- This will only show if the user is NOT on a mobile device -->
                       <div *ngIf="!isMobile">
                         <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" style="margin-bottom: 15px;">
-                          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><span (click)="openFlyer($event)"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines" pTooltip="Go To Flyer" tooltipPosition="bottom" ></i> <span> Flyer</span></span></a>
+                          <a  pTooltip="Go To Flyer" tooltipPosition="bottom" class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><span (click)="openFlyer($event)"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> <span> Flyer</span></span></a>
                         </div>
                         <div class="click-to-copy clickable-address">
                           <span class="flex align-items-center gap-2" >
@@ -157,7 +157,7 @@
                       <!-- This will only show if the user is on a mobile device -->
                       <div *ngIf="isMobile">
                         <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" style="margin-bottom: 15px;">
-                          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><span (click)="openFlyer($event)"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines" pTooltip="Go To Flyer" tooltipPosition="bottom" ></i> <span> Flyer</span></span></a>
+                          <a  pTooltip="Go To Flyer" tooltipPosition="bottom" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><span (click)="openFlyer($event)"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> <span> Flyer</span></span></a>
                         </div>
                         <div class="click-to-copy clickable-address">
                           <span class="flex align-items-center gap-2" >
@@ -181,7 +181,7 @@
                       <!-- This will only show if the user is NOT on a mobile device -->
                       <div *ngIf="!isMobile">
                         <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block"  style="margin-bottom: 15px;">
-                          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><span (click)="openFlyer($event)"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines" pTooltip="Go To Flyer" tooltipPosition="bottom" ></i> <span> Flyer</span></span></a>
+                          <a pTooltip="Go To Flyer" tooltipPosition="bottom" class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><span (click)="openFlyer($event)"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> <span> Flyer</span></span></a>
                         </div>
                         <div class="click-to-copy clickable-address">
                           <span class="flex align-items-center gap-2" >
