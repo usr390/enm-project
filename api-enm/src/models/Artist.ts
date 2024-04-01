@@ -7,7 +7,8 @@ export const ArtistSchema = new Schema({
     link: String,
     location: String,
     status: String,
-    debut: Boolean
+    debut: Boolean,
+    start: String
 });
 
 const ArtistModel = mongoose.model("Artist", ArtistSchema);
