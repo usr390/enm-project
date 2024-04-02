@@ -50,6 +50,9 @@
                     <span *ngIf="(artist.start) && (artist.start !== 'pending') && (artist.end) && (artist.end === 'pending')">
                       <p-tag value="{{artist.start | date:'yyyy' }} - active" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#704264', 'background-color': 'transparent'}"></p-tag>&nbsp;
                     </span>
+                    <span *ngIf="(artist.start) && (artist.start !== 'pending') && (artist.end) && (artist.end !== 'pending')">
+                      <p-tag value="{{artist.start | date:'yyyy' }} - {{artist.end | date: 'yyyy'}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#704264', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                    </span>
                   </span>
 
 
