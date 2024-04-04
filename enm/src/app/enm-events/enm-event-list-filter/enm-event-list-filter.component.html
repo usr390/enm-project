@@ -24,5 +24,8 @@
             </span>
             <button pButton type="button" icon="pi pi-times" class="clear-btn" (click)="clearArtistDirectoryFilter()" styleClass="p-button-sm p-button-rounded p-button-text" *ngIf="artistDirectoryFilterForm.controls.filter.value"></button>
         </div>
+        <!-- <div style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 10px;">
+            <span style="margin-right: 25px;"><p-toggleButton formControlName="recentlyListed" [onLabel]="filter" [offLabel]="filter" [style]="{ width: '10em', height: '2em' }"></p-toggleButton></span>
+        </div>     -->
     </form>
 </div>

@@ -21,6 +21,7 @@ export class ArtistDirectoryComponent {
   
   filter$ = this.store$.select(ArtistDirectorySelectors.selectFilter) // for giving user feedback when filter doesn't return results
   loading$ = this.store$.select(ArtistDirectorySelectors.selectLoading)
+  recentlyListedToggle$ = this.store$.select(ArtistDirectorySelectors.selectFilter)
 
 
   constructor(private store$: Store<AppState>) {}

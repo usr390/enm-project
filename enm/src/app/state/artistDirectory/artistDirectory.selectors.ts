@@ -170,6 +170,8 @@ export const selectSortedArtistsWithEnhancedSorting = createSelector(
         }
       }
     });
+
+    // return artists
   }
 );
 
@@ -339,7 +341,7 @@ export const selectLoading = createSelector(
 
 export const selectFilter = createSelector(
   selectFeature,
-  (state: ArtistDirectoryState): ArtistDirectoryFilter => state.artistDirectoryFilter
+(state: ArtistDirectoryState): ArtistDirectoryFilter => state.artistDirectoryFilter
 );
 
 export const selectFilterText = createSelector(
@@ -369,6 +371,13 @@ export const selectFiltered = createSelector(
         );  
         return nameMatch || platformMatch;
       });
+    }
+
+    // Apply 'recently listed' logic using slice for artists
+    if (filter.recentlyListed) {
+      // Assuming 'filteredArtists' is sorted with the most recently added at the end.
+      // This will grab the last 50 elements from the array.
+      filteredArtists = filteredArtists.slice(-50).reverse();
     }
 
     return filteredArtists;

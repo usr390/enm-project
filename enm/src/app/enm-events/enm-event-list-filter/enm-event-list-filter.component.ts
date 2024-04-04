@@ -36,7 +36,7 @@ export class EnmEventListFilterComponent {
   );
 
   enmEventListFilterForm = this.fb.group({ filter: '', checked: false, touring: false });
-  artistDirectoryFilterForm = this.fb.group({ filter: '' });
+  artistDirectoryFilterForm = this.fb.group({ filter: '', recentlyListed: false });
   selectedFilterText$ = this.store$.select(EnmEventsSelectors.selectedFilterText); // for repopulating the input field after a refresh or navigation
   selectedArtistDirectoryFilterText$ = this.store$.select(ArtistDirectorySelectors.selectFilterText); // for repopulating the input field after a refresh or navigation
   filter="Just Listed"
@@ -76,7 +76,8 @@ export class EnmEventListFilterComponent {
 
   filterArtistDirectoryResults(){
     let text = this.artistDirectoryFilterForm.value.filter?.trim() as string
-    this.store$.dispatch(ArtistDirectoryActions.artistDirectoryFilter({ text }))
+    let recentlyListed = this.artistDirectoryFilterForm.value.recentlyListed as boolean
+    this.store$.dispatch(ArtistDirectoryActions.artistDirectoryFilter({ text, recentlyListed }))
   }
 
   clearFilter() {

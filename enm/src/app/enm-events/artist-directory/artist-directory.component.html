@@ -117,98 +117,99 @@
         </p-dataView>
       </div>
 
-
-      <h2 class="datekey" style="margin-top: 20px">
-        <span>Recently Toured
-          <p-overlayPanel [style]="{'width': '200px', 'margin-right': '300px'}" #op2>
-            <p>Artists that have recently toured the valley! (or have an upcoming show)</p>
-          </p-overlayPanel>
-          <p-button (click)="op2.toggle($event)" icon="pi pi-question-circle" [style]="{'width': '20px', 'height': '28px', 'font-size': '.9em', 'background-color': 'white', 'color': '#043d75', 'border-color': 'white'}"></p-button>
-        </span>
-        <span class="numberOfEvents" *ngIf="countRecentlyTouredArtists$ | async as count">
-          Listed: {{ count }}
-        </span>
-      </h2>
-      <div class="card">
-        <p-dataView #dv [value]="(recentlyTouredArtists$ | async) ?? []">
-          <ng-template let-artist pTemplate="listItem">
-            <div class="col" style="padding: 20px 0">
-              <div class="row">
-                <!-- HERE'S THE VISIBLE CONTENT -->
-                  <span>
-                    <span class="artist-name" [innerHTML]="artist.name | highlightPipe: (filter$ | async)?.text">{{ artist.name }}</span>&nbsp;
-                    <span *ngIf="(artist.medium) && (artist.medium === 'collective')">
-                      <p-tag value="{{artist.medium}}" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#99ccff'}"></p-tag>&nbsp;
+      <ng-container *ngIf="!(recentlyListedToggle$ | async)?.recentlyListed">
+        <h2 class="datekey" style="margin-top: 20px">
+          <span>Recently Toured
+            <p-overlayPanel [style]="{'width': '200px', 'margin-right': '300px'}" #op2>
+              <p>Artists that have recently toured the valley! (or have an upcoming show)</p>
+            </p-overlayPanel>
+            <p-button (click)="op2.toggle($event)" icon="pi pi-question-circle" [style]="{'width': '20px', 'height': '28px', 'font-size': '.9em', 'background-color': 'white', 'color': '#043d75', 'border-color': 'white'}"></p-button>
+          </span>
+          <span class="numberOfEvents" *ngIf="countRecentlyTouredArtists$ | async as count">
+            Listed: {{ count }}
+          </span>
+        </h2>
+        <div class="card">
+          <p-dataView #dv [value]="(recentlyTouredArtists$ | async) ?? []">
+            <ng-template let-artist pTemplate="listItem">
+              <div class="col" style="padding: 20px 0">
+                <div class="row">
+                  <!-- HERE'S THE VISIBLE CONTENT -->
+                    <span>
+                      <span class="artist-name" [innerHTML]="artist.name | highlightPipe: (filter$ | async)?.text">{{ artist.name }}</span>&nbsp;
+                      <span *ngIf="(artist.medium) && (artist.medium === 'collective')">
+                        <p-tag value="{{artist.medium}}" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#99ccff'}"></p-tag>&nbsp;
+                      </span>
+                      <span *ngIf="(artist.location) && (artist.location !== 'RGV')">
+                        <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;
+                      </span>
+                      <span *ngIf="(artist.status) && (artist.status === 'inactive')">
+                        <p-tag value="inactive" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': 'lightgray'}"></p-tag>&nbsp;
+                      </span>
                     </span>
-                    <span *ngIf="(artist.location) && (artist.location !== 'RGV')">
-                      <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;
-                    </span>
-                    <span *ngIf="(artist.status) && (artist.status === 'inactive')">
-                      <p-tag value="inactive" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': 'lightgray'}"></p-tag>&nbsp;
-                    </span>
-                  </span>
-                  
-                  <div *ngIf="artist.links" class="social-links" style="margin-top: 15px">
-                    <a *ngIf="artist.links.spotify && (artist.links.spotify !== 'pending')" href="{{artist.links.spotify}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                      <i class="fab fa-spotify"></i>
-                    </a>
-                    <a *ngIf="artist.links.apple && (artist.links.apple !== 'pending')" href="{{artist.links.apple}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                      <i class="fa-solid fa-music"></i>
-                    </a>
-                    <a *ngIf="artist.links.bandcamp && (artist.links.bandcamp !== 'pending')" href="{{artist.links.bandcamp}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                      <i class="fab fa-bandcamp social-icon"></i>
-                    </a>
-                    <a *ngIf="artist.links.soundcloud && (artist.links.soundcloud !== 'pending')" href="{{artist.links.soundcloud}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                      <i class="fa-brands fa-soundcloud social-icon"></i>
-                    </a>
-                    <a *ngIf="artist.links.mixcloud && (artist.links.mixcloud !== 'pending')" href="{{artist.links.mixcloud}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                      <i class="fa-brands fa-mixcloud"></i>
-                    </a>
-                    <a *ngIf="artist.links.youtube && (artist.links.youtube !== 'pending')" href="{{artist.links.youtube}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                      <i class="fab fa-youtube social-icon"></i>
-                    </a>
-                    <a *ngIf="artist.links.twitch && (artist.links.twitch !== 'pending')" href="{{artist.links.twitch}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                      <i class="fa-brands fa-twitch social-icon"></i>
-                    </a>
-                    <a *ngIf="artist.links.facebook && (artist.links.facebook !== 'pending')" href="{{artist.links.facebook}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                      <i class="fab fa-facebook social-icon"></i>
-                    </a>
-                    <a *ngIf="artist.links.instagram && (artist.links.instagram !== 'pending')" href="{{artist.links.instagram}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                      <i class="fab fa-instagram social-icon"></i>
-                    </a>
-                    <a *ngIf="artist.links.myspace && (artist.links.myspace !== 'pending')" href="{{artist.links.myspace}}" target="_blank" rel="noopener noreferrer" class="social-icon" style="text-decoration: underline;">myspace lol</a>
-  
-                    <a *ngIf="artist.links.tiktok && (artist.links.tiktok !== 'pending')" href="{{artist.links.tiktok}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                      <i class="fa-brands fa-tiktok social-icon"></i>
-                    </a>
-                    <a *ngIf="artist.links.x && (artist.links.x !== 'pending')" href="{{artist.links.x}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                      <i class="fa-brands fa-x-twitter social-icon"></i>
-                    </a>
-                    <a *ngIf="artist.links.threads && (artist.links.threads !== 'pending')" href="{{artist.links.threads}}" target="_blank" rel="noopener noreferrer" class="social-icon">
-                      <i class="social-icon">Threads</i>
-                    </a>
-                  </div>
-  
-                    <div *ngFor="let artist of artist.artists">
-                      <ng-container *ngIf="artist.link && artist.link !== 'pending'; else artistName">
-                        <div class="artist-container">
-                          <a href="{{ artist.link }}" target="_blank" rel="noopener noreferrer">{{ artist.name }}<span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>&nbsp;<i class="pi pi-link"></i></a>
-                        </div>
-                      </ng-container>
-                      <ng-template #artistName>
-                        <div class="artist-container">
-                          <span class="artist-name-non-clickable">{{ artist.name }}</span><span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>
-                        </div>
-                      </ng-template>
-                  </div>
+                    
+                    <div *ngIf="artist.links" class="social-links" style="margin-top: 15px">
+                      <a *ngIf="artist.links.spotify && (artist.links.spotify !== 'pending')" href="{{artist.links.spotify}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fab fa-spotify"></i>
+                      </a>
+                      <a *ngIf="artist.links.apple && (artist.links.apple !== 'pending')" href="{{artist.links.apple}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fa-solid fa-music"></i>
+                      </a>
+                      <a *ngIf="artist.links.bandcamp && (artist.links.bandcamp !== 'pending')" href="{{artist.links.bandcamp}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fab fa-bandcamp social-icon"></i>
+                      </a>
+                      <a *ngIf="artist.links.soundcloud && (artist.links.soundcloud !== 'pending')" href="{{artist.links.soundcloud}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fa-brands fa-soundcloud social-icon"></i>
+                      </a>
+                      <a *ngIf="artist.links.mixcloud && (artist.links.mixcloud !== 'pending')" href="{{artist.links.mixcloud}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fa-brands fa-mixcloud"></i>
+                      </a>
+                      <a *ngIf="artist.links.youtube && (artist.links.youtube !== 'pending')" href="{{artist.links.youtube}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fab fa-youtube social-icon"></i>
+                      </a>
+                      <a *ngIf="artist.links.twitch && (artist.links.twitch !== 'pending')" href="{{artist.links.twitch}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fa-brands fa-twitch social-icon"></i>
+                      </a>
+                      <a *ngIf="artist.links.facebook && (artist.links.facebook !== 'pending')" href="{{artist.links.facebook}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fab fa-facebook social-icon"></i>
+                      </a>
+                      <a *ngIf="artist.links.instagram && (artist.links.instagram !== 'pending')" href="{{artist.links.instagram}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fab fa-instagram social-icon"></i>
+                      </a>
+                      <a *ngIf="artist.links.myspace && (artist.links.myspace !== 'pending')" href="{{artist.links.myspace}}" target="_blank" rel="noopener noreferrer" class="social-icon" style="text-decoration: underline;">myspace lol</a>
+    
+                      <a *ngIf="artist.links.tiktok && (artist.links.tiktok !== 'pending')" href="{{artist.links.tiktok}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fa-brands fa-tiktok social-icon"></i>
+                      </a>
+                      <a *ngIf="artist.links.x && (artist.links.x !== 'pending')" href="{{artist.links.x}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fa-brands fa-x-twitter social-icon"></i>
+                      </a>
+                      <a *ngIf="artist.links.threads && (artist.links.threads !== 'pending')" href="{{artist.links.threads}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="social-icon">Threads</i>
+                      </a>
+                    </div>
+    
+                      <div *ngFor="let artist of artist.artists">
+                        <ng-container *ngIf="artist.link && artist.link !== 'pending'; else artistName">
+                          <div class="artist-container">
+                            <a href="{{ artist.link }}" target="_blank" rel="noopener noreferrer">{{ artist.name }}<span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>&nbsp;<i class="pi pi-link"></i></a>
+                          </div>
+                        </ng-container>
+                        <ng-template #artistName>
+                          <div class="artist-container">
+                            <span class="artist-name-non-clickable">{{ artist.name }}</span><span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>
+                          </div>
+                        </ng-template>
+                    </div>
+                </div>
               </div>
-            </div>
-          </ng-template>
-        </p-dataView>
-      </div>
-      <div class="disclaimer-section">
-        <div class="disclaimer d-flex"><span>* Are we missing an artist or link? <a style="text-decoration: underline;" href="https://instagram.com/rarelygroovy" target="_blank" rel="noopener noreferrer">Let us know!</a></span></div>
-      </div>
+            </ng-template>
+          </p-dataView>
+        </div>
+        <div class="disclaimer-section">
+          <div class="disclaimer d-flex"><span>* Are we missing an artist or link? <a style="text-decoration: underline;" href="https://instagram.com/rarelygroovy" target="_blank" rel="noopener noreferrer">Let us know!</a></span></div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>

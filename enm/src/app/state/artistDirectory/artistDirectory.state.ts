@@ -6,6 +6,7 @@ export interface Artists {
 
 export interface ArtistDirectoryFilter {
     text: string;
+    recentlyListed: boolean
 }
 
 export interface ArtistDirectoryState {
@@ -18,7 +19,8 @@ export interface ArtistDirectoryState {
 export const initialState: ArtistDirectoryState = {
     entities: {},
     artistDirectoryFilter: {
-        text: ''
+        text: '',
+        recentlyListed: false
     },
     loading: false,
     loaded: false,

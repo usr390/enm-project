@@ -28,11 +28,12 @@ const _artistDirectoryReducer = createReducer(
       }
     }),
 
-    on(artistDirectoryFilter, (state, { text }) => ({
+    on(artistDirectoryFilter, (state, { text, recentlyListed }) => ({
         ...state,
         artistDirectoryFilter: {
           ...state.artistDirectoryFilter,
           text,
+          recentlyListed
         },
     })),
 );
