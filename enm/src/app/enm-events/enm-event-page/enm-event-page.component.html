@@ -125,7 +125,7 @@
 
   <h2 style="color: #123d75; margin-top: 30px">Updates</h2>
   <div *ngIf="enmEvent.updates && enmEvent.updates.length > 0; else noUpdates">
-    <div class="updates-section" style="margin-bottom: 50px;">
+    <div class="updates-section" style="margin-bottom: 50px; max-width: 750px;">
       <ul class="updates-list">
         <li *ngFor="let update of enmEvent.updates | reverseUpdates">
           <span class="update-date"><b>{{ update.date | date: 'MMM d' }}, {{ update.date | date: 'h:mm a' }}</b> - </span>
