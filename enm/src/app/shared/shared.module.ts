@@ -45,6 +45,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { ListedHowLongAgoPipe } from './listed-how-long-ago.pipe';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { GenreListPipePipe } from '../genre-list-pipe.pipe';
+import { ReverseUpdatesPipe } from './reverse-updates.pipe';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { GenreListPipePipe } from '../genre-list-pipe.pipe';
     HighlightPipePipe,
     ListedHowLongAgoPipe,
     GenreListPipePipe,
+    ReverseUpdatesPipe,
   ],
   imports: [
     CommonModule,
@@ -132,7 +134,8 @@ import { GenreListPipePipe } from '../genre-list-pipe.pipe';
     TagModule,
     CarouselModule,
     ListedHowLongAgoPipe,
-    OverlayPanelModule
+    OverlayPanelModule,
+    ReverseUpdatesPipe
   ],
   providers: [
     // primeng providers
