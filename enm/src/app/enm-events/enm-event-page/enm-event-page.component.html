@@ -56,13 +56,6 @@
       </ng-container>
     </div>
 
-    <!-- <div class="artist-container">
-      <span class="artist-name">{{ artist.name }}</span>&nbsp;&nbsp;
-      <span *ngIf="(artist.location) && (artist.location != 'RGV')">
-        <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;&nbsp;
-      </span>
-    </div> -->
-
     <div *ngIf="enmEvent.promoter">
       <div class="custom-divider">
         <hr style="width: 40px;">
@@ -125,7 +118,26 @@
       </div>
     </div>
   </p-card>
+
   <div class="disclaimer-section">
     <div class="disclaimer d-flex justify-content-center align-items-center">* Start time might vary</div>  
   </div>
+
+  <h2 style="color: #123d75; margin-top: 30px">Updates</h2>
+  <div *ngIf="enmEvent.updates && enmEvent.updates.length > 0; else noUpdates">
+    <div class="updates-section">
+      <ul class="updates-list">
+        <li *ngFor="let update of enmEvent.updates">
+          <span class="update-date">{{ update.date | date: 'MMM d' }}, {{ update.date | date: 'h:mm a' }} - </span>
+          <span class="update-message">{{ update.message }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <ng-template #noUpdates>
+    <div class="no-updates">No updates yet! Check back in later</div>
+    
+  </ng-template>
+  
+    
 </div>

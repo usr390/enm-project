@@ -115,7 +115,8 @@ app.post('/api/enmEvent', express.json(), async (req: Request, res: Response) =>
     artists: req.body.artists,
     creationDateTime: DateTime.now(),
     promoter: req.body.promoter,
-    flyer: 'pending'
+    flyer: 'pending',
+    updates: []
   });
   // persist and respond to client with created EnmEvent object
   res.json(await enmEvent.save());
