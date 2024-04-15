@@ -146,6 +146,10 @@ app.get('/api/artists', express.json(), async (req: Request, res: Response) => {
   res.json(await ArtistModel.find().catch(err => console.log(err)))
 })
 
+app.get('/api/artistDirectory', express.json(), async (req: Request, res: Response) => {
+  res.json(await ArtistModel.find().catch(err => console.log(err)))
+})
+
 app.post('/api/login', express.json(), async (req: Request, res: Response) => {
   const { username, password } = req.body;
 

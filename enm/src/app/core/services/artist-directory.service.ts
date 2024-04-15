@@ -19,7 +19,7 @@ export class ArtistDirectoryService {
   getArtistDirectory(): Observable<Artist[]> {
     return this.user$.pipe(
       switchMap(user => {
-        const ENDPOINT = environment.api + '/artists';
+        const ENDPOINT = environment.api + '/artistDirectory';
         let params = new HttpParams();
         if (user) {
           params = params.append('username', user.username);
