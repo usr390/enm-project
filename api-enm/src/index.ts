@@ -147,7 +147,6 @@ app.get('/api/artists', express.json(), async (req: Request, res: Response) => {
 })
 
 app.get('/api/artistDirectory', express.json(), async (req: Request, res: Response) => {
-
   const username = req.query.username;
 
   try {
@@ -155,16 +154,17 @@ app.get('/api/artistDirectory', express.json(), async (req: Request, res: Respon
 
     if (isPlusUser) {
       try {
-        console.log('ad but though plus channel!')
-        res.json(await ArtistModel.find().catch(err => console.log(err)))
+        console.log('ad but though plus channel!');
+        res.json(await ArtistModel.find().catch(err => console.log(err)));
       } catch (err) {
         console.log(err);
         res.status(500).send('Internal Server Error');
       }
     } else {
       try {
-        console.log('ad but though non plus channel!')
-        res.json(await ArtistModel.find().catch(err => console.log(err)))
+        console.log('ad but though non plus channel!');
+        // Apply the filter to retrieve artists whose "end" property is "pending" and "location" is "RGV"
+        res.json(await ArtistModel.find({ end: "pending", location: "RGV" }).catch(err => console.log(err)));
       } catch (err) {
         console.log(err);
         res.status(500).send('Internal Server Error');
@@ -174,8 +174,9 @@ app.get('/api/artistDirectory', express.json(), async (req: Request, res: Respon
     console.error(err);
     res.status(500).send('Internal Server Error');
   }
-  // res.json(await ArtistModel.find().catch(err => console.log(err)))
-})
+});
+
+
 
 app.post('/api/login', express.json(), async (req: Request, res: Response) => {
   const { username, password } = req.body;

@@ -123,7 +123,7 @@
         </p-dataView>
       </div>
 
-      <ng-container *ngIf="!(recentlyListedToggle$ | async)?.recentlyListed">
+      <ng-container *ngIf="(!(recentlyListedToggle$ | async)?.recentlyListed) && (user$ | async)?.plus">
         <h2 class="datekey" style="margin-top: 20px">
           <span>Recently Toured
             <p-overlayPanel [style]="{'width': '200px', 'margin-right': '300px'}" #op2>
