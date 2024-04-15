@@ -147,7 +147,34 @@ app.get('/api/artists', express.json(), async (req: Request, res: Response) => {
 })
 
 app.get('/api/artistDirectory', express.json(), async (req: Request, res: Response) => {
-  res.json(await ArtistModel.find().catch(err => console.log(err)))
+
+  const username = req.query.username;
+
+  try {
+    const isPlusUser = await checkUserPlusStatus(username);
+
+    if (isPlusUser) {
+      try {
+        console.log('ad but though plus channel!')
+        res.json(await ArtistModel.find().catch(err => console.log(err)))
+      } catch (err) {
+        console.log(err);
+        res.status(500).send('Internal Server Error');
+      }
+    } else {
+      try {
+        console.log('ad but though non plus channel!')
+        res.json(await ArtistModel.find().catch(err => console.log(err)))
+      } catch (err) {
+        console.log(err);
+        res.status(500).send('Internal Server Error');
+      }
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+  // res.json(await ArtistModel.find().catch(err => console.log(err)))
 })
 
 app.post('/api/login', express.json(), async (req: Request, res: Response) => {
