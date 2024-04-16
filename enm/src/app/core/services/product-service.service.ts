@@ -17,8 +17,8 @@ export class ProductService {
                 image: 'filter.gif',
             },
             {
-                name: 'Artist Directory',
-                description: 'Take a look at our meticulously curated list of 250+ local artists!',
+                name: 'Our FULL Artist Directory',
+                description: 'See additional artists that are no longer active in the scene. Absolutely perfect for a historical view of what the valleys alternative music scene used to be!',
                 image: 'ad.gif',
             },
         ];

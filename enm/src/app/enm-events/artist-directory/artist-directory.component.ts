@@ -26,8 +26,6 @@ export class ArtistDirectoryComponent {
 
   user$ = this.store$.select(AuthSelectors.selectUser); // for distinguishing between regular and plus users
 
-
-
   constructor(private store$: Store<AppState>) {}
 
   ngOnInit() {

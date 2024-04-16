@@ -18,8 +18,7 @@ export class ArtistDirectoryGuardService implements CanActivate {
       take(1),
       map(user => {
         if (!user || !user.plus) {
-          this.router.navigate(['/events']);
-          return false;
+          return true;
         }
         return true;
       })
