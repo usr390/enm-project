@@ -64,7 +64,7 @@
 
                   
                   
-                  <div *ngIf="artist.links" class="social-links" style="margin-top: 15px">
+                  <!-- <div *ngIf="artist.links" class="social-links" style="margin-top: 15px">
                     <a *ngIf="artist.links.spotify && (artist.links.spotify !== 'pending')" href="{{artist.links.spotify}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                       <i class="fab fa-spotify"></i>
                     </a>
@@ -103,6 +103,22 @@
                     <a *ngIf="artist.links.threads && (artist.links.threads !== 'pending')" href="{{artist.links.threads}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                       <i class="social-icon">Threads</i>
                     </a>
+                  </div> -->
+
+                  <div *ngIf="artist.links" class="social-links" style="margin-top: 15px">
+                    <a *ngIf="artist.links.spotify && (artist.links.spotify !== 'pending')" href="{{artist.links.spotify}}" target="_blank" rel="noopener noreferrer" class="social-icon">spotify&nbsp;&nbsp;</a>
+                    <a *ngIf="artist.links.apple && (artist.links.apple !== 'pending')" href="{{artist.links.apple}}" target="_blank" rel="noopener noreferrer" class="social-icon">apple music&nbsp;&nbsp;</a>
+                    <a *ngIf="artist.links.bandcamp && (artist.links.bandcamp !== 'pending')" href="{{artist.links.bandcamp}}" target="_blank" rel="noopener noreferrer" class="social-icon">bandcamp&nbsp;&nbsp;</a>
+                    <a *ngIf="artist.links.soundcloud && (artist.links.soundcloud !== 'pending')" href="{{artist.links.soundcloud}}" target="_blank" rel="noopener noreferrer" class="social-icon">soundcloud&nbsp;&nbsp;</a>
+                    <a *ngIf="artist.links.mixcloud && (artist.links.mixcloud !== 'pending')" href="{{artist.links.mixcloud}}" target="_blank" rel="noopener noreferrer" class="social-icon">mixcloud&nbsp;&nbsp;</a>
+                    <a *ngIf="artist.links.youtube && (artist.links.youtube !== 'pending')" href="{{artist.links.youtube}}" target="_blank" rel="noopener noreferrer" class="social-icon">youtube&nbsp;&nbsp;</a>
+                    <a *ngIf="artist.links.twitch && (artist.links.twitch !== 'pending')" href="{{artist.links.twitch}}" target="_blank" rel="noopener noreferrer" class="social-icon">twitch&nbsp;&nbsp;</a>
+                    <a *ngIf="artist.links.facebook && (artist.links.facebook !== 'pending')" href="{{artist.links.facebook}}" target="_blank" rel="noopener noreferrer" class="social-icon">facebook&nbsp;&nbsp;</a>
+                    <a *ngIf="artist.links.instagram && (artist.links.instagram !== 'pending')" href="{{artist.links.instagram}}" target="_blank" rel="noopener noreferrer" class="social-icon">instagram&nbsp;&nbsp;</a>
+                    <a *ngIf="artist.links.myspace && (artist.links.myspace !== 'pending')" href="{{artist.links.myspace}}" target="_blank" rel="noopener noreferrer" class="social-icon" style="text-decoration: underline;">myspace&nbsp;&nbsp;</a>
+                    <a *ngIf="artist.links.tiktok && (artist.links.tiktok !== 'pending')" href="{{artist.links.tiktok}}" target="_blank" rel="noopener noreferrer" class="social-icon">tik tok&nbsp;&nbsp;</a>
+                    <a *ngIf="artist.links.x && (artist.links.x !== 'pending')" href="{{artist.links.x}}" target="_blank" rel="noopener noreferrer" class="social-icon">x&nbsp;&nbsp;</a>
+                    <a *ngIf="artist.links.threads && (artist.links.threads !== 'pending')" href="{{artist.links.threads}}" target="_blank" rel="noopener noreferrer" class="social-icon">threads&nbsp;&nbsp;</a>
                   </div>
   
                     <div *ngFor="let artist of artist.artists">
