@@ -33,6 +33,7 @@ export interface EnmEvent {
     "isRecentlyListed": boolean,
     "canceled": boolean,
     "flyer": string,
-    "updates": any
+    "updates": any,
+    "postponed": boolean
 
 }
