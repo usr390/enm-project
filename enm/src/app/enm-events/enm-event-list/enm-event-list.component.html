@@ -29,6 +29,11 @@
                   <span *ngIf="enmEvent.canceled">Canceled</span>
                 </p-tag>
               </div>
+              <div *ngIf="enmEvent.postponed" class="tags">
+                <p-tag [style]="{'background-color': '#829bb4'}">
+                  <span *ngIf="enmEvent.postponed">Postponed</span>
+                </p-tag>
+              </div>
               <!-- HERE'S THE VISIBLE CONTENT -->
               
               <a [routerLink]="isCopying ? null : ['/events', enmEvent._id]" (click)="onEnmEventListSelection(enmEvent._id)" class="event-card-link .event-card-link" href="/">
