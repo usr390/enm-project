@@ -373,12 +373,13 @@ export const selectFiltered = createSelector(
       });
     }
 
-    // Apply 'recently listed' logic using slice for artists
-    if (filter.recentlyListed) {
-      // Assuming 'filteredArtists' is sorted with the most recently added at the end.
-      // This will grab the last 50 elements from the array.
-      filteredArtists = filteredArtists.slice(-50).reverse();
-    }
+    // // Apply 'recently listed' logic using ObjectId timestamps
+    // if (filter.recentlyListed) {
+    //   // Sort artists by timestamp extracted from ObjectId, most recent first
+    //   filteredArtists = filteredArtists
+    //     .sort((a: Artist, b: Artist) => getTimestampFromObjectId(b._id) - getTimestampFromObjectId(a._id))
+    //     .slice(0, 50);  // Take the first 50 after sorting
+    // }
 
     return filteredArtists;
   }
@@ -509,3 +510,11 @@ export const selectFilteredArtistDirectoryCountForRecentlyTouredArtists = create
     return filteredArtistDirectory.length;
   }
 );
+
+
+
+// function getTimestampFromObjectId(objectId: string): number {
+//   // Convert the timestamp component of the ObjectId from hexadecimal to a number
+//   // Multiply by 1000 to convert the seconds to milliseconds
+//   return parseInt(objectId.substring(0, 8), 16) * 1000;
+// }
