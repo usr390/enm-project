@@ -45,6 +45,9 @@
                 <p-tag value="debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
                 &nbsp;
               </span>
+              <span *ngIf="artist.albumDebut">
+                <p-tag value="album debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
+              </span>
               <i style="font-size: .6em;" class="pi pi-external-link"></i>
             </a>
 
@@ -56,6 +59,9 @@
           </div>
           <span *ngIf="artist.debut" class="tags">
             <p-tag value="debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
+          </span>
+          <span *ngIf="artist.albumDebut">
+            <p-tag value="album debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
           </span>
         </ng-template>
         <!-- Add separator for all but the last artist -->

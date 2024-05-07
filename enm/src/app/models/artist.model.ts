@@ -12,5 +12,6 @@ export interface Artist {
     "medium": string
     "status": string
     "links": any,
-    "debut": boolean
+    "debut": boolean,
+    "albumDebut": boolean
 }

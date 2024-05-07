@@ -51,6 +51,9 @@
                             <span *ngIf="artist.debut">
                               <p-tag value="debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
                             </span>
+                            <span *ngIf="artist.albumDebut">
+                              <p-tag value="album debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
+                            </span>
                           </div>
                           <span *ngIf="i < enmEvent.artists.length - 1">&middot;</span>&nbsp;
                         </ng-container>
@@ -151,7 +154,9 @@
                               <span *ngIf="artist.debut" class="tags">
                                 <p-tag value="debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
                               </span></span>&nbsp;&nbsp;
-
+                              <span *ngIf="artist.albumDebut">
+                                <p-tag value="album debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
+                              </span>
                           </div>
                           <span *ngIf="i < enmEvent.artists.length - 1">&middot;</span>&nbsp;
                         </ng-container>
