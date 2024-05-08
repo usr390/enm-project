@@ -18,7 +18,7 @@ export class ProductService {
             },
             {
                 name: 'Our FULL Artist Directory',
-                description: 'See additional artists that are no longer active in the scene. Perfect for a historical view of the valleys alternative music scene!',
+                description: 'See additional artists that are no longer active. Perfect for a historical view of the valleys alternative music scene!',
                 image: 'ad.gif',
             },
         ];
