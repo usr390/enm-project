@@ -12,7 +12,7 @@ export class ProductService {
                 image: 'fulllist2.gif',
             },
             {
-                name: 'Filters!',
+                name: 'Event Filters',
                 description: 'Filter events by artist, venue, promoter, and a bunch more',
                 image: 'filter.gif',
             },
