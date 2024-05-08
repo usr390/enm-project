@@ -7,7 +7,7 @@ export class ProductService {
     getProductsData() {
         return [
             {
-                name: 'Our FULL Event List',
+                name: 'Our Full Event List',
                 description: 'Currently extending through September!',
                 image: 'fulllist2.gif',
             },
@@ -17,7 +17,7 @@ export class ProductService {
                 image: 'filter.gif',
             },
             {
-                name: 'Our FULL Artist Directory',
+                name: 'Our Full Artist Directory',
                 description: 'See additional artists that are no longer active. Perfect for a historical view of the valleys alternative music scene!',
                 image: 'ad.gif',
             },
