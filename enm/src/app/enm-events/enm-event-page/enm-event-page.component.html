@@ -42,7 +42,7 @@
                 &nbsp;
               </span>
               <span *ngIf="artist.debut" class="tags">
-                <p-tag value="debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
+                &nbsp;<p-tag value="debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
                 &nbsp;
               </span>
               <span *ngIf="artist.albumDebut">
@@ -58,7 +58,7 @@
             <span class="artist-name-non-clickable">{{ artist.name }}</span><span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location|lowercase}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>
           </div>
           <span *ngIf="artist.debut" class="tags">
-            <p-tag value="debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
+            &nbsp;<p-tag value="debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
           </span>
           <span *ngIf="artist.albumDebut">
             <p-tag value="album debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
