@@ -66,3 +66,5 @@ api-enm/dist/
 api-enm/node_modules/
 # Environment variables
 api-enm/env.ts
+
+fastpush.sh
