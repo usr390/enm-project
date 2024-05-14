@@ -142,7 +142,7 @@
       <ul class="updates-list">
         <li *ngFor="let update of enmEvent.updates | reverseUpdates">
           <span class="update-date"><b>{{ update.date | date: 'MMM d' }}, {{ update.date | date: 'h:mm a' }}</b> - </span>
-          <span class="update-message">{{ update.message }}</span>
+          <span [innerHTML]="update.message | linkify" class="update-message"></span>
         </li>
       </ul>
     </div>

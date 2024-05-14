@@ -83,7 +83,7 @@ app.get('/api/enmEvents', express.json(), async (req, res) => {
 
         let endOfWeek = DateTime.now().endOf('week').plus({ hours: 5 });
     
-        if (today.weekday === 7) { // sunday
+        if (today.weekday === 6 || today.weekday === 7) { // saturday or sunday
           endOfWeek = today.plus({ weeks: 1 }).endOf('week').plus({ hours: 5 });
         }
     
