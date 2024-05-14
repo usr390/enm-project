@@ -62,7 +62,13 @@
                         <div class="custom-divider">
                           <hr style="width: 40px;">
                         </div>
-                        <h6 class="card-text promoter" [innerHTML]="enmEvent.promoter.name | highlightPipe: (filter$ | async)?.text">{{ enmEvent.promoter.name }}</h6>
+                        <h6 class="card-text promoter">
+                          <span [innerHTML]="enmEvent.promoter.name | highlightPipe: (filter$ | async)?.text">{{ enmEvent.promoter.name }}</span> 
+                          <span *ngIf="enmEvent.promoter.debut" class="tags">&nbsp;
+                            <p-tag value="promoter debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
+                          </span>&nbsp;&nbsp;
+                        </h6>
+
                       </div>
 
                       <!-- This will only show if the user is on a mobile device -->
@@ -165,7 +171,12 @@
                         <div class="custom-divider">
                           <hr style="width: 40px;">
                         </div>
-                        <h6 class="card-text">{{ enmEvent.promoter.name }}</h6>
+                        <h6 class="card-text">
+                          {{ enmEvent.promoter.name }}
+                          <span *ngIf="enmEvent.promoter.debut" class="tags">
+                            <p-tag value="debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
+                          </span>&nbsp;&nbsp;
+                        </h6>
                       </div>
                       <br>
                       

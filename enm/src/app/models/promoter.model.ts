@@ -7,6 +7,7 @@ export interface Promoter {
 
     "_id": string,
     "name": string,
-    "link": string
+    "link": string,
+    "debut": boolean
 
 }

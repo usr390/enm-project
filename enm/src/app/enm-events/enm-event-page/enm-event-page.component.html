@@ -76,7 +76,11 @@
       <ng-container *ngIf="enmEvent.promoter.link && enmEvent.promoter.link !== 'pending'; else promoterName">
         <h6 class="card-text promoter">
           <a href="{{ enmEvent.promoter.link }}" target="_blank" rel="noopener noreferrer" class="m-0 promoter">{{ enmEvent.promoter.name }}&nbsp;<i style="font-size: .6em;" class="pi pi-external-link"></i></a>
+          <span *ngIf="enmEvent.promoter.debut" class="tags">&nbsp;
+            <p-tag value="promoter debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
+          </span>&nbsp;&nbsp;
         </h6>
+
       </ng-container>
       <ng-template #promoterName>
         <h6 class="card-text artist-name-non-clickable promoter">{{ enmEvent.promoter.name }}</h6>
