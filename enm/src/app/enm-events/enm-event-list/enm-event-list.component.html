@@ -5,11 +5,16 @@
 <div *ngIf="!(listLoading$ | async)" class="container-sm  text-center">
   <div *ngFor="let date of (groupedByDateEnmEventList$ | async | keyvalue); let isFirst = first">
     <ng-container *ngIf="filteredEventCount$ | async as count">
+        <span *ngIf="isFirst">
+          <h2 class="datekey">
+            <span style="text-decoration: underline;">Events</span>
+            <span class="numberOfEvents">
+              Listed: {{ count }}
+            </span>
+          </h2>
+        </span>
       <h2 class="datekey">
         {{ date.key | wordifiedDateKey }}
-        <span class="numberOfEvents" *ngIf="isFirst">
-          Listed: {{ count }}
-        </span>
       </h2>
     </ng-container>
     <div class="card">
