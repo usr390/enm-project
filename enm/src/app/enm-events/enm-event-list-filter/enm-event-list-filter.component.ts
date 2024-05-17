@@ -37,7 +37,7 @@ export class EnmEventListFilterComponent {
     map(url => url && (url.startsWith('/artist-directory') || url.startsWith('/iBhLq5wrrxafte4a')) )
   );
 
-  formGroup = this.fb.group({ });
+  formGroup = this.fb.group({ rock: false, punk: false, metal: false, edm: false, perreo: false, techno: false, rap: false, rnb: false, jazz: false, pop: false, experimental: false, latin: false, other: false});
 
   enmEventListFilterForm = this.fb.group({ filter: '', checked: false, touring: false });
   artistDirectoryFilterForm = this.fb.group({ filter: '', recentlyListed: false });
@@ -50,7 +50,7 @@ export class EnmEventListFilterComponent {
   filter$ = this.store$.select(EnmEventsSelectors.selectFilter);
 
   ngOnInit() {
-    this.items = ['rock', 'punk', 'metal', 'edm', 'perreo', 'techno', 'rap', 'r&b', 'jazz', 'pop', 'experimental', 'latin', 'other'];
+    this.items = ['rock', 'punk', 'metal', 'edm', 'perreo', 'techno', 'rap', 'rnb', 'jazz', 'pop', 'experimental', 'latin', 'other'];
     this.initializeFormControl();
     this.initializeArtistDirectoryFormControl()
     this.enmEventListFilterForm.valueChanges.pipe(
