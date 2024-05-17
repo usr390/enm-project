@@ -372,14 +372,33 @@ export const selectFiltered = createSelector(
         return nameMatch || platformMatch;
       });
     }
+    
+    // Apply genre filters
+    const genreFilters = [
+      { key: 'rock', value: filter.rock },
+      { key: 'punk', value: filter.punk },
+      { key: 'metal', value: filter.metal },
+      { key: 'edm', value: filter.edm },
+      { key: 'perreo', value: filter.perreo },
+      { key: 'techno', value: filter.techno },
+      { key: 'rap', value: filter.rap },
+      { key: 'rnb', value: filter.rnb },
+      { key: 'jazz', value: filter.jazz },
+      { key: 'pop', value: filter.pop },
+      { key: 'experimental', value: filter.experimental },
+      { key: 'latin', value: filter.latin },
+      { key: 'other', value: filter.other }
+    ];
 
-    // // Apply 'recently listed' logic using ObjectId timestamps
-    // if (filter.recentlyListed) {
-    //   // Sort artists by timestamp extracted from ObjectId, most recent first
-    //   filteredArtists = filteredArtists
-    //     .sort((a: Artist, b: Artist) => getTimestampFromObjectId(b._id) - getTimestampFromObjectId(a._id))
-    //     .slice(0, 50);  // Take the first 50 after sorting
-    // }
+    const activeGenres = genreFilters
+      .filter(genre => genre.value)
+      .flatMap(genre => genreMapping[genre.key] || []);
+
+    if (activeGenres.length > 0) {
+      filteredArtists = filteredArtists.filter(artist => 
+        artist.genre && artist.genre.some(genre => activeGenres.includes(genre))
+      );
+    }
 
     return filteredArtists;
   }
@@ -518,3 +537,75 @@ export const selectFilteredArtistDirectoryCountForRecentlyTouredArtists = create
 //   // Multiply by 1000 to convert the seconds to milliseconds
 //   return parseInt(objectId.substring(0, 8), 16) * 1000;
 // }
+interface GenreMapping {
+  [key: string]: string[];
+}
+
+const genreMapping: GenreMapping = {
+  rock: [
+    'rock', 'alternative rock', 'indie rock', 'pop rock', 'psychedelic rock', 'stoner rock', 
+    'hard rock', 'glam rock', 'spanish rock', 'soft rock', 'surf rock', 'garage rock', 
+    'grunge rock', 'psychedlic rock', 'grunge', 'classic rock', 'texicana'
+  ],
+  punk: [
+    'punk', 'pop punk', 'hardcore punk', 'punk rock', 'egg punk', 'chain punk', 'soft punk',
+    'queercore', 'psych punk', 'synth punk', 'emo', 'emocore', 'hardcore rock'
+  ],
+  metal: [
+    'metal', 'symphonic metal', 'doom metal', 'black\'n\'roll', 'nwobhm', 'avant metal', 
+    'fuzz rock', 'sludge metal', 'brutal death metal', 'thrash metal', 'black metal', 
+    'death metal', 'power metal', 'heavy metal', 'doom rock', 'groove metal', 'war metal', 
+    'death rock', 'slam metal', 'drone metal', 'progressive metal', 'speed metal', 'deathcore', 
+    'nu-metalcore', 'blackened death metal', 'blackened deathcore', 'trap metal', 'grind', 'grindcore', 
+    'metalcore', 'progressive rock', 'doomgaze', 'sludge', 'art rock', 'industrial', 'hate metal', 
+    'avant rock', 'alt rock', 'alternative metal', 'experimental metal', 'groove metal'
+  ],
+  edm: [
+    'edm', 'techno', 'house', 'dubstep', 'hard techno', 'tech house', 'psytrance', 'deep house', 
+    'trance', 'breakcore', 'breakbeat hardcore', 'electronica', 'psychedelic trance'
+  ],
+  hip_hop: [
+    'rap', 'hip hop', 'trap', 'experimental hip hop', 'trill hop', 'sample hop', 'phonk', 'trap metal', 
+    'latin rap', 'gangsta rap'
+  ],
+  experimental: [
+    'experimental', 'avant garde', 'avant rock', 'experimental pop', 'experimental progressive rock', 
+    'experimental noise', 'experimental rock', 'experimental hip hop', 'experimental metal', 'industrial'
+  ],
+  jazz: ['jazz', 'fusion', 'neosoul'],
+  pop: [
+    'pop', 'pop rock', 'pop punk', 'indie pop', 'power pop', 'bedroom pop', 'alternative pop', 
+    'experimental pop', 'dark pop', 'electronic pop', 'kawaii hip hop', 'synth pop', 'synth rock'
+  ],
+  latin: [
+    'latin', 'bolero', 'cumbia', 'norteño', 'latin pop', 'reggaeton', 'regional mexican', 'tropifolk', 
+    'texicana', 'southwest'
+  ],
+  reggae: [
+    'reggae', 'dub', 'rocksteady', 'ska', 'dancehall'
+  ],
+  electronic: [
+    'electronic', 'techno', 'dubstep', 'triphop', 'tech house', 'house', 'electronica', 'synthwave', 
+    'vaporwave', 'darkwave', 'coldwave', 'ebm', 'idm', 'chiptune', 'acid', 'minimal', 'rhythmic noise'
+  ],
+  soul: ['soul', 'neosoul', 'r&b'],
+  acoustic: ['acoustic'],
+  folk: ['folk', 'americana folk', 'folk pop', 'folk rock', 'folktronica'],
+  blues: ['blues'],
+  other: [
+    'new age', 'southwest', 'kitschwave', 'triphop', 'chiptune. lsdj', 'beatdown', 'instrumental', 
+    'dirge', 'ambient', 'ambient rock', 'drone', 'psychedelic', 'psycho', 'outsider', 'world music', 
+    'soft punk', 'post hardcore', 'emo', 'slam', 'art rock', 'djent', 'goth', 'goth rock', 'disco', 
+    'club', 'no wave', 'witch house', 'new wave', 'newwave', 'post rock', 'post progressive', 'midwest', 
+    'extreme metal', 'false grind', 'future beats', 'hardcore', 'hardcore punk', 'downtempo', 'lofi', 
+    'power violence', 'slam', 'psychedelic noise', 'witchhouse', 'thrash', 'dub', 'neosoul', 'minimal', 
+    'psychedelic trance', 'trip hop', 'acoustic', 'instrumental', 'sad pop', 'sad rock', 'ambient', 
+    'ambient rock', 'drone', 'world music', 'outsider', 'psycho', 'post progressive', 'surf rock', 
+    'orchestral', 'rhythmic noise', 'dirge', 'fusion', 'future beats', 'chankla-gaze', 'void pop', 
+    'brutal death meteal', 'blackened deathcore', 'beatdown', 'dream pop', 'easycore', 'power pop', 
+    'avant rock', 'power violence', 'psych punk', 'avant garde', 'sludge', 'experimental', 'post rock', 
+    'triphop', 'indie', 'indie rock', 'heavy rock', 'progressive pop rock', 'experimental progressive rock', 
+    'math rock', 'kraut', 'digital hardcore', 'breakbeat hardcore', 'newwave', 'techo', 'ebm', 'dsmb', 
+    'neoclassical darkwave', 'voidgaze', 'dreamcore', 'sample hop', 'fusion'
+  ]
+};
