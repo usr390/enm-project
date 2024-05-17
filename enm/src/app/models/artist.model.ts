@@ -13,5 +13,6 @@ export interface Artist {
     "status": string
     "links": any,
     "debut": boolean,
-    "albumDebut": boolean
+    "albumDebut": boolean,
+    "lastShow": boolean
 }
