@@ -24,6 +24,26 @@
             </span>
             <button pButton type="button" icon="pi pi-times" class="clear-btn" (click)="clearArtistDirectoryFilter()" styleClass="p-button-sm p-button-rounded p-button-text" *ngIf="artistDirectoryFilterForm.controls.filter.value"></button>
         </div>
+        <div style="margin-top: 10px" *ngIf="((currentUser$ | async)?.username === 'muslimgauze') || ((currentUser$ | async)?.username === 'cd')">
+            <p-scroller 
+            [items]="items" 
+            [itemSize]="50" 
+            scrollHeight="75px" 
+            orientation="horizontal" 
+            styleClass="border-1 surface-border" 
+            [style]="{'height': '200px'}">
+                <ng-template pTemplate="item" let-item let-options="options">
+                    <div style="margin-right: 10px">
+                        <form [formGroup]="formGroup">
+                            <p-toggleButton 
+                                onLabel="{{item}}" 
+                                offLabel="{{item}}" />
+                        </form>
+                    </div>
+                </ng-template>
+            </p-scroller>
+        </div>
+
         <!-- <div style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 10px;">
             <span style="margin-right: 25px;"><p-toggleButton formControlName="recentlyListed" [onLabel]="filter" [offLabel]="filter" [style]="{ width: '10em', height: '2em' }"></p-toggleButton></span>
         </div>     -->

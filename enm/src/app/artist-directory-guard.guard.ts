@@ -13,7 +13,6 @@ export class ArtistDirectoryGuardService implements CanActivate {
   constructor(private store: Store<AppState>, private router: Router) {}
 
   canActivate(): Observable<boolean> {
-    console.log('Guard activated!');
     return this.store.select(AuthSelectors.selectUser).pipe(
       take(1),
       map(user => {

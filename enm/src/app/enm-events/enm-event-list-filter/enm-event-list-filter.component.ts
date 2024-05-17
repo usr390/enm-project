@@ -22,6 +22,8 @@ import * as RouterSelectors from './../../state/router/router.selectors'; // enm
 })
 export class EnmEventListFilterComponent {
 
+  items: string[] = [];
+
   constructor(
     private fb: FormBuilder, // angular
     private store$: Store<AppState>, // 3rd party
@@ -35,6 +37,8 @@ export class EnmEventListFilterComponent {
     map(url => url && (url.startsWith('/artist-directory') || url.startsWith('/iBhLq5wrrxafte4a')) )
   );
 
+  formGroup = this.fb.group({ });
+
   enmEventListFilterForm = this.fb.group({ filter: '', checked: false, touring: false });
   artistDirectoryFilterForm = this.fb.group({ filter: '', recentlyListed: false });
   selectedFilterText$ = this.store$.select(EnmEventsSelectors.selectedFilterText); // for repopulating the input field after a refresh or navigation
@@ -46,6 +50,7 @@ export class EnmEventListFilterComponent {
   filter$ = this.store$.select(EnmEventsSelectors.selectFilter);
 
   ngOnInit() {
+    this.items = ['rock', 'punk', 'metal', 'edm', 'perreo', 'techno', 'rap', 'r&b', 'jazz', 'pop', 'experimental', 'latin', 'other'];
     this.initializeFormControl();
     this.initializeArtistDirectoryFormControl()
     this.enmEventListFilterForm.valueChanges.pipe(
