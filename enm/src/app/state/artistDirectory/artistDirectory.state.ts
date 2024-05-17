@@ -6,7 +6,20 @@ export interface Artists {
 
 export interface ArtistDirectoryFilter {
     text: string;
-    recentlyListed: boolean
+    recentlyListed: boolean,
+    rock: boolean, 
+    punk: boolean, 
+    metal: boolean, 
+    edm: boolean, 
+    perreo: boolean, 
+    techno: boolean, 
+    rap: boolean, 
+    rnb: boolean, 
+    jazz: boolean, 
+    pop: boolean, 
+    experimental: boolean, 
+    latin: boolean, 
+    other: boolean
 }
 
 export interface ArtistDirectoryState {
@@ -20,7 +33,20 @@ export const initialState: ArtistDirectoryState = {
     entities: {},
     artistDirectoryFilter: {
         text: '',
-        recentlyListed: false
+        recentlyListed: false,
+        rock: false, 
+        punk: false, 
+        metal: false, 
+        edm: false, 
+        perreo: false, 
+        techno: false, 
+        rap: false, 
+        rnb: false, 
+        jazz: false, 
+        pop: false, 
+        experimental: false, 
+        latin: false, 
+        other: false
     },
     loading: false,
     loaded: false,

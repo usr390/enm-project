@@ -26,20 +26,18 @@
         </div>
         <div style="margin-top: 10px" *ngIf="((currentUser$ | async)?.username === 'muslimgauze') || ((currentUser$ | async)?.username === 'cd')">
             <p-scroller 
-            [items]="items" 
+            [items]="genres" 
             [itemSize]="150"
             scrollHeight="50px" 
             orientation="horizontal" 
             styleClass="border-1 surface-border" 
             [style]="{'height': '200px'}">
-                <ng-template pTemplate="item" let-item let-options="options">
+                <ng-template pTemplate="item" let-genre let-options="options">
                     <div style="margin-right: 10px">
-                        <form [formGroup]="formGroup">
                             <p-toggleButton [style]="{ width: '8em', height: '2em' }"
-                                formControlName="{{item}}" 
-                                onLabel="{{item}}" 
-                                offLabel="{{item}}" />
-                        </form>
+                                formControlName="{{genre}}" 
+                                onLabel="{{genre}}" 
+                                offLabel="{{genre}}" />
                     </div>
                 </ng-template>
             </p-scroller>

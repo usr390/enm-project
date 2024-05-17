@@ -28,12 +28,25 @@ const _artistDirectoryReducer = createReducer(
       }
     }),
 
-    on(artistDirectoryFilter, (state, { text, recentlyListed }) => ({
+    on(artistDirectoryFilter, (state, { text, recentlyListed, rock, punk, metal, edm, perreo, techno, rap, rnb, jazz, pop, experimental, latin, other }) => ({
         ...state,
         artistDirectoryFilter: {
           ...state.artistDirectoryFilter,
           text,
-          recentlyListed
+          recentlyListed,
+          rock,
+          punk,
+          metal,
+          edm,
+          perreo,
+          techno,
+          rap,
+          rnb,
+          jazz,
+          pop,
+          experimental,
+          latin,
+          other
         },
     })),
 );
