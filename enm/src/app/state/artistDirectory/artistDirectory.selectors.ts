@@ -558,7 +558,7 @@ const genreMapping: GenreMapping = {
     'death metal', 'power metal', 'heavy metal', 'groove metal', 'war metal', 
     'slam metal', 'drone metal', 'progressive metal', 'speed metal', 'deathcore', 
     'nu-metalcore', 'blackened death metal', 'blackened deathcore', 'trap metal', 'grind', 'grindcore', 
-    'metalcore', 'doomgaze', 'sludge', 'industrial', 'hate metal', 
+    'metalcore', 'doomgaze', 'sludge', 'hate metal', 
     'avant rock', 'alternative metal', 'experimental metal', 'groove metal', 'voidgaze'
   ],
   edm: [
