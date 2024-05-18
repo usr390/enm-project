@@ -48,7 +48,7 @@ export class EnmEventListFilterComponent {
   filter$ = this.store$.select(EnmEventsSelectors.selectFilter);
 
   ngOnInit() {
-    this.genres = ['rock', 'punk', 'metal', 'edm', 'perreo', 'techno', 'rap', 'rnb', 'jazz', 'pop', 'experimental', 'latin', 'other'];
+    this.genres = ['rock', 'punk', 'metal', 'experimental', 'edm', 'rap', 'jazz', 'pop', 'latin', 'other'];
     this.initializeFormControl();
     this.initializeArtistDirectoryFormControl()
     this.enmEventListFilterForm.valueChanges.pipe(
@@ -84,17 +84,14 @@ export class EnmEventListFilterComponent {
     let punk = this.artistDirectoryFilterForm.value.punk as boolean
     let metal = this.artistDirectoryFilterForm.value.metal as boolean
     let edm = this.artistDirectoryFilterForm.value.edm as boolean
-    let perreo = this.artistDirectoryFilterForm.value.perreo as boolean
-    let techno = this.artistDirectoryFilterForm.value.techno as boolean
     let rap = this.artistDirectoryFilterForm.value.rap as boolean
-    let rnb = this.artistDirectoryFilterForm.value.rnb as boolean
     let jazz = this.artistDirectoryFilterForm.value.jazz as boolean
     let pop = this.artistDirectoryFilterForm.value.pop as boolean
     let experimental = this.artistDirectoryFilterForm.value.experimental as boolean
     let latin = this.artistDirectoryFilterForm.value.latin as boolean
     let other = this.artistDirectoryFilterForm.value.other as boolean
 
-    this.store$.dispatch(ArtistDirectoryActions.artistDirectoryFilter({ text, recentlyListed, rock, punk, metal, edm, perreo, techno, rap, rnb, jazz, pop, experimental, latin, other }))
+    this.store$.dispatch(ArtistDirectoryActions.artistDirectoryFilter({ text, recentlyListed, rock, punk, metal, edm, rap, jazz, pop, experimental, latin, other }))
   }
 
   clearFilter() {

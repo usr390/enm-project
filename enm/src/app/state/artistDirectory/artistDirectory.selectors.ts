@@ -379,10 +379,7 @@ export const selectFiltered = createSelector(
       { key: 'punk', value: filter.punk },
       { key: 'metal', value: filter.metal },
       { key: 'edm', value: filter.edm },
-      { key: 'perreo', value: filter.perreo },
-      { key: 'techno', value: filter.techno },
       { key: 'rap', value: filter.rap },
-      { key: 'rnb', value: filter.rnb },
       { key: 'jazz', value: filter.jazz },
       { key: 'pop', value: filter.pop },
       { key: 'experimental', value: filter.experimental },
@@ -550,7 +547,7 @@ const genreMapping: GenreMapping = {
   ],
   punk: [
     'punk', 'pop punk', 'hardcore punk', 'punk rock', 'egg punk', 'chain punk', 'soft punk',
-    'queercore', 'psych punk', 'synth punk', 'emo', 'emocore', 'hardcore rock'
+    'queercore', 'psych punk', 'synth punk', 'emo', 'emocore', 'hardcore rock', 'beatdown'
   ],
   metal: [
     'metal', 'symphonic metal', 'doom metal', 'black\'n\'roll', 'nwobhm', 'avant metal', 
@@ -565,22 +562,23 @@ const genreMapping: GenreMapping = {
     'edm', 'techno', 'house', 'dubstep', 'hard techno', 'tech house', 'psytrance', 'deep house', 
     'trance', 'breakcore', 'breakbeat hardcore', 'electronica', 'psychedelic trance'
   ],
-  hip_hop: [
+  rap: [
     'rap', 'hip hop', 'trap', 'experimental hip hop', 'trill hop', 'sample hop', 'phonk', 'trap metal', 
     'latin rap', 'gangsta rap'
   ],
   experimental: [
     'experimental', 'avant garde', 'avant rock', 'experimental pop', 'experimental progressive rock', 
-    'experimental noise', 'experimental rock', 'experimental hip hop', 'experimental metal', 'industrial', 'voidgaze'
+    'experimental noise', 'experimental rock', 'experimental hip hop', 'experimental metal', 'industrial', 'voidgaze',
+    'witch house'
   ],
-  jazz: ['jazz', 'fusion', 'neosoul'],
+  jazz: ['jazz', 'neosoul'],
   pop: [
     'pop', 'pop rock', 'pop punk', 'indie pop', 'power pop', 'bedroom pop', 'alternative pop', 
     'experimental pop', 'dark pop', 'electronic pop', 'kawaii hip hop', 'synth pop', 'synth rock'
   ],
   latin: [
     'latin', 'bolero', 'cumbia', 'norteño', 'latin pop', 'reggaeton', 'regional mexican', 'tropifolk', 
-    'texicana', 'southwest'
+    'texicana', 'perreo'
   ],
   reggae: [
     'reggae', 'dub', 'rocksteady', 'ska', 'dancehall'
@@ -589,24 +587,24 @@ const genreMapping: GenreMapping = {
     'electronic', 'techno', 'dubstep', 'triphop', 'tech house', 'house', 'electronica', 'synthwave', 
     'vaporwave', 'darkwave', 'coldwave', 'ebm', 'idm', 'chiptune', 'acid', 'minimal', 'rhythmic noise'
   ],
-  soul: ['soul', 'neosoul', 'r&b'],
+  soul: ['soul', 'neosoul'],
   acoustic: ['acoustic'],
   folk: ['folk', 'americana folk', 'folk pop', 'folk rock', 'folktronica'],
   blues: ['blues'],
   other: [
-    'new age', 'southwest', 'kitschwave', 'triphop', 'chiptune. lsdj', 'beatdown', 'instrumental', 
-    'dirge', 'ambient', 'ambient rock', 'drone', 'psychedelic', 'psycho', 'outsider', 'world music', 
+    'new age', 'southwest', 'kitschwave', 'chiptune. lsdj', 'instrumental', 
+    'ambient', 'ambient rock', 'drone', 'psychedelic', 'psycho', 'outsider', 'world music', 
     'soft punk', 'post hardcore', 'emo', 'slam', 'art rock', 'djent', 'goth', 'goth rock', 'disco', 
-    'club', 'no wave', 'witch house', 'new wave', 'newwave', 'post rock', 'post progressive', 'midwest', 
+    'club', 'no wave', 'new wave', 'newwave', 'post rock', 'post progressive', 'midwest', 
     'extreme metal', 'false grind', 'future beats', 'hardcore', 'hardcore punk', 'downtempo', 'lofi', 
-    'power violence', 'slam', 'psychedelic noise', 'witchhouse', 'thrash', 'dub', 'neosoul', 'minimal', 
+    'thrash', 'dub', 'neosoul', 'minimal', 
     'psychedelic trance', 'trip hop', 'acoustic', 'instrumental', 'sad pop', 'sad rock', 'ambient', 
     'ambient rock', 'drone', 'world music', 'outsider', 'psycho', 'post progressive', 'surf rock', 
     'orchestral', 'rhythmic noise', 'dirge', 'fusion', 'future beats', 'chankla-gaze', 'void pop', 
-    'brutal death meteal', 'blackened deathcore', 'beatdown', 'dream pop', 'easycore', 'power pop', 
+    'brutal death meteal', 'blackened deathcore', 'dream pop', 'easycore', 'power pop', 
     'avant rock', 'power violence', 'psych punk', 'avant garde', 'sludge', 'experimental', 'post rock', 
-    'triphop', 'indie', 'indie rock', 'heavy rock', 'progressive pop rock', 'experimental progressive rock', 
+    'triphop', 'indie', 'progressive pop rock', 'experimental progressive rock', 
     'math rock', 'kraut', 'digital hardcore', 'breakbeat hardcore', 'newwave', 'techo', 'ebm', 'dsmb', 
-    'neoclassical darkwave', 'dreamcore', 'sample hop', 'fusion'
+    'fusion'
   ]
 };
