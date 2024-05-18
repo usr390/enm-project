@@ -545,7 +545,8 @@ const genreMapping: GenreMapping = {
   rock: [
     'rock', 'alternative rock', 'indie rock', 'pop rock', 'psychedelic rock', 'stoner rock', 
     'hard rock', 'glam rock', 'spanish rock', 'soft rock', 'surf rock', 'garage rock', 
-    'grunge rock', 'psychedlic rock', 'grunge', 'classic rock', 'texicana'
+    'grunge rock', 'psychedlic rock', 'grunge', 'classic rock', 'texicana', 'death rock', 'doom rock'
+    , 'progressive rock', 'art rock', 'voidgaze'
   ],
   punk: [
     'punk', 'pop punk', 'hardcore punk', 'punk rock', 'egg punk', 'chain punk', 'soft punk',
@@ -553,12 +554,12 @@ const genreMapping: GenreMapping = {
   ],
   metal: [
     'metal', 'symphonic metal', 'doom metal', 'black\'n\'roll', 'nwobhm', 'avant metal', 
-    'fuzz rock', 'sludge metal', 'brutal death metal', 'thrash metal', 'black metal', 
-    'death metal', 'power metal', 'heavy metal', 'doom rock', 'groove metal', 'war metal', 
-    'death rock', 'slam metal', 'drone metal', 'progressive metal', 'speed metal', 'deathcore', 
+    'sludge metal', 'brutal death metal', 'thrash metal', 'black metal', 
+    'death metal', 'power metal', 'heavy metal', 'groove metal', 'war metal', 
+    'slam metal', 'drone metal', 'progressive metal', 'speed metal', 'deathcore', 
     'nu-metalcore', 'blackened death metal', 'blackened deathcore', 'trap metal', 'grind', 'grindcore', 
-    'metalcore', 'progressive rock', 'doomgaze', 'sludge', 'art rock', 'industrial', 'hate metal', 
-    'avant rock', 'alt rock', 'alternative metal', 'experimental metal', 'groove metal'
+    'metalcore', 'doomgaze', 'sludge', 'industrial', 'hate metal', 
+    'avant rock', 'alternative metal', 'experimental metal', 'groove metal', 'voidgaze'
   ],
   edm: [
     'edm', 'techno', 'house', 'dubstep', 'hard techno', 'tech house', 'psytrance', 'deep house', 
@@ -570,7 +571,7 @@ const genreMapping: GenreMapping = {
   ],
   experimental: [
     'experimental', 'avant garde', 'avant rock', 'experimental pop', 'experimental progressive rock', 
-    'experimental noise', 'experimental rock', 'experimental hip hop', 'experimental metal', 'industrial'
+    'experimental noise', 'experimental rock', 'experimental hip hop', 'experimental metal', 'industrial', 'voidgaze'
   ],
   jazz: ['jazz', 'fusion', 'neosoul'],
   pop: [
@@ -606,6 +607,6 @@ const genreMapping: GenreMapping = {
     'avant rock', 'power violence', 'psych punk', 'avant garde', 'sludge', 'experimental', 'post rock', 
     'triphop', 'indie', 'indie rock', 'heavy rock', 'progressive pop rock', 'experimental progressive rock', 
     'math rock', 'kraut', 'digital hardcore', 'breakbeat hardcore', 'newwave', 'techo', 'ebm', 'dsmb', 
-    'neoclassical darkwave', 'voidgaze', 'dreamcore', 'sample hop', 'fusion'
+    'neoclassical darkwave', 'dreamcore', 'sample hop', 'fusion'
   ]
 };
