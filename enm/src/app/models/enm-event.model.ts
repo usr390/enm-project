@@ -35,5 +35,5 @@ export interface EnmEvent {
     "flyer": string,
     "updates": any,
     "postponed": boolean
-
+    "rsvp": string
 }
