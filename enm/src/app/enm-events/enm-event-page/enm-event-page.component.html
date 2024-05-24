@@ -94,11 +94,11 @@
     <div *ngIf="isMobile">
       <div class="row">
         <div class="col-6" *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="margin-bottom: 15px;">
-          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer" style="margin-right: 25px;">
+          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer">
             <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> 
             <span style="padding-bottom: 100px;"> Flyer</span>
           </a>
-          <a class="flyer-icon" href="{{enmEvent.rsvp}}" target="_blank" rel="noopener noreferrer">
+          <a class="flyer-icon"  *ngIf="enmEvent.rsvp && enmEvent.rsvp != 'pending'" href="{{enmEvent.rsvp}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
             <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
             <span style="padding-bottom: 100px;"> RSVP</span>
           </a>
@@ -131,6 +131,8 @@
             <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> 
             <span style="padding-bottom: 100px;"> Flyer</span>
           </a>
+        </div>
+        <div *ngIf="enmEvent.rsvp && enmEvent.rsvp != 'pending'">
           <a class="flyer-icon" href="{{enmEvent.rsvp}}" target="_blank" rel="noopener noreferrer">
             <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
             <span style="padding-bottom: 100px;"> RSVP</span>
