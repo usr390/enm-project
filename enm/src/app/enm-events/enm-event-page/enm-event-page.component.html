@@ -102,6 +102,10 @@
             <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
             <span style="padding-bottom: 100px;"> RSVP</span>
           </a>
+          <a class="flyer-icon"  *ngIf="enmEvent.tickets && enmEvent.tickets != 'pending'" href="{{enmEvent.tickets}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
+            <i style="font-size: 2em; margin-top: 15px" class="fa-solid fa-ticket"></i> 
+            <span style="padding-bottom: 100px;"> Tickets</span>
+          </a>
         </div>
       </div>
       <div class="click-to-copy clickable-address">
