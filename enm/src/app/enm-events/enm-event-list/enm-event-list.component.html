@@ -81,8 +81,27 @@
 
                       <!-- This will only show if the user is on a mobile device -->
                       <div *ngIf="isMobile">
-                        <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" style="margin-bottom: 15px;">
-                          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><span (click)="openFlyer($event)"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> <span> Flyer</span></span></a>
+                        <div class="row">
+                          <div class="col-6" *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="margin-bottom: 15px;">
+                            <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer">
+                              <span (click)="openFlyer($event)">
+                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> 
+                                <span style="padding-bottom: 100px;"> Flyer</span>
+                              </span>
+                            </a>
+                            <a class="flyer-icon"  *ngIf="enmEvent.rsvp && enmEvent.rsvp != 'pending'" href="{{enmEvent.rsvp}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
+                              <span  (click)="openFlyer($event)">
+                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
+                                <span style="padding-bottom: 100px;"> RSVP</span>
+                              </span>
+                            </a>
+                            <a class="flyer-icon"  *ngIf="enmEvent.tickets && enmEvent.tickets != 'pending'" href="{{enmEvent.tickets}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
+                              <span (click)="openFlyer($event)">
+                                <i style="font-size: 2em; margin-top: 15px" class="fa-solid fa-ticket"></i> 
+                                <span style="padding-bottom: 100px;"> Tickets</span>
+                              </span>
+                            </a>
+                          </div>
                         </div>
                         <div class="click-to-copy clickable-address">
                           <span class="flex align-items-center gap-2" >
@@ -105,8 +124,27 @@
 
                       <!-- This will only show if the user is NOT on a mobile device -->
                       <div *ngIf="!isMobile">
-                        <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" style="margin-bottom: 15px;">
-                          <a  pTooltip="Go To Flyer" tooltipPosition="bottom" class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><span (click)="openFlyer($event)"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> <span> Flyer</span></span></a>
+                        <div class="row">
+                          <div class="col-6" *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="margin-bottom: 15px;">
+                            <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer">
+                              <span (click)="openFlyer($event)">
+                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> 
+                                <span style="padding-bottom: 100px;"> Flyer</span>
+                              </span>
+                            </a>
+                            <a class="flyer-icon"  *ngIf="enmEvent.rsvp && enmEvent.rsvp != 'pending'" href="{{enmEvent.rsvp}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
+                              <span  (click)="openFlyer($event)">
+                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
+                                <span style="padding-bottom: 100px;"> RSVP</span>
+                              </span>
+                            </a>
+                            <a class="flyer-icon"  *ngIf="enmEvent.tickets && enmEvent.tickets != 'pending'" href="{{enmEvent.tickets}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
+                              <span (click)="openFlyer($event)">
+                                <i style="font-size: 2em; margin-top: 15px" class="fa-solid fa-ticket"></i> 
+                                <span style="padding-bottom: 100px;"> Tickets</span>
+                              </span>
+                            </a>
+                          </div>
                         </div>
                         <div class="click-to-copy clickable-address">
                           <span class="flex align-items-center gap-2" >
@@ -193,8 +231,27 @@
                       
                       <!-- This will only show if the user is on a mobile device -->
                       <div *ngIf="isMobile">
-                        <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block" style="margin-bottom: 15px;">
-                          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><span (click)="openFlyer($event)"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> <span> Flyer</span></span></a>
+                        <div class="row">
+                          <div class="col-6" *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="margin-bottom: 15px;">
+                            <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer">
+                              <span (click)="openFlyer($event)">
+                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> 
+                                <span style="padding-bottom: 100px;"> Flyer</span>
+                              </span>
+                            </a>
+                            <a class="flyer-icon"  *ngIf="enmEvent.rsvp && enmEvent.rsvp != 'pending'" href="{{enmEvent.rsvp}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
+                              <span  (click)="openFlyer($event)">
+                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
+                                <span style="padding-bottom: 100px;"> RSVP</span>
+                              </span>
+                            </a>
+                            <a class="flyer-icon"  *ngIf="enmEvent.tickets && enmEvent.tickets != 'pending'" href="{{enmEvent.tickets}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
+                              <span (click)="openFlyer($event)">
+                                <i style="font-size: 2em; margin-top: 15px" class="fa-solid fa-ticket"></i> 
+                                <span style="padding-bottom: 100px;"> Tickets</span>
+                              </span>
+                            </a>
+                          </div>
                         </div>
                         <div class="click-to-copy clickable-address">
                           <span class="flex align-items-center gap-2" >
@@ -217,8 +274,27 @@
 
                       <!-- This will only show if the user is NOT on a mobile device -->
                       <div *ngIf="!isMobile">
-                        <div *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="display: inline-block"  style="margin-bottom: 15px;">
-                          <a pTooltip="Go To Flyer" tooltipPosition="bottom" class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer"><span (click)="openFlyer($event)"><i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> <span> Flyer</span></span></a>
+                        <div class="row">
+                          <div class="col-6" *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="margin-bottom: 15px;">
+                            <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer">
+                              <span (click)="openFlyer($event)">
+                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> 
+                                <span style="padding-bottom: 100px;"> Flyer</span>
+                              </span>
+                            </a>
+                            <a class="flyer-icon"  *ngIf="enmEvent.rsvp && enmEvent.rsvp != 'pending'" href="{{enmEvent.rsvp}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
+                              <span  (click)="openFlyer($event)">
+                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
+                                <span style="padding-bottom: 100px;"> RSVP</span>
+                              </span>
+                            </a>
+                            <a class="flyer-icon"  *ngIf="enmEvent.tickets && enmEvent.tickets != 'pending'" href="{{enmEvent.tickets}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
+                              <span (click)="openFlyer($event)">
+                                <i style="font-size: 2em; margin-top: 15px" class="fa-solid fa-ticket"></i> 
+                                <span style="padding-bottom: 100px;"> Tickets</span>
+                              </span>
+                            </a>
+                          </div>
                         </div>
                         <div class="click-to-copy clickable-address">
                           <span class="flex align-items-center gap-2" >
