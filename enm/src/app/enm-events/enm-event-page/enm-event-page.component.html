@@ -169,9 +169,9 @@
   </p-card>
 
   <div *ngIf="false">
-    <h2 style="color: #123d75; margin-top: 30px">Artist Directory</h2>
+    <h2 class="d-flex justify-content-center align-items-center" style="color: #123d75; margin-top: 30px">Artist Directory</h2>
     <div class="d-flex justify-content-center align-items-center">
-      <div class="container-sm text-center" style="margin: 20px 0">
+      <div class="container-sm text-center">
         <div class="card">
           <p-dataView #dv [value]="enmEvent.artists"> 
             <ng-template let-artist pTemplate="listItem">
