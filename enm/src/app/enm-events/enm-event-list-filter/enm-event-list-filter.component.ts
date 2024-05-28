@@ -40,7 +40,7 @@ export class EnmEventListFilterComponent {
   enmEventListFilterForm = this.fb.group({ filter: '', checked: false, touring: false });
   artistDirectoryFilterForm = this.fb.group({ filter: '', recentlyListed: false, Rock: false, Punk: false, Metal: false, Edm: false, Rap: false, Jazz: false, Pop: false, Experimental: false, Latin: false, Other: false });
   selectedFilterText$ = this.store$.select(EnmEventsSelectors.selectedFilterText); // for repopulating the input field after a refresh or navigation
-  selectedArtistDirectoryFilterText$ = this.store$.select(ArtistDirectorySelectors.selectFilterText); // for repopulating the input field after a refresh or navigation
+  selectedArtistDirectoryFilterText$ = this.store$.select(ArtistDirectorySelectors.selectFilter); // for repopulating the input field after a refresh or navigation
   filter="Just Listed"
   touring="Touring"
   currentUser$ = this.store$.select(AuthSelectors.selectUser);
@@ -120,8 +120,18 @@ export class EnmEventListFilterComponent {
   }
 
   initializeArtistDirectoryFormControl() {
-    this.selectedArtistDirectoryFilterText$.pipe(take(1)).subscribe(filterText => {
-      this.artistDirectoryFilterForm.get('filter')?.setValue(filterText)
+    this.selectedArtistDirectoryFilterText$.pipe(take(1)).subscribe(filter => {
+      this.artistDirectoryFilterForm.get('filter')?.setValue(filter.text)
+      this.artistDirectoryFilterForm.get('Rock')?.setValue(filter.rock)
+      this.artistDirectoryFilterForm.get('Punk')?.setValue(filter.punk)
+      this.artistDirectoryFilterForm.get('Metal')?.setValue(filter.metal)
+      this.artistDirectoryFilterForm.get('Experimental')?.setValue(filter.experimental)
+      this.artistDirectoryFilterForm.get('Edm')?.setValue(filter.edm)
+      this.artistDirectoryFilterForm.get('Rap')?.setValue(filter.rap)
+      this.artistDirectoryFilterForm.get('Jazz')?.setValue(filter.jazz)
+      this.artistDirectoryFilterForm.get('Pop')?.setValue(filter.pop)
+      this.artistDirectoryFilterForm.get('Latin')?.setValue(filter.latin)
+      this.artistDirectoryFilterForm.get('Other')?.setValue(filter.other)
     });
   }
 }
