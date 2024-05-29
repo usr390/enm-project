@@ -39,11 +39,6 @@ export class EnmEventPageComponent implements OnInit {
   );
 
   ngOnInit(): void { 
-    this.viewportScroller.scrollToPosition([0, 0]);
-    // Additionally, ensure compatibility with Safari
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
     this.checkDeviceType();
     this.store$.select(RouterSelectors.selectCurrentRoute)
     .pipe(
@@ -56,6 +51,14 @@ export class EnmEventPageComponent implements OnInit {
       }
     });
     this.store$.dispatch(enmEventsActions.enmEventListRequest())
+  }
+
+  ngAfterViewInit() {
+    this.viewportScroller.scrollToPosition([0, 0]);
+    // Additionally, ensure compatibility with Safari
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   }
 
   goBack() {
