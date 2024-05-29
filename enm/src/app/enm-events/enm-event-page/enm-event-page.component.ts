@@ -11,6 +11,7 @@ import * as RouterSelectors from './../../state/router/router.selectors';
 import { MessageService } from 'primeng/api';
 import * as AuthSelectors from './../../state/auth/auth.selectors';
 import * as enmEventsActions from './../../state/enmEvents/enmEvents.actions';
+import { ViewportScroller } from '@angular/common';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class EnmEventPageComponent implements OnInit {
   constructor(
     private store$: Store<AppState>,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private viewportScroller: ViewportScroller
   ) { }
 
   lastCopyTimestamp: number = 0;
@@ -37,6 +39,7 @@ export class EnmEventPageComponent implements OnInit {
   );
 
   ngOnInit(): void { 
+    this.viewportScroller.scrollToPosition([0, 0]);
     this.checkDeviceType();
     this.store$.select(RouterSelectors.selectCurrentRoute)
     .pipe(
