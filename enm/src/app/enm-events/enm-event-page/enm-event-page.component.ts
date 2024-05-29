@@ -9,6 +9,7 @@ import { AppState } from 'src/app/state/app.state';
 import * as EnmEventsSelectors from './../../state/enmEvents/enmEvents.selectors';
 import * as RouterSelectors from './../../state/router/router.selectors';
 import { MessageService } from 'primeng/api';
+import * as AuthSelectors from './../../state/auth/auth.selectors';
 import * as enmEventsActions from './../../state/enmEvents/enmEvents.actions';
 
 
@@ -28,6 +29,8 @@ export class EnmEventPageComponent implements OnInit {
   lastCopyTimestamp: number = 0;
   isCopying: boolean = false;
   isMobile!: boolean;
+  currentUser$ = this.store$.select(AuthSelectors.selectUser);
+
 
   enmEvent$ = combineLatest([this.store$.select(EnmEventsSelectors.selectAll), this.store$.select(EnmEventsSelectors.selectSelectedEventId)]).pipe(
     map(([enmEvents, spotlightEnmEventId]) => enmEvents.filter(enmEvent => enmEvent._id === spotlightEnmEventId)[0]),
