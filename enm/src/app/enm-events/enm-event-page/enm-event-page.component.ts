@@ -54,11 +54,13 @@ export class EnmEventPageComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.viewportScroller.scrollToPosition([0, 0]);
-    // Additionally, ensure compatibility with Safari
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
+    setTimeout(() => {
+      this.viewportScroller.scrollToPosition([0, 0]);
+      // Additionally, ensure compatibility with Safari
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 200); // 500 milliseconds delay
   }
 
   goBack() {
