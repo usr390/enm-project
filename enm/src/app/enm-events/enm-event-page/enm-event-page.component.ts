@@ -60,7 +60,7 @@ export class EnmEventPageComponent implements OnInit {
       window.scrollTo(0, 0);
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
-    }, 200); // 500 milliseconds delay
+    }, 100); // 500 milliseconds delay
   }
 
   goBack() {
