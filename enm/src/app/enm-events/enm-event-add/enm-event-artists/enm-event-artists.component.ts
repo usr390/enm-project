@@ -66,7 +66,7 @@ export class EnmEventArtistsComponent {
   }
   tearDownLocalFormControls() {
   }
-  createArtistInputField() { return this.fb.control('', Validators.required); }
+  createArtistInputField() { return this.fb.control([]); }
   removeArtistInputField(index: number) { 
     // counterpart of 'addArtistInputField'
     this.artistsArray.removeAt(index);
