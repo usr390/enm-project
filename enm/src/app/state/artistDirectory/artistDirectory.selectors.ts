@@ -545,7 +545,7 @@ const genreMapping: GenreMapping = {
     'grunge rock', 'psychedlic rock', 'grunge', 'classic rock', 'texicana', 'death rock', 'doom rock',
     'progressive rock', 'art rock', 'voidgaze', 'ambient rock', 'math rock', 'avant rock', 'post rock',
     'goth rock', 'experimental progressive rock', 'sad rock', 'progressive pop rock', 'chankla-gaze',
-    'lofi rock', 'post progressive'
+    'lofi rock', 'post progressive', 'beach rock'
   ],
   punk: [
     'punk', 'pop punk', 'hardcore punk', 'punk rock', 'egg punk', 'chain punk', 'soft punk',
