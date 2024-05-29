@@ -283,6 +283,9 @@
                       <a *ngIf="artist.links.tumblr && (artist.links.tumblr !== 'pending')" href="{{artist.links.tumblr}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                         <i class="fa-brands fa-tumblr"></i>
                       </a>
+                      <a *ngIf="artist.links.self && (artist.links.self !== 'pending')" href="{{artist.links.self}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fa-solid fa-globe"></i>
+                      </a>
                     </div>
         
                     <div *ngFor="let artist of artist.artists">

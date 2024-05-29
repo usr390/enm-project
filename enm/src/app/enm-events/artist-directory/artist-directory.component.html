@@ -100,6 +100,9 @@
                     <a *ngIf="artist.links.tumblr && (artist.links.tumblr !== 'pending')" href="{{artist.links.tumblr}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                       <i class="fa-brands fa-tumblr"></i>
                     </a>
+                    <a *ngIf="artist.links.self && (artist.links.self !== 'pending')" href="{{artist.links.self}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                      <i class="fa-solid fa-globe"></i>
+                    </a>
                   </div>
 
                   <!-- <div *ngIf="artist.links" class="social-links" style="margin-top: 15px">
@@ -205,6 +208,12 @@
                       </a>
                       <a *ngIf="artist.links.threads && (artist.links.threads !== 'pending')" href="{{artist.links.threads}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                         <i class="social-icon">Threads</i>
+                      </a>
+                      <a *ngIf="artist.links.tumblr && (artist.links.tumblr !== 'pending')" href="{{artist.links.tumblr}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fa-brands fa-tumblr"></i>
+                      </a>
+                      <a *ngIf="artist.links.self && (artist.links.self !== 'pending')" href="{{artist.links.self}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fa-solid fa-globe"></i>
                       </a>
                     </div>
 
