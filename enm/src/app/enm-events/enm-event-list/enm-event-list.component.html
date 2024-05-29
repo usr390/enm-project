@@ -70,13 +70,20 @@
                         <div class="custom-divider">
                           <hr style="width: 40px;">
                         </div>
-                        <h6 class="card-text promoter">
-                          <span [innerHTML]="enmEvent.promoter.name | highlightPipe: (filter$ | async)?.text">{{ enmEvent.promoter.name }}</span> 
-                          <span *ngIf="enmEvent.promoter.debut" class="tags">&nbsp;
+                        <h6 class="card-text">
+                          {{ enmEvent.promoter.name }}
+                          <span *ngIf="enmEvent.promoter.debut" class="tags">
                             <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
-                          </span>&nbsp;&nbsp;
+                          </span>
+                          <!-- Add ampersand and promoter2 if promoter2 exists -->
+                          <ng-container *ngIf="enmEvent.promoter2">
+                            &nbsp;&amp;&nbsp;
+                            {{ enmEvent.promoter2.name }}
+                            <span *ngIf="enmEvent.promoter2.debut" class="tags">
+                              <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
+                            </span>
+                          </ng-container>
                         </h6>
-
                       </div>
 
                       <!-- This will only show if the user is on a mobile device -->
@@ -224,7 +231,15 @@
                           {{ enmEvent.promoter.name }}
                           <span *ngIf="enmEvent.promoter.debut" class="tags">
                             <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
-                          </span>&nbsp;&nbsp;
+                          </span>
+                          <!-- Add ampersand and promoter2 if promoter2 exists -->
+                          <ng-container *ngIf="enmEvent.promoter2">
+                            &nbsp;&amp;&nbsp;
+                            {{ enmEvent.promoter2.name }}
+                            <span *ngIf="enmEvent.promoter2.debut" class="tags">
+                              <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
+                            </span>
+                          </ng-container>
                         </h6>
                       </div>
                       <br>

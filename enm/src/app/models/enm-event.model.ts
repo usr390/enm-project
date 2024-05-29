@@ -30,6 +30,7 @@ export interface EnmEvent {
     "artists": Artist[];
     "creationDateTime": string,
     "promoter": Promoter,
+    "promoter2": Promoter,
     "isRecentlyListed": boolean,
     "canceled": boolean,
     "flyer": string,

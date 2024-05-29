@@ -76,18 +76,41 @@
       <div class="custom-divider">
         <hr style="width: 40px;">
       </div>
-      <ng-container *ngIf="enmEvent.promoter.link && enmEvent.promoter.link !== 'pending'; else promoterName">
+      <!-- Promoter 1 -->
+      <ng-container *ngIf="enmEvent.promoter.link && enmEvent.promoter.link !== 'pending'; else promoterName1">
         <h6 class="card-text promoter">
           <a href="{{ enmEvent.promoter.link }}" target="_blank" rel="noopener noreferrer" class="m-0 promoter">{{ enmEvent.promoter.name }}&nbsp;<i style="font-size: .6em;" class="pi pi-external-link"></i></a>
           <span *ngIf="enmEvent.promoter.debut" class="tags">&nbsp;
             <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
           </span>&nbsp;&nbsp;
+          <!-- Add ampersand if promoter2 exists -->
+          <span *ngIf="enmEvent.promoter2">&nbsp;&amp;&nbsp;</span>
         </h6>
-
       </ng-container>
-      <ng-template #promoterName>
+      <ng-template #promoterName1>
         <h6 class="card-text artist-name-non-clickable promoter">{{ enmEvent.promoter.name }}</h6>
+        <span *ngIf="enmEvent.promoter.debut" class="tags">&nbsp;
+          <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
+        </span>
       </ng-template>
+    
+      <!-- Promoter 2 -->
+      <span *ngIf="enmEvent.promoter2">
+        <ng-container *ngIf="enmEvent.promoter2.link && enmEvent.promoter2.link !== 'pending'; else promoterName2">
+          <h6 class="card-text promoter">
+            <a href="{{ enmEvent.promoter2.link }}" target="_blank" rel="noopener noreferrer" class="m-0 promoter">{{ enmEvent.promoter2.name }}&nbsp;<i style="font-size: .6em;" class="pi pi-external-link"></i></a>
+            <span *ngIf="enmEvent.promoter2.debut" class="tags">&nbsp;
+              <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
+            </span>&nbsp;&nbsp;
+          </h6>
+        </ng-container>
+        <ng-template #promoterName2>
+          <h6 class="card-text artist-name-non-clickable promoter">{{ enmEvent.promoter2.name }}</h6>
+          <span *ngIf="enmEvent.promoter2.debut" class="tags">&nbsp;
+            <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
+          </span>
+        </ng-template>
+      </span>
     </div>
     <br>
     <!-- This will only show if the user is on a mobile device -->
