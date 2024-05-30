@@ -27,7 +27,7 @@
 
         <div style="margin-top: 10px" *ngIf="((currentUser$ | async)?.username === 'muslimgauze') || ((currentUser$ | async)?.username === 'cd')">
             <div class="d-flex align-items-center">
-                <button pButton type="button" icon="pi pi-times" class="test" (click)="clearGenreFilters()" styleClass="p-button-sm p-button-rounded p-button-text" *ngIf="anyGenreSelected()"></button>
+                <button pButton type="button" icon="pi pi-times" class="test" (click)="clearGenreFilters()" styleClass="p-button-sm p-button-rounded p-button-text" *ngIf="anyGenreSelected()" style="margin-left: 10px; margin-bottom: 20px;"></button>
                 <p-scroller 
                   [items]="genres" 
                   [itemSize]="75"
