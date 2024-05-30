@@ -38,7 +38,7 @@ export class EnmEventListFilterComponent {
   );
 
   enmEventListFilterForm = this.fb.group({ filter: '', checked: false, touring: false });
-  artistDirectoryFilterForm = this.fb.group({ filter: '', recentlyListed: false, Rock: false, Punk: false, Metal: false, Edm: false, Rap: false, Jazz: false, Pop: false, Experimental: false, Latin: false, Other: false });
+  artistDirectoryFilterForm = this.fb.group({ filter: '', recentlyListed: false, Rock: false, Punk: false, Metal: false, EDM: false, Rap: false, Jazz: false, Pop: false, Experimental: false, Latin: false, Other: false });
   selectedFilterText$ = this.store$.select(EnmEventsSelectors.selectedFilterText); // for repopulating the input field after a refresh or navigation
   selectedArtistDirectoryFilterText$ = this.store$.select(ArtistDirectorySelectors.selectFilter); // for repopulating the input field after a refresh or navigation
   filter="Just Listed"
@@ -48,7 +48,7 @@ export class EnmEventListFilterComponent {
   filter$ = this.store$.select(EnmEventsSelectors.selectFilter);
 
   ngOnInit() {
-    this.genres = ['Rock', 'Punk', 'Metal', 'Experimental', 'Edm', 'Rap', 'Jazz', 'Pop', 'Latin', 'Other'];
+    this.genres = ['Rock', 'Punk', 'Metal', 'Experimental', 'EDM', 'Rap', 'Jazz', 'Pop', 'Latin', 'Other'];
     this.initializeFormControl();
     this.initializeArtistDirectoryFormControl()
     this.enmEventListFilterForm.valueChanges.pipe(
@@ -83,7 +83,7 @@ export class EnmEventListFilterComponent {
     let rock = this.artistDirectoryFilterForm.value.Rock as boolean
     let punk = this.artistDirectoryFilterForm.value.Punk as boolean
     let metal = this.artistDirectoryFilterForm.value.Metal as boolean
-    let edm = this.artistDirectoryFilterForm.value.Edm as boolean
+    let edm = this.artistDirectoryFilterForm.value.EDM as boolean
     let rap = this.artistDirectoryFilterForm.value.Rap as boolean
     let jazz = this.artistDirectoryFilterForm.value.Jazz as boolean
     let pop = this.artistDirectoryFilterForm.value.Pop as boolean
@@ -126,7 +126,7 @@ export class EnmEventListFilterComponent {
       this.artistDirectoryFilterForm.get('Punk')?.setValue(filter.punk)
       this.artistDirectoryFilterForm.get('Metal')?.setValue(filter.metal)
       this.artistDirectoryFilterForm.get('Experimental')?.setValue(filter.experimental)
-      this.artistDirectoryFilterForm.get('Edm')?.setValue(filter.edm)
+      this.artistDirectoryFilterForm.get('EDM')?.setValue(filter.edm)
       this.artistDirectoryFilterForm.get('Rap')?.setValue(filter.rap)
       this.artistDirectoryFilterForm.get('Jazz')?.setValue(filter.jazz)
       this.artistDirectoryFilterForm.get('Pop')?.setValue(filter.pop)
