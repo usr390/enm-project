@@ -366,10 +366,12 @@ export const selectFiltered = createSelector(
         // Check if filter text is in artist's name
         const nameMatch = normalizeText(artist.name).includes(normalizedFilter);
         // Check if any of artist's links match the filter text as a platform, assuming non-'pending'
-        const platformMatch = Object.entries(artist.links).some(([key, value]) =>
-          normalizeText(key).includes(normalizedFilter) && value !== 'pending'
-        );  
-        return nameMatch || platformMatch;
+
+        // const platformMatch = Object.entries(artist.links).some(([key, value]) =>
+        //   normalizeText(key).includes(normalizedFilter) && value !== 'pending'
+        // );  
+
+        return nameMatch //|| platformMatch;
       });
     }
     
@@ -387,15 +389,14 @@ export const selectFiltered = createSelector(
       { key: 'other', value: filter.other }
     ];
 
-    const activeGenres = genreFilters
-      .filter(genre => genre.value)
-      .flatMap(genre => genreMapping[genre.key] || []);
+    const activeGenres = genreFilters.filter(genre => genre.value).flatMap(genre => genreMapping[genre.key]);
 
     if (activeGenres.length > 0) {
       filteredArtists = filteredArtists.filter(artist => 
         artist.genre && artist.genre.some(genre => activeGenres.includes(genre))
       );
     }
+
 
     return filteredArtists;
   }
@@ -591,7 +592,7 @@ const genreMapping: GenreMapping = {
   electronic: [
     'electronic', 'techno', 'dubstep', 'triphop', 'tech house', 'house', 'electronica', 'synthwave', 
     'vaporwave', 'darkwave', 'coldwave', 'ebm', 'idm', 'chiptune', 'acid', 'minimal', 'rhythmic noise',
-    'future beats', 
+    'future beats'
   ],
   soul: ['soul', 'neosoul'],
   acoustic: ['acoustic'],
@@ -601,6 +602,6 @@ const genreMapping: GenreMapping = {
     'new age', 'kitschwave', 'chiptune. lsdj', 'instrumental', 'ambient', 'psychedelic', 'outsider', 'goth', 
     'disco', 'club', 'no wave', 'midwest', 'lofi', 'neosoul', 'acoustic', 'instrumental', 
     'world music', 'orchestral', 'rhythmic noise', 'dirge', 
-    'fusion', 'indie', 'ebm', 'dsmb', 'alternative folk', 
+    'fusion', 'indie', 'ebm', 'dsmb', 'alternative folk'
   ]
 };
