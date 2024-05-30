@@ -24,20 +24,24 @@
             </span>
             <button pButton type="button" icon="pi pi-times" class="clear-btn" (click)="clearArtistDirectoryFilter()" styleClass="p-button-sm p-button-rounded p-button-text" *ngIf="artistDirectoryFilterForm.controls.filter.value"></button>
         </div>
+
         <div style="margin-top: 10px" *ngIf="((currentUser$ | async)?.username === 'muslimgauze') || ((currentUser$ | async)?.username === 'cd')">
-            <p-scroller 
-            [items]="genres" 
-            [itemSize]="75"
-            scrollHeight="50px" 
-            orientation="horizontal" 
-            styleClass="border-1 surface-border">
-                <ng-template pTemplate="item" let-genre let-options="options">
-                            <p-toggleButton [style]="{ height: '2em' }"
-                                formControlName="{{genre}}" 
-                                onLabel="{{genre}}" 
-                                offLabel="{{genre}}" />
-                </ng-template>
-            </p-scroller>
+            <div class="d-flex align-items-center">
+                <button pButton type="button" icon="pi pi-times" class="test" (click)="clearGenreFilters()" styleClass="p-button-sm p-button-rounded p-button-text" *ngIf="anyGenreSelected()"></button>
+                <p-scroller 
+                  [items]="genres" 
+                  [itemSize]="75"
+                  scrollHeight="50px" 
+                  orientation="horizontal" 
+                  styleClass="border-1 surface-border">
+                  <ng-template pTemplate="item" let-genre let-options="options">
+                    <p-toggleButton [style]="{ height: '2em' }"
+                                    formControlName="{{genre}}" 
+                                    onLabel="{{genre}}" 
+                                    offLabel="{{genre}}" />
+                  </ng-template>
+                </p-scroller>
+            </div>
         </div>
 
         <!-- <div style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 10px;">

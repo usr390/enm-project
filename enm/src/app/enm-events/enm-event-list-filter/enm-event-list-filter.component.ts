@@ -134,5 +134,15 @@ export class EnmEventListFilterComponent {
       this.artistDirectoryFilterForm.get('Other')?.setValue(filter.other)
     });
   }
+
+  clearGenreFilters() {
+    this.genres.forEach(genre => {
+      this.artistDirectoryFilterForm.get(genre)?.setValue(false);
+    });
+    this.filterArtistDirectoryResults();
+  }
+  anyGenreSelected(): boolean {
+    return this.genres.some(genre => this.artistDirectoryFilterForm.get(genre)?.value);
+  }
 }
 
