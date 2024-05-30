@@ -27,12 +27,12 @@
         <div style="margin-top: 10px" *ngIf="((currentUser$ | async)?.username === 'muslimgauze') || ((currentUser$ | async)?.username === 'cd')">
             <p-scroller 
             [items]="genres" 
-            [itemSize]="150"
+            [itemSize]="75"
             scrollHeight="50px" 
             orientation="horizontal" 
             styleClass="border-1 surface-border">
                 <ng-template pTemplate="item" let-genre let-options="options">
-                            <p-toggleButton [style]="{ width: '10em', height: '2em' }"
+                            <p-toggleButton [style]="{ height: '2em' }"
                                 formControlName="{{genre}}" 
                                 onLabel="{{genre}}" 
                                 offLabel="{{genre}}" />
