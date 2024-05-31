@@ -14,32 +14,38 @@
         </div>    
     </form>
 </div>
-<div *ngIf="showArtistFilter$ | async" class="container-fluid">
+
+<div *ngIf="showArtistFilter$ | async">
     <form [formGroup]="artistDirectoryFilterForm" (ngSubmit)="filterArtistDirectoryResults()">
-        <div class="row mb-3">
-            <div class="col">
-                <div class="input-clearable d-flex align-items-center">
-                    <span class="p-input-icon-left flex-grow-1">
-                        <i class="pi pi-search"></i>
-                        <input #filterInput pInputText formControlName="filter" type="text" placeholder="Filter Artists By Name" maxlength="30" name="search" role="search" autocomplete="off" class="form-control"/>
-                    </span>
-                    <button pButton type="button" icon="pi pi-times" class="clear-btn ml-2" (click)="clearArtistDirectoryFilter()" styleClass="p-button-sm p-button-rounded p-button-text" *ngIf="artistDirectoryFilterForm.controls.filter.value"></button>
-                </div>
+        <div class="input-clearable">
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input #filterInput pInputText formControlName="filter" type="text"  placeholder="Filter Artists By Name" maxlength="30" name="search" role="search" autocomplete="off"/>
+            </span>
+            <button pButton type="button" icon="pi pi-times" class="clear-btn" (click)="clearArtistDirectoryFilter()" styleClass="p-button-sm p-button-rounded p-button-text" *ngIf="artistDirectoryFilterForm.controls.filter.value"></button>
+        </div>
+
+        <div style="margin-top: 10px" *ngIf="((currentUser$ | async)?.username === 'muslimgauze') || ((currentUser$ | async)?.username === 'cd')">
+            <div class="d-flex align-items-center">
+                <button pButton type="button" icon="pi pi-times" class="test" (click)="clearGenreFilters()" styleClass="p-button-sm p-button-rounded p-button-text" *ngIf="anyGenreSelected()" style="margin-left: 10px; margin-bottom: 20px;"></button>
+                <p-scroller 
+                  [items]="genres" 
+                  [itemSize]="75"
+                  scrollHeight="50px" 
+                  orientation="horizontal" 
+                  styleClass="border-1 surface-border">
+                  <ng-template pTemplate="item" let-genre let-options="options">
+                    <p-toggleButton [style]="{ height: '2em' }"
+                                    formControlName="{{genre}}" 
+                                    onLabel="{{genre}}" 
+                                    offLabel="{{genre}}" />
+                  </ng-template>
+                </p-scroller>
             </div>
         </div>
-        <div class="row" *ngIf="((currentUser$ | async)?.username === 'muslimgauze') || ((currentUser$ | async)?.username === 'cd')">
-            <div class="col">
-                <div class="d-flex align-items-center flex-wrap">
-                    <button pButton type="button" class="test" (click)="clearGenreFilters()" styleClass="p-button-sm p-button-rounded p-button-text mr-2 mb-2" *ngIf="anyGenreSelected()">Clear Genres</button>
-                    <div class="d-flex flex-wrap align-items-center flex-grow-1">
-                        <p-scroller [items]="genres" [itemSize]="75" scrollHeight="50px" orientation="horizontal" styleClass="border-1 surface-border flex-grow-1">
-                            <ng-template pTemplate="item" let-genre let-options="options">
-                                <p-toggleButton [style]="{ height: '2em' }" formControlName="{{genre}}" onLabel="{{genre}}" offLabel="{{genre}}" />
-                            </ng-template>
-                        </p-scroller>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+        <!-- <div style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 10px;">
+            <span style="margin-right: 25px;"><p-toggleButton formControlName="recentlyListed" [onLabel]="filter" [offLabel]="filter" [style]="{ width: '10em', height: '2em' }"></p-toggleButton></span>
+        </div>     -->
     </form>
 </div>
