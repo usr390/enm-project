@@ -8,7 +8,7 @@ export class ProductService {
         return [
             {
                 name: 'Our Full Event List',
-                description: 'Currently extending through October!',
+                description: 'Currently extending through November!',
                 image: 'fulllist2.gif',
             },
             {
