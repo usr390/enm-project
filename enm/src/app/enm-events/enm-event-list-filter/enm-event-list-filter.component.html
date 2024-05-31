@@ -26,8 +26,8 @@
         </div>
 
         <div style="margin-top: 10px" *ngIf="((currentUser$ | async)?.username === 'muslimgauze') || ((currentUser$ | async)?.username === 'cd')">
-            <div style="text-align: right;">
-                <button pButton type="button" icon="pi pi-times" class="test" (click)="clearGenreFilters()" styleClass="p-button-sm p-button-rounded p-button-text" *ngIf="anyGenreSelected()"></button>
+            <div style="text-align: right;" [ngClass]="{'invisible': !anyGenreSelected()}">
+                <button pButton type="button" icon="pi pi-times" class="test" (click)="clearGenreFilters()" styleClass="p-button-sm p-button-rounded p-button-text"></button>
             </div>
             <div class="d-flex align-items-center">
                 <p-scroller 
