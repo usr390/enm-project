@@ -551,7 +551,7 @@ const genreMapping: GenreMapping = {
   punk: [
     'punk', 'pop punk', 'hardcore punk', 'punk rock', 'egg punk', 'chain punk', 'soft punk',
     'queercore', 'psych punk', 'synth punk', 'emo', 'emocore', 'hardcore rock', 'beatdown',
-    'post hardcore', 'easycore', 'new wave', 'digital hardcore', 'hardcore'
+    'post hardcore', 'easycore', 'new wave', 'digital hardcore', 'hardcore', 'dbeat'
   ],
   metal: [
     'metal', 'symphonic metal', 'doom metal', 'black\'n\'roll', 'nwobhm', 'avant metal', 
