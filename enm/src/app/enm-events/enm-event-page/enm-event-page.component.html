@@ -285,6 +285,12 @@
                     <a *ngIf="artist.links.self && (artist.links.self !== 'pending')" href="{{artist.links.self}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                       <i class="fa-solid fa-globe"></i>
                     </a>
+                    <a *ngIf="artist.links.lastfm && (artist.links.lastfm !== 'pending')" href="{{artist.links.lastfm}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                      <i class="fa-brands fa-lastfm"></i>
+                    </a>
+                    <a *ngIf="artist.links.discogs && (artist.links.discogs !== 'pending')" href="{{artist.links.discogs}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                      <i class="fa-solid fa-record-vinyl"></i>
+                    </a>
                   </div>
       
                   <div *ngFor="let artist of artist.artists">

@@ -14,7 +14,9 @@ const LinksSchema = new Schema({
     x: String,
     self: String,
     tumblr: String,
-    twitch: String
+    twitch: String,
+    lastfm: String,
+    discogs: String
 });
 
 
