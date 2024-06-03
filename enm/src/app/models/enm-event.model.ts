@@ -37,5 +37,6 @@ export interface EnmEvent {
     "updates": any,
     "postponed": boolean
     "rsvp": string,
-    "tickets": string
+    "tickets": string,
+    "signup": string
 }
