@@ -37,10 +37,12 @@
                   orientation="horizontal" 
                   styleClass="border-1 surface-border">
                   <ng-template pTemplate="item" let-genre let-options="options">
-                    <p-toggleButton [style]="{ height: '2em', padding: '2px'  }"
-                                    formControlName="{{genre}}" 
-                                    onLabel="{{genre}}" 
-                                    offLabel="{{genre}}" />
+                    <span style="margin-right: 5px">
+                        <p-toggleButton [style]="{ height: '2em' }"
+                        formControlName="{{genre}}" 
+                        onLabel="{{genre}}" 
+                        offLabel="{{genre}}" />
+                    </span>
                   </ng-template>
                 </p-scroller>
             </div>
