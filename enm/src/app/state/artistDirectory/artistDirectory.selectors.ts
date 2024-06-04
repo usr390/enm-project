@@ -581,7 +581,7 @@ const genreMapping: GenreMapping = {
   pop: [
     'pop', 'pop rock', 'pop punk', 'indie pop', 'power pop', 'bedroom pop', 'alternative pop', 
     'experimental pop', 'dark pop', 'electronic pop', 'kawaii hip hop', 'synth pop', 'synth rock', 'dream pop',
-    'sad pop', 'void pop'
+    'sad pop', 'void pop', 'jangle pop'
   ],
   latin: [
     'latin', 'bolero', 'cumbia', 'norteño', 'latin pop', 'reggaeton', 'regional mexican', 'tropifolk', 
