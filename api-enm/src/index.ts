@@ -105,6 +105,7 @@ app.get('/api/enmEvents', express.json(), async (req, res) => {
 
 app.post('/api/enmEvent', express.json(), async (req: Request, res: Response) => {
   console.log(req.body)
+  const creationDateTime = DateTime.now()
   const enmEvent = new EnmEventModel({
     tags: req.body.tags,
     venue: req.body.venue,
@@ -113,10 +114,13 @@ app.post('/api/enmEvent', express.json(), async (req: Request, res: Response) =>
     dateTime: req.body.dateTime,
     cover: req.body.cover,
     artists: req.body.artists,
-    creationDateTime: DateTime.now(),
+    creationDateTime: creationDateTime,
     promoter: req.body.promoter,
     flyer: 'pending',
-    updates: []
+    updates: [{
+      date: creationDateTime,
+      message: "Event added to Rarelygroovy"
+    }]
   });
   // persist and respond to client with created EnmEvent object
   res.json(await enmEvent.save());
