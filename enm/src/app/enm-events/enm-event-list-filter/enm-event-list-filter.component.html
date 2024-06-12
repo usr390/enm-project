@@ -25,25 +25,23 @@
             <button pButton type="button" icon="pi pi-times" class="clear-btn" (click)="clearArtistDirectoryFilter()" styleClass="p-button-sm p-button-rounded p-button-text" *ngIf="artistDirectoryFilterForm.controls.filter.value"></button>
         </div>
 
-        <div style="margin-top: 10px" *ngIf="(currentUser$ | async)?.plus">
-            <div style="text-align: right; margin-bottom: 5px" [ngClass]="{'invisible': !anyGenreSelected()}">
-                <button pButton type="button" icon="pi pi-times" class="test" (click)="clearGenreFilters()" styleClass="p-button-sm p-button-rounded p-button-text"></button>
-            </div>
-            <div class="d-flex align-items-center">
-                <p-scroller 
-                  [items]="genres" 
-                  [itemSize]="75"
-                  scrollHeight="50px" 
-                  orientation="horizontal" 
-                  styleClass="border-1 surface-border">
-                  <ng-template pTemplate="item" let-genre let-options="options">
-                    <p-toggleButton [style]="{ height: '2em' }"
-                    formControlName="{{genre}}" 
-                    onLabel="{{genre}}" 
-                    offLabel="{{genre}}" />
-                  </ng-template>
-                </p-scroller>
-            </div>
+        <div style="text-align: right; margin-bottom: 5px" [ngClass]="{'invisible': !anyGenreSelected()}">
+            <button pButton type="button" icon="pi pi-times" class="test" (click)="clearGenreFilters()" styleClass="p-button-sm p-button-rounded p-button-text"></button>
+        </div>
+        <div class="d-flex align-items-center">
+            <p-scroller 
+                [items]="genres" 
+                [itemSize]="75"
+                scrollHeight="50px" 
+                orientation="horizontal" 
+                styleClass="border-1 surface-border">
+                <ng-template pTemplate="item" let-genre let-options="options">
+                <p-toggleButton [style]="{ height: '2em' }"
+                formControlName="{{genre}}" 
+                onLabel="{{genre}}" 
+                offLabel="{{genre}}" />
+                </ng-template>
+            </p-scroller>
         </div>
 
         <!-- <div style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 10px;">
