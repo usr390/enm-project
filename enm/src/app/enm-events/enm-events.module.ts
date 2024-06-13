@@ -15,8 +15,6 @@ import { RouterModule } from '@angular/router';
 import { PaymentScreenTestComponent } from './payment-screen-test/payment-screen-test.component';
 import { ArtistDirectoryComponent } from './artist-directory/artist-directory.component';
 import { FaqComponent } from './faq/faq.component';
-import { ArtistDirectoryForVendingEventsComponent } from './artist-directory-for-vending-events/artist-directory-for-vending-events.component';
-
 
 @NgModule({
   declarations: [
@@ -29,7 +27,6 @@ import { ArtistDirectoryForVendingEventsComponent } from './artist-directory-for
     PaymentScreenTestComponent,
     ArtistDirectoryComponent,
     FaqComponent,
-    ArtistDirectoryForVendingEventsComponent,
   ],
   imports: [
     // angular modules
@@ -50,7 +47,6 @@ import { ArtistDirectoryForVendingEventsComponent } from './artist-directory-for
     PaymentScreenTestComponent,
     ArtistDirectoryComponent,
     FaqComponent,
-    ArtistDirectoryForVendingEventsComponent,
   ]
 })
 export class EnmEventModule { }
