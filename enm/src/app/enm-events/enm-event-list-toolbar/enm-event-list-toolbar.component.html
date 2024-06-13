@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="((user$ | async)?.plus) && ((currentRoute$ | async) === '/artist-directory' || (currentRoute$ | async)?.startsWith('/artist-directory?') || (currentRoute$ | async)?.startsWith('/iBhLq5wrrxafte4a') || (currentRoute$ | async)?.startsWith('/iBhLq5wrrxafte4a?'))"  class="row">
+        <div *ngIf="((currentRoute$ | async) === '/artist-directory' || (currentRoute$ | async)?.startsWith('/artist-directory?') || (currentRoute$ | async)?.startsWith('/iBhLq5wrrxafte4a') || (currentRoute$ | async)?.startsWith('/iBhLq5wrrxafte4a?'))"  class="row">
             <div class="col-12">
                 <div class="p-toolbar-group-end">
                     <div><app-enm-event-list-filter></app-enm-event-list-filter></div>
