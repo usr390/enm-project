@@ -15,5 +15,6 @@ export interface Artist {
     "debut": boolean,
     "albumDebut": boolean,
     "lastShow": boolean,
+    "start": string,
     "genre": []
 }

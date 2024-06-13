@@ -14,7 +14,7 @@ import * as AuthSelectors from './../../state/auth/auth.selectors';
 })
 export class ArtistDirectoryComponent {
 
-  artists$ = this.store$.select(ArtistDirectorySelectors.selectFiltered)
+  artists$ = this.store$.select(ArtistDirectorySelectors.sortFiltered)
   count$ = this.store$.select(ArtistDirectorySelectors.selectFilteredArtistDirectoryCount)
 
   recentlyTouredArtists$ = this.store$.select(ArtistDirectorySelectors.selectFilteredRecentlyTouredArtists)
