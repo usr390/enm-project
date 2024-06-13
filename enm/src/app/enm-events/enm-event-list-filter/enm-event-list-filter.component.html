@@ -43,6 +43,9 @@
                 </ng-template>
             </p-scroller>
         </div>
+        <ng-container *ngIf="((currentUser$ | async)?.username === 'muslimgauze') || ((currentUser$ | async)?.username === 'cd')">
+            <p-toggleButton [style]="{ height: '1em' }" onIcon="pi pi-arrows-v" offIcon="pi pi-arrows-v" formControlName="sortByYearDescending" />
+        </ng-container>
 
         <!-- <div style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 10px;">
             <span style="margin-right: 25px;"><p-toggleButton formControlName="recentlyListed" [onLabel]="filter" [offLabel]="filter" [style]="{ width: '10em', height: '2em' }"></p-toggleButton></span>

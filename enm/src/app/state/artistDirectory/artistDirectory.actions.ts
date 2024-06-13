@@ -7,4 +7,4 @@ export const artistDirectoryRequest = createAction('[Artist Directory Screen] Ar
 export const artistDirectoryRequestSuccessResponse = createAction('[Artist Directory Screen] Artist Directory Request Success Response', props<{ artistDirectorySuccessResponse: ArtistDirectorySuccessResponse }>()); 
 export const artistDirectoryRequestErrorResponse = createAction('[Artist Directory Screen] Artist Directory Request Error Response', props<{ artistDirectoryErrorResponse: ArtistDirectoryErrorResponse }>()); 
 
-export const artistDirectoryFilter = createAction('[Artist Directory Screen] Artists Directory Filter', props<{ text: string, recentlyListed: boolean, rock: boolean, punk: boolean, metal: boolean, edm: boolean, rap: boolean, jazz: boolean, pop: boolean, experimental: boolean, latin: boolean, other: boolean }>()); 
+export const artistDirectoryFilter = createAction('[Artist Directory Screen] Artists Directory Filter', props<{ text: string, recentlyListed: boolean, sortByYearDescending: boolean, rock: boolean, punk: boolean, metal: boolean, edm: boolean, rap: boolean, jazz: boolean, pop: boolean, experimental: boolean, latin: boolean, other: boolean }>()); 

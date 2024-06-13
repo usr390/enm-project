@@ -7,6 +7,7 @@ export interface Artists {
 export interface ArtistDirectoryFilter {
     text: string;
     recentlyListed: boolean,
+    sortByYearDescending: boolean,
     rock: boolean, 
     punk: boolean, 
     metal: boolean, 
@@ -31,6 +32,7 @@ export const initialState: ArtistDirectoryState = {
     artistDirectoryFilter: {
         text: '',
         recentlyListed: false,
+        sortByYearDescending: false,
         rock: false, 
         punk: false, 
         metal: false, 

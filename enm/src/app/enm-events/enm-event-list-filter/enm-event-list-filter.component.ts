@@ -38,7 +38,7 @@ export class EnmEventListFilterComponent {
   );
 
   enmEventListFilterForm = this.fb.group({ filter: '', checked: false, touring: false });
-  artistDirectoryFilterForm = this.fb.group({ filter: '', recentlyListed: false, Rock: false, Punk: false, Metal: false, EDM: false, Rap: false, Jazz: false, Pop: false, Experimental: false, Latin: false, Other: false });
+  artistDirectoryFilterForm = this.fb.group({ filter: '', recentlyListed: false, sortByYearDescending: false, Rock: false, Punk: false, Metal: false, EDM: false, Rap: false, Jazz: false, Pop: false, Experimental: false, Latin: false, Other: false });
   selectedFilterText$ = this.store$.select(EnmEventsSelectors.selectedFilterText); // for repopulating the input field after a refresh or navigation
   selectedArtistDirectoryFilterText$ = this.store$.select(ArtistDirectorySelectors.selectFilter); // for repopulating the input field after a refresh or navigation
   filter="Just Listed"
@@ -80,6 +80,7 @@ export class EnmEventListFilterComponent {
   filterArtistDirectoryResults(){
     let text = this.artistDirectoryFilterForm.value.filter?.trim() as string
     let recentlyListed = this.artistDirectoryFilterForm.value.recentlyListed as boolean
+    let sortByYearDescending = this.artistDirectoryFilterForm.value.sortByYearDescending as boolean
     let rock = this.artistDirectoryFilterForm.value.Rock as boolean
     let punk = this.artistDirectoryFilterForm.value.Punk as boolean
     let metal = this.artistDirectoryFilterForm.value.Metal as boolean
@@ -91,7 +92,7 @@ export class EnmEventListFilterComponent {
     let latin = this.artistDirectoryFilterForm.value.Latin as boolean
     let other = this.artistDirectoryFilterForm.value.Other as boolean
 
-    this.store$.dispatch(ArtistDirectoryActions.artistDirectoryFilter({ text, recentlyListed, rock, punk, metal, edm, rap, jazz, pop, experimental, latin, other }))
+    this.store$.dispatch(ArtistDirectoryActions.artistDirectoryFilter({ text, recentlyListed, sortByYearDescending, rock, punk, metal, edm, rap, jazz, pop, experimental, latin, other }))
   }
 
   clearFilter() {
