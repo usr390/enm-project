@@ -123,6 +123,7 @@ export class EnmEventListFilterComponent {
   initializeArtistDirectoryFormControl() {
     this.selectedArtistDirectoryFilterText$.pipe(take(1)).subscribe(filter => {
       this.artistDirectoryFilterForm.get('filter')?.setValue(filter.text)
+      this.artistDirectoryFilterForm.get('sortByYearDescending')?.setValue(filter.sortByYearDescending)
       this.artistDirectoryFilterForm.get('Rock')?.setValue(filter.rock)
       this.artistDirectoryFilterForm.get('Punk')?.setValue(filter.punk)
       this.artistDirectoryFilterForm.get('Metal')?.setValue(filter.metal)
