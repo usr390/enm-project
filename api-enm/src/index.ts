@@ -588,6 +588,32 @@ app.post('/api/cancel-subscription/:userId', async (req, res) => {
   }
 });
 
+const predefinedIds = [
+  "6670b1a4de365201d3e6d35f", // amani's open mic @ luna
+  "6671a1fcde365201d3e6dec2" // carl's open mic @ cork
+];
+
+app.get('/api/bump-weekly-recurring-events', async (req: Request, res: Response) => {
+  try {
+    const events = await EnmEventModel.find({ _id: { $in: predefinedIds.map(id => new mongoose.Types.ObjectId(id)) } });
+
+    const bulkOps = events.map(event => ({
+      updateOne: {
+        filter: { _id: event._id },
+        update: { $set: { dateTime: new Date(event.dateTime.getTime() + 7 * 24 * 60 * 60 * 1000) } }
+      }
+    }));
+
+    const result = await EnmEventModel.bulkWrite(bulkOps);
+
+    res.send(`${result.modifiedCount} documents were updated`);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred');
+  }
+});
+
+
 
 
 
