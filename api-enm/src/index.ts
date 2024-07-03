@@ -590,7 +590,9 @@ app.post('/api/cancel-subscription/:userId', async (req, res) => {
 
 const predefinedIds = [
   "6670b1a4de365201d3e6d35f", // amani's open mic @ luna
-  "6671a1fcde365201d3e6dec2" // carl's open mic @ cork
+  "6671a1fcde365201d3e6dec2", // carl's open mic @ cork
+  "66859c5650d851839c3a67b0", // emi and borracho's open decks @ flying
+  "6685a04223cab62867eefdb9", // yung hick's open mic @ gremlin
 ];
 
 app.get('/api/bump-weekly-recurring-events', async (req: Request, res: Response) => {
