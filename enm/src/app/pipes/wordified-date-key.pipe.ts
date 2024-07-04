@@ -15,7 +15,8 @@ export class WordifiedDateKeyPipe implements PipeTransform {
       '0317': "St. Patrick's Day",
       '0704': "Independence Day",
       '1031': "Halloween",
-      '1225': "Christmas Day"
+      '1225': "Christmas Day",
+      '1231': "New Year's Eve",
       // Add more holidays here
     };
 
