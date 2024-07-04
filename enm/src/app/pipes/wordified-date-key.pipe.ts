@@ -19,11 +19,6 @@ export class WordifiedDateKeyPipe implements PipeTransform {
       // Add more holidays here
     };
 
-    const monthDay = dateKey.slice(4); // Extract month and day
-    if (holidays[monthDay]) {
-      return holidays[monthDay]; // Return the holiday name if it exists
-    }
-
     const year = parseInt(dateKey.slice(0, 4));
     const month = parseInt(dateKey.slice(4, 6)) - 1;
     const day = parseInt(dateKey.slice(6, 8));
@@ -37,8 +32,11 @@ export class WordifiedDateKeyPipe implements PipeTransform {
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
 
+    // Extract month and day for holiday check
+    const monthDay = dateKey.slice(4);
+
     if (eventDate.getTime() === today.getTime()) {
-      return 'Today';
+      return holidays[monthDay] ? `Today (${holidays[monthDay]})` : 'Today';
     } else if (eventDate.getTime() === tomorrow.getTime()) {
       return 'Tomorrow';
     }
