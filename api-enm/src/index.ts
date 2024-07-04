@@ -158,17 +158,39 @@ app.get('/api/artistDirectory', express.json(), async (req: Request, res: Respon
 
     if (isPlusUser) {
       try {
-        console.log('ad but though plus channel!');
-        res.json(await ArtistModel.find().catch(err => console.log(err)));
+        console.log('ad but through plus channel!');
+        // Query for plus users
+        res.json(await ArtistModel.find({
+          $or: [
+            {
+              location: "RGV",
+              start: { $exists: true, $ne: "pending" }
+            },
+            {
+              location: { $ne: "RGV" }
+            }
+          ]
+        }).catch(err => console.log(err)));
       } catch (err) {
         console.log(err);
         res.status(500).send('Internal Server Error');
       }
     } else {
       try {
-        console.log('ad but though non plus channel!');
-        // Apply the filter to retrieve artists whose "end" property is "pending" and "location" is "RGV"
-        res.json(await ArtistModel.find({ end: "pending", location: "RGV" }).catch(err => console.log(err)));
+        console.log('ad but through non-plus channel!');
+        // Query for non-plus users
+        res.json(await ArtistModel.find({
+          end: "pending",
+          $or: [
+            {
+              location: "RGV",
+              start: { $exists: true, $ne: "pending" }
+            },
+            {
+              location: { $ne: "RGV" }
+            }
+          ]
+        }).catch(err => console.log(err)));
       } catch (err) {
         console.log(err);
         res.status(500).send('Internal Server Error');
@@ -179,6 +201,8 @@ app.get('/api/artistDirectory', express.json(), async (req: Request, res: Respon
     res.status(500).send('Internal Server Error');
   }
 });
+
+
 
 
 
