@@ -156,21 +156,37 @@ app.get('/api/artistDirectory', express.json(), async (req: Request, res: Respon
   try {
     const isPlusUser = await checkUserPlusStatus(username);
 
+    const commonQuery = {
+      $or: [
+        {
+          location: "RGV",
+          start: { $exists: true, $ne: "pending" }
+        },
+        {
+          location: { $ne: "RGV" }
+        }
+      ],
+      $expr: {
+        $gt: [
+          {
+            $size: {
+              $filter: {
+                input: { $objectToArray: { $ifNull: ["$links", {}] } },
+                as: "link",
+                cond: { $ne: ["$$link.v", "pending"] }
+              }
+            }
+          },
+          0
+        ]
+      }
+    };
+
     if (isPlusUser) {
       try {
         console.log('ad but through plus channel!');
         // Query for plus users
-        res.json(await ArtistModel.find({
-          $or: [
-            {
-              location: "RGV",
-              start: { $exists: true, $ne: "pending" }
-            },
-            {
-              location: { $ne: "RGV" }
-            }
-          ]
-        }).catch(err => console.log(err)));
+        res.json(await ArtistModel.find(commonQuery).catch(err => console.log(err)));
       } catch (err) {
         console.log(err);
         res.status(500).send('Internal Server Error');
@@ -181,15 +197,7 @@ app.get('/api/artistDirectory', express.json(), async (req: Request, res: Respon
         // Query for non-plus users
         res.json(await ArtistModel.find({
           end: "pending",
-          $or: [
-            {
-              location: "RGV",
-              start: { $exists: true, $ne: "pending" }
-            },
-            {
-              location: { $ne: "RGV" }
-            }
-          ]
+          ...commonQuery
         }).catch(err => console.log(err)));
       } catch (err) {
         console.log(err);
