@@ -317,7 +317,7 @@ const genreMapping: GenreMapping = {
   ],
   edm: [
     'edm', 'techno', 'house', 'dubstep', 'hard techno', 'tech house', 'psytrance', 'deep house', 
-    'trance', 'breakcore', 'breakbeat hardcore', 'electronica', 'psychedelic trance', 'digital hardcore'
+    'trance', 'breakcore', 'breakbeat hardcore', 'electronica', 'psychedelic trance', 'digital hardcore', 'electro'
   ],
   rap: [
     'rap', 'hip hop', 'trap', 'experimental hip hop', 'trill hop', 'sample hop', 'phonk', 'trap metal', 
