@@ -86,7 +86,7 @@
                     <a *ngIf="artist.links.instagram && (artist.links.instagram !== 'pending')" href="{{artist.links.instagram}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                       <i class="fab fa-instagram social-icon"></i>
                     </a>
-                    <a *ngIf="artist.links.myspace && (artist.links.myspace !== 'pending')" href="{{artist.links.myspace}}" target="_blank" rel="noopener noreferrer" class="social-icon" style="text-decoration: underline;">myspace</a>&nbsp;&nbsp;
+                    <a *ngIf="artist.links.myspace && (artist.links.myspace !== 'pending')" href="{{artist.links.myspace}}" target="_blank" rel="noopener noreferrer" class="social-icon">myspace&nbsp;&nbsp;</a>
   
                     <a *ngIf="artist.links.tiktok && (artist.links.tiktok !== 'pending')" href="{{artist.links.tiktok}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                       <i class="fa-brands fa-tiktok social-icon"></i>
@@ -108,6 +108,9 @@
                     </a>
                     <a *ngIf="artist.links.discogs && (artist.links.discogs !== 'pending')" href="{{artist.links.discogs}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                       <i class="fa-solid fa-record-vinyl"></i>
+                    </a>
+                    <a *ngIf="artist.links.deezer && (artist.links.deezer !== 'pending')" href="{{artist.links.deezer}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                      <i class="fa-brands fa-deezer"></i>
                     </a>
                   </div>
 
@@ -204,7 +207,7 @@
                       <a *ngIf="artist.links.instagram && (artist.links.instagram !== 'pending')" href="{{artist.links.instagram}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                         <i class="fab fa-instagram social-icon"></i>
                       </a>
-                      <a *ngIf="artist.links.myspace && (artist.links.myspace !== 'pending')" href="{{artist.links.myspace}}" target="_blank" rel="noopener noreferrer" class="social-icon" style="text-decoration: underline;">myspace</a>&nbsp;&nbsp;
+                      <a *ngIf="artist.links.myspace && (artist.links.myspace !== 'pending')" href="{{artist.links.myspace}}" target="_blank" rel="noopener noreferrer" class="social-icon">myspace&nbsp;&nbsp;</a>
     
                       <a *ngIf="artist.links.tiktok && (artist.links.tiktok !== 'pending')" href="{{artist.links.tiktok}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                         <i class="fa-brands fa-tiktok social-icon"></i>
@@ -220,6 +223,9 @@
                       </a>
                       <a *ngIf="artist.links.self && (artist.links.self !== 'pending')" href="{{artist.links.self}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                         <i class="fa-solid fa-globe"></i>
+                      </a>
+                      <a *ngIf="artist.links.deezer && (artist.links.deezer !== 'pending')" href="{{artist.links.deezer}}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fa-brands fa-deezer"></i>
                       </a>
                     </div>
 

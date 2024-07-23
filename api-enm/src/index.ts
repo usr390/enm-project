@@ -648,7 +648,22 @@ app.get('/api/bump-weekly-recurring-events', async (req: Request, res: Response)
   }
 });
 
+// new endpoint to get the number of artists from RGV who have reached an end
+app.get('/api/rgv-defunct-artists-count', express.json(), async (req: Request, res: Response) => {
+  try {
+    // query to find artists with location "RGV" and end property not equal to "pending"
+    const rgvDefunctArtistsCount = await ArtistModel.countDocuments({ 
+      location: "RGV", 
+      end: { $ne: "pending" }
+    });
 
+    // return the count in the response
+    res.json({ count: rgvDefunctArtistsCount });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 
 
