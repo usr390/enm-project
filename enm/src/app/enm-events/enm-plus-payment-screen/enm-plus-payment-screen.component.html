@@ -6,40 +6,41 @@
 </div>
 
 <div *ngIf="furthestEventDate$ | async as furthestEventDate">
-    <div class="d-flex justify-content-center align-items-center">
-        <p-card class="card wrapper position-relative" header="Rarelygroovy+" subheader="$2 per month" [ngStyle]="{'border': 'none', 'max-width': '500px'}">
-            <ng-container *ngIf="(currentUser$ | async) === null">
-
-                <p>Comes with:</p>
-                <div class="login-subscribe-wrapper d-flex justify-content-center align-items-center">
-                    <p-button label="Get Started" size="small" (click)="navigateToLogInPage()" [style]="{'width': '150px', 'height': '35px', 'font-size': '.9em'}" class="login-button"></p-button>
-                </div>
-
-            </ng-container>
-            <p-carousel [value]="products" [numVisible]="1" [numScroll]="1" [responsiveOptions]="responsiveOptions">
-                <ng-template let-product pTemplate="item">
-                    <div class="product-item">
-                        <div class="product-item-content">
-                            <h4 class="mb-1 d-flex justify-content-center align-items-center">{{product.name}}</h4>
-                            <div>
-                                <h6 class="mt-0 mb-3" style="padding: 0 10px; font-size: .9em;">{{product.description}}</h6>
-                            </div>
-                            <div class="mb-3 d-flex justify-content-center align-items-center">
-                                <img *ngIf="product.image" src="./../../../assets/images/{{product.image}}"[alt]="product.name" class="product-image" />
-                            </div>
-
-                        </div>
+    <div *ngIf="defunctArtistsCount$ | async as defunctArtistsCount">
+        <div class="d-flex justify-content-center align-items-center">
+            <p-card class="card wrapper position-relative" header="Rarelygroovy+" subheader="$2 per month" [ngStyle]="{'border': 'none', 'max-width': '500px'}">
+                <ng-container *ngIf="(currentUser$ | async) === null">
+    
+                    <p>Comes with:</p>
+                    <div class="login-subscribe-wrapper d-flex justify-content-center align-items-center">
+                        <p-button label="Get Started" size="small" (click)="navigateToLogInPage()" [style]="{'width': '150px', 'height': '35px', 'font-size': '.9em'}" class="login-button"></p-button>
                     </div>
-                </ng-template>
-
-            </p-carousel>
-            <!-- <p class="d-flex justify-content-center align-items-center"><span>Watch an oveview of Rg+ on our <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/watch?v=3cWyKcfxYs4">YouTube</a> channel</span></p> -->
-            
-        </p-card>
-    </div>
-    <ng-container *ngIf="currentUser$ | async">
-        <div id="checkout" style="margin-bottom: 20px">
-            <!-- Checkout will insert the payment form here -->
+    
+                </ng-container>
+                <p-carousel [value]="products" [numVisible]="1" [numScroll]="1" [responsiveOptions]="responsiveOptions">
+                    <ng-template let-product pTemplate="item">
+                        <div class="product-item">
+                            <div class="product-item-content">
+                                <h4 class="mb-1 d-flex justify-content-center align-items-center">{{product.name}}</h4>
+                                <div>
+                                    <h6 class="mt-0 mb-3" style="padding: 0 10px; font-size: .9em;">{{product.description}}</h6>
+                                </div>
+                                <div class="mb-3 d-flex justify-content-center align-items-center">
+                                    <img *ngIf="product.image" src="./../../../assets/images/{{product.image}}"[alt]="product.name" class="product-image" />
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+    
+                </p-carousel>
+                <!-- <p class="d-flex justify-content-center align-items-center"><span>Watch an oveview of Rg+ on our <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/watch?v=3cWyKcfxYs4">YouTube</a> channel</span></p> -->
+                
+            </p-card>
         </div>
-    </ng-container>
+        <ng-container *ngIf="currentUser$ | async">
+            <div id="checkout" style="margin-bottom: 20px">
+                <!-- Checkout will insert the payment form here -->
+            </div>
+        </ng-container>
+    </div>
 </div>

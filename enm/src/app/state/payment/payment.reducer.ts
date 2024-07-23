@@ -6,7 +6,10 @@ import {
     enmPlusPaymentScreenWaitOnFurthestMonthErrorResponse,
     enmPlusPaymentScreenWaitOnStripeCheckoutResponse,
     enmPlusPaymentScreenWaitOnStripeCheckoutSuccessResponse,
-    enmPlusPaymentScreenWaitOnStripeCheckoutErrorResponse
+    enmPlusPaymentScreenWaitOnStripeCheckoutErrorResponse,
+    enmPlusPaymentScreenWaitOnDefunctArtistsCount,
+    enmPlusPaymentScreenWaitOnDefunctArtistsCountErrorResponse,
+    enmPlusPaymentScreenWaitOnDefunctArtistsCountSuccessResponse
 } from "../payment/payment.actions";
 
 
@@ -32,6 +35,28 @@ const _paymentReducer = createReducer(
             furthestEventMonth: enmPlusPaymentScreenWaitOnFurthestMonthSuccessResponse,
             plusSubscriptionCardLoading: false,
             plusSubscriptionCardLoaded: true
+        }
+    }),
+    on(enmPlusPaymentScreenWaitOnDefunctArtistsCount, (state) => {
+        return {
+            ...state,
+            plusSubscriptionCardLoading: true,
+            plusSubscriptionCardLoaded: false
+        }
+    }),
+    on(enmPlusPaymentScreenWaitOnDefunctArtistsCountErrorResponse, (state) => {
+        return {
+            ...state,
+            plusSubscriptionCardLoading: true,
+            plusSubscriptionCardLoaded: false
+        }
+    }),
+    on(enmPlusPaymentScreenWaitOnDefunctArtistsCountSuccessResponse, (state, { enmPlusPaymentScreenWaitOnDefunctArtistsCountSuccessResponse }) => {
+        return {
+            ...state,
+            defunctArtistsCount: enmPlusPaymentScreenWaitOnDefunctArtistsCountSuccessResponse,
+            // plusSubscriptionCardLoading: true,
+            // plusSubscriptionCardLoaded: false
         }
     }),
     on(enmPlusPaymentScreenWaitOnStripeCheckoutResponse, (state) => {

@@ -18,3 +18,7 @@ interface StripeCheckoutSession {
   }
 export const enmPlusPaymentScreenWaitOnStripeCheckoutSuccessResponse = createAction('[Enm Plus Payment Screen] Wait On Stripe Checkout Success Response', props<{ enmPlusPaymentScreenWaitOnStripeCheckoutSuccessResponse: StripeCheckoutSession }>());
 export const enmPlusPaymentScreenWaitOnStripeCheckoutErrorResponse = createAction('[Enm Plus Payment Screen] Wait On Stripe Checkout Error Response');
+
+export const enmPlusPaymentScreenWaitOnDefunctArtistsCount = createAction('[Enm Plus Payment Screen] Wait On Defunct Artists Count');
+export const enmPlusPaymentScreenWaitOnDefunctArtistsCountSuccessResponse = createAction('[Enm Plus Payment Screen] Wait On Defunct Artists Count Success Response', props<{ enmPlusPaymentScreenWaitOnDefunctArtistsCountSuccessResponse: string }>());
+export const enmPlusPaymentScreenWaitOnDefunctArtistsCountErrorResponse = createAction('[Enm Plus Payment Screen] Wait On Defunct Artists Count Error Response');

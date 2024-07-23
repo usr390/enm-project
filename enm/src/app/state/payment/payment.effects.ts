@@ -21,6 +21,18 @@ export class PaymentEffects {
         )
     );
 
+    enmPlusPaymentScreenWaitOnDefunctArtistsCount$ = createEffect(() => 
+        this.actions$.pipe(
+            ofType(PaymentActions.enmPlusPaymentScreenWaitOnDefunctArtistsCount),
+            exhaustMap(
+                (action) => this.enmPlusPaymentService.defunctArtistsCount$.pipe(
+                    map(enmPlusPaymentScreenWaitOnDefunctArtistsCountSuccessResponse => PaymentActions.enmPlusPaymentScreenWaitOnDefunctArtistsCountSuccessResponse({ enmPlusPaymentScreenWaitOnDefunctArtistsCountSuccessResponse })),
+                    catchError((error: string) => of(PaymentActions.enmPlusPaymentScreenWaitOnDefunctArtistsCountErrorResponse()))
+                ), 
+            )
+        )
+    );
+
     enmPlusMonthlySubscriptionPaymentSubmission$ = createEffect(() => 
         this.actions$.pipe(
             ofType(PaymentActions.enmPlusMonthlySubscriptionPaymentSubmission),

@@ -658,7 +658,7 @@ app.get('/api/rgv-defunct-artists-count', express.json(), async (req: Request, r
     });
 
     // return the count in the response
-    res.json({ count: rgvDefunctArtistsCount });
+    res.send(rgvDefunctArtistsCount.toString());
   } catch (err) {
     console.error(err);
     res.status(500).send('Internal Server Error');

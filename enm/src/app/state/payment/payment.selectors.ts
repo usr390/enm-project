@@ -14,3 +14,8 @@ export const selectFurthestMonth = createSelector(
   selectFeature,
   (state: PaymentState): string => state.furthestEventMonth
 );
+
+export const selectDefunctArtistsCount = createSelector(
+  selectFeature,
+  (state: PaymentState): string => state.defunctArtistsCount
+);

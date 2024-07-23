@@ -39,6 +39,8 @@ export class EnmPlusPaymentScreenComponent {
 
   // checkoutSession$ = this.enmPlusPaymentService.checkoutSession$;
   furthestEventDate$ = this.store$.select(PaymentSelectors.selectFurthestMonth);
+  defunctArtistsCount$ = this.store$.select(PaymentSelectors.selectDefunctArtistsCount);
+
   plusSubscriptionCardLoading$ = this.store$.select(PaymentSelectors.plusSubscriptionCardLoading);
   currentUser$ = this.store$.select(AuthSelectors.selectUser);
 
@@ -50,10 +52,12 @@ export class EnmPlusPaymentScreenComponent {
       if (user) {
         this.initializeStripe(user.id);
         this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth());
+        this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnDefunctArtistsCount());
       } 
       else {
         this.navigationService.paymentScreenSkipped = true;
         this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth());
+        this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnDefunctArtistsCount());
       }}
     );
 

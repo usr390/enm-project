@@ -31,6 +31,8 @@ export class EnmPlusPaymentService {
   }
 
   furthestEventDate$ = this.http.get<string>(BASE_URL + '/getFurthestEventDateTime')
+  
+  defunctArtistsCount$ = this.http.get<string>(BASE_URL + '/rgv-defunct-artists-count')
 
   plusifyUser(user: NullableUser) {
     const url = `${BASE_URL}/user/${user?.id}/plusify`;

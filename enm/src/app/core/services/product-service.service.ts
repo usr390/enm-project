@@ -18,7 +18,7 @@ export class ProductService {
             },
             {
                 name: 'Our Full Artist Directory',
-                description: 'See additional artists that are no longer active. Perfect for a historical view of the valleys alternative music scene!',
+                description: 'See defunct artists from previous eras of the valley music scene. We currently have 161 catalogued, but this number is always growing',
                 image: 'ad.gif',
             },
         ];
