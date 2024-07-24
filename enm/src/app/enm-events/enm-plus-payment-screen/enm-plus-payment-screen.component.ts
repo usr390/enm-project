@@ -79,7 +79,7 @@ export class EnmPlusPaymentScreenComponent {
     this.products = [
       {
         name: 'Our Full Event List',
-        description: `Currently extending through ${month}!`,
+        description: `Currently extending through November!`,
         image: 'fulllist2.gif',
       },
       {
@@ -89,7 +89,7 @@ export class EnmPlusPaymentScreenComponent {
       },
       {
           name: 'Our Full Artist Directory',
-          description: `See defunct artists from previous eras of the valley music scene. We currently have ${this.defunctArtistCount} catalogued, but this number is always growing`,
+          description: `See defunct artists from previous eras of the valley music scene. We currently have 162 catalogued, but this number is always growing`,
           image: 'ad.gif',
       }
     ];
