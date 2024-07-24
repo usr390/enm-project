@@ -39,7 +39,9 @@ export class EnmPlusPaymentScreenComponent {
 
   // checkoutSession$ = this.enmPlusPaymentService.checkoutSession$;
   furthestEventDate$ = this.store$.select(PaymentSelectors.selectFurthestMonth);
+  furthestEventDate = ''
   defunctArtistsCount$ = this.store$.select(PaymentSelectors.selectDefunctArtistsCount);
+  defunctArtistCount = '';
 
   plusSubscriptionCardLoading$ = this.store$.select(PaymentSelectors.plusSubscriptionCardLoading);
   currentUser$ = this.store$.select(AuthSelectors.selectUser);
@@ -51,19 +53,42 @@ export class EnmPlusPaymentScreenComponent {
     this.currentUser$.pipe(take(1)).subscribe(user => { 
       if (user) {
         this.initializeStripe(user.id);
-        this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth());
-        this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnDefunctArtistsCount());
       } 
       else {
         this.navigationService.paymentScreenSkipped = true;
-        this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth());
-        this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnDefunctArtistsCount());
       }}
     );
 
-    this.productService.getProductsSmall().then((products) => {
-      this.products = products;
-    });
+    this.defunctArtistsCount$.pipe(take(1)).subscribe(defunctArtistCount => {
+      this.defunctArtistCount = defunctArtistCount
+    })
+
+    this.furthestEventDate$.pipe(take(1)).subscribe(furthestEventDate => {
+      this.furthestEventDate = furthestEventDate;
+    })
+
+    const date = new Date(this.furthestEventDate);
+
+    // Get the month name
+    const month = date.toLocaleString('default', { month: 'long' });
+
+    this.products = [
+      {
+        name: 'Our Full Event List',
+        description: `Currently extending through ${month}!`,
+        image: 'fulllist2.gif',
+      },
+      {
+          name: 'Event Filters',
+          description: 'Filter events by artist, venue, promoter, and a bunch more',
+          image: 'filter.gif',
+      },
+      {
+          name: 'Our Full Artist Directory',
+          description: `See defunct artists from previous eras of the valley music scene. We currently have ${this.defunctArtistCount} catalogued, but this number is always growing`,
+          image: 'ad.gif',
+      }
+    ];
 
     this.responsiveOptions = [
       {
