@@ -73,7 +73,7 @@ export class EnmPlusPaymentScreenComponent {
       },
       {
           breakpoint: '991px',
-          numVisible: 2,
+          numVisible: 1,
           numScroll: 1
       },
       {
