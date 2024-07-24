@@ -53,9 +53,13 @@ export class EnmPlusPaymentScreenComponent {
     this.currentUser$.pipe(take(1)).subscribe(user => { 
       if (user) {
         this.initializeStripe(user.id);
+        this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth());
+        this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnDefunctArtistsCount());
       } 
       else {
         this.navigationService.paymentScreenSkipped = true;
+        this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnFurthestMonth());
+        this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnDefunctArtistsCount());
       }}
     );
 
