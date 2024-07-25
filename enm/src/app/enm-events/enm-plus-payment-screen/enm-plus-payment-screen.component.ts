@@ -89,7 +89,7 @@ export class EnmPlusPaymentScreenComponent {
       },
       {
           name: 'Our Full Artist Directory',
-          description: `See defunct artists from previous eras of the valley music scene. We currently have 162 catalogued, but this number is always growing`,
+          description: `See defunct artists from previous eras of the valley music scene. We currently have 168 catalogued, but this number is always growing`,
           image: 'ad.gif',
       }
     ];
