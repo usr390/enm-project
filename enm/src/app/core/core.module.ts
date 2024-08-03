@@ -13,6 +13,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { MyAccountComponent } from './my-account/my-account.component';
+import { BlogComponent } from './blog/blog.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { MyAccountComponent } from './my-account/my-account.component';
     PageNotFoundComponent,
     PrivacyPolicyComponent,
     MyAccountComponent,
+    BlogComponent,
   ],
   imports: [
     // angular modules
@@ -41,7 +43,8 @@ import { MyAccountComponent } from './my-account/my-account.component';
     CreateUserComponent,
     PageNotFoundComponent,
     PrivacyPolicyComponent,
-    MyAccountComponent
+    MyAccountComponent,
+    BlogComponent
   ]
 })
 export class CoreModule { }
