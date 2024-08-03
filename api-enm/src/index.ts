@@ -38,6 +38,7 @@ import { UserDTO } from "./models/UserDTO";
 import PromoterModel from "./models/Promoter";
 import { checkUserPlusStatus } from "./utilty/isplus";
 import PromoCodeModel from "./models/PromoCode";
+import BlogModel from "./models/Blog";
 
 const app = express(); app.use(cors(corsOptions)); app.use(apiLimiter)
 const port = process.env.PORT || 3000
@@ -665,6 +666,9 @@ app.get('/api/rgv-defunct-artists-count', express.json(), async (req: Request, r
   }
 });
 
+app.get('/api/blogs', express.json(), async (req: Request, res: Response) => {
+  res.json(await BlogModel.find().catch(err => console.log(err)))
+})
 
 
 // asynchronous initialization. keeps api from processesing requests until a successful connection to db is established
