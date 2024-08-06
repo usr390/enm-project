@@ -25,6 +25,7 @@ import { StoreModule } from '@ngrx/store';
   // written by enm team but related to parent
   import { reducers, metaReducers } from './state/app.state';
 import { StoreRouterConnectingModule, RouterState } from "@ngrx/router-store";
+import { BlogEffects } from './state/blog/blog.effects';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { StoreRouterConnectingModule, RouterState } from "@ngrx/router-store";
       EnmEventsEffects,
       HydrationEffects,
       RarelygroovyPlusEffects,
-      ArtistDirectoryEffects
+      ArtistDirectoryEffects,
+      BlogEffects
     ]),
     StoreRouterConnectingModule.forRoot({
       routerState: RouterState.Minimal }),

@@ -12,6 +12,8 @@ import { RarelygroovyPlusState } from './rarelygroovyPlus/rarelygroovyPlus.state
 import { rarelygroovyPlusReducer } from './rarelygroovyPlus/rarelygroovyPlus.reducer';
 import { ArtistDirectoryState } from './artistDirectory/artistDirectory.state';
 import { artistDirectoryReducer } from './artistDirectory/artistDirectory.reducer';
+import { BlogState } from './blog/blog.state';
+import { blogReducer } from './blog/blog.reducer';
 
 export interface AppState {
     auth: AuthState;
@@ -20,7 +22,8 @@ export interface AppState {
     payment: PaymentState;
     router: RouterReducerState;
     rarelygroovyPlus: RarelygroovyPlusState
-    artistDirectory: ArtistDirectoryState
+    artistDirectory: ArtistDirectoryState,
+    blogs: BlogState
 }
 
 export const reducers: ActionReducerMap<AppState> = {
@@ -30,7 +33,8 @@ export const reducers: ActionReducerMap<AppState> = {
     payment: paymentReducer,
     router: routerReducer,
     rarelygroovyPlus: rarelygroovyPlusReducer,
-    artistDirectory: artistDirectoryReducer
+    artistDirectory: artistDirectoryReducer,
+    blogs: blogReducer
 };
 
 export const metaReducers: MetaReducer[] = [
