@@ -1,22 +1,30 @@
 <div *ngIf="blogList$ | async as blogList">
-    <div class="card">
-        <p-dataView #dv [value]="blogList">
+    <div class="container-sm" style="margin: 20px 0">
+        <h2 class="datekey">
+            <span>Blog</span>
+            <span class="numberOfEvents" *ngIf="blogCount$ | async as count" style="text-decoration: none;">
+              Listed: {{ count }}
+            </span>
+        </h2>
+        <div class="card">
+            <p-dataView #dv [value]="blogList">
                 <ng-template let-blog pTemplate="listItem">
                     <div class="col-12">
                         <a [routerLink]="['/blogs', blog._id]" (click)="onBlogListSelection(blog._id)" class="event-card-link .event-card-link" href="/">
                             <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
-                              <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                                <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                                 <div class="flex flex-column align-items-center sm:align-items-start gap-3">
                                     <h2>{{ blog.title }}</h2>
                                     <p>{{ blog.date | date:'medium' }}</p>
                                     <p><strong>Author:</strong> {{ blog.author }}</p>
                                     <p>{{ blog.body }}</p>
                                 </div>
-                              </div>
+                                </div>
                             </div>
                         </a>
                     </div>
                 </ng-template>
-        </p-dataView>
+            </p-dataView>
+        </div>
     </div>
 </div>
