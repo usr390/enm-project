@@ -14,6 +14,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { BlogComponent } from './blog/blog.component';
+import { BlogPageComponent } from './blog-page/blog-page.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { BlogComponent } from './blog/blog.component';
     PrivacyPolicyComponent,
     MyAccountComponent,
     BlogComponent,
+    BlogPageComponent,
   ],
   imports: [
     // angular modules
@@ -44,7 +46,8 @@ import { BlogComponent } from './blog/blog.component';
     PageNotFoundComponent,
     PrivacyPolicyComponent,
     MyAccountComponent,
-    BlogComponent
+    BlogComponent,
+    BlogPageComponent
   ]
 })
 export class CoreModule { }

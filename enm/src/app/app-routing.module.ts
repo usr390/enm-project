@@ -17,6 +17,7 @@ import { ArtistDirectoryComponent } from './enm-events/artist-directory/artist-d
 import { FaqComponent } from './enm-events/faq/faq.component';
 import { ArtistDirectoryGuardService } from './artist-directory-guard.guard';
 import { BlogComponent } from './core/blog/blog.component';
+import { BlogPageComponent } from './core/blog-page/blog-page.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'events' },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'plus', component: EnmPlusPaymentScreenComponent },
   { path: 'account', component: MyAccountComponent },
   { path: 'blog', component: BlogComponent },
+  { path: 'blog/:id', component: BlogPageComponent },
   { path: 'iBhLq5wrrxafte4e', component: PaymentScreenTestComponent },
   { path: 'checkout/return', component: EnmPlusPaymentSuccessfulComponent },
   { path: 'add-event', loadChildren: () => import('./enm-events/enm-event-add/enm-event-add.module').then(m => m.EnmEventAddModule) },

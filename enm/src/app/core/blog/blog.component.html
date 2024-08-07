@@ -10,7 +10,7 @@
             <p-dataView #dv [value]="blogList">
                 <ng-template let-blog pTemplate="listItem">
                     <div class="col-12">
-                        <a [routerLink]="['/blogs', blog._id]" (click)="onBlogListSelection(blog._id)" class="event-card-link .event-card-link" href="/">
+                        <a [routerLink]="['/blog', blog._id]" (click)="onBlogListSelection(blog._id)" class="event-card-link .event-card-link" href="/">
                             <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
                                 <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                                 <div class="flex flex-column align-items-center sm:align-items-start gap-3">
