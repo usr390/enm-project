@@ -7,7 +7,7 @@
     <div class="container-sm text-center" style="margin: 20px 0">
       <ng-container>
         <h2 class="datekey">
-          <span>Artist Directory</span>
+          <span>Artist Archive</span>
           <span class="numberOfEvents" *ngIf="count$ | async as count" style="text-decoration: none;">
             Listed: {{ count }}
           </span></h2>
@@ -268,9 +268,9 @@
         </div>
       </ng-container>
       <div *ngIf="(count$ | async) !== 0" class="disclaimer-section">
-        <div class="disclaimer d-flex">* Start year and end year are best estimates</div>
+        <div class="disclaimer d-flex">* Start and end years are best estimates</div>
         <div *ngIf="!(user$ | async)?.plus" class="disclaimer d-flex"><span>* Only currently active, rgv-based artists are listed</span></div>
-        <div *ngIf="!(user$ | async)?.plus" class="disclaimer d-flex"><span>* Get <a routerLink="/plus" style="color: rgb(162, 162, 162); text-decoration: underline;">Rarelygroovy+</a> for our full artist directory</span></div>
+        <div *ngIf="!(user$ | async)?.plus" class="disclaimer d-flex"><span>* Get <a routerLink="/plus" style="color: rgb(162, 162, 162); text-decoration: underline;">Rarelygroovy+</a> for our full artist archive</span></div>
       </div>
     </div>
   </div>

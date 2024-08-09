@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'add-event', loadChildren: () => import('./enm-events/enm-event-add/enm-event-add.module').then(m => m.EnmEventAddModule) },
   { path: 'termsofservice', component: TermsOfServiceComponent },
   { path: 'privacypolicy', component: PrivacyPolicyComponent },
-  { path: 'artist-directory', component: ArtistDirectoryComponent, canActivate: [ArtistDirectoryGuardService] },
+  { path: 'artist-archive', component: ArtistDirectoryComponent, canActivate: [ArtistDirectoryGuardService] },
   { path: 'faq', component: FaqComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
