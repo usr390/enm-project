@@ -267,7 +267,11 @@
           <div class="disclaimer d-flex"><span>* Are we missing an artist or link? <a style="text-decoration: underline;" href="https://instagram.com/rarelygroovy" target="_blank" rel="noopener noreferrer">Let us know!</a></span></div>
         </div>
       </ng-container>
-
+      <div *ngIf="(count$ | async) !== 0" class="disclaimer-section">
+        <div class="disclaimer d-flex">* Start year and end year are best estimates</div>
+        <div *ngIf="!(user$ | async)?.plus" class="disclaimer d-flex"><span>* Only currently active, rgv-based artists are listed</span></div>
+        <div *ngIf="!(user$ | async)?.plus" class="disclaimer d-flex"><span>* Get <a routerLink="/plus" style="color: rgb(162, 162, 162); text-decoration: underline;">Rarelygroovy+</a> for our full artist directory</span></div>
+      </div>
     </div>
   </div>
 
