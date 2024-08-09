@@ -374,8 +374,8 @@
     </div>
   </div>
   <div *ngIf="(filteredEnmEventList$ | async)?.length !== 0" class="disclaimer-section">
-    <div *ngIf="!(user$ | async)?.plus" class="disclaimer d-flex"><span>* Get <a routerLink="/plus" style="color: rgb(162, 162, 162)">Rarelygroovy+</a> for our full event list</span></div>
     <div class="disclaimer d-flex">* Start times might vary (e.g., punk time)</div>
+    <div *ngIf="!(user$ | async)?.plus" class="disclaimer d-flex"><span>* Get <a routerLink="/plus" style="color: rgb(162, 162, 162)">Rarelygroovy+</a> for our full event list</span></div>
   </div>
   <div *ngIf="(filteredEnmEventList$ | async)?.length == 0" class="d-flex justify-content-center align-items-center text-center no-results-text" style="height: 70vh;">
     <ng-container *ngIf="filter$ | async as filters">
