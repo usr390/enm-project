@@ -79,7 +79,7 @@ export class EnmPlusPaymentScreenComponent {
     this.products = [
       {
         name: 'Our Full Event List',
-        description: `Currently extending through November!`,
+        description: `Currently extending through December!`,
         image: 'fulllist2.gif',
       },
       {
