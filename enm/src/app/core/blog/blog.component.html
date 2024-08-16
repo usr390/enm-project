@@ -15,7 +15,7 @@
                                 <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                                 <div class="flex flex-column align-items-center sm:align-items-start gap-3">
                                     <h2>{{ blog.title }}</h2>
-                                    <p>{{ blog.date | date:'medium' }}</p>
+                                    <p>{{ blog.date | date:'MMM d, y, h:mm a' }}</p>
                                     <p><strong>Author:</strong> {{ blog.author }}</p>
                                     <p [innerHTML]="blog.body | blogPreview"></p>
                                 </div>
