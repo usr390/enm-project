@@ -5,7 +5,8 @@
                 <h2>{{ selectedBlog.title }}</h2>
                 <p>{{ selectedBlog.date | date:'medium' }}</p>
                 <p><strong>Author:</strong> {{ selectedBlog.author }}</p>
-                <p>{{ selectedBlog.body }}</p>
+                <div [innerHTML]="selectedBlog.body | blogifyBody"></div>
+
             </div>
         </div>
     </div>

@@ -48,6 +48,7 @@ import { GenreListPipePipe } from '../genre-list-pipe.pipe';
 import { ReverseUpdatesPipe } from './reverse-updates.pipe';
 import { LinkifyPipe } from './pipes/linkify.pipe';
 import { BlogPreviewPipe } from '../blog-preview.pipe';
+import { BlogifyBodyPipe } from '../blogify-body.pipe';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { BlogPreviewPipe } from '../blog-preview.pipe';
     ReverseUpdatesPipe,
     LinkifyPipe,
     BlogPreviewPipe,
+    BlogifyBodyPipe,
   ],
   imports: [
     CommonModule,
@@ -141,7 +143,8 @@ import { BlogPreviewPipe } from '../blog-preview.pipe';
     OverlayPanelModule,
     ReverseUpdatesPipe,
     LinkifyPipe,
-    BlogPreviewPipe
+    BlogPreviewPipe,
+    BlogifyBodyPipe
   ],
   providers: [
     // primeng providers
