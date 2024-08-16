@@ -47,6 +47,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { GenreListPipePipe } from '../genre-list-pipe.pipe';
 import { ReverseUpdatesPipe } from './reverse-updates.pipe';
 import { LinkifyPipe } from './pipes/linkify.pipe';
+import { BlogPreviewPipe } from '../blog-preview.pipe';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { LinkifyPipe } from './pipes/linkify.pipe';
     GenreListPipePipe,
     ReverseUpdatesPipe,
     LinkifyPipe,
+    BlogPreviewPipe,
   ],
   imports: [
     CommonModule,
@@ -138,7 +140,8 @@ import { LinkifyPipe } from './pipes/linkify.pipe';
     ListedHowLongAgoPipe,
     OverlayPanelModule,
     ReverseUpdatesPipe,
-    LinkifyPipe
+    LinkifyPipe,
+    BlogPreviewPipe
   ],
   providers: [
     // primeng providers

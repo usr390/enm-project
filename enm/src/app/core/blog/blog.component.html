@@ -17,7 +17,7 @@
                                     <h2>{{ blog.title }}</h2>
                                     <p>{{ blog.date | date:'medium' }}</p>
                                     <p><strong>Author:</strong> {{ blog.author }}</p>
-                                    <p>{{ blog.body }}</p>
+                                    <p [innerHTML]="blog.body | blogPreview"></p>
                                 </div>
                                 </div>
                             </div>
