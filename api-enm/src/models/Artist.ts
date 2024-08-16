@@ -31,6 +31,7 @@ export const ArtistSchema = new Schema({
     medium: String,
     links: { type: LinksSchema },
     genre: { type: [String] },
+    artists: { type: [] },
     end: { type: String, default: "pending" },
     notes: { type: String, default: "" }
 });

@@ -123,8 +123,15 @@ app.post('/api/enmEvent', express.json(), async (req: Request, res: Response) =>
       message: "Event added to Rarelygroovy"
     }]
   });
-  // persist and respond to client with created EnmEvent object
-  res.json(await enmEvent.save());
+  // Save the enmEvent object
+  const savedEvent = await enmEvent.save();
+
+  // Log the saved object
+  console.log(savedEvent);
+
+  // Respond to client with the saved object
+  res.json(savedEvent);
+
 })
 
 app.get('/api/venues', express.json(), async (req: Request, res: Response) => {
