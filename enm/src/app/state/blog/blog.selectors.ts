@@ -11,7 +11,7 @@ export const selectEntities = createSelector(
 );
 
 export const selectAll = createSelector(selectEntities, (entities): Blog[] =>
-  Object.values(entities)
+  Object.values(entities).reverse()
 );
 
 export const selectSelectedBlogId = createSelector(
