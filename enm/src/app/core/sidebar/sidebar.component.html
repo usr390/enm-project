@@ -5,6 +5,7 @@
         </p>
         <p routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: false}"><span><a routerLink="/events" (click)="closeSidebar()">Events</a></span></p>
         <p routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"><span><a routerLink="/artist-archive" (click)="closeSidebar()">Artist Directory</a></span></p>
+        <p routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"><span><a routerLink="/blog" (click)="closeSidebar()">Blog</a></span></p>
         <span *ngIf="showPlusLink()">
             <p routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/plus']" routerLinkActive="active-link" (click)="closeSidebar()">Get Rarelygroovy+</a></p><br>
             <!-- Additional links here -->
