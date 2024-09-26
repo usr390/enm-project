@@ -13,7 +13,7 @@ import { map, tap } from 'rxjs';
 export class EnmEventListToolbarComponent {
 
   showToolbar$ = this.store$.select(RouterSelectors.selectUrl).pipe(
-    map(url => url && (url.startsWith('/events') || url.startsWith('/checkout/return') || url.startsWith('/plus') || url.startsWith('/artist-archive') || url.startsWith('/account') || url.startsWith('/termsofservice') || url.startsWith('/faq') || url.startsWith('/privacypolicy') || url.startsWith('/blog') || url.startsWith('/iBhLq5wrrxafte4a')))
+    map(url => url && (url.startsWith('/events') || url.startsWith('/checkout/return') || url.startsWith('/plus') || url.startsWith('/artist-directory') || url.startsWith('/account') || url.startsWith('/termsofservice') || url.startsWith('/faq') || url.startsWith('/privacypolicy') || url.startsWith('/blog') || url.startsWith('/iBhLq5wrrxafte4a')))
   );
   
   
