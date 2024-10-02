@@ -346,7 +346,7 @@ const genreMapping: GenreMapping = {
     'vaporwave', 'darkwave', 'coldwave', 'ebm', 'idm', 'chiptune', 'acid', 'minimal', 'rhythmic noise',
     'future beats'
   ],
-  soul: ['soul', 'neosoul'],
+  soul: ['soul', 'neosoul', 'indie soul'],
   acoustic: ['acoustic'],
   folk: ['folk', 'americana folk', 'folk pop', 'folk rock', 'folktronica'],
   blues: ['blues'],
@@ -354,7 +354,7 @@ const genreMapping: GenreMapping = {
     'new age', 'kitschwave', 'chiptune. lsdj', 'instrumental', 'ambient', 'psychedelic', 'outsider', 'goth', 
     'disco', 'club', 'no wave', 'midwest', 'lofi', 'neosoul', 'acoustic', 'instrumental', 
     'world music', 'orchestral', 'rhythmic noise', 'dirge', 
-    'fusion', 'indie', 'ebm', 'dsmb', 'alternative folk', 'piano', 'lounge'
+    'fusion', 'indie', 'ebm', 'dsmb', 'alternative folk', 'piano', 'lounge', 'indie soul'
   ]
 };
 
