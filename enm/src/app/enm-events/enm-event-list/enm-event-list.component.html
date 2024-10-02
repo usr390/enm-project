@@ -58,7 +58,7 @@
                           <div class="artist-container">
                             <span class="artist-name" [innerHTML]="artist.name | highlightPipe: (filter$ | async)?.text">{{ artist.name }}</span>&nbsp;&nbsp;
                             <span *ngIf="(artist.location) && (artist.location != 'RGV')">
-                              <p-tag value="{{artist.location | lowercase}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;&nbsp;
+                              <p-tag value="{{artist.location | lowercase}}" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;&nbsp;
                             </span>
                             <span *ngIf="artist.debut">
                               <p-tag value="debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
@@ -230,7 +230,7 @@
                           <div class="artist-container">
                             <span class="artist-name">{{ artist.name }}
                               <span *ngIf="(artist.location) && (artist.location != 'RGV')">
-                                <p-tag value="{{artist.location | lowercase}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;&nbsp;
+                                <p-tag value="{{artist.location | lowercase}}" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;&nbsp;
                               </span>
                               <span *ngIf="artist.debut" class="tags">
                                 <p-tag value="debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
