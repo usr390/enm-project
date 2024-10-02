@@ -336,7 +336,7 @@ const genreMapping: GenreMapping = {
   ],
   latin: [
     'latin', 'bolero', 'cumbia', 'norteño', 'latin pop', 'reggaeton', 'regional mexican', 'tropifolk', 
-    'texicana', 'perreo'
+    'texicana', 'perreo', 'boleroglam'
   ],
   reggae: [
     'reggae', 'dub', 'rocksteady', 'ska', 'dancehall'
