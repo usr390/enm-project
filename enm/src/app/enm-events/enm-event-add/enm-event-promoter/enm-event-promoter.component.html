@@ -17,7 +17,7 @@
             </div>
             <div class="row g-0 justify-content-center">
                 <div class="col-auto">
-                    <p-autoComplete formControlName="promoter" [suggestions]="filteredPromoters" (completeMethod)="filterPromoter($event)" field="name" [minLength]="3" placeholder="Promoter" [maxlength]="30" [forceSelection]="true"></p-autoComplete>
+                    <p-autoComplete pAutoFocus [autofocus]="true" formControlName="promoter" [suggestions]="filteredPromoters" (completeMethod)="filterPromoter($event)" field="name" [minLength]="3" placeholder="Promoter" [maxlength]="30" [forceSelection]="true"></p-autoComplete>
                 </div>
                 <div class="col-auto">
                     <button class="arrow" pButton type="submit" [disabled]="enmEventAddForm.invalid" icon="pi pi-arrow-right" styleClass="p-button-secondary p-button-rounded p-button-text p-button-sm"></button>
