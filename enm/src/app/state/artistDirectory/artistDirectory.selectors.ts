@@ -465,3 +465,8 @@ const genreMapping: GenreMapping = {
       }
     });
   };
+
+  export const selectRecentlyToured = createSelector(
+    selectFeature,
+    (state: ArtistDirectoryState): boolean => state.artistDirectoryFilter.recentlyToured
+  );
