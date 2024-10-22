@@ -44,7 +44,7 @@
             </p-scroller>
         </div>
         <p-toggleButton [style]="{ height: '1em' }" onIcon="pi pi-arrows-v" offIcon="pi pi-arrows-v" formControlName="sortByYearDescending" onLabel="Timeline" offLabel="Timeline"/>
-        <p-toggleButton *ngIf="(user$ | async)?.plus && ((user$ | async)?.username === 'muslimgauze' || (user$ | async)?.username === 'cd')" [style]="{ height: '1em', 'margin-left': '5px' }" onIcon="fa-solid fa-van-shuttle" offIcon="fa-solid fa-van-shuttle" formControlName="recentlyToured" onLabel="Recently Toured" offLabel="Recently Toured"/>
+        <p-toggleButton *ngIf="(user$ | async)?.plus" [style]="{ height: '1em', 'margin-left': '5px' }" onIcon="fa-solid fa-van-shuttle" offIcon="fa-solid fa-van-shuttle" formControlName="recentlyToured" onLabel="Recently Toured" offLabel="Recently Toured"/>
 
         <!-- <div style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 10px;">
             <span style="margin-right: 25px;"><p-toggleButton formControlName="recentlyListed" [onLabel]="filter" [offLabel]="filter" [style]="{ width: '10em', height: '2em' }"></p-toggleButton></span>
