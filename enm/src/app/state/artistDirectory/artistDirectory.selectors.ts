@@ -79,58 +79,34 @@ export const selectSortedArtistsWithEnhancedSortingNonRGV = createSelector(
   selectAll,
   (artists: Artist[]): Artist[] => {
     // Check if the artist has a non-pending streaming platform link
-    const isStreamingArtist = (artist: Artist): boolean => {
-      for (const key in artist.links) {
-        if (artist.links[key] !== 'pending' &&
-            (key === 'spotify' || key === 'apple' || key === 'bandcamp' ||
-             key === 'soundcloud' || key === 'mixcloud')) {
-          return true;
-        }
-      }
-      return false;
-    };
+    // const isStreamingArtist = (artist: Artist): boolean => {
+    //   for (const key in artist.links) {
+    //     if (artist.links[key] !== 'pending' &&
+    //         (key === 'spotify' || key === 'apple' || key === 'bandcamp' ||
+    //          key === 'soundcloud' || key === 'mixcloud')) {
+    //       return true;
+    //     }
+    //   }
+    //   return false;
+    // };
 
-    // Check if the artist has a non-pending social media link
-    const isSocialMediaArtist = (artist: Artist): boolean => {
-      for (const key in artist.links) {
-        if (artist.links[key] !== 'pending' &&
-            (key === 'instagram' || key === 'facebook' || key === 'youtube')) {
-          return true;
-        }
-      }
-      return false;
-    };
+    // // Check if the artist has a non-pending social media link
+    // const isSocialMediaArtist = (artist: Artist): boolean => {
+    //   for (const key in artist.links) {
+    //     if (artist.links[key] !== 'pending' &&
+    //         (key === 'instagram' || key === 'facebook' || key === 'youtube')) {
+    //       return true;
+    //     }
+    //   }
+    //   return false;
+    // };
+
+
+    let results = artists.filter(artist => artist.location !== 'RGV')
+
 
     // Prioritize artists based on location, streaming, and social media presence
-    return artists.filter(artist => artist.location !== 'RGV').sort((a, b) => {
-      const aIsFromRGV = a.location === 'RGV';
-      const bIsFromRGV = b.location === 'RGV';
-      const aIsStreaming = isStreamingArtist(a);
-      const bIsStreaming = isStreamingArtist(b);
-      const aIsSocialMedia = isSocialMediaArtist(a);
-      const bIsSocialMedia = isSocialMediaArtist(b);
-
-      // Prioritize RGV artists first
-      if (aIsFromRGV && !bIsFromRGV) {
-        return -1; // a before b
-      } else if (!aIsFromRGV && bIsFromRGV) {
-        return 1; // b before a
-      } else {
-        // If both are from RGV or both are not, proceed with previous priorities
-        if (aIsStreaming && !bIsStreaming) {
-          return -1;
-        } else if (!aIsStreaming && bIsStreaming) {
-          return 1;
-        } else if (!aIsStreaming && !bIsStreaming && aIsSocialMedia && !bIsSocialMedia) {
-          return -1;
-        } else if (!aIsStreaming && !bIsStreaming && !aIsSocialMedia && bIsSocialMedia) {
-          return 1;
-        } else {
-          // Alphabetically sort if both are in the same category
-          return a.name.localeCompare(b.name);
-        }
-      }
-    });
+    return artists.filter(artist => artist.location !== 'RGV')
   }
 );
 
@@ -208,6 +184,75 @@ export const selectFiltered = createSelector(
   }
 );
 
+export const selectFilteredNonRGV = createSelector(
+  selectSortedArtistsWithEnhancedSortingNonRGV,
+  selectFilter,
+  (artists: Artist[], filter: ArtistDirectoryFilter): Artist[] => {
+    let filteredArtists = artists;
+
+
+    // Apply text filter
+    if (filter.text) {
+      const normalizedFilter = normalizeText(filter.text);
+      filteredArtists = filteredArtists.filter(artist => {
+        // Check if filter text is in artist's name
+        const nameMatch = normalizeText(artist.name).includes(normalizedFilter);
+        // Check if any of artist's links match the filter text as a platform, assuming non-'pending'
+
+        // const platformMatch = Object.entries(artist.links).some(([key, value]) =>
+        //   normalizeText(key).includes(normalizedFilter) && value !== 'pending'
+        // );  
+
+        return nameMatch //|| platformMatch;
+      });
+    }
+    
+    // Apply genre filters
+    const genreFilters = [
+      { key: 'rock', value: filter.rock },
+      { key: 'punk', value: filter.punk },
+      { key: 'metal', value: filter.metal },
+      { key: 'edm', value: filter.edm },
+      { key: 'rap', value: filter.rap },
+      { key: 'jazz', value: filter.jazz },
+      { key: 'pop', value: filter.pop },
+      { key: 'experimental', value: filter.experimental },
+      { key: 'latin', value: filter.latin },
+      { key: 'other', value: filter.other }
+    ];
+
+    const activeGenres = genreFilters.filter(genre => genre.value).flatMap(genre => genreMapping[genre.key]);
+
+    if (activeGenres.length > 0) {
+      filteredArtists = filteredArtists.filter(artist => 
+        artist.genre && artist.genre.some(genre => activeGenres.includes(genre))
+      );
+    }
+
+    return filteredArtists;
+  }
+);
+
+export const sortFilteredNonRGV = createSelector(
+  selectFilteredNonRGV,
+  selectFilter,
+  (filteredArtists: Artist[], filter: ArtistDirectoryFilter): Artist[] => {
+    let filteredAndSortedArtists = filteredArtists;
+
+    // Conditionally apply sorting by 'start' property in descending order
+    if (filter.sortByYearDescending) {
+      filteredAndSortedArtists = filteredAndSortedArtists.sort((a, b) => {
+        return new Date(b.start).getTime() - new Date(a.start).getTime();
+      });
+    } else {
+      // Apply the enhanced sorting logic for the default case
+      filteredAndSortedArtists = enhancedSortNonRGV(filteredArtists);
+    }
+
+    return filteredAndSortedArtists;
+  }
+);
+
 export const sortFiltered = createSelector(
   selectFiltered,
   selectFilter,
@@ -275,7 +320,7 @@ export const selectFilteredArtistDirectoryCount = createSelector(
 );
 
 export const selectFilteredArtistDirectoryCountForRecentlyTouredArtists = createSelector(
-  selectFilteredRecentlyTouredArtists,
+  selectFilteredNonRGV,
   (filteredArtistDirectory: Artist[]): number => {
     return filteredArtistDirectory.length;
   }
@@ -466,6 +511,52 @@ const genreMapping: GenreMapping = {
     });
   };
 
+  const enhancedSortNonRGV = (artists: Artist[]): Artist[] => {
+    const isStreamingArtist = (artist: Artist): boolean => {
+      for (const key in artist.links) {
+        if (
+          artist.links[key] !== 'pending' &&
+          (key === 'spotify' || key === 'apple' || key === 'bandcamp' ||
+           key === 'soundcloud' || key === 'mixcloud')
+        ) {
+          return true;
+        }
+      }
+      return false;
+    };
+  
+    const isSocialMediaArtist = (artist: Artist): boolean => {
+      for (const key in artist.links) {
+        if (
+          artist.links[key] !== 'pending' &&
+          (key === 'instagram' || key === 'facebook' || key === 'youtube')
+        ) {
+          return true;
+        }
+      }
+      return false;
+    };
+  
+    return artists.sort((a, b) => {
+      const aIsStreaming = isStreamingArtist(a);
+      const bIsStreaming = isStreamingArtist(b);
+      const aIsSocialMedia = isSocialMediaArtist(a);
+      const bIsSocialMedia = isSocialMediaArtist(b);
+  
+      if (aIsStreaming && !bIsStreaming) {
+        return -1;
+      } else if (!aIsStreaming && bIsStreaming) {
+        return 1;
+      } else if (!aIsStreaming && !bIsStreaming && aIsSocialMedia && !bIsSocialMedia) {
+        return -1;
+      } else if (!aIsStreaming && !bIsStreaming && !aIsSocialMedia && bIsSocialMedia) {
+        return 1;
+      } else {
+        return a.name.localeCompare(b.name);
+      }
+    });
+  };
+  
   export const selectRecentlyToured = createSelector(
     selectFeature,
     (state: ArtistDirectoryState): boolean => state.artistDirectoryFilter.recentlyToured

@@ -17,7 +17,7 @@ export class ArtistDirectoryComponent {
   artists$ = this.store$.select(ArtistDirectorySelectors.sortFiltered)
   count$ = this.store$.select(ArtistDirectorySelectors.selectFilteredArtistDirectoryCount)
 
-  recentlyTouredArtists$ = this.store$.select(ArtistDirectorySelectors.selectFilteredRecentlyTouredArtists)
+  recentlyTouredArtists$ = this.store$.select(ArtistDirectorySelectors.sortFilteredNonRGV)
   showRecentlyTouredArtistsOnly$ = this.store$.select(ArtistDirectorySelectors.selectRecentlyToured);
   countRecentlyTouredArtists$ = this.store$.select(ArtistDirectorySelectors.selectFilteredArtistDirectoryCountForRecentlyTouredArtists)
   

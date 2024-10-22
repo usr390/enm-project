@@ -112,6 +112,8 @@
                       <a *ngIf="artist.links.deezer && (artist.links.deezer !== 'pending')" href="{{artist.links.deezer}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                         <i class="fa-brands fa-deezer"></i>
                       </a>
+                      <br/>
+                      <br/>
                     </div>
   
                     <!-- <div *ngIf="artist.links" class="social-links" style="margin-top: 15px">
@@ -129,16 +131,15 @@
                       <a *ngIf="artist.links.x && (artist.links.x !== 'pending')" href="{{artist.links.x}}" target="_blank" rel="noopener noreferrer" class="social-icon">x&nbsp;&nbsp;</a>
                       <a *ngIf="artist.links.threads && (artist.links.threads !== 'pending')" href="{{artist.links.threads}}" target="_blank" rel="noopener noreferrer" class="social-icon">threads&nbsp;&nbsp;</a>
                     </div> -->
-    
                       <div *ngFor="let artist of artist.artists">
                         <ng-container *ngIf="artist.link && artist.link !== 'pending'; else artistName">
                           <div class="artist-container">
-                            <a href="{{ artist.link }}" target="_blank" rel="noopener noreferrer">{{ artist.name }}<span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>&nbsp;<i class="pi pi-link"></i></a>
+                            <a href="{{ artist.link }}" target="_blank" rel="noopener noreferrer">{{ artist.name }}<span *ngIf="(artist.location) && (artist.location != 'RGV')"></span>&nbsp;<i class="pi pi-link"></i></a>
                           </div>
                         </ng-container>
                         <ng-template #artistName>
                           <div class="artist-container">
-                            <span class="artist-name-non-clickable">{{ artist.name }}</span><span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>
+                            <span class="artist-name-non-clickable">{{ artist.name }}</span><span *ngIf="(artist.location) && (artist.location != 'RGV')"></span>
                           </div>
                         </ng-template>
                     </div>
@@ -167,6 +168,12 @@
                 <div class="row">
                   <!-- HERE'S THE VISIBLE CONTENT -->
                     <span>
+                      <div *ngIf="artist.notes" class="d-flex justify-content-right align-items-right">
+                        <p-overlayPanel [style]="{'width': '300px', 'margin-right': '200px'}" #op3>
+                          <p [innerHTML]="artist.notes | linkify"></p>
+                        </p-overlayPanel>
+                        <p-button (click)="op3.toggle($event)" icon="fa-regular fa-note-sticky" [style]="{'width': '20px', 'height': '28px', 'font-size': '.9em', 'background-color': 'white', 'color': '#043d75', 'border-color': 'white','margin-left': '25px'}"></p-button>
+                      </div>
                       <span class="artist-name" [innerHTML]="artist.name | highlightPipe: (filter$ | async)?.text">{{ artist.name }}</span>&nbsp;
                       <span *ngIf="(artist.medium) && (artist.medium === 'collective')">
                         <p-tag value="{{artist.medium}}" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#99ccff'}"></p-tag>&nbsp;
@@ -176,6 +183,27 @@
                       </span>
                       <span *ngIf="(artist.status) && (artist.status === 'inactive')">
                         <p-tag value="inactive" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': 'lightgray'}"></p-tag>&nbsp;
+                      </span>
+                    </span>
+
+                    <span style="padding-left: 25px; padding-right: 25px">
+                      <span *ngIf="artist.hometownheroes">
+                        <p-tag value="hometown heroes" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#DAA520', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                      </span>
+  
+                      <span *ngIf="(artist.medium)">
+                        <p-tag value="{{artist.medium}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#FF7ED4', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                      </span>                    
+  
+                      <span *ngIf="artist.genre && !(artist.genre.length === 1 && artist.genre[0] === 'pending')">
+                        <p-tag value="{{artist.genre | genreListPipe:' · '}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#043d75', 'background-color': 'transparent'}"></p-tag>
+                      </span>
+  
+                      <span *ngIf="(artist.start) && (artist.start !== 'pending') && (artist.end) && (artist.end === 'pending')">
+                        <p-tag value="{{artist.start | date:'yyyy' }} - active" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#704264', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                      </span>
+                      <span *ngIf="(artist.start) && (artist.start !== 'pending') && (artist.end) && (artist.end !== 'pending')">
+                        <p-tag value="{{artist.start | date:'yyyy' }} - {{artist.end | date: 'yyyy'}}, {{artist.status}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#704264', 'background-color': 'transparent'}"></p-tag>&nbsp;
                       </span>
                     </span>
                     
@@ -227,6 +255,9 @@
                       <a *ngIf="artist.links.deezer && (artist.links.deezer !== 'pending')" href="{{artist.links.deezer}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                         <i class="fa-brands fa-deezer"></i>
                       </a>
+                      <br/>
+                      <br/>
+
                     </div>
 
 
@@ -245,16 +276,15 @@
                     <a *ngIf="artist.links.x && (artist.links.x !== 'pending')" href="{{artist.links.x}}" target="_blank" rel="noopener noreferrer" class="social-icon">x&nbsp;&nbsp;</a>
                     <a *ngIf="artist.links.threads && (artist.links.threads !== 'pending')" href="{{artist.links.threads}}" target="_blank" rel="noopener noreferrer" class="social-icon">threads&nbsp;&nbsp;</a>
                   </div> -->
-    
                       <div *ngFor="let artist of artist.artists">
                         <ng-container *ngIf="artist.link && artist.link !== 'pending'; else artistName">
                           <div class="artist-container">
-                            <a href="{{ artist.link }}" target="_blank" rel="noopener noreferrer">{{ artist.name }}<span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>&nbsp;<i class="pi pi-link"></i></a>
+                            <a href="{{ artist.link }}" target="_blank" rel="noopener noreferrer">{{ artist.name }}<span *ngIf="(artist.location) && (artist.location != 'RGV')"></span>&nbsp;<i class="pi pi-link"></i></a>
                           </div>
                         </ng-container>
                         <ng-template #artistName>
                           <div class="artist-container">
-                            <span class="artist-name-non-clickable">{{ artist.name }}</span><span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>
+                            <span class="artist-name-non-clickable">{{ artist.name }}</span>
                           </div>
                         </ng-template>
                     </div>

@@ -104,7 +104,8 @@ export class EnmEventListFilterComponent {
   }
 
   clearArtistDirectoryFilter() {
-    this.artistDirectoryFilterForm.patchValue({ filter: ''});
+    this.artistDirectoryFilterForm.patchValue({ filter: '' });
+    
     this.filterArtistDirectoryResults();
   }
 
@@ -144,10 +145,11 @@ export class EnmEventListFilterComponent {
     this.genres.forEach(genre => {
       this.artistDirectoryFilterForm.get(genre)?.setValue(false);
     });
+    this.artistDirectoryFilterForm.patchValue({ filter: '', recentlyListed: false, sortByYearDescending: false, recentlyToured: false, Rock: false, Punk: false, Metal: false, EDM: false, Rap: false, Jazz: false, Pop: false, Experimental: false, Latin: false, Other: false });
     this.filterArtistDirectoryResults();
   }
   anyGenreSelected(): boolean {
-    return this.genres.some(genre => this.artistDirectoryFilterForm.get(genre)?.value);
+    return this.genres.some(genre => this.artistDirectoryFilterForm.get(genre)?.value) || this.artistDirectoryFilterForm.controls.recentlyToured.value as boolean || this.artistDirectoryFilterForm.controls.sortByYearDescending.value as boolean;
   }
 }
 
