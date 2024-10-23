@@ -153,7 +153,8 @@
 
       <ng-container *ngIf="(user$ | async)?.plus">
         <h2 class="datekey" [ngStyle]="{ 'margin-top': !(showRecentlyTouredArtistsOnly$ | async) ? '20px' : '0px' }">
-          <span>Artist Directory</span>
+          <span *ngIf="!(filter$ | async)?.recentlyToured">Recently Toured</span>
+          <span *ngIf="(filter$ | async)?.recentlyToured">Artist Directory</span>
           <p-overlayPanel [style]="{'width': '200px', 'margin-right': '300px'}" #op2>
             <p>Artists that have recently toured the valley! (or have an upcoming show)</p>
           </p-overlayPanel>
