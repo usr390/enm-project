@@ -17,7 +17,7 @@
                     <div *ngIf="(currentUser$ | async) as currentUser">
                       <p><b>Username:</b> {{ currentUser.username }}</p>
                       <p><b>Account Type:</b><span> Founder</span></p>
-                      <p>Founders are among the first people to ever use Rarelygroovy. You will forever have access to the latest and greatest features we have to offer. Thank you for seeing our vision so early on in our journey! </p>
+                      <p>Founders are among the first people to ever use Rarelygroovy. You will forever have access to the latest and greatest features we have to offer. Thank you for being part of our little experiment! </p>
                     </div>
                   </p-panel>
                 </div>
@@ -43,8 +43,8 @@
                         <p><b>Username:</b> {{ currentUser.username }}</p>
                         <p>
                           <b>Account Type:</b>
-                          <span *ngIf="(nextInvoice$ | async) || (currentUser$ | async)?.plus"> Rarelygroovy+</span><span *ngIf="(promoExpirationDate$ | async) as promoExpirationDate"> (1 month promo, expires {{ promoExpirationDate | date:'MMMM d' }})</span>
-                          <span *ngIf="!(nextInvoice$ | async) && !(currentUser$ | async)?.plus"> Free</span>
+                          <span *ngIf="(chargesHistory$ | async).length > 0"> Rarelygroovy+</span>
+                          <span *ngIf="!((chargesHistory$ | async).length > 0)"> Free</span>
                         </p>
                       </div>
           
@@ -53,79 +53,16 @@
                 </div>
                 <div class="row" style="margin-top: 10px;">
                   <div class="col">
-                    <p-panel header="Rarelygroovy+">
-                      <div *ngIf="((subscriptionStatus$ | async) === 'active')">
-                        <div *ngIf="(nextInvoice$ | async) as nextInvoice">
-                          <p *ngIf="nextInvoice"><b>Subscription Renews:</b> {{ nextInvoice | date }}</p>
-                          <p *ngIf="!nextInvoice">No upcoming invoice found.</p>  
-                        </div>
-      
-                        <p style="margin-top: 20px"><b>Transaction History:</b></p>
-                        <div *ngFor="let charge of (chargesHistory$ | async)">
-                          <div class="card">
-                            <div class="grid grid-nogutter">
-                              <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
-                                <div class="flex flex-column align-items-center sm:align-items-start gap-3">
-                                  <div class="text-2xl font-bold text-900"><b>Rarelygroovy+ Monthly Subscription</b></div>
-                                  <div class="text-2xl font-bold text-900">{{ charge.created | date }} </div>
-                                  <div class="flex align-items-center gap-3">
-                                    <span class="flex align-items-center gap-2">
-                                      <span class="font-semibold">Payment {{ charge.status.charAt(0).toUpperCase() + charge.status.slice(1) }}</span>
-                                    </span>
-                                  </div>
-                                </div>
-                                <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                                  <span class="text-2xl font-semibold">{{ charge.amount / 100 | currency:'USD' }}</span>
-                                </div>
-                              </div>
+                    <p-panel *ngIf="((chargesHistory$ | async).length > 0)" header="Rarelygroovy+">
+                      <div class="grid grid-nogutter">
+                        <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                          <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                            <div class="text-2xl font-bold text-900">Purchased {{ (chargesHistory$ | async)[(chargesHistory$ | async).length - 1].created | date }} ({{ (chargesHistory$ | async)[(chargesHistory$ | async).length - 1].amount / 100 | currency:'USD' }})</div>
+                            <div class="flex align-items-center gap-3">
                             </div>
                           </div>
                         </div>
-                        
-                        <div style="margin-top: 25px; display: flex; justify-content: center;">
-                          <p-confirmDialog header="Confirmation"></p-confirmDialog>
-                          <p-button size="small" (click)="confirmCancellation()" label="Cancel Subscription" [disabled]="(( isSubscriptionCanceling$ | async) === true)">
-                            <div *ngIf="isSubscriptionCanceling$ | async">
-                              <p-progressSpinner strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner" [style]="{width: '20px', height: '12px', margin: '0px 20px 0px 0px'}"></p-progressSpinner>
-                            </div>
-                          </p-button>
-                        </div>
-                      </div>
-      
-                      <div *ngIf="((subscriptionStatus$ | async) === 'canceled')">
-                        <p><b>Subscription Cancelled On:</b> {{ (subscriptionCancellationDate$ | async) | date }}</p>
-
-                        <p style="margin-top: 20px"><b>Transaction History:</b></p>
-                        <div *ngFor="let charge of (chargesHistory$ | async)">
-                          <div class="card">
-                            <div class="grid grid-nogutter">
-                              <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
-                                <div class="flex flex-column align-items-center sm:align-items-start gap-3">
-                                  <div class="text-2xl font-bold text-900"><b>Rarelygroovy+ Monthly Subscription</b></div>
-                                  <div class="text-2xl font-bold text-900">{{ charge.created | date }} </div>
-                                  <div class="flex align-items-center gap-3">
-                                    <span class="flex align-items-center gap-2">
-                                      <span class="font-semibold">Charge {{ charge.status.charAt(0).toUpperCase() + charge.status.slice(1) }}</span>
-                                    </span>
-                                  </div>
-                                </div>
-                                <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                                  <span class="text-2xl font-semibold">{{ charge.amount / 100 | currency:'USD' }}</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div style="margin-top: 25px; display: flex; justify-content: center;">
-                          <p-button size="small" label="Renew Subscription" (click)="renewSubscription()"></p-button>
-                        </div>
-                        
-                      </div>
-                      <div *ngIf="!((subscriptionStatus$ | async))">
-                        <p>No subscription information available.</p>
-                        <p>When you subscribe to <a routerLink="/plus">Rarelygroovy+</a>, you'll see details about your subscription here</p>
-                      </div>
+                    </div>
                     </p-panel>
                   </div>
                 </div>

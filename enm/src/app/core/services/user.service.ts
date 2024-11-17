@@ -21,7 +21,7 @@ export class UserService {
   }
 
   getNextInvoice(id: string) {
-    return this.http.get<UpcomingSubscriptionRenewalDateSuccessResponse>(`${BASE_URL}/next-invoice-date/${id}`);
+    return this.http.get<UpcomingSubscriptionRenewalDateSuccessResponse>(`${BASE_URL}/payment-history/${id}`);
   }
 
   cancelSubscription(id: string) {

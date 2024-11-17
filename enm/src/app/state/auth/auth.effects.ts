@@ -76,7 +76,7 @@ export class AuthEffects {
                         this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnStripeCheckoutResponse({ userId: userid }));
                     }
                   })
-                this.router.navigate(['/plus'], { replaceUrl: true });
+                this.router.navigate(['/iBhLq5wrrxafte4e'], { replaceUrl: true });
             } else {
                 this.router.navigate(['/events'], { replaceUrl: true });
             }
@@ -116,7 +116,7 @@ export class AuthEffects {
                         key: 'continueSingingUpForRarerlyGroovyPlus', 
                         severity: 'success', 
                         summary: createUserSuccessResponse.createUserSuccessResponse.user?.username, 
-                        detail: 'Account created. Subscribe to Rarelygroovy+ below',
+                        detail: 'Account created. Purchase Rarelygroovy+ below',
                         life: 7000,
                     })
                 } else {

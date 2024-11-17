@@ -351,10 +351,10 @@ app.post('/api/create-checkout-session', express.json(), async (req, res) => {
   const userid = req.body.userid;
   const session = await stripe.checkout.sessions.create({
     line_items: [{
-      price: 'price_1OXsJeCJybB30ZxsKnyXMpdq',
+      price: 'price_1QGMbTCJybB30Zxs86gY7o9L',
       quantity: 1,
     }],
-    mode: 'subscription',
+    mode: 'payment',
     ui_mode: 'embedded',
     return_url: 'https://rarelygroovy.com/checkout/return',
     metadata: {
@@ -366,21 +366,24 @@ app.post('/api/create-checkout-session', express.json(), async (req, res) => {
 });
 
 app.post('/api/create-checkout-session-test', express.json(), async (req, res) => {
-
-  console.log('fired!')
   const userid = req.body.userid;
-  console.log('from test create checkout session api: ', userid)
+
+  const customer = await stripeTest.customers.create({});
+
+
   const session = await stripeTest.checkout.sessions.create({
     line_items: [{
-      price: 'price_1ORkd9CJybB30ZxsUYIcvfLk',
+      price: 'price_1QGNKPCJybB30Zxsg6wIprWh',
       quantity: 1,
     }],
-    mode: 'subscription',
+    mode: 'payment',
     ui_mode: 'embedded',
-    return_url: 'https://rarelygroovy.com/checkout/return',
+    // return_url: 'https://rarelygroovy.com/checkout/return',
+    return_url: 'http://localhost:4200/checkout/return',
     metadata: {
       userid: userid
-    }
+    },
+    customer: customer.id, // Use the created customer ID
   });
 
   res.send({clientSecret: session.client_secret});
@@ -420,7 +423,7 @@ app.post('/api/stripe-new-subscription-handler-test', express.raw({type: 'applic
 
   try {
     // construct the event sent by Stripe
-    const event = stripe.webhooks.constructEvent(req.body, sig, stripeWebHookSecretTest);
+    const event = stripeTest.webhooks.constructEvent(req.body, sig, stripeWebHookSecretTest);
     res.status(200).send('OK');
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object; // this is the session object
@@ -608,6 +611,321 @@ app.get('/api/next-invoice-date/:userId', async (req, res) => {
     res.status(400).send({ error: error.message });
   }
 });
+
+app.get('/api/next-invoice-date/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Initialize response shape
+    let response = {
+      nextInvoiceDate: null,
+      subscriptionStatus: null,
+      cancellationDate: null,
+      invoiceHistory: [],
+      chargesHistory: [], // Added to include charge history
+      promoCode: null
+    };
+
+    // Retrieve the user and their Stripe customer ID
+    const user = await UserModel.findById(userId).select('stripeCustomerId -_id').exec();
+
+    // Proceed only if user and stripeCustomerId exist
+    if (user && user.stripeCustomerId) {
+      // Retrieve subscription data
+      try {
+        const subscriptions = await stripe.subscriptions.list({
+          customer: user.stripeCustomerId,
+          status: 'all',
+          limit: 1
+        });
+
+        if (subscriptions.data.length > 0) {
+          const subscription = subscriptions.data[0];
+          response.subscriptionStatus = subscription.status;
+
+          if (subscription.canceled_at) {
+            response.cancellationDate = new Date(subscription.canceled_at * 1000);
+          }
+        }
+      } catch (subscriptionError) {
+        console.error('Error fetching subscription:', subscriptionError);
+      }
+
+      // Retrieve the upcoming invoice
+      try {
+        const upcomingInvoice = await stripe.invoices.retrieveUpcoming({ customer: user.stripeCustomerId });
+        response.nextInvoiceDate = upcomingInvoice.next_payment_attempt ? new Date(upcomingInvoice.next_payment_attempt * 1000) : null;
+      } catch (invoiceError) {
+        if (!invoiceError.message || !invoiceError.message.includes('No upcoming invoices for customer')) {
+          throw invoiceError;
+        }
+      }
+
+      // Retrieve invoice history
+      try {
+        const invoices = await stripe.invoices.list({
+          customer: user.stripeCustomerId,
+          limit: 10
+        });
+
+        response.invoiceHistory = invoices.data.map(invoice => ({
+          invoiceId: invoice.id,
+          amountPaid: invoice.amount_paid,
+          status: invoice.status,
+          billingPeriodStart: invoice.period_start ? new Date(invoice.period_start * 1000) : null,
+          billingPeriodEnd: invoice.period_end ? new Date(invoice.period_end * 1000) : null
+        }));
+      } catch (invoiceHistoryError) {
+        console.error('Error fetching invoice history:', invoiceHistoryError);
+      }
+
+      // Retrieve charge history
+      try {
+        const charges = await stripe.charges.list({
+          customer: user.stripeCustomerId,
+          limit: 10 // You can adjust the limit as needed
+        });
+
+        response.chargesHistory = charges.data.map(charge => ({
+          chargeId: charge.id,
+          amount: charge.amount,
+          created: new Date(charge.created * 1000),
+          status: charge.status,
+          currency: charge.currency
+          // Include any other relevant charge fields here
+        }));
+      } catch (chargeError) {
+        console.error('Error fetching charge history:', chargeError);
+      }
+    }
+
+    //promoCode
+    try {
+      const promoCode = await PromoCodeModel.findOne({
+        userId: userId, // Make sure this matches the field and type stored in your PromoCode schema
+      }).exec();
+
+      if (promoCode) {
+        // Constructing a simplified object with promo code details. Adjust according to what details you need.
+        const promoCodeDetails = {
+          activatedAt: promoCode.activatedAt,
+          expiresAt: promoCode.expiresAt,
+          // Add any other relevant fields you need
+        };
+    
+        // Add it to your response object
+        response.promoCode = promoCodeDetails; 
+      } 
+    }
+    catch (chargeError) {
+      console.error('Error fetching charge history:', chargeError);
+    }
+    
+
+
+    // Send the response
+    res.send(response);
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+});
+
+app.get('/api/next-invoice-date-test/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Initialize response shape
+    let response = {
+      nextInvoiceDate: null,
+      subscriptionStatus: null,
+      cancellationDate: null,
+      invoiceHistory: [],
+      chargesHistory: [], // Added to include charge history
+      promoCode: null
+    };
+
+    // Retrieve the user and their Stripe customer ID
+    const user = await UserModel.findById(userId).select('stripeCustomerId -_id').exec();
+
+    // Proceed only if user and stripeCustomerId exist
+    if (user && user.stripeCustomerId) {
+      // Retrieve subscription data
+      try {
+        const subscriptions = await stripeTest.subscriptions.list({
+          customer: user.stripeCustomerId,
+          status: 'all',
+          limit: 1
+        });
+
+        if (subscriptions.data.length > 0) {
+          const subscription = subscriptions.data[0];
+          response.subscriptionStatus = subscription.status;
+
+          if (subscription.canceled_at) {
+            response.cancellationDate = new Date(subscription.canceled_at * 1000);
+          }
+        }
+      } catch (subscriptionError) {
+        console.error('Error fetching subscription:', subscriptionError);
+      }
+
+      // Retrieve the upcoming invoice
+      try {
+        const upcomingInvoice = await stripeTest.invoices.retrieveUpcoming({ customer: user.stripeCustomerId });
+        response.nextInvoiceDate = upcomingInvoice.next_payment_attempt ? new Date(upcomingInvoice.next_payment_attempt * 1000) : null;
+      } catch (invoiceError) {
+        if (!invoiceError.message || !invoiceError.message.includes('No upcoming invoices for customer')) {
+          throw invoiceError;
+        }
+      }
+
+      // Retrieve invoice history
+      try {
+        const invoices = await stripeTest.invoices.list({
+          customer: user.stripeCustomerId,
+          limit: 10
+        });
+
+        response.invoiceHistory = invoices.data.map(invoice => ({
+          invoiceId: invoice.id,
+          amountPaid: invoice.amount_paid,
+          status: invoice.status,
+          billingPeriodStart: invoice.period_start ? new Date(invoice.period_start * 1000) : null,
+          billingPeriodEnd: invoice.period_end ? new Date(invoice.period_end * 1000) : null
+        }));
+      } catch (invoiceHistoryError) {
+        console.error('Error fetching invoice history:', invoiceHistoryError);
+      }
+
+      // Retrieve charge history
+      try {
+        const charges = await stripeTest.charges.list({
+          customer: user.stripeCustomerId,
+          limit: 10 // You can adjust the limit as needed
+        });
+
+        response.chargesHistory = charges.data.map(charge => ({
+          chargeId: charge.id,
+          amount: charge.amount,
+          created: new Date(charge.created * 1000),
+          status: charge.status,
+          currency: charge.currency
+          // Include any other relevant charge fields here
+        }));
+      } catch (chargeError) {
+        console.error('Error fetching charge history:', chargeError);
+      }
+    }
+
+    //promoCode
+    try {
+      const promoCode = await PromoCodeModel.findOne({
+        userId: userId, // Make sure this matches the field and type stored in your PromoCode schema
+      }).exec();
+
+      if (promoCode) {
+        // Constructing a simplified object with promo code details. Adjust according to what details you need.
+        const promoCodeDetails = {
+          activatedAt: promoCode.activatedAt,
+          expiresAt: promoCode.expiresAt,
+          // Add any other relevant fields you need
+        };
+    
+        // Add it to your response object
+        response.promoCode = promoCodeDetails; 
+      } 
+    }
+    catch (chargeError) {
+      console.error('Error fetching charge history:', chargeError);
+    }
+    
+
+
+    // Send the response
+    res.send(response);
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+});
+
+app.get('/api/payment-history/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Initialize response shape
+    let response = {
+      chargesHistory: [],
+      invoiceHistory: [],
+      promoCode: null
+    };
+
+    // Retrieve the user and their Stripe customer ID
+    const user = await UserModel.findById(userId).select('stripeCustomerId -_id').exec();
+    console.log(user)
+
+    // Proceed only if user and stripeCustomerId exist
+    if (user && user.stripeCustomerId) {
+      // Retrieve charge history
+      try {
+        const charges = await stripeTest.charges.list({
+          customer: user.stripeCustomerId,
+          limit: 10 // Adjust as needed
+        });
+
+        response.chargesHistory = charges.data.map(charge => ({
+          chargeId: charge.id,
+          amount: charge.amount,
+          created: new Date(charge.created * 1000),
+          status: charge.status,
+          currency: charge.currency
+        }));
+      } catch (chargeError) {
+        console.error('Error fetching charge history:', chargeError);
+      }
+
+      // Retrieve invoice history (one-time payments create invoices as well)
+      try {
+        const invoices = await stripe.invoices.list({
+          customer: user.stripeCustomerId,
+          limit: 10
+        });
+
+        response.invoiceHistory = invoices.data.map(invoice => ({
+          invoiceId: invoice.id,
+          amountPaid: invoice.amount_paid,
+          status: invoice.status,
+          billingPeriodStart: invoice.period_start ? new Date(invoice.period_start * 1000) : null,
+          billingPeriodEnd: invoice.period_end ? new Date(invoice.period_end * 1000) : null
+        }));
+      } catch (invoiceHistoryError) {
+        console.error('Error fetching invoice history:', invoiceHistoryError);
+      }
+    }
+
+    // Retrieve promo code if applicable
+    try {
+      const promoCode = await PromoCodeModel.findOne({
+        userId: userId, // Ensure this matches your PromoCode schema
+      }).exec();
+
+      if (promoCode) {
+        const promoCodeDetails = {
+          activatedAt: promoCode.activatedAt,
+          expiresAt: promoCode.expiresAt,
+        };
+        response.promoCode = promoCodeDetails; 
+      } 
+    } catch (promoCodeError) {
+      console.error('Error fetching promo code:', promoCodeError);
+    }
+
+    // Send the response
+    res.send(response);
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+});
+
 
 
 

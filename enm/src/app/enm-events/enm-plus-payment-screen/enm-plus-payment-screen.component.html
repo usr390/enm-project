@@ -1,4 +1,3 @@
-
 <div *ngIf="currentUser$ | async"></div>
 
 <div *ngIf="plusSubscriptionCardLoading$ | async" class="d-flex justify-content-center align-items-center" style="height: 85vh;">
@@ -8,7 +7,7 @@
 <div *ngIf="furthestEventDate$ | async as furthestEventDate">
     <div *ngIf="defunctArtistsCount$ | async as defunctArtistsCount">
         <div class="d-flex justify-content-center align-items-center">
-            <p-card class="card wrapper position-relative" header="Rarelygroovy+" subheader="$2 per month" [ngStyle]="{'border': 'none', 'max-width': '500px'}">
+            <p-card class="card wrapper position-relative" header="Rarelygroovy+" subheader="$5 One Time Purchase" [ngStyle]="{'border': 'none', 'max-width': '500px'}">
                 <ng-container *ngIf="(currentUser$ | async) === null">
     
                     <p>Comes with:</p>
