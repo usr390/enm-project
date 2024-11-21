@@ -32,7 +32,7 @@ export class EnmPlusPaymentScreenComponent {
   planFeatures = [
     {
         name: 'Events - complete event list',
-        info: 'Free plan will only show events for the current week.',
+        info: null,
         basic: false,
         premium: true
     },
