@@ -115,16 +115,9 @@
                     <h3>One-time payment</h3>
                     <h2 class="price">$5</h2>
                     <p>No recurring charges, lifetime access.</p>
-                </div>
-            </p-card>
-        </div>
-
-        <!-- CTA Section -->
-        <div class="cta-section mt-4" *ngIf="(currentUser$ | async) === null">
-            <p-card [style]="{ 'background-color': '#ffffff', 'box-shadow': 'none', 'border': 'none', 'padding': '20px' }">
-                <div class="text-center">
-                    <h4>Get unrestricted access to Rarelygroovy+</h4>
-                    <p-button label="Get Started" size="large" class="cta-button" (click)="navigateToLogInPage()"></p-button>
+                    <div class="text-center">
+                        <p-button label="Get Started" size="large" class="cta-button" (click)="navigateToLogInPage()"></p-button>
+                    </div>
                 </div>
             </p-card>
         </div>
