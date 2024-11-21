@@ -184,8 +184,9 @@ a:hover {
   margin-top: 5px;
 }
 .cta-icon {
-  font-size: 1.2rem;
-  margin-left: auto;
+  font-size: 1.2rem; /* Adjust icon size */
+  margin-left: 10px; /* Add spacing between the text and the icon */
+  align-self: center; /* Align the icon vertically */
 }
 
 /* Compare Plans */
@@ -230,4 +231,24 @@ p-table {
   .grid-layout {
     grid-template-columns: repeat(3, 1fr); /* Three columns */
   }
+}
+
+.cta-content {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for better alignment */
+  align-items: center;
+  gap: 5px; /* Adjust spacing between content items */
+}
+
+.cta-main-text {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 5px; /* Add space below the main text */
+}
+
+.cta-icon {
+  font-size: 1.2rem; /* Adjust icon size */
+  margin-left: 10px; /* Add space to the left of the icon */
+  margin-top: 5px; /* Add space above the icon */
+  align-self: flex-start; /* Align icon with the start of the content */
 }
