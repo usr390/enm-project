@@ -63,7 +63,7 @@ export class PaymentEffects {
         tap(() => {
             setTimeout(() => {
                 const scrollHeight = document.body.scrollHeight;
-                const scrollTo = scrollHeight * 0.5;
+                const scrollTo = scrollHeight * 0.8;
                 window.scrollTo(0, scrollTo);
             }, 2000); // Delay of 5 seconds
         })

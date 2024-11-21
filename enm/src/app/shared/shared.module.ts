@@ -49,6 +49,7 @@ import { ReverseUpdatesPipe } from './reverse-updates.pipe';
 import { LinkifyPipe } from './pipes/linkify.pipe';
 import { BlogPreviewPipe } from '../blog-preview.pipe';
 import { BlogifyBodyPipe } from '../blogify-body.pipe';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import { BlogifyBodyPipe } from '../blogify-body.pipe';
     ToggleButtonModule,
     TagModule,
     CarouselModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    TableModule
   ],
   exports: [
     // enm imports
@@ -144,7 +146,8 @@ import { BlogifyBodyPipe } from '../blogify-body.pipe';
     ReverseUpdatesPipe,
     LinkifyPipe,
     BlogPreviewPipe,
-    BlogifyBodyPipe
+    BlogifyBodyPipe,
+    TableModule
   ],
   providers: [
     // primeng providers

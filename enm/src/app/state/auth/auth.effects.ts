@@ -76,7 +76,7 @@ export class AuthEffects {
                         this.store$.dispatch(PaymentActions.enmPlusPaymentScreenWaitOnStripeCheckoutResponse({ userId: userid }));
                     }
                   })
-                this.router.navigate(['/iBhLq5wrrxafte4e'], { replaceUrl: true });
+                this.router.navigate(['/plus'], { replaceUrl: true });
             } else {
                 this.router.navigate(['/events'], { replaceUrl: true });
             }

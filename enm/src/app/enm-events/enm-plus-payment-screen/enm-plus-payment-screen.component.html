@@ -1,44 +1,138 @@
-<div *ngIf="currentUser$ | async"></div>
-
 <div *ngIf="plusSubscriptionCardLoading$ | async" class="d-flex justify-content-center align-items-center" style="height: 85vh;">
-    <p-progressSpinner styleClass= "w-4rem h-4rem" strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner"></p-progressSpinner>
+    <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner"></p-progressSpinner>
 </div>
 
 <div *ngIf="furthestEventDate$ | async as furthestEventDate">
-    <div *ngIf="defunctArtistsCount$ | async as defunctArtistsCount">
-        <div class="d-flex justify-content-center align-items-center">
-            <p-card class="card wrapper position-relative" header="Rarelygroovy+" subheader="$5 One Time Purchase" [ngStyle]="{'border': 'none', 'max-width': '500px'}">
-                <ng-container *ngIf="(currentUser$ | async) === null">
-    
-                    <p>Comes with:</p>
-                    <div class="login-subscribe-wrapper d-flex justify-content-center align-items-center">
-                        <p-button label="Get Started" size="small" (click)="navigateToLogInPage()" [style]="{'width': '150px', 'height': '35px', 'font-size': '.9em'}" class="login-button"></p-button>
+    <div class="premium-page">
+        <!-- Hero Section -->
+        <div class="hero-section d-flex flex-column align-items-center text-center">
+            <h1><b>Rarelygroovy+</b></h1>
+            <div class="cta-section">
+                <div class="cta-wrapper">
+                    <!-- Big Text -->
+                    <div class="big-text">
+                        Unlock the complete underground music experience with Rarelygroovy+!
                     </div>
-    
-                </ng-container>
-                <p-carousel [value]="products" [numVisible]="1" [numScroll]="1" [responsiveOptions]="responsiveOptions">
-                    <ng-template let-product pTemplate="item">
-                        <div class="product-item">
-                            <div class="product-item-content">
-                                <h4 class="mb-1 d-flex justify-content-center align-items-center">{{product.name}}</h4>
-                                <div>
-                                    <h6 class="mt-0 mb-3" style="padding: 0 10px; font-size: .9em;">{{product.description}}</h6>
-                                </div>
-                                <div class="mb-3 d-flex justify-content-center align-items-center">
-                                    <img *ngIf="product.image" src="./../../../assets/images/{{product.image}}"[alt]="product.name" class="product-image" />
-                                </div>
+                    <!-- Button -->
+                    <p-button size="large" class="cta-button" (click)="handleButtonClick()">
+                        <ng-template pTemplate="label">
+                            <div class="cta-content">
+                                <span class="cta-main-text">Get unrestricted access.</span><br>
+                                <span class="cta-price">$5 one-time purchase</span>
+                                <i class="pi pi-arrow-right cta-icon"></i>
+                            </div>
+                        </ng-template>
+                    </p-button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features-section mt-4 px-3">
+            <div class="grid">
+                <!-- Feature 1: Event List -->
+                <div class="col-12 md:col-6 lg:col-4">
+                    <p-card [style]="{ 'background-color': '#ffffff', 'box-shadow': 'none', 'border': 'none', 'margin-bottom': '20px' }">
+                        <div class="feature-content flex align-items-center gap-3">
+                            <i class="pi pi-calendar feature-icon" style="font-size: 2rem;"></i>
+                            <div>
+
+                                <h4>Our Complete Event List</h4>
+                                <p>Stay updated with our comprehensive event list, featuring all upcoming events through March 2025!</p>
+                            </div>
+
+                        </div>
+                    </p-card>
+                </div>
+        
+                <!-- Feature 2: Filters -->
+                <div class="col-12 md:col-6 lg:col-4">
+                    <p-card [style]="{ 'background-color': '#ffffff', 'box-shadow': 'none', 'border': 'none', 'margin-bottom': '20px' }">
+                        <div class="feature-content flex align-items-center gap-3">
+                            <i class="pi pi-search feature-icon" style="font-size: 2rem;"></i>
+                            <div>
+                                <h4>Event Filters</h4>
+                                <p>Filter events by artist, venue, promoter, and more.</p>
                             </div>
                         </div>
-                    </ng-template>
-    
-                </p-carousel>
-                <!-- <p class="d-flex justify-content-center align-items-center"><span>Watch an oveview of Rg+ on our <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/watch?v=3cWyKcfxYs4">YouTube</a> channel</span></p> -->
-                
+                    </p-card>
+                </div>
+        
+                <!-- Feature 3: Artist Directory -->
+                <div class="col-12 md:col-6 lg:col-4">
+                    <p-card [style]="{ 'background-color': '#ffffff', 'box-shadow': 'none', 'border': 'none', 'margin-bottom': '20px' }">
+                        <div class="feature-content flex align-items-center gap-3">
+                            <i class="pi pi-book feature-icon" style="font-size: 2rem;"></i>
+                            <div>
+                                <h4>Our Complete Artist Directory</h4>
+                                <p>Explore every artist we've catalogued—active performers, defunct bands, disbanded groups, artists on hiatus, and even those who’ve recently toured the Valley.</p>
+                            </div>
+                        </div>
+                    </p-card>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compare Plans Section -->
+        <div class="compare-plans-section mt-5 px-3">
+            <h3 class="text-center" style="color: #033d7a">Compare Plans</h3>
+            <p-table [value]="planFeatures" class="p-datatable-gridlines" [responsiveLayout]="'scroll'">
+
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Feature</th>
+                        <th class="text-center">Free</th>
+                        <th class="text-center">Rarelygroovy+</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-feature>
+                    <tr>
+                        <td>
+                            {{ feature.name }}
+                            &nbsp;<i class="pi pi-info-circle"
+                               *ngIf="feature.info"
+                               pTooltip="{{ feature.info }}"
+                               tooltipPosition="top"
+                               tooltipEvent="hover"></i>
+                        </td>
+                        <td class="text-center">
+                            <i *ngIf="feature.basic" class="pi pi-check text-success"></i>
+                            <i *ngIf="!feature.basic" class="pi pi-minus"></i>
+                        </td>
+                        <td class="text-center">
+                            <i *ngIf="feature.premium" class="pi pi-check text-success"></i>
+                            <i *ngIf="!feature.premium" class="pi pi-times text-danger"></i>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <!-- Pricing Section -->
+        <div class="pricing-section mt-4" *ngIf="(currentUser$ | async) === null">
+            <p-card [style]="{ 'background-color': '#ffffff', 'box-shadow': 'none', 'border': 'none', 'padding': '20px' }">
+                <div class="text-center">
+                    <h3>One-time payment</h3>
+                    <h2 class="price">$5</h2>
+                    <p>No recurring charges, lifetime access.</p>
+                </div>
             </p-card>
         </div>
-        <ng-container *ngIf="currentUser$ | async">
-            <div id="checkout" style="margin-bottom: 20px">
-                <!-- Checkout will insert the payment form here -->
+
+        <!-- CTA Section -->
+        <div class="cta-section mt-4" *ngIf="(currentUser$ | async) === null">
+            <p-card [style]="{ 'background-color': '#ffffff', 'box-shadow': 'none', 'border': 'none', 'padding': '20px' }">
+                <div class="text-center">
+                    <h4>Get unrestricted access to Rarelygroovy+</h4>
+                    <p-button label="Get Started" size="large" class="cta-button" (click)="navigateToLogInPage()"></p-button>
+                </div>
+            </p-card>
+        </div>
+
+        <ng-container *ngIf="currentUser$ | async" >
+            <h3 id="checkOutScrollTo" #checkOutScrollTo class="text-center" style="color: #033d7a; margin-top: 50px">Checkout</h3>
+            <div id="checkout" #checkout style="margin-bottom: 25px; margin-top: 25">
+
             </div>
         </ng-container>
     </div>

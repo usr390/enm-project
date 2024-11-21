@@ -26,6 +26,62 @@ declare var Stripe: any;
 export class PaymentScreenTestComponent {
 
   products: Product[] = [];
+  planFeatures = [
+    {
+        name: 'Get unlimited replays',
+        info: 'Replay events as much as you like with Premium.',
+        basic: false,
+        premium: true
+    },
+    {
+        name: 'Download shows to listen offline',
+        info: 'Save events locally for offline access.',
+        basic: false,
+        premium: true
+    },
+    {
+        name: 'Listen without adverts',
+        info: null, // no tooltip for this feature
+        basic: false,
+        premium: true
+    },
+    {
+        name: 'Seek through shows without restrictions',
+        info: null,
+        basic: false,
+        premium: true
+    },
+    {
+        name: 'View upfront tracklists',
+        info: 'Tracklists show all the songs in an event.',
+        basic: false,
+        premium: true
+    },
+    {
+        name: 'Unlimited uploads (creators)',
+        info: 'Only available for Pro-level creators.',
+        basic: false,
+        premium: true
+    },
+    {
+        name: 'Listen on mobile (iOS and Android apps)',
+        info: null,
+        basic: true,
+        premium: true
+    },
+    {
+        name: 'Sync play queue across platforms',
+        info: null,
+        basic: true,
+        premium: true
+    },
+    {
+        name: 'Watch live streams',
+        info: null,
+        basic: true,
+        premium: true
+    }
+  ];
 
   responsiveOptions: any[] | undefined;
 

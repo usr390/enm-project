@@ -1,5 +1,5 @@
 // angular imports
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 // 3rd party imports
@@ -25,7 +25,54 @@ declare var Stripe: any;
 })
 export class EnmPlusPaymentScreenComponent {
 
+  @ViewChild('checkOutScrollTo', { static: false }) checkoutSection!: ElementRef;
+
   products: Product[] = [];
+
+  planFeatures = [
+    {
+        name: 'Events - complete event list',
+        info: 'Free plan will only show events for the current week.',
+        basic: false,
+        premium: true
+    },
+    {
+        name: 'Events - event filters',
+        info: null,
+        basic: false,
+        premium: true
+    },
+    {
+        name: 'Artist Directory - active artists',
+        info: null, // no tooltip for this feature
+        basic: true,
+        premium: true
+    },
+    {
+        name: 'Artist Directory - defunct artists',
+        info: null,
+        basic: false,
+        premium: true
+    },
+    {
+      name: 'Artist Directory - touring artists',
+      info: null,
+      basic: false,
+      premium: true
+    },
+    {
+      name: 'Artist Directory - filter by genre',
+      info: null,
+      basic: true,
+      premium: true
+    },
+    {
+        name: 'Blog',
+        info: null,
+        basic: true,
+        premium: true
+    }
+  ];
 
   responsiveOptions: any[] | undefined;
 
@@ -131,6 +178,24 @@ export class EnmPlusPaymentScreenComponent {
 
   tearDownStripe() {
     if (this.checkout) this.checkout.destroy()
+  }
+
+  handleButtonClick() {
+    this.currentUser$.pipe(take(1)).subscribe((user) => {
+      console.log('Current User:', user);
+      if (user) {
+        const elementPosition = this.checkoutSection.nativeElement.getBoundingClientRect().top + window.scrollY;
+        const offset = 50; // Adjust this value to add space above
+        window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
+      } else {
+        // User is not signed in, navigate to login
+        this.navigateToLogInPage();
+      }
+    });
+  }
+
+  scrollToCheckout() {
+    this.checkoutSection.nativeElement.scrollIntoView({ behavior: 'smooth' });
   }
 
   navigateToLogInPage() {

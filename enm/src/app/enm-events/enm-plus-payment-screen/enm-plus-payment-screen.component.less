@@ -17,23 +17,6 @@ a:hover {
   margin-bottom: 20px
 }
 
-:host ::ng-deep {
-
-  .product-item {
-      .product-item-content {
-          border: none;
-          border-radius: 3px;
-          margin: .3rem;
-          text-align: center;
-          padding: 0;
-      }
-  
-      .product-image {
-          width: 70%;
-          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
-      }
-  }
-}
 
 .wrapper {
   margin-bottom: 20px;
@@ -61,4 +44,378 @@ a:hover {
 .new-to-rarelygroovy {
   margin-top: 0;
   margin-bottom: 10px; /* Adjust if more spacing is needed */
+}
+
+.premium-page {
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.hero-section {
+  background: linear-gradient(to right, #fff30e, #af4261);
+  padding: 50px 20px;
+  color: white;
+}
+
+.features-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.feature-wrapper {
+  margin-bottom: 20px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.feature-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+}
+
+.pricing-section {
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  border-radius: 8px;
+}
+
+.cta-button {
+  border: none;
+  font-size: 1em;
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 300px;
+  height: 350px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 15px;
+}
+
+.feature-text h4 {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+.feature-text p {
+  font-size: 0.9rem;
+}
+
+.compare-plans-section {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+p-table {
+  margin-top: 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.pi-check {
+  font-size: 1.2rem;
+}
+
+.pi-times {
+  font-size: 1.2rem;
+}
+
+@media (min-width: 768px) {
+  .feature-wrapper {
+      flex: 1 1 calc(50% - 20px); /* Two columns on medium screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .feature-wrapper {
+      flex: 1 1 calc(33.333% - 20px); /* Three columns on large screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .features-section {
+      padding: 0;
+  }
+
+  .feature-wrapper {
+      margin-bottom: 10px;
+  }
+
+  .feature-card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      background: none;
+      border: none;
+      box-shadow: none;
+      padding: 10px;
+      width: 100%;
+      height: auto;
+      text-align: left;
+  }
+
+  .feature-icon {
+      width: 50px;
+      height: 50px;
+      margin-right: 15px;
+      margin-bottom: 0;
+  }
+
+  .feature-text {
+      flex: 1;
+  }
+
+  .feature-text h4 {
+      font-size: 1rem;
+      margin-bottom: 5px;
+  }
+
+  .feature-text p {
+      font-size: 0.8rem;
+      margin: 0;
+  }
+}
+
+
+/* Ensure the button layout works */
+.cta-button {
+  display: inline-flex; /* PrimeNG's button uses flexbox */
+  align-items: center;
+  justify-content: center;
+  white-space: normal; /* Allow line wrapping */
+  text-align: left; /* Ensures content aligns left */
+  line-height: 1.4; /* Adjust line spacing for readability */
+  padding: 10px 20px; /* Padding for better visuals */
+  max-width: 300px; /* Optional: Restrict the width */
+}
+
+/* Styling specifically for the price text */
+.cta-button .price {
+  font-size: 0.85rem; /* Smaller font for price */
+  font-weight: 400; /* Optional: Regular font weight for price */
+  color: inherit; /* Match the button's text color */
+  margin: 0; /* Remove any margin around the price */
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start; /* Ensure content aligns left */
+  text-align: left;
+  padding: 10px 20px;
+  white-space: normal; /* Allow text to wrap */
+  max-width: 300px; /* Adjust width as needed */
+  line-height: 1.4; /* Space lines for readability */
+}
+
+.cta-content {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for multi-line content */
+  align-items: center;
+}
+
+.cta-main-text {
+  font-size: 1rem; /* Main text size */
+  font-weight: bold;
+}
+
+.cta-price {
+  font-size: 0.85rem; /* Smaller text for the price */
+  color: inherit; /* Matches button text color */
+  margin-top: 5px; /* Optional: add spacing between text and price */
+}
+
+.cta-icon {
+  font-size: 1.2rem; /* Adjust icon size */
+  margin-left: auto; /* Push icon to the far right */
+  align-self: center; /* Align the icon vertically */
+}
+
+.cta-wrapper {
+  display: flex; /* Enable side-by-side layout */
+  flex-wrap: wrap; /* Allow stacking on smaller screens */
+  align-items: center; /* Align items vertically */
+  justify-content: space-between; /* Add space between button and text */
+  gap: 20px; /* Add spacing between elements */
+  margin-top: 20px;
+}
+
+.cta-button {
+  flex: 1; /* Let the button take up equal space */
+  max-width: 300px; /* Optional: Restrict button width */
+}
+
+.big-text {
+  flex: 2; /* Let the text take up more space */
+  font-size: 1.5rem; /* Big text for emphasis */
+  font-weight: bold;
+  text-align: left; /* Align text to the left */
+  margin-left: 20px
+}
+
+@media (max-width: 768px) {
+  .cta-wrapper {
+      flex-direction: column; /* Stack items on small screens */
+      text-align: center; /* Center-align content when stacked */
+  }
+
+  .big-text {
+      text-align: center; /* Center the big text on small screens */
+      font-size: 1.4rem; /* Adjust font size for readability */
+  }
+}
+
+.feature-panel {
+  border: none !important; /* Removes panel border */
+  box-shadow: none !important; /* Removes shadow */
+  padding: 0; /* Removes padding around the content */
+}
+
+.feature-panel .p-panel-header {
+  display: none !important; /* Hides the default header */
+}
+
+.feature-content {
+  padding: 10px 0; /* Optional: Adds consistent padding inside the content */
+  text-align: left; /* Aligns text to the left */
+}
+
+.feature-content h4 {
+  font-size: 1.2rem; /* Adjust the header size */
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.feature-content p {
+  font-size: 1rem; /* Text size for descriptions */
+  color: #555; /* Lighter text color for details */
+  margin: 0;
+}
+
+.feature-panel .p-panel-header {
+  display: none !important; /* Hides the header */
+}
+
+.feature-card {
+  border: none !important; /* Remove all borders */
+  box-shadow: none !important; /* Remove any shadow */
+  background: none !important; /* No background */
+  padding: 0 !important; /* Remove internal padding */
+  margin-bottom: 20px; /* Add spacing between features */
+}
+
+.feature-content h4 {
+  font-size: 1.2rem; /* PrimeNG default heading style */
+  font-weight: bold; /* Keep bold for emphasis */
+  margin: 0 0 5px; /* Add spacing below the title */
+  color: inherit; /* Use inherited text color */
+}
+
+.feature-content p {
+  font-size: 1rem; /* Default paragraph size */
+  margin: 0; /* No extra spacing */
+  color: inherit; /* Match site's text style */
+}
+.grid-layout {
+  display: grid;
+  gap: 20px; /* Space between cards */
+  grid-template-columns: 1fr; /* Default: Single column on small screens */
+  justify-items: center; /* Center-align cards on smaller screens */
+}
+
+.feature-card {
+  width: 100%; /* Make cards responsive */
+  max-width: 300px; /* Optional: Limit the max width of each card */
+}
+
+.feature-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  object-fit: contain; /* Ensures images are scaled properly */
+}
+
+/* Medium Screens: Triangle Layout */
+@media (min-width: 768px) {
+  .grid-layout {
+      grid-template-columns: 1fr 1fr; /* Two columns */
+      grid-template-rows: auto auto; /* Adjust for two rows */
+      grid-template-areas: 
+          "card1 card2"
+          "card3 card3"; /* Card 3 spans both columns */
+  }
+
+  .grid-layout > :nth-child(1) {
+      grid-area: card1;
+  }
+
+  .grid-layout > :nth-child(2) {
+      grid-area: card2;
+  }
+
+  .grid-layout > :nth-child(3) {
+      grid-area: card3;
+      justify-self: center; /* Center-align card 3 */
+  }
+}
+
+/* Large Screens: Single Row Layout */
+@media (min-width: 1024px) {
+  .grid-layout {
+      grid-template-columns: repeat(3, 1fr); /* Three columns */
+      grid-template-rows: auto; /* Single row */
+  }
+
+  .grid-layout > :nth-child(3) {
+      justify-self: stretch; /* Make card stretch if needed */
+  }
+}
+.feature-content {
+  display: flex; /* Aligns content horizontally */
+  align-items: center; /* Vertically centers the icon and text */
+  gap: 15px; /* Adds space between the icon and text */
+}
+
+.feature-icon {
+  font-size: 2rem; /* Ensures consistent icon size */
+  width: 50px; /* Fixes icon width */
+  height: 50px; /* Fixes icon height */
+  display: flex; /* Ensures the icon container behaves as a flexbox */
+  align-items: center; /* Centers the icon vertically within its container */
+  justify-content: center; /* Centers the icon horizontally within its container */
+  color: #033d7a; /* Optional: Matches the icon color with the theme */
 }
