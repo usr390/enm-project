@@ -115,6 +115,7 @@ export class EnmPlusPaymentScreenComponent {
   checkout: any;
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.currentUser$.pipe(take(1)).subscribe(user => { 
       if (user) {
         this.initializeStripe(user.id);
