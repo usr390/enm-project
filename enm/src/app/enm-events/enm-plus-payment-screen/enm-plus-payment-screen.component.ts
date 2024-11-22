@@ -36,8 +36,8 @@ export class EnmPlusPaymentScreenComponent {
       image: './../../../assets/images/test.png',
     },
     {
-      title: 'Plan Which Events You’ll Attend',
-      description: 'Get a glimpse of upcoming events and plan your schedule well in advance.',
+      title: 'Learn about events months in advance',
+      description: 'Plan your event going early, and stay on top of local happenings.',
       image: './../../../assets/images/test3.png',
     },
     {
