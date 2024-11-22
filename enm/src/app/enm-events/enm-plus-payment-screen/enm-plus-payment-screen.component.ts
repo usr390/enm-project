@@ -29,6 +29,24 @@ export class EnmPlusPaymentScreenComponent {
 
   products: Product[] = [];
 
+  premiumFeatures = [
+    {
+      title: 'Narrow down your search for events',
+      description: 'Use filters to find events based on specific artists, venues, dates, and more.',
+      image: './../../../assets/images/test.png',
+    },
+    {
+      title: 'Plan Which Events You’ll Attend',
+      description: 'Get a glimpse of upcoming events and plan your schedule well in advance.',
+      image: './../../../assets/images/test3.png',
+    },
+    {
+      title: 'Revel in the valley’s music history',
+      description: 'The complete artist directory includes bands that are no longer active—whether due to disbandment, hiatus, or simply fading into history.',
+      image: './../../../assets/images/test2.png',
+    },
+  ];
+
   planFeatures = [
     {
         name: 'Events - complete event list',

@@ -38,7 +38,7 @@
                             <div>
 
                                 <h4>Our Complete Event List</h4>
-                                <p>Stay updated with our comprehensive event list, featuring all upcoming events through March 2025!</p>
+                                <p>Stay updated with our comprehensive event list, featuring all upcoming events!</p>
                             </div>
 
                         </div>
@@ -72,6 +72,23 @@
                 </div>
             </div>
         </div>
+
+        <div class="premium-features-section-wrapper">
+            <p-card [style]="{ 'background-color': '#ffffff', 'box-shadow': 'none', 'border': 'none', 'padding': '20px' }">
+              <div class="premium-features-section">
+                <div class="features-grid">
+                  <div *ngFor="let feature of premiumFeatures" class="feature-item">
+                    <img [src]="feature.image" alt="{{ feature.title }}" class="feature-image" />
+                    <div class="feature-description">
+                      <h4>{{ feature.title }}</h4>
+                      <p>{{ feature.description }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </p-card>
+          </div>
+
 
         <!-- Compare Plans Section -->
         <div class="compare-plans-section mt-5 px-3">
