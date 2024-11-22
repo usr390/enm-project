@@ -362,7 +362,7 @@ const genreMapping: GenreMapping = {
   ],
   edm: [
     'edm', 'techno', 'house', 'dubstep', 'hard techno', 'tech house', 'psytrance', 'deep house', 
-    'trance', 'breakcore', 'breakbeat hardcore', 'electronica', 'psychedelic trance', 'digital hardcore', 'electro'
+    'trance', 'breakcore', 'breakbeat hardcore', 'electronica', 'psychedelic trance', 'digital hardcore', 'electro', 'gabber'
   ],
   rap: [
     'rap', 'hip hop', 'trap', 'experimental hip hop', 'trill hop', 'sample hop', 'phonk', 'trap metal', 
@@ -389,7 +389,7 @@ const genreMapping: GenreMapping = {
   electronic: [
     'electronic', 'techno', 'dubstep', 'triphop', 'tech house', 'house', 'electronica', 'synthwave', 
     'vaporwave', 'darkwave', 'coldwave', 'ebm', 'idm', 'chiptune', 'acid', 'minimal', 'rhythmic noise',
-    'future beats'
+    'future beats', 'gabber'
   ],
   soul: ['soul', 'neosoul', 'indie soul'],
   acoustic: ['acoustic'],
