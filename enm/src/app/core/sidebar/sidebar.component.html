@@ -1,11 +1,10 @@
 <p-sidebar [(visible)]="sidebarVisible" position="right">
     <ng-template pTemplate="content">
         <p>
-            Rarelygroovy - event listing and artist directory for rio grande valley alternative music. est 2024
+            Rarelygroovy - event listing and artist directory for Rio Grande Valley music
         </p>
         <p routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: false}"><span><a routerLink="/events" (click)="closeSidebar()">Events</a></span></p>
         <p routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"><span><a routerLink="/artist-directory" (click)="closeSidebar()">Artist Directory</a></span></p>
-        <p routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"><span><a routerLink="/blog" (click)="closeSidebar()">Blog</a></span></p>
         <span *ngIf="showPlusLink()">
             <p routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/plus']" routerLinkActive="active-link" (click)="closeSidebar()">Get Rarelygroovy+</a></p><br>
             <!-- Additional links here -->
@@ -17,11 +16,7 @@
             <span *ngIf="(user$ | async)"><a href="/"(click)="onLogOut()">Log Out</a></span>
             <span *ngIf="!(user$ | async)"><a [routerLink]="['/login']"  href="/">Log In</a></span> &nbsp;
             <span  routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" *ngIf="(((user$ | async)))"><a [routerLink]="['/account']"  (click)="closeSidebar()" href="/">Account</a></span> &nbsp;
-
-            <span routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/termsofservice" (click)="closeSidebar()">Terms Of Service</a></span>
         </p>
-        <p>Copyright {{currentDate | date: 'y'}} All Rights Reserved</p>
-        <p><a class="ig" href="https://www.instagram.com/rarelygroovy/" target="_blank" rel="noopener noreferrer"><i class="pi pi-instagram" style="color: inherit"></i></a></p>
     </ng-template>
 </p-sidebar>
 <i (click)="sidebarVisible = true" class="pi pi-bars clickable-icon"></i>

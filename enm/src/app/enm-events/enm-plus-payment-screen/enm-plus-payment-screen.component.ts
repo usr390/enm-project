@@ -84,12 +84,6 @@ export class EnmPlusPaymentScreenComponent {
       basic: true,
       premium: true
     },
-    {
-        name: 'Blog',
-        info: null,
-        basic: true,
-        premium: true
-    }
   ];
 
   responsiveOptions: any[] | undefined;
