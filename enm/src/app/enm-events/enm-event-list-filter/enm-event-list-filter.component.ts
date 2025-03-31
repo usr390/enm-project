@@ -49,6 +49,30 @@ export class EnmEventListFilterComponent {
   gifted = "merwin"
   filter$ = this.store$.select(EnmEventsSelectors.selectFilter);
 
+  toggleItems: any[] = [
+    {
+      controlName: 'sortByYearDescending',
+      onLabel: 'Timeline',
+      offLabel: 'Timeline',
+      onIcon: 'pi pi-arrows-v',  // or your chosen icon
+      offIcon: 'pi pi-arrows-v'
+    },
+    {
+      controlName: 'recentlyToured',
+      onLabel: 'Recently Toured',
+      offLabel: 'Recently Toured',
+      onIcon: 'fa-solid fa-van-shuttle',
+      offIcon: 'fa-solid fa-van-shuttle'
+    },
+    {
+      controlName: 'randomArtist',
+      onLabel: 'Random Artist',
+      offLabel: 'Random Artist',
+      onIcon: 'fa-solid fa-shuffle', // or if you prefer FontAwesome, adjust accordingly
+      offIcon: 'fa-solid fa-shuffle'
+    }
+  ];
+
   ngOnInit() {
     this.genres = ['Rock', 'Punk', 'Metal', 'Experimental', 'EDM', 'Rap', 'Jazz', 'Pop', 'Latin', 'Other'];
     this.initializeFormControl();
