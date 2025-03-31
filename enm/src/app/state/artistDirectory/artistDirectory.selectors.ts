@@ -179,6 +179,14 @@ export const selectFiltered = createSelector(
       );
     }
 
+    if (filter.randomArtist) {
+      if (filteredArtists.length > 0) {
+        const randomIndex = Math.floor(Math.random() * filteredArtists.length);
+        return [filteredArtists[randomIndex]];
+      }
+      return [];
+    }
+
 
     return filteredArtists;
   }
@@ -227,6 +235,14 @@ export const selectFilteredNonRGV = createSelector(
       filteredArtists = filteredArtists.filter(artist => 
         artist.genre && artist.genre.some(genre => activeGenres.includes(genre))
       );
+    }
+
+    if (filter.randomArtist) {
+      if (filteredArtists.length > 0) {
+        const randomIndex = Math.floor(Math.random() * filteredArtists.length);
+        return [filteredArtists[randomIndex]];
+      }
+      return [];
     }
 
     return filteredArtists;

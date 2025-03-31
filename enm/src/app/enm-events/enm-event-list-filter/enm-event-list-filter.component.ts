@@ -40,7 +40,7 @@ export class EnmEventListFilterComponent {
   );
 
   enmEventListFilterForm = this.fb.group({ filter: '', checked: false, touring: false });
-  artistDirectoryFilterForm = this.fb.group({ filter: '', recentlyListed: false, sortByYearDescending: false, recentlyToured: false, Rock: false, Punk: false, Metal: false, EDM: false, Rap: false, Jazz: false, Pop: false, Experimental: false, Latin: false, Other: false });
+  artistDirectoryFilterForm = this.fb.group({ filter: '', recentlyListed: false, sortByYearDescending: false, recentlyToured: false, randomArtist: false, Rock: false, Punk: false, Metal: false, EDM: false, Rap: false, Jazz: false, Pop: false, Experimental: false, Latin: false, Other: false });
   selectedFilterText$ = this.store$.select(EnmEventsSelectors.selectedFilterText); // for repopulating the input field after a refresh or navigation
   selectedArtistDirectoryFilterText$ = this.store$.select(ArtistDirectorySelectors.selectFilter); // for repopulating the input field after a refresh or navigation
   filter="Just Listed"
@@ -84,6 +84,7 @@ export class EnmEventListFilterComponent {
     let recentlyListed = this.artistDirectoryFilterForm.value.recentlyListed as boolean
     let sortByYearDescending = this.artistDirectoryFilterForm.value.sortByYearDescending as boolean
     let recentlyToured = this.artistDirectoryFilterForm.value.recentlyToured as boolean
+    let randomArtist = this.artistDirectoryFilterForm.value.randomArtist as boolean
     let rock = this.artistDirectoryFilterForm.value.Rock as boolean
     let punk = this.artistDirectoryFilterForm.value.Punk as boolean
     let metal = this.artistDirectoryFilterForm.value.Metal as boolean
@@ -95,7 +96,7 @@ export class EnmEventListFilterComponent {
     let latin = this.artistDirectoryFilterForm.value.Latin as boolean
     let other = this.artistDirectoryFilterForm.value.Other as boolean
 
-    this.store$.dispatch(ArtistDirectoryActions.artistDirectoryFilter({ text, recentlyListed, sortByYearDescending, recentlyToured, rock, punk, metal, edm, rap, jazz, pop, experimental, latin, other }))
+    this.store$.dispatch(ArtistDirectoryActions.artistDirectoryFilter({ text, recentlyListed, sortByYearDescending, recentlyToured, randomArtist, rock, punk, metal, edm, rap, jazz, pop, experimental, latin, other }))
   }
 
   clearFilter() {
@@ -128,6 +129,7 @@ export class EnmEventListFilterComponent {
     this.selectedArtistDirectoryFilterText$.pipe(take(1)).subscribe(filter => {
       this.artistDirectoryFilterForm.get('filter')?.setValue(filter.text)
       this.artistDirectoryFilterForm.get('sortByYearDescending')?.setValue(filter.sortByYearDescending)
+      this.artistDirectoryFilterForm.get('randomArtist')?.setValue(filter.randomArtist)
       this.artistDirectoryFilterForm.get('Rock')?.setValue(filter.rock)
       this.artistDirectoryFilterForm.get('Punk')?.setValue(filter.punk)
       this.artistDirectoryFilterForm.get('Metal')?.setValue(filter.metal)

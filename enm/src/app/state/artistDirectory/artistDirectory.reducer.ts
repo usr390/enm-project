@@ -28,7 +28,7 @@ const _artistDirectoryReducer = createReducer(
       }
     }),
 
-    on(artistDirectoryFilter, (state, { text, recentlyListed, sortByYearDescending, recentlyToured, rock, punk, metal, edm, rap, jazz, pop, experimental, latin, other }) => ({
+    on(artistDirectoryFilter, (state, { text, recentlyListed, sortByYearDescending, recentlyToured, randomArtist, rock, punk, metal, edm, rap, jazz, pop, experimental, latin, other }) => ({
         ...state,
         artistDirectoryFilter: {
           ...state.artistDirectoryFilter,
@@ -36,6 +36,7 @@ const _artistDirectoryReducer = createReducer(
           recentlyListed,
           sortByYearDescending,
           recentlyToured,
+          randomArtist,
           rock,
           punk,
           metal,
