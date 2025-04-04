@@ -71,7 +71,10 @@ app.get('/api/enmEvents', express.json(), async (req, res) => {
 
     if (isPlusUser) {
       try {
-        res.json(await EnmEventModel.find({ dateTime: { $gte: DateTime.now().minus({ hours: 8 }) } })
+        res.json(await EnmEventModel.find({
+          verified: true,
+          dateTime: { $gte: DateTime.now().minus({ hours: 8 }) }
+        })
         .sort({ dateTime: 1 })
         .catch(err => console.log(err)))
       } catch (err) {
@@ -89,7 +92,8 @@ app.get('/api/enmEvents', express.json(), async (req, res) => {
         }
     
         const enmEvents = await EnmEventModel.find({ 
-          dateTime: { $gte: today, $lte: endOfWeek } 
+          verified: true,
+          dateTime: { $gte: today, $lte: endOfWeek }
         }).sort({ dateTime: 1 });
         
         res.json(enmEvents);
@@ -121,7 +125,9 @@ app.post('/api/enmEvent', express.json(), async (req: Request, res: Response) =>
     updates: [{
       date: creationDateTime,
       message: "Event added to Rarelygroovy"
-    }]
+    }],
+    verified: false,
+    submittedBy: req.body.submittedBy
   });
   // Save the enmEvent object
   const savedEvent = await enmEvent.save();

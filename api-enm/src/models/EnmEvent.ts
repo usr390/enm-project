@@ -25,7 +25,10 @@ const EnmEventSchema = new Schema({
     promoter: PromoterSchema,
     canceled: Boolean,
     flyer: String,
-    updates: []
+    flyerColors: [String],
+    updates: [],
+    verified: Boolean,
+    submittedBy: String
 });
 
 const EnmEventModel = mongoose.model("EnmEvent", EnmEventSchema);
