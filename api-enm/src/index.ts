@@ -121,7 +121,7 @@ app.post('/api/enmEvent', express.json(), async (req: Request, res: Response) =>
     artists: req.body.artists,
     creationDateTime: creationDateTime,
     promoter: req.body.promoter,
-    flyer: 'pending',
+    flyer: req.body.flyer?.trim() || 'pending',
     updates: [{
       date: creationDateTime,
       message: "Event added to Rarelygroovy"
