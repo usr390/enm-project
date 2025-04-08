@@ -1023,6 +1023,54 @@ app.get('/api/blogs', express.json(), async (req: Request, res: Response) => {
   res.json(await BlogModel.find().catch(err => console.log(err)))
 })
 
+app.post('/api/verify-apple-receipt', express.json(), async (req, res) => {
+  const { userId, receiptData } = req.body;
+
+  if (!userId || !receiptData) {
+    return res.status(400).json({ message: 'Missing required fields' });
+  }
+
+  try {
+    const response = await fetch('https://buy.itunes.apple.com/verifyReceipt', {
+      method: 'POST',
+      body: JSON.stringify({
+        'receipt-data': receiptData,
+        'password': process.env.APP_SHARED_SECRET, // from App Store Connect
+      }),
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    const result = await response.json();
+
+    if (result.status !== 0) {
+      return res.status(400).json({ message: 'Invalid receipt', status: result.status });
+    }
+
+    // ✅ Receipt is valid — now check for the right product
+    const isPlusPurchased = result?.receipt?.in_app?.some(purchase =>
+      purchase.product_id === 'rarelygroovyplus'
+    );
+
+    if (!isPlusPurchased) {
+      return res.status(403).json({ message: 'Product not found in receipt' });
+    }
+
+    // 🔥 Flip the plus flag
+    const user = await UserModel.findByIdAndUpdate(userId, { plus: true }, { new: true });
+    if (!user) return res.status(404).send({ message: 'User not found' });
+
+    return res.json({
+      id: user._id,
+      username: user.username,
+      plus: user.plus
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 // asynchronous initialization. keeps api from processesing requests until a successful connection to db is established
 mongoose.connect(process.env.MONGO_URL || '').then(() => { app.listen(port, () => {}); })
