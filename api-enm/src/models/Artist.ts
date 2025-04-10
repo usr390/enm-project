@@ -33,7 +33,8 @@ export const ArtistSchema = new Schema({
     genre: { type: [String] },
     artists: { type: [] },
     end: { type: String, default: "pending" },
-    notes: { type: String, default: "" }
+    notes: { type: String, default: "" },
+    rgvDebut: Boolean
 });
 
 const ArtistModel = mongoose.model("Artist", ArtistSchema);
