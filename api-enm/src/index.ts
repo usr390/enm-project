@@ -1071,6 +1071,35 @@ app.post('/api/verify-apple-receipt', express.json(), async (req, res) => {
   }
 });
 
+// pseudo-code using Node/Express and Stripe SDK
+app.post("/api/apple-pay-charge", async (req, res) => {
+  const { applePayToken, userId } = req.body;
+
+  try {
+    const paymentMethod = await stripe.paymentMethods.create({
+      type: "card",
+      card: {
+        token: applePayToken
+      }
+    });
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: 499, // $4.99
+      currency: "usd",
+      payment_method: paymentMethod.id,
+      confirm: true,
+    });
+
+    // update your DB: mark user as plus
+    await UserModel.findByIdAndUpdate(userId, { plus: true });
+
+    return res.status(200).json({ success: true });
+  } catch (err) {
+    console.error("❌ Stripe charge failed", err);
+    return res.status(500).json({ error: err.message });
+  }
+});
+
 
 // asynchronous initialization. keeps api from processesing requests until a successful connection to db is established
 mongoose.connect(process.env.MONGO_URL || '').then(() => { app.listen(port, () => {}); })
