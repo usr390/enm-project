@@ -8,6 +8,7 @@ const UserSchema = new Schema({
     plus: Boolean,
     stripeCustomerId: String,
     expires: String,
+    appAccountToken_apple: String,
 });
 
 const UserModel = mongoose.model("User", UserSchema);

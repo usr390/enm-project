@@ -28,6 +28,7 @@ const apiLimiter = rateLimit({
   legacyHeaders: false, // disable the `X-RateLimit-*` headers
   message: 'Too many requests from this IP, please try again after 15 minutes',
 })
+import { randomUUID } from 'crypto';
 
 // enm imports
 import EnmEventModel from "./models/EnmEvent";
@@ -248,7 +249,7 @@ app.post('/api/login', express.json(), async (req: Request, res: Response) => {
     }
 
     // The passwords match, proceed with login
-    const userDTO = new UserDTO(user.id, user.username, user.plus);
+    const userDTO = new UserDTO(user.id, user.username, user.plus, user.appAccountToken_apple);
     res.json({ user: { ...userDTO } });
   } catch (err) {
     console.error(err);
@@ -276,7 +277,8 @@ app.post('/api/create-user', express.json(), async (req: Request, res: Response)
     const newUser = new UserModel({
       username,
       password: hashedPassword, // Store the hashed password
-      plus: false
+      plus: false,
+      appAccountToken_apple: randomUUID()
     });
 
     // Promo code redemption logic
@@ -324,7 +326,7 @@ app.post('/api/create-user', express.json(), async (req: Request, res: Response)
 
     await newUser.save();
 
-    const userDTO = new UserDTO(newUser.id, newUser.username, newUser.plus);
+    const userDTO = new UserDTO(newUser.id, newUser.username, newUser.plus, newUser.appAccountToken_apple);
 
     res.status(201).json({ user: { ...userDTO } });
   } 
@@ -485,7 +487,7 @@ app.get('/api/getUser/:username', express.json(), async (req, res) => {
     const { username } = req.params;
 
     // Find the user by userid, excluding the password field
-    const user = await UserModel.findOne({ username: username }, 'username plus expires');
+    const user = await UserModel.findOne({ username: username }, 'username plus expires appAccountToken_apple');
 
     if (user) {
       // Send back the user data excluding the password
