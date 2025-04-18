@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { logInSuccessResponse, logOut, logInErrorResponse, rehydrateFromBrowserLocalStorage, createUserSuccessResponse, createUserRequest, createUserErrorResponse, logInRequest, refreshUserSuccessResponse } from "./auth.actions";
+import { logInSuccessResponse, logOut, deleteUser, logInErrorResponse, rehydrateFromBrowserLocalStorage, createUserSuccessResponse, createUserRequest, createUserErrorResponse, logInRequest, refreshUserSuccessResponse, deleteUserSuccess, deleteUserFailure } from "./auth.actions";
 import { enmPlusMonthlySubscriptionPaymentSuccessReponse } from "../payment/payment.actions";
 import {AuthState, initialState} from './auth.state'
 
@@ -58,6 +58,26 @@ const _authReducer = createReducer(
             ...state,
             user: null,
             logInErrorResponse: null
+        }
+    }),
+    on(deleteUser, (state, { userId }) => {
+        return {
+            ...state,
+            logInProcessing: true
+        }
+    }),
+    on(deleteUserSuccess, (state) => {
+        return {
+            ...state,
+            user: null,
+            logInErrorResponse: null,
+            logInProcessing: false
+        }
+    }),
+    on(deleteUserFailure, (state) => {
+        return {
+            ...state,
+            logInProcessing: false
         }
     }),
     on(rehydrateFromBrowserLocalStorage, (state, { user, logInErrorResponse }) => {

@@ -22,6 +22,11 @@ export const createUserErrorResponse = createAction('[Create Account Screen] Cre
 
 export const logOut = createAction('[Sidebar Component] Log Out'); 
 
+export const deleteUser = createAction('[Profile] Delete User', props<{ userId: string }>()); 
+export const deleteUserSuccess = createAction('[Profile] Delete User Success');
+export const deleteUserFailure = createAction('[Profile] Delete User Failure');
+
+
 export const rehydrateFromBrowserLocalStorage = createAction('[App] Rehydrate From Browser Local Storage', props<{ user: NullableUser, logInErrorResponse: LogInErrorResponse }>())
 
 export const updateForm = createAction('[All "Add Event" Form Related Screens] Update Form Fields', props<{ formValue: EnmEventAddFormState }>());

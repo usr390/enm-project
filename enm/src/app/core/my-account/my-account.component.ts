@@ -99,4 +99,24 @@ export class MyAccountComponent {
     }
   }
 
+  confirmDeleteAccount() {
+    this.confirmationService.confirm({
+      key: 'deleteAccount',
+      header: 'Are you sure?',
+      icon: 'pi pi-exclamation-triangle',
+      message: 'Are you sure you want to delete your account? This action cannot be undone.',
+      acceptLabel: 'Delete',
+      rejectLabel: 'Cancel',
+      acceptButtonStyleClass: 'p-button-danger',
+      accept: () => {
+        this.currentUser$.pipe(take(1)).subscribe(user => {
+          if (user) {
+            let userid = user._id || user.id;
+            this.store$.dispatch(AuthActions.deleteUser({ userId: userid }));
+          }
+        });
+      }
+    });
+  }
+
 }

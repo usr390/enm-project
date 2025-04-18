@@ -336,8 +336,8 @@ app.post('/api/create-user', express.json(), async (req: Request, res: Response)
   }
 });
 
-app.delete('/api/delete-user', express.json(), async (req: Request, res: Response) => {
-  const { userId } = req.body;
+app.delete('/api/delete-user/:userId', async (req: Request, res: Response) => {
+  const { userId } = req.params;
 
   if (!userId) {
     return res.status(400).json({ error: 'Missing userId' });
@@ -345,14 +345,11 @@ app.delete('/api/delete-user', express.json(), async (req: Request, res: Respons
 
   try {
     const user = await UserModel.findById(userId);
-
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    // Delete the user
     await UserModel.deleteOne({ _id: userId });
-
     return res.status(200).json({ message: 'User deleted successfully' });
   } catch (err) {
     console.error('❌ Error deleting user:', err);

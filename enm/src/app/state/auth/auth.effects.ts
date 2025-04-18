@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { LogInService } from "src/app/core/services/login.service";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, of, exhaustMap, map, tap, concatMap, Observable, take } from "rxjs";
+import { catchError, of, exhaustMap, map, tap, concatMap, Observable, take, switchMap, EMPTY } from "rxjs";
 import * as AuthActions from './auth.actions';
 import * as EnmEventActions from './../enmEvents/enmEvents.actions'
 import { CreateUserService } from "src/app/core/services/create-user.service";
@@ -15,6 +15,7 @@ import { AppState } from "../app.state";
 import { Store } from "@ngrx/store";
 import * as PaymentActions from './../../state/payment/payment.actions'
 import * as AuthSelectors from './../../state/auth/auth.selectors';
+import { HttpClient } from "@angular/common/http";
 
 
 
@@ -46,7 +47,8 @@ export class AuthEffects {
         private router: Router,
         private messageService: MessageService,
         private paymentScreenSkippedService: PaymentScreenSkippedService,
-        private store$: Store<AppState>
+        private store$: Store<AppState>,
+        private http: HttpClient
     ) {}
 
     logInRequest$ = createEffect(() => 
@@ -152,4 +154,51 @@ export class AuthEffects {
         ),
         { dispatch: false }
     )
+
+    deleteUser$ = createEffect(() =>
+        this.actions$.pipe(
+          ofType(AuthActions.deleteUser),
+          exhaustMap(action =>
+            this.userService.deleteUser(action.userId).pipe(
+              map(() => AuthActions.deleteUserSuccess()),
+              catchError(error => of(AuthActions.deleteUserFailure()))
+            )
+          )
+        )
+      );
+
+      deleteUserSuccess$ = createEffect(() =>
+        this.actions$.pipe(
+          ofType(AuthActions.deleteUserSuccess),
+          tap(() => {
+            localStorage.clear();
+            this.router.navigate(['/'], { replaceUrl: true });
+            this.messageService.add({
+              key: 'deleteAccount',
+              severity: 'success',
+              summary: 'User deleted',
+              detail: 'User successfully deleted',
+              life: 7000,
+            });
+          })
+        ),
+        { dispatch: false }
+      );
+      
+      deleteUserFailure$ = createEffect(() =>
+        this.actions$.pipe(
+          ofType(AuthActions.deleteUserFailure),
+          tap(() => {
+            this.messageService.add({
+              key: 'deleteAccount',
+              severity: 'error',
+              summary: 'Delete failed',
+              detail: 'Could not delete account',
+              life: 7000,
+            });
+          })
+        ),
+        { dispatch: false }
+      );
+    
 }

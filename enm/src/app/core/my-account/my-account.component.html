@@ -1,3 +1,5 @@
+<p-confirmDialog key="deleteAccount"></p-confirmDialog>
+
 <div class="back-arrow">
   <p-button type="button" (click)="goBack()" icon="pi pi-arrow-left" styleClass="p-button-rounded p-button-lg p-button-text"></p-button>
 </div>
@@ -6,7 +8,7 @@
   <div class="row">
     <div class="col">
       <ng-container *ngIf="(currentUser$ | async) as currentUser">
-        <!-- Content to display if the username is a founding account -->
+        <!-- Founder -->
         <div *ngIf="founderAccounts.includes(currentUser.username); else notFoundingAccount">
           <div class="d-flex justify-content-center align-items-center">
             <div class="container">
@@ -14,57 +16,62 @@
                 <div class="col">
                   <h2 style="color: #708da8; margin-left: 15px;">Account</h2>
                   <p-panel header="General">
-                    <div *ngIf="(currentUser$ | async) as currentUser">
-                      <p><b>Username:</b> {{ currentUser.username }}</p>
-                      <p><b>Account Type:</b><span> Founder</span></p>
-                      <p>Founders are among the first people to ever use Rarelygroovy. You will forever have access to the latest and greatest features we have to offer. Thank you for being part of our little experiment! </p>
-                    </div>
+                    <p><b>Username:</b> {{ currentUser.username }}</p>
+                    <p><b>Account Type:</b><span> Founder</span></p>
+                    <p>Founders are among the first people to ever use Rarelygroovy. You will forever have access to the latest and greatest features we have to offer. Thank you for being part of our little experiment! </p>
                   </p-panel>
+
+                  <p-button 
+                    label="Delete Account" 
+                    icon="pi pi-trash" 
+                    class="p-button-danger p-button-outlined" 
+                    (click)="confirmDeleteAccount()">
+                  </p-button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      
-        <!-- Content to display if the username is NOT a founding account -->
+
+        <!-- Not founder -->
         <ng-template #notFoundingAccount>
           <div *ngIf="isUpcomingSubscriptionRenewalDateLoading$ | async" class="d-flex justify-content-center align-items-center" style="height: 65vh;">
-            <p-progressSpinner styleClass= "w-4rem h-4rem" strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner"></p-progressSpinner>
+            <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner"></p-progressSpinner>
           </div>
-          
+
           <div *ngIf="!(isUpcomingSubscriptionRenewalDateLoading$ | async)" class="d-flex justify-content-center align-items-center">
-            <div class="d-flex justify-content-center align-items-center">
-              <div class="container">
-                <div class="row">
-                  <div class="col">
-                    <h2 style="color: #708da8; margin-left: 15px;">Account</h2>
-                    <p-panel header="General">
-                      <div *ngIf="(currentUser$ | async) as currentUser">
-                        <p><b>Username:</b> {{ currentUser.username }}</p>
-                        <p>
-                          <b>Account Type:</b>
-                          <span *ngIf="(chargesHistory$ | async).length > 0"> Rarelygroovy+</span>
-                          <span *ngIf="!((chargesHistory$ | async).length > 0)"> Free</span>
-                        </p>
-                      </div>
-          
-                    </p-panel>
-                  </div>
-                </div>
-                <div class="row" style="margin-top: 10px;">
-                  <div class="col">
-                    <p-panel *ngIf="((chargesHistory$ | async).length > 0)" header="Rarelygroovy+">
-                      <div class="grid grid-nogutter">
-                        <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
-                          <div class="flex flex-column align-items-center sm:align-items-start gap-3">
-                            <div class="text-2xl font-bold text-900">Purchased {{ (chargesHistory$ | async)[(chargesHistory$ | async).length - 1].created | date }} ({{ (chargesHistory$ | async)[(chargesHistory$ | async).length - 1].amount / 100 | currency:'USD' }})</div>
-                            <div class="flex align-items-center gap-3">
-                            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <h2 style="color: #708da8; margin-left: 15px;">Account</h2>
+                  <p-panel header="General">
+                    <p><b>Username:</b> {{ currentUser.username }}</p>
+                    <p>
+                      <b>Account Type:</b>
+                      <span *ngIf="(chargesHistory$ | async).length > 0"> Rarelygroovy+</span>
+                      <span *ngIf="!((chargesHistory$ | async).length > 0)"> Free</span>
+                    </p>
+                  </p-panel>
+
+                  <p-panel *ngIf="(chargesHistory$ | async).length > 0" header="Rarelygroovy+">
+                    <div class="grid grid-nogutter">
+                      <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                        <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                          <div class="text-2xl font-bold text-900">
+                            Purchased {{ (chargesHistory$ | async)[(chargesHistory$ | async).length - 1].created | date }}
+                            ({{ (chargesHistory$ | async)[(chargesHistory$ | async).length - 1].amount / 100 | currency:'USD' }})
                           </div>
                         </div>
+                      </div>
                     </div>
-                    </p-panel>
-                  </div>
+                  </p-panel>
+
+                  <p-button 
+                    label="Delete Account" 
+                    icon="pi pi-trash" 
+                    class="p-button-danger p-button-outlined" 
+                    (click)="confirmDeleteAccount()" >
+                  </p-button>
                 </div>
               </div>
             </div>
@@ -74,6 +81,3 @@
     </div>
   </div>
 </div>
-
-
-

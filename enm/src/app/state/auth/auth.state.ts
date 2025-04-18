@@ -6,11 +6,13 @@ export interface AuthState {
     logInErrorResponse: LogInErrorResponse,
     createUserProcessing: boolean,
     logInProcessing: boolean
+    deleteUserProcessing: boolean
 }
 
 export const initialState: AuthState = {
     user: null,
     logInErrorResponse: null,
     createUserProcessing: false,
-    logInProcessing: false
+    logInProcessing: false,
+    deleteUserProcessing: false
 }

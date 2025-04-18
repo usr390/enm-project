@@ -27,5 +27,9 @@ export class UserService {
   cancelSubscription(id: string) {
     return this.http.post<CancelRarelygroovyPlusSubscriptionSuccessResponse>(`${BASE_URL}/cancel-subscription/${id}`, {});
   }
+
+  deleteUser(userId: string) {
+    return this.http.delete<{ message: string }>(`${BASE_URL}/delete-user/${userId}`);
+  }
   
 }
