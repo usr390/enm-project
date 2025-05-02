@@ -1046,6 +1046,29 @@ app.get('/api/blogs', express.json(), async (req: Request, res: Response) => {
   res.json(await BlogModel.find().catch(err => console.log(err)))
 })
 
+// returns count of events beyond the free-user limit
+app.get('/api/enmEvents/number-of-events-passed-free-limit', express.json(), async (req, res) => {
+  try {
+    // mirror your free-user window
+    const now = DateTime.now().minus({ hours: 8 });
+    let endOfWeek = DateTime.now().endOf('week').plus({ hours: 5 });
+    if (now.weekday === 6 || now.weekday === 7) {
+      endOfWeek = now.plus({ weeks: 1 }).endOf('week').plus({ hours: 5 });
+    }
+
+    // count all verified events strictly after that cutoff
+    const extraCount = await EnmEventModel.countDocuments({
+      verified: true,
+      dateTime: { $gt: endOfWeek.toJSDate() }
+    });
+
+    res.json({ extraEvents: extraCount });
+  } catch (err) {
+    console.error('Error fetching free-extra count:', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 // asynchronous initialization. keeps api from processesing requests until a successful connection to db is established
 mongoose.connect(process.env.MONGO_URL || '').then(() => { app.listen(port, () => {}); })
 .catch((error) => {
