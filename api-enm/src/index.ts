@@ -109,7 +109,8 @@ app.get('/api/enmEvents', express.json(), async (req, res) => {
   }
 });
 
-// Past events endpoint - Rarelygroovy+ only
+// Past events endpoint (Rarelygroovy+ only, capped at 1 month back)
+
 app.get('/api/enmEvents/past', express.json(), async (req, res) => {
   const username = req.query.username;
   try {
@@ -120,12 +121,17 @@ app.get('/api/enmEvents/past', express.json(), async (req, res) => {
         .send('Forbidden: Rarelygroovy+ required to view past events');
     }
 
-    // cutoff = now minus 8h, to mirror your “free window” offset
-    const cutoff = DateTime.now().minus({ hours: 8 }).toJSDate();
+    // cutoff = now minus 8h
+    const cutoff    = DateTime.now().minus({ hours: 8 }).toJSDate();
+    // one month ago
+    const oneMonthAgo = DateTime.now().minus({ months: 1 }).toJSDate();
 
     const pastEvents = await EnmEventModel.find({
       verified: true,
-      dateTime: { $lt: cutoff }
+      dateTime: {
+        $lt: cutoff,
+        $gte: oneMonthAgo
+      }
     })
     .sort({ dateTime: -1 }); // newest past first
 
