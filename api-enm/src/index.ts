@@ -135,7 +135,7 @@ app.get('/api/enmEvents/past', express.json(), async (req, res) => {
     })
     .sort({ dateTime: -1 }); // newest past first
 
-    res.json(pastEvents);
+    res.json(pastEvents.reverse());
   } catch (err) {
     console.error('Error fetching past events:', err);
     res.status(500).send('Internal Server Error');
