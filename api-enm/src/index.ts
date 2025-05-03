@@ -109,6 +109,33 @@ app.get('/api/enmEvents', express.json(), async (req, res) => {
   }
 });
 
+// Past events endpoint - Rarelygroovy+ only
+app.get('/api/enmEvents/past', express.json(), async (req, res) => {
+  const username = req.query.username;
+  try {
+    const isPlusUser = await checkUserPlusStatus(username);
+    if (!isPlusUser) {
+      return res
+        .status(403)
+        .send('Forbidden: Rarelygroovy+ required to view past events');
+    }
+
+    // cutoff = now minus 8h, to mirror your “free window” offset
+    const cutoff = DateTime.now().minus({ hours: 8 }).toJSDate();
+
+    const pastEvents = await EnmEventModel.find({
+      verified: true,
+      dateTime: { $lt: cutoff }
+    })
+    .sort({ dateTime: -1 }); // newest past first
+
+    res.json(pastEvents);
+  } catch (err) {
+    console.error('Error fetching past events:', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 app.post('/api/enmEvent', express.json(), async (req: Request, res: Response) => {
   console.log(req.body)
   const creationDateTime = DateTime.now()
