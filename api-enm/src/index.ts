@@ -1122,6 +1122,21 @@ app.get('/api/enmEvents/number-of-events-passed-free-limit', express.json(), asy
   }
 });
 
+app.get('/api/artists/local-inactive-count', express.json(), async (req, res) => {
+  try {
+    // count all artists with location "RGV" whose status is not "active"
+    const inactiveCount = await ArtistModel.countDocuments({
+      location: "RGV",
+      status: { $ne: "active" }
+    });
+
+    res.json({ inactiveLocalArtists: inactiveCount });
+  } catch (err) {
+    console.error('Error fetching local inactive artist count:', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 // asynchronous initialization. keeps api from processesing requests until a successful connection to db is established
 mongoose.connect(process.env.MONGO_URL || '').then(() => { app.listen(port, () => {}); })
 .catch((error) => {
