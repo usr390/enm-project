@@ -133,7 +133,7 @@ app.get('/api/enmEvents/past', express.json(), async (req, res) => {
         $gte: oneMonthAgo
       }
     })
-    .sort({ dateTime: 1 }); // newest past first
+    .sort({ dateTime: -1 }); // newest past first
 
     res.json(pastEvents);
   } catch (err) {
