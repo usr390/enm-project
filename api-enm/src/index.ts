@@ -1082,20 +1082,40 @@ app.get('/api/blogs', express.json(), async (req: Request, res: Response) => {
 // returns count of events beyond the free-user limit
 app.get('/api/enmEvents/number-of-events-passed-free-limit', express.json(), async (req, res) => {
   try {
-    // mirror your free-user window
+    // 1) figure out the “free” cutoff just as you already do
     const now = DateTime.now().minus({ hours: 8 });
     let endOfWeek = DateTime.now().endOf('week').plus({ hours: 5 });
     if (now.weekday === 6 || now.weekday === 7) {
       endOfWeek = now.plus({ weeks: 1 }).endOf('week').plus({ hours: 5 });
     }
 
-    // count all verified events strictly after that cutoff
+    // 2) count everything beyond that cutoff
     const extraCount = await EnmEventModel.countDocuments({
       verified: true,
       dateTime: { $gt: endOfWeek.toJSDate() }
     });
 
-    res.json({ extraEvents: extraCount });
+    // 3) find the furthest‐out event’s date
+    const furthestEvent = await EnmEventModel
+      .findOne({ verified: true })
+      .sort({ dateTime: -1 })
+      .select('dateTime')
+      .lean();
+
+    // 4) extract its month name
+    let furthestMonth = null;
+    if (furthestEvent?.dateTime) {
+      furthestMonth = DateTime
+        .fromJSDate(furthestEvent.dateTime)
+        .toFormat('LLLL');   // full month name, e.g. “April”
+    }
+
+    // 5) send both back
+    res.json({
+      extraEvents: extraCount,
+      furthestMonth
+    });
+
   } catch (err) {
     console.error('Error fetching free-extra count:', err);
     res.status(500).send('Internal Server Error');
