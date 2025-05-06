@@ -1124,15 +1124,25 @@ app.get('/api/enmEvents/number-of-events-passed-free-limit', express.json(), asy
 
 app.get('/api/artists/local-inactive-count', express.json(), async (req, res) => {
   try {
-    // count all artists with location "RGV" whose status is not "active"
+    // 1) count all artists with location "RGV" whose status is not "active"
     const inactiveCount = await ArtistModel.countDocuments({
       location: "RGV",
-      status: { $ne: "active" }
+      status:   { $ne: "active" }
     });
 
-    res.json({ inactiveLocalArtists: inactiveCount });
+    // 2) count all artists whose location is NOT "RGV"
+    const touringCount = await ArtistModel.countDocuments({
+      location: { $ne: "RGV" }
+    });
+
+    // 3) send both back
+    res.json({
+      inactiveLocalArtists: inactiveCount,
+      touringArtists:       touringCount
+    });
+
   } catch (err) {
-    console.error('Error fetching local inactive artist count:', err);
+    console.error('Error fetching local/inactive & touring counts:', err);
     res.status(500).send('Internal Server Error');
   }
 });
