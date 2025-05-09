@@ -245,7 +245,22 @@ app.get('/api/artistDirectory', express.json(), async (req: Request, res: Respon
         // Query for non-plus users
         res.json(await ArtistModel.find({
           end: "pending",
-          ...commonQuery
+          location: "RGV", // <- restrict to local artists only
+          start: { $exists: true, $ne: "pending" },
+          $expr: {
+            $gt: [
+              {
+                $size: {
+                  $filter: {
+                    input: { $objectToArray: { $ifNull: ["$links", {}] } },
+                    as: "link",
+                    cond: { $ne: ["$$link.v", "pending"] }
+                  }
+                }
+              },
+              0
+            ]
+          }
         }).catch(err => console.log(err)));
       } catch (err) {
         console.log(err);
