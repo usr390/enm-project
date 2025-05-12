@@ -124,7 +124,7 @@ app.get('/api/enmEvents/past', express.json(), async (req, res) => {
     // cutoff = now minus 8h
     const cutoff    = DateTime.now().minus({ hours: 8 }).toJSDate();
     // one month ago
-    const oneMonthAgo = DateTime.now().minus({ months: 7 }).toJSDate();
+    const oneMonthAgo = DateTime.now().minus({ months: 24 }).toJSDate();
 
     const pastEvents = await EnmEventModel.find({
       verified: true,
