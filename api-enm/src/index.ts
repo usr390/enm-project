@@ -121,19 +121,12 @@ app.get('/api/enmEvents/past', express.json(), async (req, res) => {
         .send('Forbidden: Rarelygroovy+ required to view past events');
     }
 
-    // cutoff = now minus 8h
-    const cutoff    = DateTime.now().minus({ hours: 8 }).toJSDate();
-    // one month ago
-    const oneMonthAgo = DateTime.now().minus({ months: 24 }).toJSDate();
+    const cutoff = DateTime.now().minus({ hours: 8 }).toJSDate();
 
     const pastEvents = await EnmEventModel.find({
       verified: true,
-      dateTime: {
-        $lt: cutoff,
-        $gte: oneMonthAgo
-      }
-    })
-    .sort({ dateTime: -1 }); // newest past first
+      dateTime: { $lt: cutoff }
+    }).sort({ dateTime: -1 });
 
     res.json(pastEvents);
   } catch (err) {
@@ -1161,6 +1154,57 @@ app.get('/api/artists/local-inactive-count', express.json(), async (req, res) =>
     res.status(500).send('Internal Server Error');
   }
 });
+
+// POST /api/normalize-event/:id
+// Extract venue and artists from legacy name field
+app.post('/api/normalize-event/:id', express.json(), async (req, res) => {
+  const eventId = req.params.id;
+
+  try {
+    const event = await EnmEventModel.findById(eventId);
+    if (!event || !event.name) {
+      return res.status(404).json({ error: 'Event not found or missing name field' });
+    }
+
+    const [venueNameRaw, artistListRaw] = event.name.split(" - ");
+    if (!venueNameRaw || !artistListRaw) {
+      return res.status(400).json({ error: 'Invalid event name format' });
+    }
+
+    // --- VENUE LOOKUP ---
+    const venue = await VenueModel.findOne({
+      name: new RegExp(`^${venueNameRaw.trim()}$`, 'i')
+    });
+
+    if (!venue) {
+      console.warn(`No venue found for name: ${venueNameRaw}`);
+    }
+
+    // --- ARTIST LOOKUP ---
+    const artistNames = artistListRaw.split(",").map(name => name.trim());
+    const artists = await ArtistModel.find({
+      name: { $in: artistNames }
+    });
+
+    // Optional: warn if not all artists found
+    const foundNames = new Set(artists.map(a => a.name));
+    const missingNames = artistNames.filter(name => !foundNames.has(name));
+    if (missingNames.length > 0) {
+      console.warn(`Missing artist(s):`, missingNames);
+    }
+
+    // Update the event with structured venue + artists
+    event.venue = venue || null;
+    event.set('artists', artists);    
+    await event.save();
+
+    res.json({ message: 'Event normalized successfully', updatedEvent: event });
+  } catch (err) {
+    console.error('Error normalizing event:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 // asynchronous initialization. keeps api from processesing requests until a successful connection to db is established
 mongoose.connect(process.env.MONGO_URL || '').then(() => { app.listen(port, () => {}); })

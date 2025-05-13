@@ -14,6 +14,7 @@ import { PromoterSchema } from "./Promoter";
 const Schema = mongoose.Schema;
 
 const EnmEventSchema = new Schema({
+    name: String,
     tags: [String],
     venue: VenueSchema,
     date: Date,
