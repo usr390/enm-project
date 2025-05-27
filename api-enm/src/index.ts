@@ -1115,7 +1115,7 @@ app.get('/api/enmEvents/number-of-events-passed-free-limit', express.json(), asy
     if (furthestEvent?.dateTime) {
       furthestMonth = DateTime
         .fromJSDate(furthestEvent.dateTime)
-        .toFormat('LLLL');   // full month name, e.g. “April”
+        .toFormat('LLLL yyyy');   // e.g. “March 2026”
     }
 
     // 5) send both back
@@ -1155,55 +1155,79 @@ app.get('/api/artists/local-inactive-count', express.json(), async (req, res) =>
   }
 });
 
-// POST /api/normalize-event/:id
-// Extract venue and artists from legacy name field
-app.post('/api/normalize-event/:id', express.json(), async (req, res) => {
-  const eventId = req.params.id;
+// POST /api/normalize-events
+// app.post('/api/normalize-events', express.json(), async (req, res) => {
+//   const eventIds = req.body.eventIds;
 
-  try {
-    const event = await EnmEventModel.findById(eventId);
-    if (!event || !event.name) {
-      return res.status(404).json({ error: 'Event not found or missing name field' });
-    }
+//   if (!Array.isArray(eventIds) || eventIds.length === 0) {
+//     return res.status(400).json({ error: 'eventIds must be a non-empty array' });
+//   }
 
-    const [venueNameRaw, artistListRaw] = event.name.split(" - ");
-    if (!venueNameRaw || !artistListRaw) {
-      return res.status(400).json({ error: 'Invalid event name format' });
-    }
+//   try {
+//     const events = await EnmEventModel.find({ _id: { $in: eventIds } });
+//     const results = [];
 
-    // --- VENUE LOOKUP ---
-    const venue = await VenueModel.findOne({
-      name: new RegExp(`^${venueNameRaw.trim()}$`, 'i')
-    });
+//     for (const event of events) {
+//       try {
+//         const stripParens = (s) => s.replace(/\s*\([^)]*\)/g, '').trim();
 
-    if (!venue) {
-      console.warn(`No venue found for name: ${venueNameRaw}`);
-    }
+//         // Validate required fields
+//         if (!Array.isArray(event.artists2)) {
+//           results.push({ id: event._id, error: 'Missing artist2 names' });
+//           continue;
+//         }
 
-    // --- ARTIST LOOKUP ---
-    const artistNames = artistListRaw.split(",").map(name => name.trim());
-    const artists = await ArtistModel.find({
-      name: { $in: artistNames }
-    });
+//         const artistNames = event.artists2
+//           .map((a) => typeof a === 'string' ? stripParens(a.trim()) : null)
+//           .filter((name) => typeof name === 'string' && name.length > 0);
 
-    // Optional: warn if not all artists found
-    const foundNames = new Set(artists.map(a => a.name));
-    const missingNames = artistNames.filter(name => !foundNames.has(name));
-    if (missingNames.length > 0) {
-      console.warn(`Missing artist(s):`, missingNames);
-    }
+//         // Lookups
+//         const artistRegexes = artistNames.map(name => new RegExp(`^${name}$`, 'i'));
+//         const matchedArtists = await ArtistModel.find({ name: { $in: artistRegexes } });
 
-    // Update the event with structured venue + artists
-    event.venue = venue || null;
-    event.set('artists', artists);    
-    await event.save();
+//         const nameToArtist = new Map(matchedArtists.map(a => [a.name.toLowerCase(), a]));
+//         const orderedArtists = artistNames
+//           .map(name => nameToArtist.get(name.toLowerCase()))
+//           .filter(Boolean);
 
-    res.json({ message: 'Event normalized successfully', updatedEvent: event });
-  } catch (err) {
-    console.error('Error normalizing event:', err);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
+//         if (orderedArtists.length === 0) {
+//           results.push({ id: event._id, warning: 'No matching artists found' });
+//         }
+
+//         // Update fields
+//         event.set('artists', orderedArtists);
+
+//         const tags = [];
+//         if (event.venue?.name) tags.push(event.venue.name);
+//         if (event.venue?.city) tags.push(event.venue.city);
+//         event.set('tags', tags);
+
+//         if (event.year && event.month && event.day) {
+//           const y = event.year;
+//           const m = event.month - 1;
+//           const d = event.day;
+
+//           event.set('date', new Date(Date.UTC(y, m, d, 5, 0, 0)));
+//           event.set('doorTime', null);
+//           event.set('dateTime', new Date(Date.UTC(y, m, d + 1, 4, 59, 0)));
+//         }
+
+//         await event.save();
+//         results.push({ id: event._id, status: 'ok' });
+
+//       } catch (err) {
+//         results.push({ id: event._id, error: err.message, stack: err.stack });
+//       }
+//     }
+
+//     res.json({ results });
+
+//   } catch (err) {
+//     console.error('Batch normalization failed:', err);
+//     res.status(500).json({ error: 'Internal server error' });
+//   }
+// });
+
 
 
 // asynchronous initialization. keeps api from processesing requests until a successful connection to db is established
@@ -1213,3 +1237,6 @@ mongoose.connect(process.env.MONGO_URL || '').then(() => { app.listen(port, () =
   process.exit(1); // exit the process with an error code
 });
 
+function stripParens(text: string): string {
+  return text.replace(/\s*\(.*?\)\s*/g, '').trim();
+}
