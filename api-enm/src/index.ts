@@ -1118,10 +1118,18 @@ app.get('/api/enmEvents/number-of-events-passed-free-limit', express.json(), asy
         .toFormat('LLLL yyyy');   // e.g. “March 2026”
     }
 
+    // count past events starting from yesterday and going backwards
+    const yesterday = DateTime.now().minus({ days: 1 }).toJSDate();
+    const pastEvents = await EnmEventModel.countDocuments({
+      verified: true,
+      dateTime: { $lt: yesterday }
+    });
+
     // 5) send both back
     res.json({
       extraEvents: extraCount,
-      furthestMonth
+      furthestMonth,
+      pastEvents
     });
 
   } catch (err) {
