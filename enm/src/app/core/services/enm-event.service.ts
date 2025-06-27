@@ -18,7 +18,7 @@ export class EnmEventService {
   getEnmEventList(): Observable<EnmEvent[]> {
     return this.user$.pipe(
       switchMap(user => {
-        const ENDPOINT = environment.api + '/enmEvents';
+        const ENDPOINT = environment.api + '/enmEventsTrans';
         let params = new HttpParams();
         if (user) {
           params = params.append('username', user.username);

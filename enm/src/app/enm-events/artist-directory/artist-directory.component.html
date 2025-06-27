@@ -151,7 +151,7 @@
 
       </ng-container>
 
-      <ng-container *ngIf="(user$ | async)?.plus">
+      <ng-container *ngIf="true">
         <h2 class="datekey" [ngStyle]="{ 'margin-top': !(showRecentlyTouredArtistsOnly$ | async) ? '20px' : '0px' }">
           <span *ngIf="!(filter$ | async)?.recentlyToured">Recently Toured</span>
           <span *ngIf="(filter$ | async)?.recentlyToured">Artist Directory</span>
@@ -299,9 +299,7 @@
       </ng-container>
 
       <div *ngIf="(count$ | async) !== 0" class="disclaimer-section">
-        <div class="disclaimer d-flex">* Start and end years are best estimates</div>
-        <div *ngIf="!(user$ | async)?.plus" class="disclaimer d-flex"><span>* Only currently active, rgv-based artists are listed</span></div>
-        <div *ngIf="!(user$ | async)?.plus" class="disclaimer d-flex"><span>* Get <a routerLink="/plus" style="color: rgb(162, 162, 162); text-decoration: underline;">Rarelygroovy+</a> for our full artist directory</span></div>
+        <div class="disclaimer d-flex">* Information presented is our best estimate</div>
       </div>
     </div>
   </div>

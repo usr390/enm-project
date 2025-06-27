@@ -48,24 +48,6 @@
                   <h2 style="color: #708da8; margin-left: 15px;">Account</h2>
                   <p-panel header="General">
                     <p><b>Username:</b> {{ currentUser.username }}</p>
-                    <p>
-                      <b>Account Type:</b>
-                      <span *ngIf="(chargesHistory$ | async).length > 0"> Rarelygroovy+</span>
-                      <span *ngIf="!((chargesHistory$ | async).length > 0)"> Free</span>
-                    </p>
-                  </p-panel>
-
-                  <p-panel *ngIf="(chargesHistory$ | async).length > 0" header="Rarelygroovy+">
-                    <div class="grid grid-nogutter">
-                      <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
-                        <div class="flex flex-column align-items-center sm:align-items-start gap-3">
-                          <div class="text-2xl font-bold text-900">
-                            Purchased {{ (chargesHistory$ | async)[(chargesHistory$ | async).length - 1].created | date }}
-                            ({{ (chargesHistory$ | async)[(chargesHistory$ | async).length - 1].amount / 100 | currency:'USD' }})
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </p-panel>
 
                   <div style="margin-top: 10px">

@@ -5,17 +5,15 @@
         </p>
         <p routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: false}"><span><a routerLink="/events" (click)="closeSidebar()">Events</a></span></p>
         <p routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"><span><a routerLink="/artist-directory" (click)="closeSidebar()">Artist Directory</a></span></p>
-        <span *ngIf="showPlusLink()">
-            <p routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/plus']" routerLinkActive="active-link" (click)="closeSidebar()">Get Rarelygroovy+</a></p><br>
-            <!-- Additional links here -->
-        </span>
     </ng-template>
     <ng-template pTemplate="footer">
-        <p *ngIf="(user$ | async)">Logged in as {{(user$ | async)?.username}}<span *ngIf="(user$ | async) && (user$ | async)?.plus"> ✨ </span></p>
+        <p *ngIf="(user$ | async)">Logged in as {{(user$ | async)?.username}}</p>
         <p>
             <span *ngIf="(user$ | async)"><a href="/"(click)="onLogOut()">Log Out</a></span>
             <span *ngIf="!(user$ | async)"><a [routerLink]="['/login']"  href="/">Log In</a></span> &nbsp;
             <span  routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" *ngIf="(((user$ | async)))"><a [routerLink]="['/account']"  (click)="closeSidebar()" href="/">Account</a></span> &nbsp;
+            <span><a href="https://ko-fi.com/rgvyyy" target="_blank">Our Ko-Fi ❤️</a></span> &nbsp;
+
         </p>
     </ng-template>
 </p-sidebar>

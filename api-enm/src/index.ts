@@ -109,7 +109,87 @@ app.get('/api/enmEvents', express.json(), async (req, res) => {
   }
 });
 
+app.get('/api/enmEventsTrans', express.json(), async (req, res) => {
+  const username = req.query.username;
+  console.log({
+    timestamp: new Date().toISOString(),
+    method: req.method,
+    url: req.url,
+    query: req.query,
+    status: res.statusCode, // Note: This might need to be logged after response is sent
+    responseTime: `${res.getHeader('X-Response-Time')}ms`, // Requires middleware to set this header
+    headers: req.headers, // Be cautious about sensitive data
+    clientIP: req.ip,
+    userAgent: req.get('User-Agent')
+    // ... any other properties you find relevant
+  });
+  try {
+    const isPlusUser = await checkUserPlusStatus(username);
+
+    if (true) {
+      try {
+        res.json(await EnmEventModel.find({
+          verified: true,
+          dateTime: { $gte: DateTime.now().minus({ hours: 8 }) }
+        })
+        .sort({ dateTime: 1 })
+        .catch(err => console.log(err)))
+      } catch (err) {
+        console.log(err);
+        res.status(500).send('Internal Server Error');
+      }
+    } else {
+      try {
+        const today = DateTime.now().minus({ hours: 8 });
+
+        let endOfWeek = DateTime.now().endOf('week').plus({ hours: 5 });
+    
+        if (today.weekday === 6 || today.weekday === 7) { // saturday or sunday
+          endOfWeek = today.plus({ weeks: 1 }).endOf('week').plus({ hours: 5 });
+        }
+    
+        const enmEvents = await EnmEventModel.find({ 
+          verified: true,
+          dateTime: { $gte: today, $lte: endOfWeek }
+        }).sort({ dateTime: 1 });
+        
+        res.json(enmEvents);
+      } catch (err) {
+        console.log(err);
+        res.status(500).send('Internal Server Error');
+      }
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 // Past events endpoint (Rarelygroovy+ only, capped at 1 month back)
+
+app.get('/api/enmEvents/pastTrans', express.json(), async (req, res) => {
+  const username = req.query.username;
+  try {
+    const isPlusUser = true;
+    if (!isPlusUser) {
+      return res
+        .status(403)
+        .send('Forbidden: Rarelygroovy+ required to view past events');
+    }
+
+    const cutoff = DateTime.now().minus({ hours: 8 }).toJSDate();
+
+    const pastEvents = await EnmEventModel.find({
+      verified: true,
+      dateTime: { $lt: cutoff }
+    }).sort({ dateTime: -1 });
+
+    res.json(pastEvents);
+  } catch (err) {
+    console.error('Error fetching past events:', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 app.get('/api/enmEvents/past', express.json(), async (req, res) => {
   const username = req.query.username;
@@ -224,6 +304,81 @@ app.get('/api/artistDirectory', express.json(), async (req: Request, res: Respon
     };
 
     if (isPlusUser) {
+      try {
+        console.log('ad but through plus channel!');
+        // Query for plus users
+        res.json(await ArtistModel.find(commonQuery).catch(err => console.log(err)));
+      } catch (err) {
+        console.log(err);
+        res.status(500).send('Internal Server Error');
+      }
+    } else {
+      try {
+        console.log('ad but through non-plus channel!');
+        // Query for non-plus users
+        res.json(await ArtistModel.find({
+          end: "pending",
+          location: "RGV", // <- restrict to local artists only
+          start: { $exists: true, $ne: "pending" },
+          $expr: {
+            $gt: [
+              {
+                $size: {
+                  $filter: {
+                    input: { $objectToArray: { $ifNull: ["$links", {}] } },
+                    as: "link",
+                    cond: { $ne: ["$$link.v", "pending"] }
+                  }
+                }
+              },
+              0
+            ]
+          }
+        }).catch(err => console.log(err)));
+      } catch (err) {
+        console.log(err);
+        res.status(500).send('Internal Server Error');
+      }
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/api/artistDirectoryTrans', express.json(), async (req: Request, res: Response) => {
+  const username = req.query.username;
+
+  try {
+    const isPlusUser = await checkUserPlusStatus(username);
+
+    const commonQuery = {
+      $or: [
+        {
+          location: "RGV",
+          start: { $exists: true, $ne: "pending" }
+        },
+        {
+          location: { $ne: "RGV" }
+        }
+      ],
+      $expr: {
+        $gt: [
+          {
+            $size: {
+              $filter: {
+                input: { $objectToArray: { $ifNull: ["$links", {}] } },
+                as: "link",
+                cond: { $ne: ["$$link.v", "pending"] }
+              }
+            }
+          },
+          0
+        ]
+      }
+    };
+
+    if (true) {
       try {
         console.log('ad but through plus channel!');
         // Query for plus users
