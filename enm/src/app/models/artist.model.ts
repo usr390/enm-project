@@ -17,5 +17,7 @@ export interface Artist {
     "lastShow": boolean,
     "start": string,
     "genre": [],
-    "rgvDebut": boolean
+    "rgvDebut": boolean,
+    "women": boolean,
+    "womanfronted": boolean
 }

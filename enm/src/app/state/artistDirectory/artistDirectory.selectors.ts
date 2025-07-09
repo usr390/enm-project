@@ -179,6 +179,18 @@ export const selectFiltered = createSelector(
       );
     }
 
+    const { includesWomen, womanFronted } = filter;
+
+    if (includesWomen) {
+      filteredArtists = filteredArtists.filter(artist =>
+        artist.women === true
+      );
+    } else if (womanFronted) {
+      filteredArtists = filteredArtists.filter(artist =>
+        artist.womanfronted === true
+      );
+    }
+
     if (filter.randomArtist) {
       if (filteredArtists.length > 0) {
         const randomIndex = Math.floor(Math.random() * filteredArtists.length);
@@ -186,6 +198,8 @@ export const selectFiltered = createSelector(
       }
       return [];
     }
+
+    
 
 
     return filteredArtists;
@@ -234,6 +248,18 @@ export const selectFilteredNonRGV = createSelector(
     if (activeGenres.length > 0) {
       filteredArtists = filteredArtists.filter(artist => 
         artist.genre && artist.genre.some(genre => activeGenres.includes(genre))
+      );
+    }
+
+    const { includesWomen, womanFronted } = filter;
+
+    if (includesWomen) {
+      filteredArtists = filteredArtists.filter(artist =>
+        artist.women === true
+      );
+    } else if (womanFronted) {
+      filteredArtists = filteredArtists.filter(artist =>
+        artist.womanfronted === true
       );
     }
 

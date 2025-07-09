@@ -40,7 +40,7 @@ export class EnmEventListFilterComponent {
   );
 
   enmEventListFilterForm = this.fb.group({ filter: '', checked: false, touring: false });
-  artistDirectoryFilterForm = this.fb.group({ filter: '', recentlyListed: false, sortByYearDescending: false, recentlyToured: false, randomArtist: false, Rock: false, Punk: false, Metal: false, EDM: false, Rap: false, Jazz: false, Pop: false, Experimental: false, Latin: false, Other: false });
+  artistDirectoryFilterForm = this.fb.group({ filter: '', recentlyListed: false, sortByYearDescending: false, recentlyToured: false, randomArtist: false, womanFronted: false, includesWomen: false, Rock: false, Punk: false, Metal: false, EDM: false, Rap: false, Jazz: false, Pop: false, Experimental: false, Latin: false, Other: false });
   selectedFilterText$ = this.store$.select(EnmEventsSelectors.selectedFilterText); // for repopulating the input field after a refresh or navigation
   selectedArtistDirectoryFilterText$ = this.store$.select(ArtistDirectorySelectors.selectFilter); // for repopulating the input field after a refresh or navigation
   filter="Just Listed"
@@ -70,7 +70,21 @@ export class EnmEventListFilterComponent {
       offLabel: 'Random Artist',
       onIcon: 'fa-solid fa-shuffle', // or if you prefer FontAwesome, adjust accordingly
       offIcon: 'fa-solid fa-shuffle'
-    }
+    },
+    {
+      controlName: 'womanFronted',
+      onLabel: 'Woman Fronted',
+      offLabel: 'Woman Fronted',
+      onIcon: 'fa-solid fa-chess-queen', // or if you prefer FontAwesome, adjust accordingly
+      offIcon: 'fa-solid fa-chess-queen'
+    },
+    // {
+    //   controlName: 'includesWomen',
+    //   onLabel: 'Includes Women',
+    //   offLabel: 'Includes Women',
+    //   onIcon: 'fa-solid fa-venus', // or if you prefer FontAwesome, adjust accordingly
+    //   offIcon: 'fa-solid fa-venus'
+    // }
   ];
 
   ngOnInit() {
@@ -108,7 +122,9 @@ export class EnmEventListFilterComponent {
     let recentlyListed = this.artistDirectoryFilterForm.value.recentlyListed as boolean
     let sortByYearDescending = this.artistDirectoryFilterForm.value.sortByYearDescending as boolean
     let recentlyToured = this.artistDirectoryFilterForm.value.recentlyToured as boolean
-    let randomArtist = this.artistDirectoryFilterForm.value.randomArtist as boolean
+    let randomArtist = this.artistDirectoryFilterForm.value.randomArtist as boolean    
+    let womanFronted = this.artistDirectoryFilterForm.value.womanFronted as boolean
+    let includesWomen = this.artistDirectoryFilterForm.value.includesWomen as boolean
     let rock = this.artistDirectoryFilterForm.value.Rock as boolean
     let punk = this.artistDirectoryFilterForm.value.Punk as boolean
     let metal = this.artistDirectoryFilterForm.value.Metal as boolean
@@ -120,7 +136,7 @@ export class EnmEventListFilterComponent {
     let latin = this.artistDirectoryFilterForm.value.Latin as boolean
     let other = this.artistDirectoryFilterForm.value.Other as boolean
 
-    this.store$.dispatch(ArtistDirectoryActions.artistDirectoryFilter({ text, recentlyListed, sortByYearDescending, recentlyToured, randomArtist, rock, punk, metal, edm, rap, jazz, pop, experimental, latin, other }))
+    this.store$.dispatch(ArtistDirectoryActions.artistDirectoryFilter({ text, recentlyListed, sortByYearDescending, recentlyToured, randomArtist, womanFronted, includesWomen, rock, punk, metal, edm, rap, jazz, pop, experimental, latin, other }))
   }
 
   clearFilter() {
@@ -171,11 +187,11 @@ export class EnmEventListFilterComponent {
     this.genres.forEach(genre => {
       this.artistDirectoryFilterForm.get(genre)?.setValue(false);
     });
-    this.artistDirectoryFilterForm.patchValue({ filter: '', recentlyListed: false, sortByYearDescending: false, recentlyToured: false, randomArtist: false, Rock: false, Punk: false, Metal: false, EDM: false, Rap: false, Jazz: false, Pop: false, Experimental: false, Latin: false, Other: false });
+    this.artistDirectoryFilterForm.patchValue({ filter: '', recentlyListed: false, sortByYearDescending: false, recentlyToured: false, randomArtist: false, womanFronted: false, includesWomen: false, Rock: false, Punk: false, Metal: false, EDM: false, Rap: false, Jazz: false, Pop: false, Experimental: false, Latin: false, Other: false });
     this.filterArtistDirectoryResults();
   }
   anyGenreSelected(): boolean {
-    return this.genres.some(genre => this.artistDirectoryFilterForm.get(genre)?.value) || this.artistDirectoryFilterForm.controls.recentlyToured.value as boolean || this.artistDirectoryFilterForm.controls.sortByYearDescending.value as boolean || this.artistDirectoryFilterForm.controls.randomArtist.value as boolean;
+    return this.genres.some(genre => this.artistDirectoryFilterForm.get(genre)?.value) || this.artistDirectoryFilterForm.controls.recentlyToured.value as boolean || this.artistDirectoryFilterForm.controls.sortByYearDescending.value as boolean || this.artistDirectoryFilterForm.controls.womanFronted.value as boolean;
   }
 }
 

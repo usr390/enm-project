@@ -36,30 +36,30 @@
                 orientation="horizontal" 
                 styleClass="border-1 surface-border">
                 <ng-template pTemplate="item" let-genre let-options="options">
-                <p-toggleButton [style]="{ height: '2em' }"
-                formControlName="{{genre}}" 
-                onLabel="{{genre}}" 
-                offLabel="{{genre}}" />
+                    <p-toggleButton [style]="{ height: '2em' }"
+                    formControlName="{{genre}}" 
+                    onLabel="{{genre}}" 
+                    offLabel="{{genre}}" />
                 </ng-template>
             </p-scroller>
         </div>
-        <p-scroller 
-        [items]="toggleItems" 
-        [itemSize]="75" 
-        scrollHeight="3em" 
-        orientation="horizontal" 
-        styleClass="border-1 surface-border">
-      <ng-template pTemplate="item" let-toggle>
-        <p-toggleButton 
-            [style]="{ height: '1em', 'min-width': '190px' }" 
-            formControlName="{{toggle.controlName}}" 
-            onLabel="{{toggle.onLabel}}" 
-            offLabel="{{toggle.offLabel}}"
-            onIcon="{{toggle.onIcon}}" 
-            offIcon="{{toggle.offIcon}}">
-        </p-toggleButton>
-      </ng-template>
-        </p-scroller>
+            <p-scroller 
+            [items]="toggleItems" 
+            [itemSize]="150" 
+            scrollHeight="50px" 
+            orientation="horizontal" 
+            styleClass="border-1 surface-border">
+                <ng-template pTemplate="item" let-toggle let-options="options">
+                    <p-toggleButton 
+                    [style]="{ height: '1em', 'min-width': '190px' }" 
+                    formControlName="{{toggle.controlName}}" 
+                    onLabel="{{toggle.onLabel}}" 
+                    offLabel="{{toggle.offLabel}}"
+                    onIcon="{{toggle.onIcon}}" 
+                    offIcon="{{toggle.offIcon}}">
+                    </p-toggleButton>
+                </ng-template>
+            </p-scroller>
         <!-- <div style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 10px;">
             <span style="margin-right: 25px;"><p-toggleButton formControlName="recentlyListed" [onLabel]="filter" [offLabel]="filter" [style]="{ width: '10em', height: '2em' }"></p-toggleButton></span>
         </div>     -->
