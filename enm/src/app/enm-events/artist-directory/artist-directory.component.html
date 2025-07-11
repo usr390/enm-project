@@ -8,7 +8,7 @@
 
       <ng-container *ngIf="!(showRecentlyTouredArtistsOnly$ | async)" >
         <h2 class="datekey">
-          <span>Artist Directory</span>
+          <span style="color: #e2e2e2">Artist Directory</span>
           <span class="numberOfEvents" *ngIf="count$ | async as count" style="text-decoration: none;">
             Listed: {{ count }}
         </span></h2>
@@ -21,7 +21,7 @@
                     <p-overlayPanel [style]="{'width': '300px', 'margin-right': '200px'}" #op3>
                       <p [innerHTML]="artist.notes | linkify"></p>
                     </p-overlayPanel>
-                    <p-button (click)="op3.toggle($event)" icon="fa-regular fa-note-sticky" [style]="{'width': '20px', 'height': '28px', 'font-size': '.9em', 'background-color': 'white', 'color': '#043d75', 'border-color': 'white','margin-left': '25px'}"></p-button>
+                    <p-button (click)="op3.toggle($event)" icon="fa-regular fa-note-sticky" [style]="{'width': '20px', 'height': '28px', 'font-size': '.9em', 'color': 'white','background': 'none','margin-left': '25px'}"></p-button>
                   </div>
                   <!-- HERE'S THE VISIBLE CONTENT -->
                     <span>
@@ -36,29 +36,29 @@
   
                     <span style="padding-left: 25px; padding-right: 25px">
                       <span *ngIf="artist.hometownheroes">
-                        <p-tag value="hometown heroes" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#DAA520', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                        <p-tag value="hometown heroes" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2', 'background-color': 'transparent'}"></p-tag>&nbsp;
                       </span>
   
                       <span *ngIf="(artist.medium)">
-                        <p-tag value="{{artist.medium}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#FF7ED4', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                        <p-tag value="{{artist.medium}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2', 'background-color': 'transparent'}"></p-tag>&nbsp;
                       </span>                    
   
                       <span *ngIf="artist.genre && !(artist.genre.length === 1 && artist.genre[0] === 'pending')">
-                        <p-tag value="{{artist.genre | genreListPipe:' · '}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#043d75', 'background-color': 'transparent'}"></p-tag>
+                        <p-tag value="{{artist.genre | genreListPipe:' · '}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2', 'background-color': 'transparent'}"></p-tag>
                       </span>
   
                       <span *ngIf="(artist.start) && (artist.start !== 'pending') && (artist.end) && (artist.end === 'pending')">
-                        <p-tag value="{{artist.start | date:'yyyy' }} - active" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#704264', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                        <p-tag value="{{artist.start | date:'yyyy' }} - active" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2', 'background-color': 'transparent'}"></p-tag>&nbsp;
                       </span>
                       <span *ngIf="(artist.start) && (artist.start !== 'pending') && (artist.end) && (artist.end !== 'pending')">
-                        <p-tag value="{{artist.start | date:'yyyy' }} - {{artist.end | date: 'yyyy'}}, {{artist.status}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#704264', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                        <p-tag value="{{artist.start | date:'yyyy' }} - {{artist.end | date: 'yyyy'}}, {{artist.status}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2', 'background-color': 'transparent'}"></p-tag>&nbsp;
                       </span>
                     </span>
   
   
                     
                     
-                    <div *ngIf="artist.links" class="social-links" style="margin-top: 15px">
+                    <div *ngIf="artist.links" class="social-links" style="margin-top: 15px; color: #a2a2a2">
                       <a *ngIf="artist.links.spotify && (artist.links.spotify !== 'pending')" href="{{artist.links.spotify}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                         <i class="fab fa-spotify"></i>
                       </a>
@@ -153,8 +153,8 @@
 
       <ng-container *ngIf="true">
         <h2 class="datekey" [ngStyle]="{ 'margin-top': !(showRecentlyTouredArtistsOnly$ | async) ? '20px' : '0px' }">
-          <span *ngIf="!(filter$ | async)?.recentlyToured">Recently Toured</span>
-          <span *ngIf="(filter$ | async)?.recentlyToured">Artist Directory</span>
+          <span style="color: #e2e2e2" *ngIf="!(filter$ | async)?.recentlyToured">Recently Toured</span>
+          <span style="color: #e2e2e2" *ngIf="(filter$ | async)?.recentlyToured">Artist Directory</span>
           <p-overlayPanel [style]="{'width': '200px', 'margin-right': '300px'}" #op2>
             <p>Artists that have recently toured the valley! (or have an upcoming show)</p>
           </p-overlayPanel>
@@ -173,42 +173,42 @@
                         <p-overlayPanel [style]="{'width': '300px', 'margin-right': '200px'}" #op3>
                           <p [innerHTML]="artist.notes | linkify"></p>
                         </p-overlayPanel>
-                        <p-button (click)="op3.toggle($event)" icon="fa-regular fa-note-sticky" [style]="{'width': '20px', 'height': '28px', 'font-size': '.9em', 'background-color': 'white', 'color': '#043d75', 'border-color': 'white','margin-left': '25px'}"></p-button>
+                        <p-button (click)="op3.toggle($event)" icon="fa-regular fa-note-sticky" [style]="{'width': '20px', 'height': '28px', 'font-size': '.9em',  'color': 'white','background': 'none','margin-left': '25px'}"></p-button>
                       </div>
                       <span class="artist-name" [innerHTML]="artist.name | highlightPipe: (filter$ | async)?.text">{{ artist.name }}</span>&nbsp;
                       <span *ngIf="(artist.medium) && (artist.medium === 'collective')">
-                        <p-tag value="{{artist.medium}}" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#99ccff'}"></p-tag>&nbsp;
+                        <p-tag value="{{artist.medium}}" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#99ccff'}"></p-tag>&nbsp;
                       </span>
                       <span *ngIf="(artist.location) && (artist.location !== 'RGV')">
-                        <p-tag value="{{artist.location | lowercase}}" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;
+                        <p-tag value="{{artist.location | lowercase}}" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#937fee'}"></p-tag>&nbsp;
                       </span>
                       <span *ngIf="(artist.status) && (artist.status === 'inactive')">
-                        <p-tag value="inactive" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': 'lightgray'}"></p-tag>&nbsp;
+                        <p-tag value="inactive" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': 'lightgray'}"></p-tag>&nbsp;
                       </span>
                     </span>
 
                     <span style="padding-left: 25px; padding-right: 25px">
                       <span *ngIf="artist.hometownheroes">
-                        <p-tag value="hometown heroes" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#DAA520', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                        <p-tag value="hometown heroes" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2', 'background-color': 'transparent'}"></p-tag>&nbsp;
                       </span>
   
                       <span *ngIf="(artist.medium)">
-                        <p-tag value="{{artist.medium}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#FF7ED4', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                        <p-tag value="{{artist.medium}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2', 'background-color': 'transparent'}"></p-tag>&nbsp;
                       </span>                    
   
                       <span *ngIf="artist.genre && !(artist.genre.length === 1 && artist.genre[0] === 'pending')">
-                        <p-tag value="{{artist.genre | genreListPipe:' · '}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#043d75', 'background-color': 'transparent'}"></p-tag>
+                        <p-tag value="{{artist.genre | genreListPipe:' · '}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2', 'background-color': 'transparent'}"></p-tag>
                       </span>
   
                       <span *ngIf="(artist.start) && (artist.start !== 'pending') && (artist.end) && (artist.end === 'pending')">
-                        <p-tag value="{{artist.start | date:'yyyy' }} - active" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#704264', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                        <p-tag value="{{artist.start | date:'yyyy' }} - active" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2', 'background-color': 'transparent'}"></p-tag>&nbsp;
                       </span>
                       <span *ngIf="(artist.start) && (artist.start !== 'pending') && (artist.end) && (artist.end !== 'pending')">
-                        <p-tag value="{{artist.start | date:'yyyy' }} - {{artist.end | date: 'yyyy'}}, {{artist.status}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#704264', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                        <p-tag value="{{artist.start | date:'yyyy' }} - {{artist.end | date: 'yyyy'}}, {{artist.status}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2', 'background-color': 'transparent'}"></p-tag>&nbsp;
                       </span>
                     </span>
                     
-                    <div *ngIf="artist.links" class="social-links" style="margin-top: 15px">
+                    <div *ngIf="artist.links" class="social-links" style="margin-top: 15px; color: #a2a2a2">
                       <a *ngIf="artist.links.spotify && (artist.links.spotify !== 'pending')" href="{{artist.links.spotify}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                         <i class="fab fa-spotify"></i>
                       </a>
@@ -310,4 +310,7 @@
 
 
 
-<p-scrollTop [style]="{'background-color': '#7254f3', 'color': 'white', 'border-color': '#0056b3'}"></p-scrollTop>
+<p-scrollTop [style]="{'background-color': '#e2e2e2', 'color': 'white', 'border-color': '#0056b3'}"></p-scrollTop>
+
+
+

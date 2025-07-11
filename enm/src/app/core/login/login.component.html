@@ -1,6 +1,9 @@
-<div class="d-flex justify-content-center align-items-center" style="height: 85vh">
+
+
+<p-panel styleClass="p-m-0 p-p-0" [style]="{'background': 'inherit', 'box-shadow': 'none', 'border': 'none'}">
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh">
     <div class="container text-center">
-        <img style="width: 50px; height: 50px; margin-bottom: 30px" src="./../../../assets/images/ig-prof.png"/>
+        <img style="width: 50px; height: 50px; margin-bottom: 30px" src="./../../../assets/images/logo-bw.png"/>
         <h2>Log in to Rarelygroovy</h2>
         <form [formGroup]="userLogInForm" (ngSubmit)="onSubmit()">
             <div class="row">
@@ -28,3 +31,4 @@
         <p>or <button class="link-button" label="create an account" (click)="navigateAndReplace()">create an account</button></p>
     </div>
 </div>
+</p-panel>

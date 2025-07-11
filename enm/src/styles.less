@@ -3,6 +3,7 @@
 
 body {
     font-family: var(--font-family);
+    background-color: #1e1e1e !important;
 }
 
 .p-toast {
@@ -29,4 +30,31 @@ mark {
 .p-horizontal-scroll .p-scroller-content {
     display: flex;
     flex-direction: row;
+}
+
+/* when active (on) */
+.p-togglebutton.p-highlight {
+    background-color: #e2e2e2 !important;  /* custom ON background */
+    color: #1e1e1e !important;               /* custom ON text color */
+    // border-color: #7254f3 !important;      /* optional: match border */
+}
+
+/* when inactive (off) */
+ .p-togglebutton:not(.p-highlight) {
+     background-color: #1e1e1e !important;  /* custom OFF background */
+     color: #e2e2e2 !important;                /* custom OFF text color */
+ }
+
+/* target the PrimeNG toggleButton icons */
+.p-togglebutton .pi {
+    color: inherit !important;  /* makes the icon follow text color */
+}
+
+.p-togglebutton .fa-solid {
+  color: inherit !important;
+}
+
+p-tag, p-tag .p-tag {
+  background: transparent !important;
+  border: none !important;
 }

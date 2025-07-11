@@ -1,14 +1,13 @@
 <button class="back-arrow d-flex align-items-center p-button p-button-rounded p-button-lg p-button-text" (click)="goBack()" style="background: none; border: none;">
   <i class="pi pi-arrow-left" style="font-size: 1.5rem; margin-right: 10px;"></i>
-  <h5 style="color: #123d75; margin: 0;">Back To Events</h5>
+  <h5 style="margin: 0;">Back To Events</h5>
 </button>
-
 
 <div *ngIf="enmEvent$ | async as enmEvent" class="container-sm d-flex flex-column justify-content-center align-items-center" style="margin-top: 10px">
   <p-card header="" styleClass="text-center" class="event-details">
     <div *ngIf="enmEvent.isRecentlyListed" class="recently-listed-badge">
-      <p-tag>
-        Listed<span *ngIf="enmEvent.creationDateTime | listedHowLongAgo as listedTime">&nbsp;{{ listedTime }}</span>
+      <p-tag [style]="{'color': '#a2a2a2'}">
+        <i>Listed<span *ngIf="enmEvent.creationDateTime | listedHowLongAgo as listedTime">&nbsp;{{ listedTime }}</span></i>
       </p-tag>
     </div>
     <div *ngIf="enmEvent.canceled" class="recently-listed-badge tags">
@@ -23,96 +22,131 @@
       <br>
       <br>
     </div>
-    <ng-container *ngIf="enmEvent.venue.link && enmEvent.venue.link !== 'pending'; else venueName">
-      <h1 class="card-text">
-        <a href="{{ enmEvent.venue.link }}" target="_blank" rel="noopener noreferrer" class="m-0">{{ enmEvent.venue.name }}&nbsp;<i style="font-size: .5em;" class="pi pi-external-link"></i></a>
-        <span *ngIf="enmEvent.venue.debut">
-          &nbsp;<p-tag value="venue debut" [style]="{'font-size': '.3em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
-        </span>
-      </h1>
-    </ng-container>
-    <ng-template #venueName>
-      <h1 class="card-text artist-name-non-clickable">{{ enmEvent.venue.name }}</h1>
-    </ng-template>
+    
+    <h1 class="card-text">
+      {{ enmEvent.venue.name }}
+      <span *ngIf="enmEvent.venue.debut">
+        &nbsp;
+        <p-tag value="venue debut" [style]="{
+          'font-size': '.3em',
+          'margin-bottom': '10px',
+          'position': 'relative',
+          'bottom': '10px',
+          'padding-left': '4px',
+          'padding-right': '4px',
+          'padding-top': '2px',
+          'padding-bottom': '2px',
+          'color': '#f8addf'
+        }"></p-tag>
+        &nbsp;&nbsp;
+      </span>
+    </h1>
 
-    <div class="m-0 lh-lg artists artist-name">
-      <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
-        <ng-container *ngIf="artist.link && artist.link !== 'pending'; else artistName">
-          <div class="artist-container">
-            <a href="{{ artist.link }}" target="_blank" rel="noopener noreferrer">{{ artist.name }}
-              <span *ngIf="(artist.location) && (artist.location != 'RGV')">
-                <p-tag value="{{artist.location|lowercase}}" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>
-                &nbsp;
-              </span>
-              <span *ngIf="artist.debut" class="tags">
-                &nbsp;<p-tag value="debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
-                &nbsp;
-              </span>
-              <span *ngIf="artist.albumDebut">
-                <p-tag value="album debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
-              </span>
-              <span *ngIf="artist.lastShow">
-                <p-tag value="last show" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
-              </span>
-              <i style="font-size: .6em;" class="pi pi-external-link"></i>
-            </a>
-
-          </div>
-        </ng-container>
-        <ng-template #artistName>
-          <div class="artist-container">
-            <span class="artist-name-non-clickable">{{ artist.name }}</span><span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location|lowercase}}" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>
-          </div>
-          <span *ngIf="artist.debut" class="tags">
-            &nbsp;<p-tag value="debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
-          </span>
-          <span *ngIf="artist.albumDebut">
-            <p-tag value="album debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
-          </span>
-        </ng-template>
-        <!-- Add separator for all but the last artist -->
-        <span *ngIf="i < enmEvent.artists.length - 1">&nbsp;&nbsp;&nbsp; &middot; &nbsp;&nbsp;&nbsp;</span>
-      </ng-container>
+<div class="m-0 lh-lg artists artist-name">
+  <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
+    <div class="artist-container">
+      {{ artist.name }}
+      <span *ngIf="(artist.location) && (artist.location != 'RGV')">
+        <p-tag value="{{artist.location | lowercase}}" [style]="{
+          'font-size': '.5em',
+          'margin-bottom': '10px',
+          'position': 'relative',
+          'bottom': '10px',
+          'padding-left': '4px',
+          'padding-right': '4px',
+          'padding-top': '2px',
+          'padding-bottom': '2px',
+          'color': '#937fee'
+        }"></p-tag>
+      </span>
+      <span *ngIf="artist.debut">
+        <p-tag value="debut" [style]="{
+          'font-size': '.4em',
+          'margin-bottom': '10px',
+          'position': 'relative',
+          'bottom': '10px',
+          'padding-left': '4px',
+          'padding-right': '4px',
+          'padding-top': '2px',
+          'padding-bottom': '2px',
+          'background-color': '#f8addf'
+        }"></p-tag>
+      </span>
+      <span *ngIf="artist.albumDebut">
+        <p-tag value="album debut" [style]="{
+          'font-size': '.4em',
+          'margin-bottom': '10px',
+          'position': 'relative',
+          'bottom': '10px',
+          'padding-left': '4px',
+          'padding-right': '4px',
+          'padding-top': '2px',
+          'padding-bottom': '2px',
+          'color': '#f8addf'
+        }"></p-tag>
+      </span>
+      <span *ngIf="artist.lastShow">
+        <p-tag value="last show" [style]="{
+          'font-size': '.6em',
+          'margin-bottom': '10px',
+          'position': 'relative',
+          'bottom': '10px',
+          'padding-left': '4px',
+          'padding-right': '4px',
+          'padding-top': '2px',
+          'padding-bottom': '2px',
+          'color': '#f8addf'
+        }"></p-tag>
+      </span>
     </div>
+
+    <!-- Add separator for all but the last artist -->
+    <span *ngIf="i < enmEvent.artists.length - 1">&nbsp;&nbsp;&nbsp; &middot; &nbsp;&nbsp;&nbsp;</span>
+  </ng-container>
+</div>
 
     <div *ngIf="enmEvent.promoter">
       <div class="custom-divider">
         <hr style="width: 40px;">
       </div>
       <!-- Promoter 1 -->
-      <ng-container *ngIf="enmEvent.promoter.link && enmEvent.promoter.link !== 'pending'; else promoterName1">
-        <h6 class="card-text promoter">
-          <a href="{{ enmEvent.promoter.link }}" target="_blank" rel="noopener noreferrer" class="m-0 promoter">{{ enmEvent.promoter.name }}&nbsp;<i style="font-size: .6em;" class="pi pi-external-link"></i></a>
-          <span *ngIf="enmEvent.promoter.debut" class="tags">&nbsp;
-            <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
-          </span>&nbsp;&nbsp;
-          <!-- Add ampersand if promoter2 exists -->
-          <span *ngIf="enmEvent.promoter2">&nbsp;&amp;&nbsp;</span>
-        </h6>
-      </ng-container>
-      <ng-template #promoterName1>
-        <h6 class="card-text artist-name-non-clickable promoter">{{ enmEvent.promoter.name }}</h6>
-        <span *ngIf="enmEvent.promoter.debut" class="tags">&nbsp;
-          <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
+      <h6 class="card-text promoter" style="color: #a2a2a2;">
+        {{ enmEvent.promoter.name }}
+        <span *ngIf="enmEvent.promoter.debut" class="tags">
+          &nbsp;
+          <p-tag value="promoter debut" [style]="{
+            'font-size': '.5em',
+            'margin-bottom': '10px',
+            'position': 'relative',
+            'bottom': '10px',
+            'padding-left': '4px',
+            'padding-right': '4px',
+            'padding-top': '2px',
+            'padding-bottom': '2px',
+            'color': '#f8addf'
+          }"></p-tag>
         </span>
-      </ng-template>
+      </h6>
     
       <!-- Promoter 2 -->
       <span *ngIf="enmEvent.promoter2">
-        <ng-container *ngIf="enmEvent.promoter2.link && enmEvent.promoter2.link !== 'pending'; else promoterName2">
-          <h6 class="card-text promoter">
-            <a href="{{ enmEvent.promoter2.link }}" target="_blank" rel="noopener noreferrer" class="m-0 promoter">{{ enmEvent.promoter2.name }}&nbsp;<i style="font-size: .6em;" class="pi pi-external-link"></i></a>
-            <span *ngIf="enmEvent.promoter2.debut" class="tags">&nbsp;
-              <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
-            </span>&nbsp;&nbsp;
-          </h6>
-        </ng-container>
-        <ng-template #promoterName2>
-          <h6 class="card-text artist-name-non-clickable promoter">{{ enmEvent.promoter2.name }}</h6>
-          <span *ngIf="enmEvent.promoter2.debut" class="tags">&nbsp;
-            <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>
+        <h6 class="card-text promoter" style="color: #a2a2a2;">
+          & {{ enmEvent.promoter2.name }}
+          <span *ngIf="enmEvent.promoter2.debut" class="tags">
+            &nbsp;
+            <p-tag value="promoter debut" [style]="{
+              'font-size': '.5em',
+              'margin-bottom': '10px',
+              'position': 'relative',
+              'bottom': '10px',
+              'padding-left': '4px',
+              'padding-right': '4px',
+              'padding-top': '2px',
+              'padding-bottom': '2px',
+              'color': '#f8addf'
+            }"></p-tag>
           </span>
-        </ng-template>
+        </h6>
       </span>
     </div>
     <br>
@@ -203,7 +237,7 @@
   </p-card>
 
   <ng-container *ngIf="enmEvent.artists.length > 0">
-    <h2 class="d-flex justify-content-center align-items-center" style="color: #123d75; margin-top: 30px">Artist Directory</h2>
+    <h2 class="d-flex justify-content-center align-items-center" style="color: #a2a2a2; margin-top: 30px">Artist Directory</h2>
     <div class="d-flex justify-content-center align-items-center">
       <div class="container-sm text-center">
         <div class="card">
@@ -215,44 +249,44 @@
                     <p-overlayPanel [style]="{'width': '300px', 'margin-right': '200px'}" #op3>
                       <p [innerHTML]="artist.notes | linkify"></p>
                     </p-overlayPanel>
-                    <p-button (click)="op3.toggle($event)" icon="fa-regular fa-note-sticky" [style]="{'width': '20px', 'height': '28px', 'font-size': '.9em', 'background-color': 'white', 'color': '#043d75', 'border-color': 'white','margin-left': '25px'}"></p-button>
+                    <p-button (click)="op3.toggle($event)" icon="fa-regular fa-note-sticky" [style]="{'width': '20px', 'height': '28px', 'font-size': '.9em',  'color': 'white','background': 'none','margin-left': '25px'}"></p-button>
                   </div>
                   <!-- HERE'S THE VISIBLE CONTENT -->
                     <span>
                       <span class="artist-name">{{ artist.name }}</span>&nbsp; <span *ngIf="artist.fka">(FKA {{artist.fka}})</span>
                       <span *ngIf="(artist.location) && (artist.location !== 'RGV')">
-                        <p-tag value="{{artist.location | lowercase}}" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;
+                        <p-tag value="{{artist.location | lowercase}}" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#937fee'}"></p-tag>&nbsp;
                       </span>
                       <span *ngIf="(artist.status) && (artist.status === 'inactive')">
-                        <p-tag value="inactive" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': 'lightgray'}"></p-tag>&nbsp;
+                        <p-tag value="inactive" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': 'lightgray'}"></p-tag>&nbsp;
                       </span>
                     </span>
         
                     <span style="padding-left: 25px; padding-right: 25px">
                       <span *ngIf="artist.hometownheroes">
-                        <p-tag value="hometown heroes" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#DAA520', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                        <p-tag value="hometown heroes" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2'}"></p-tag>&nbsp;
                       </span>
         
                       <span *ngIf="(artist.medium)">
-                        <p-tag value="{{artist.medium}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#FF7ED4', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                        <p-tag value="{{artist.medium}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2'}"></p-tag>&nbsp;
                       </span>                    
         
                       <span *ngIf="artist.genre && !(artist.genre.length === 1 && artist.genre[0] === 'pending')">
-                        <p-tag value="{{artist.genre | genreListPipe:' · '}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#043d75', 'background-color': 'transparent'}"></p-tag>
+                        <p-tag value="{{artist.genre | genreListPipe:' · '}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2'}"></p-tag>
                       </span>
         
                       <span *ngIf="(artist.start) && (artist.start !== 'pending') && (artist.end) && (artist.end === 'pending')">
-                        <p-tag value="{{artist.start | date:'yyyy' }} - active" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#704264', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                        <p-tag value="{{artist.start | date:'yyyy' }} - active" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2'}"></p-tag>&nbsp;
                       </span>
                       <span *ngIf="(artist.start) && (artist.start !== 'pending') && (artist.end) && (artist.end !== 'pending')">
-                        <p-tag value="{{artist.start | date:'yyyy' }} - {{artist.end | date: 'yyyy'}}, {{artist.status}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#704264', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                        <p-tag value="{{artist.start | date:'yyyy' }} - {{artist.end | date: 'yyyy'}}, {{artist.status}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2'}"></p-tag>&nbsp;
                       </span>
                     </span>
         
         
                     
                     
-                    <div *ngIf="artist.links" class="social-links" style="margin-top: 15px">
+                    <div *ngIf="artist.links" class="social-links" style="margin-top: 15px; color: #a2a2a2">
                       <a *ngIf="artist.links.spotify && (artist.links.spotify !== 'pending')" href="{{artist.links.spotify}}" target="_blank" rel="noopener noreferrer" class="social-icon">
                         <i class="fab fa-spotify"></i>
                       </a>
@@ -308,12 +342,12 @@
                     <div *ngFor="let artist of artist.artists">
                       <ng-container *ngIf="artist.link && artist.link !== 'pending'; else artistName">
                         <div class="artist-container">
-                          <a href="{{ artist.link }}" target="_blank" rel="noopener noreferrer">{{ artist.name }}<span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>&nbsp;<i class="pi pi-link"></i></a>
+                          <a href="{{ artist.link }}" target="_blank" rel="noopener noreferrer">{{ artist.name }}<span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#937fee'}"></p-tag></span>&nbsp;<i class="pi pi-link"></i></a>
                         </div>
                       </ng-container>
                       <ng-template #artistName>
                         <div class="artist-container">
-                          <span class="artist-name-non-clickable">{{ artist.name }}</span><span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag></span>
+                          <span class="artist-name-non-clickable">{{ artist.name }}</span><span *ngIf="(artist.location) && (artist.location != 'RGV')">&nbsp;<p-tag value="{{artist.location}}" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#937fee'}"></p-tag></span>
                         </div>
                       </ng-template>
                   </div>
@@ -326,7 +360,7 @@
     </div>
   </ng-container>
 
-  <h2 style="color: #123d75; margin-top: 30px">Updates</h2>
+  <h2 style="color: #a2a2a2; margin-top: 30px">Updates</h2>
   <div *ngIf="enmEvent.updates && enmEvent.updates.length > 0; else noUpdates">
     <div class="updates-section" style="margin-bottom: 50px; max-width: 750px;">
       <ul class="updates-list">
