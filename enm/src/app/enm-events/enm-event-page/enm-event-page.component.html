@@ -360,6 +360,28 @@
     </div>
   </ng-container>
 
+<ng-container *ngIf="enmEvent.promoter || enmEvent.promoter2">
+  <h2 style="color: #a2a2a2; margin-top: 30px">
+    {{ enmEvent.promoter2 ? 'Promoters' : 'Promoter' }}
+  </h2>
+
+  <div class="promoters-section" style="margin-bottom: 30px; color: #a2a2a2">
+    <div *ngIf="enmEvent.promoter">
+      <div class="promoter-name">{{ enmEvent.promoter.name }}</div>
+      <div *ngIf="enmEvent.promoter.link && enmEvent.promoter.link !== 'pending'" class="social-links">
+        <i class="fab fa-instagram social-icon"></i>
+      </div>
+    </div>
+
+    <div *ngIf="enmEvent.promoter2" style="margin-top: 10px;">
+      <div class="promoter-name">{{ enmEvent.promoter2.name }}</div>
+      <div *ngIf="enmEvent.promoter2.link && enmEvent.promoter2.link !== 'pending'" class="social-links">
+        <i class="fab fa-instagram social-icon"></i>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
   <h2 style="color: #a2a2a2; margin-top: 30px">Updates</h2>
   <div *ngIf="enmEvent.updates && enmEvent.updates.length > 0; else noUpdates">
     <div class="updates-section" style="margin-bottom: 50px; max-width: 750px;">
