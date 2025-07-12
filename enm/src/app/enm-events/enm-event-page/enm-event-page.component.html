@@ -360,27 +360,31 @@
     </div>
   </ng-container>
 
-<ng-container *ngIf="enmEvent.promoter || enmEvent.promoter2">
-  <h2 style="color: #a2a2a2; margin-top: 30px">
-    {{ enmEvent.promoter2 ? 'Promoters' : 'Promoter' }}
-  </h2>
+  <ng-container *ngIf="enmEvent.promoter || enmEvent.promoter2">
+    <h2 style="color: #a2a2a2; margin-top: 30px; text-align: center;">
+      {{ enmEvent.promoter2 ? 'Promoters' : 'Promoter' }}
+    </h2>
 
-  <div class="promoters-section" style="margin-bottom: 30px; color: #a2a2a2">
-    <div *ngIf="enmEvent.promoter">
-      <div class="promoter-name">{{ enmEvent.promoter.name }}</div>
-      <div *ngIf="enmEvent.promoter.link && enmEvent.promoter.link !== 'pending'" class="social-links">
-        <i class="fab fa-instagram social-icon"></i>
+    <div class="promoters-section" style="margin-bottom: 30px; color: #a2a2a2; text-align: center;">
+      <div *ngIf="enmEvent.promoter" style="margin-bottom: 15px;">
+        <div class="promoter-name">{{ enmEvent.promoter.name }}</div>
+        <div *ngIf="enmEvent.promoter.link && enmEvent.promoter.link !== 'pending'" class="social-links" style="margin-top: 5px;">
+          <a href="{{ enmEvent.promoter.link }}" target="_blank" rel="noopener noreferrer" class="social-icon">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+
+      <div *ngIf="enmEvent.promoter2">
+        <div class="promoter-name">{{ enmEvent.promoter2.name }}</div>
+        <div *ngIf="enmEvent.promoter2.link && enmEvent.promoter2.link !== 'pending'" class="social-links" style="margin-top: 5px;">
+          <a href="{{ enmEvent.promoter2.link }}" target="_blank" rel="noopener noreferrer" class="social-icon">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
       </div>
     </div>
-
-    <div *ngIf="enmEvent.promoter2" style="margin-top: 10px;">
-      <div class="promoter-name">{{ enmEvent.promoter2.name }}</div>
-      <div *ngIf="enmEvent.promoter2.link && enmEvent.promoter2.link !== 'pending'" class="social-links">
-        <i class="fab fa-instagram social-icon"></i>
-      </div>
-    </div>
-  </div>
-</ng-container>
+  </ng-container>
 
   <h2 style="color: #a2a2a2; margin-top: 30px">Updates</h2>
   <div *ngIf="enmEvent.updates && enmEvent.updates.length > 0; else noUpdates">
