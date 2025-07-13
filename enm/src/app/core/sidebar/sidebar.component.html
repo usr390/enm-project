@@ -12,8 +12,8 @@
             <span *ngIf="(user$ | async)"><a href="/"(click)="onLogOut()">Log Out</a></span>
             <span *ngIf="!(user$ | async)"><a [routerLink]="['/login']"  href="/">Log In</a></span> &nbsp;
             <span  routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" *ngIf="(((user$ | async)))"><a [routerLink]="['/account']"  (click)="closeSidebar()" href="/">Account</a></span> &nbsp;
-            <span><a href="https://ko-fi.com/rgvyyy" target="_blank">Our Ko-Fi ❤️</a></span> &nbsp;
-
+            <a href="https://instagram.com/rarelygroovy" target="_blank" style->Instagram</a> &nbsp;
+            <span><a href="https://ko-fi.com/rgvyyy" target="_blank">Ko-Fi ❤️</a></span> &nbsp;
         </p>
     </ng-template>
 </p-sidebar>
