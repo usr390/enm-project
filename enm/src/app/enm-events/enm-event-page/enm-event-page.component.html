@@ -48,7 +48,7 @@
       {{ artist.name }}
       <span *ngIf="(artist.location) && (artist.location != 'RGV')">
         <p-tag value="{{artist.location | lowercase}}" [style]="{
-          'font-size': '.5em',
+          'font-size': '.6em',
           'margin-bottom': '10px',
           'position': 'relative',
           'bottom': '10px',
@@ -59,22 +59,12 @@
           'color': '#937fee'
         }"></p-tag>
       </span>
-      <span *ngIf="artist.debut">
-        <p-tag value="debut" [style]="{
-          'font-size': '.4em',
-          'margin-bottom': '10px',
-          'position': 'relative',
-          'bottom': '10px',
-          'padding-left': '4px',
-          'padding-right': '4px',
-          'padding-top': '2px',
-          'padding-bottom': '2px',
-          'background-color': '#f8addf'
-        }"></p-tag>
+      <span *ngIf="artist.debut" class="tags">
+        <p-tag value="debut" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>
       </span>
       <span *ngIf="artist.albumDebut">
         <p-tag value="album debut" [style]="{
-          'font-size': '.4em',
+          'font-size': '.6em',
           'margin-bottom': '10px',
           'position': 'relative',
           'bottom': '10px',
@@ -255,7 +245,7 @@
                     <span>
                       <span class="artist-name">{{ artist.name }}</span>&nbsp; <span *ngIf="artist.fka">(FKA {{artist.fka}})</span>
                       <span *ngIf="(artist.location) && (artist.location !== 'RGV')">
-                        <p-tag value="{{artist.location | lowercase}}" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#937fee'}"></p-tag>&nbsp;
+                        <p-tag value="{{artist.location | lowercase}}" [style]="{'font-size': '.8em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#937fee'}"></p-tag>&nbsp;
                       </span>
                       <span *ngIf="(artist.status) && (artist.status === 'inactive')">
                         <p-tag value="inactive" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': 'lightgray'}"></p-tag>&nbsp;
