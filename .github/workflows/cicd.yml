@@ -20,7 +20,7 @@ jobs:
     - name: Install Project Dependencies
       run: npm run clean-install
     - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+      run: cd enm && npx playwright install --with-deps
     - name: Run Playwright Tests
       run: cd enm && npm run test:playwright
     - name: Run Commit Tests
