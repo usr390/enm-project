@@ -20,11 +20,14 @@ jobs:
     - name: Install Project Dependencies
       run: npm run clean-install
 
-      # playwright tests
+      # playwright tests with Percy
     - name: Install Playwright Browsers
       run: cd enm && npx playwright install --with-deps
-    - name: Run Playwright Tests
-      run: cd enm && npm run test:playwright
+
+    - name: Run Visual Regression with Percy + Playwright
+      env:
+        PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+      run: cd enm && npx percy exec -- npm run test:playwright
 
       # angular tests
     - name: Run Commit Tests
