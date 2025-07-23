@@ -18,5 +18,5 @@ test('Events header renders from mocked API', async ({ context, page }) => {
   // 3️⃣ Assert UI
   const header = page.locator('#events-header');
   await expect(header).toBeVisible();
-  await expect(header).toHaveText('Not Events');
+  await expect(header).toHaveText('Events');
 });
