@@ -22,7 +22,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright Tests
-      run: npm run test:playwright
+      run: cd enm && npm run test:playwright
     - name: Run Commit Tests
       run: npm run test
     - name: Install Vercel CLI
