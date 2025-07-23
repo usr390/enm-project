@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { mockEvents } from './mocks/mockEvents';
+import percySnapshot from '@percy/playwright';
 
 
 test('Events header renders from mocked API', async ({ context, page }) => {
@@ -14,6 +15,7 @@ test('Events header renders from mocked API', async ({ context, page }) => {
 
   // 2️⃣ THEN navigate
   await page.goto('/');
+  await percySnapshot(page, 'Events page');
 
   // 3️⃣ Assert UI
   const header = page.locator('#events-header');
