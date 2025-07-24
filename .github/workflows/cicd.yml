@@ -6,6 +6,8 @@ env:
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 jobs:
   cicd:
     runs-on: ubuntu-22.04
