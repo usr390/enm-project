@@ -2,7 +2,7 @@
 import cors from "cors";
 const allowedOrigins = [
   'https://www.rarelygroovy.com', // Production frontend
-  'http://localhost:4200'
+  'http://localhost:4200',
 ];
 
 const corsOptions = {
@@ -29,6 +29,7 @@ const apiLimiter = rateLimit({
   message: 'Too many requests from this IP, please try again after 15 minutes',
 })
 import { randomUUID } from 'crypto';
+import { swaggerUi, swaggerSpec } from './../swagger'
 
 // enm imports
 import EnmEventModel from "./models/EnmEvent";
@@ -41,7 +42,13 @@ import { checkUserPlusStatus } from "./utilty/isplus";
 import PromoCodeModel from "./models/PromoCode";
 import BlogModel from "./models/Blog";
 
-const app = express(); app.use(cors(corsOptions)); app.use(apiLimiter)
+const app = express(); 
+app.use(cors(corsOptions)); 
+app.use(apiLimiter);
+if (process.env.NODE_ENV !== 'production') {
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+}
+
 const port = process.env.PORT || 3000
 const stripe = require('stripe')(process.env.STRIPE_API_KEY);
 const stripeWebHookSecret = process.env.STRIPE_API_WEBHOOK_SECRET;
@@ -164,8 +171,6 @@ app.get('/api/enmEventsTrans', express.json(), async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
-
-// Past events endpoint (Rarelygroovy+ only, capped at 1 month back)
 
 app.get('/api/enmEvents/pastTrans', express.json(), async (req, res) => {
   const username = req.query.username;
@@ -420,10 +425,6 @@ app.get('/api/artistDirectoryTrans', express.json(), async (req: Request, res: R
     res.status(500).send('Internal Server Error');
   }
 });
-
-
-
-
 
 app.post('/api/login', express.json(), async (req: Request, res: Response) => {
   const { username, password } = req.body;
