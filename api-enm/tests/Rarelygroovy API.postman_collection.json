@@ -1,0 +1,1054 @@
+{
+	"info": {
+		"_postman_id": "eea1a64f-0c53-45ce-bfb9-236091fdeec7",
+		"name": "Rarelygroovy API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47081991",
+		"_collection_link": "https://edutrecompute-1093912.postman.co/workspace/Eduardo's-Workspace~05dafd60-39d9-4edb-897b-247c54bc5364/collection/47081991-eea1a64f-0c53-45ce-bfb9-236091fdeec7?action=share&source=collection_link&creator=47081991"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "enmEventsTrans",
+					"item": [
+						{
+							"name": "Get all future events",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"  pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response is an array\", function () {",
+											"  const json = pm.response.json();",
+											"  pm.expect(json).to.be.an(\"array\");",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/enmEventsTrans",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"enmEventsTrans"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "List of events",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/enmEventsTrans",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enmEventsTrans"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"_id\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"venue\": {\n      \"name\": \"string\",\n      \"address\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"country\": \"string\",\n      \"link\": \"string\",\n      \"_id\": \"string\"\n    },\n    \"date\": \"2024-12-08T11:11:44.324Z\",\n    \"doorTime\": \"2005-04-08T08:11:04.098Z\",\n    \"dateTime\": \"1962-09-22T21:35:20.739Z\",\n    \"cover\": 3676.40123427208,\n    \"artists\": [\n      {\n        \"_id\": \"string\",\n        \"name\": \"string\",\n        \"link\": \"http://ZanUeocU.jsaH\",\n        \"location\": \"string\",\n        \"status\": \"string\",\n        \"start\": \"1954-03-10T08:48:24.739Z\",\n        \"end\": \"1972-08-28T14:07:28.304Z\",\n        \"medium\": \"string\",\n        \"genre\": [\n          \"string\",\n          \"string\"\n        ],\n        \"notes\": \"string\",\n        \"links\": {\n          \"key_0\": \"https://yYMdAVxcKFeEfEvSpucqdUThwp.vdcxEdDZBr\",\n          \"key_1\": \"http://QuYvOBXoYQOIRleTa.czR2M+IHGPTh4wZQtAa.9\"\n        },\n        \"artists\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          }\n        ]\n      },\n      {\n        \"_id\": \"string\",\n        \"name\": \"string\",\n        \"link\": \"http://Q.szhcUPc6Fz,\",\n        \"location\": \"string\",\n        \"status\": \"string\",\n        \"start\": \"2021-09-06T01:58:20.403Z\",\n        \"end\": \"1952-03-16T15:55:16.191Z\",\n        \"medium\": \"string\",\n        \"genre\": [\n          \"string\",\n          \"string\"\n        ],\n        \"notes\": \"string\",\n        \"links\": {\n          \"key_0\": \"https://Fc.texqxm\"\n        },\n        \"artists\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          }\n        ]\n      }\n    ],\n    \"creationDateTime\": \"1959-06-20T13:01:21.591Z\",\n    \"promoter\": {\n      \"name\": \"string\",\n      \"link\": \"string\",\n      \"_id\": \"string\"\n    },\n    \"flyer\": \"http://fAybVxVNf.pgIsuAiXKfS\",\n    \"flyerColors\": [\n      \"string\",\n      \"string\"\n    ],\n    \"updates\": [\n      {\n        \"date\": \"1956-06-14T09:19:18.544Z\",\n        \"message\": \"string\"\n      },\n      {\n        \"date\": \"1953-05-13T03:26:48.657Z\",\n        \"message\": \"string\"\n      }\n    ],\n    \"verified\": true,\n    \"__v\": 8675.166637081435\n  },\n  {\n    \"_id\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"venue\": {\n      \"name\": \"string\",\n      \"address\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"strin\",\n      \"country\": \"string\",\n      \"link\": \"string\",\n      \"_id\": \"string\"\n    },\n    \"date\": \"2000-12-15T19:14:10.284Z\",\n    \"doorTime\": \"1963-04-21T13:11:56.908Z\",\n    \"dateTime\": \"2007-12-26T02:04:50.042Z\",\n    \"cover\": 5124.495931846523,\n    \"artists\": [\n      {\n        \"_id\": \"string\",\n        \"name\": \"string\",\n        \"link\": \"http://WSofvbvdHofwvcoYkfFszpBorRC.ehrdcoCyHziOVbPKDaUClVZjtBnSm4uV7G\",\n        \"location\": \"string\",\n        \"status\": \"string\",\n        \"start\": \"1952-01-14T16:54:21.274Z\",\n        \"end\": \"1994-11-04T04:21:31.485Z\",\n        \"medium\": \"string\",\n        \"genre\": [\n          \"string\",\n          \"string\"\n        ],\n        \"notes\": \"string\",\n        \"links\": {\n          \"key_0\": \"http://TzYODPYfrUwMkICHzN.ehdiYK+pNLauyzzL,JbK59DY.2dX2suKVF+4mBz2xwGNFc\",\n          \"key_1\": \"http://pD.udazx6Z3Np\"\n        },\n        \"artists\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          }\n        ]\n      },\n      {\n        \"_id\": \"string\",\n        \"name\": \"string\",\n        \"link\": \"https://FdRAefbTAsQfaeoQUD.hxcpSlJf2c96,z\",\n        \"location\": \"string\",\n        \"status\": \"string\",\n        \"start\": \"1991-01-17T21:14:24.628Z\",\n        \"end\": \"2007-09-22T16:13:08.146Z\",\n        \"medium\": \"string\",\n        \"genre\": [\n          \"string\",\n          \"string\"\n        ],\n        \"notes\": \"string\",\n        \"links\": {\n          \"key_0\": \"http://Co.qdckJKmOOa84ly,j5W0BC4mniVJtW,5FYtDAhUiSSR1+N\",\n          \"key_1\": \"https://rSetQJtHhjxPeeBwSX.imLS6Ro6sSYxxWOMu-F9HO8L78uGAZKowIrC7Lg.\"\n        },\n        \"artists\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          }\n        ]\n      }\n    ],\n    \"creationDateTime\": \"1957-12-30T11:08:21.518Z\",\n    \"promoter\": {\n      \"name\": \"string\",\n      \"link\": \"string\",\n      \"_id\": \"string\"\n    },\n    \"flyer\": \"https://QliaaLkSczPYzefyzQcuAPRWc.qwqnqDukTtaYWw.eqYDknJzVy\",\n    \"flyerColors\": [\n      \"string\",\n      \"string\"\n    ],\n    \"updates\": [\n      {\n        \"date\": \"2013-04-03T19:41:02.353Z\",\n        \"message\": \"stri\"\n      },\n      {\n        \"date\": \"2020-11-14T18:44:43.576Z\",\n        \"message\": \"string\"\n      }\n    ],\n    \"verified\": true,\n    \"__v\": 3041.412773338643\n  }\n]"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "enmEvents",
+					"item": [
+						{
+							"name": "pastTrans",
+							"item": [
+								{
+									"name": "Get all past events",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"  pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Response is an array\", function () {",
+													"  const json = pm.response.json();",
+													"  pm.expect(json).to.be.an(\"array\");",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/enmEvents/pastTrans?username=string",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enmEvents",
+												"pastTrans"
+											],
+											"query": [
+												{
+													"key": "username",
+													"value": "string",
+													"description": "Username of the requesting user (not used)"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "List of past verified events",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/enmEvents/pastTrans?username=string",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"enmEvents",
+														"pastTrans"
+													],
+													"query": [
+														{
+															"key": "username",
+															"value": "string",
+															"description": "Username of the requesting user (not used)"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"_id\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"venue\": {\n      \"name\": \"string\",\n      \"address\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"country\": \"string\",\n      \"link\": \"string\",\n      \"_id\": \"string\"\n    },\n    \"date\": \"2024-12-08T11:11:44.324Z\",\n    \"doorTime\": \"2005-04-08T08:11:04.098Z\",\n    \"dateTime\": \"1962-09-22T21:35:20.739Z\",\n    \"cover\": 3676.40123427208,\n    \"artists\": [\n      {\n        \"_id\": \"string\",\n        \"name\": \"string\",\n        \"link\": \"http://ZanUeocU.jsaH\",\n        \"location\": \"string\",\n        \"status\": \"string\",\n        \"start\": \"1954-03-10T08:48:24.739Z\",\n        \"end\": \"1972-08-28T14:07:28.304Z\",\n        \"medium\": \"string\",\n        \"genre\": [\n          \"string\",\n          \"string\"\n        ],\n        \"notes\": \"string\",\n        \"links\": {\n          \"key_0\": \"https://yYMdAVxcKFeEfEvSpucqdUThwp.vdcxEdDZBr\",\n          \"key_1\": \"http://QuYvOBXoYQOIRleTa.czR2M+IHGPTh4wZQtAa.9\"\n        },\n        \"artists\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          }\n        ]\n      },\n      {\n        \"_id\": \"string\",\n        \"name\": \"string\",\n        \"link\": \"http://Q.szhcUPc6Fz,\",\n        \"location\": \"string\",\n        \"status\": \"string\",\n        \"start\": \"2021-09-06T01:58:20.403Z\",\n        \"end\": \"1952-03-16T15:55:16.191Z\",\n        \"medium\": \"string\",\n        \"genre\": [\n          \"string\",\n          \"string\"\n        ],\n        \"notes\": \"string\",\n        \"links\": {\n          \"key_0\": \"https://Fc.texqxm\"\n        },\n        \"artists\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          }\n        ]\n      }\n    ],\n    \"creationDateTime\": \"1959-06-20T13:01:21.591Z\",\n    \"promoter\": {\n      \"name\": \"string\",\n      \"link\": \"string\",\n      \"_id\": \"string\"\n    },\n    \"flyer\": \"http://fAybVxVNf.pgIsuAiXKfS\",\n    \"flyerColors\": [\n      \"string\",\n      \"string\"\n    ],\n    \"updates\": [\n      {\n        \"date\": \"1956-06-14T09:19:18.544Z\",\n        \"message\": \"string\"\n      },\n      {\n        \"date\": \"1953-05-13T03:26:48.657Z\",\n        \"message\": \"string\"\n      }\n    ],\n    \"verified\": true,\n    \"__v\": 8675.166637081435\n  },\n  {\n    \"_id\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"venue\": {\n      \"name\": \"string\",\n      \"address\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"strin\",\n      \"country\": \"string\",\n      \"link\": \"string\",\n      \"_id\": \"string\"\n    },\n    \"date\": \"2000-12-15T19:14:10.284Z\",\n    \"doorTime\": \"1963-04-21T13:11:56.908Z\",\n    \"dateTime\": \"2007-12-26T02:04:50.042Z\",\n    \"cover\": 5124.495931846523,\n    \"artists\": [\n      {\n        \"_id\": \"string\",\n        \"name\": \"string\",\n        \"link\": \"http://WSofvbvdHofwvcoYkfFszpBorRC.ehrdcoCyHziOVbPKDaUClVZjtBnSm4uV7G\",\n        \"location\": \"string\",\n        \"status\": \"string\",\n        \"start\": \"1952-01-14T16:54:21.274Z\",\n        \"end\": \"1994-11-04T04:21:31.485Z\",\n        \"medium\": \"string\",\n        \"genre\": [\n          \"string\",\n          \"string\"\n        ],\n        \"notes\": \"string\",\n        \"links\": {\n          \"key_0\": \"http://TzYODPYfrUwMkICHzN.ehdiYK+pNLauyzzL,JbK59DY.2dX2suKVF+4mBz2xwGNFc\",\n          \"key_1\": \"http://pD.udazx6Z3Np\"\n        },\n        \"artists\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          }\n        ]\n      },\n      {\n        \"_id\": \"string\",\n        \"name\": \"string\",\n        \"link\": \"https://FdRAefbTAsQfaeoQUD.hxcpSlJf2c96,z\",\n        \"location\": \"string\",\n        \"status\": \"string\",\n        \"start\": \"1991-01-17T21:14:24.628Z\",\n        \"end\": \"2007-09-22T16:13:08.146Z\",\n        \"medium\": \"string\",\n        \"genre\": [\n          \"string\",\n          \"string\"\n        ],\n        \"notes\": \"string\",\n        \"links\": {\n          \"key_0\": \"http://Co.qdckJKmOOa84ly,j5W0BC4mniVJtW,5FYtDAhUiSSR1+N\",\n          \"key_1\": \"https://rSetQJtHhjxPeeBwSX.imLS6Ro6sSYxxWOMu-F9HO8L78uGAZKowIrC7Lg.\"\n        },\n        \"artists\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          }\n        ]\n      }\n    ],\n    \"creationDateTime\": \"1957-12-30T11:08:21.518Z\",\n    \"promoter\": {\n      \"name\": \"string\",\n      \"link\": \"string\",\n      \"_id\": \"string\"\n    },\n    \"flyer\": \"https://QliaaLkSczPYzefyzQcuAPRWc.qwqnqDukTtaYWw.eqYDknJzVy\",\n    \"flyerColors\": [\n      \"string\",\n      \"string\"\n    ],\n    \"updates\": [\n      {\n        \"date\": \"2013-04-03T19:41:02.353Z\",\n        \"message\": \"stri\"\n      },\n      {\n        \"date\": \"2020-11-14T18:44:43.576Z\",\n        \"message\": \"string\"\n      }\n    ],\n    \"verified\": true,\n    \"__v\": 3041.412773338643\n  }\n]"
+										},
+										{
+											"name": "Server error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/enmEvents/pastTrans?username=string",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"enmEvents",
+														"pastTrans"
+													],
+													"query": [
+														{
+															"key": "username",
+															"value": "string",
+															"description": "Username of the requesting user (not used)"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "artistDirectoryTrans",
+					"item": [
+						{
+							"name": "Get artist directory",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"  pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response is an array\", function () {",
+											"  const json = pm.response.json();",
+											"  pm.expect(json).to.be.an(\"array\");",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/artistDirectoryTrans?username=string",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"artistDirectoryTrans"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "string",
+											"description": "Username to check Plus status (not used)"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "List of all artists in the Artist Directory",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/artistDirectoryTrans?username=string",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"artistDirectoryTrans"
+											],
+											"query": [
+												{
+													"key": "username",
+													"value": "string",
+													"description": "Username to check Plus status (not used)"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"link\": \"https://jphIZjeLyOVdOXflIujQHIcIv.jlmpCj53CihfXnbn,QldtZxVzFpa-vwj-4KUr\",\n    \"location\": \"string\",\n    \"status\": \"string\",\n    \"start\": \"1988-12-11T14:10:00.006Z\",\n    \"end\": \"1994-04-13T06:26:37.013Z\",\n    \"medium\": \"string\",\n    \"genre\": [\n      \"string\",\n      \"string\"\n    ],\n    \"notes\": \"stri\",\n    \"links\": {\n      \"key_0\": \"https://gmpyzHQkPawOsqnwpvMBqtzo.octFM,IsHistWjRkYUil5Kdkxb\"\n    },\n    \"artists\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n      }\n    ]\n  },\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"link\": \"http://GwbLCCo.ackdwSvR4M11SOulDMPD31LilrZJkrmxvvpXp5FaL9cveuIraQ+BMBo7.e5ysqmmaZgLlqrvPK2t3-6n.\",\n    \"location\": \"string\",\n    \"status\": \"string\",\n    \"start\": \"1967-08-20T13:40:15.244Z\",\n    \"end\": \"1980-05-17T00:54:49.633Z\",\n    \"medium\": \"string\",\n    \"genre\": [\n      \"string\",\n      \"string\"\n    ],\n    \"notes\": \"string\",\n    \"links\": {\n      \"key_0\": \"https://TrGDibb.bhBKOJ-O2fZzT6JOmWo,HkOAM\"\n    },\n    \"artists\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n      }\n    ]\n  }\n]"
+								},
+								{
+									"name": "Server error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/artistDirectoryTrans?username=string",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"artistDirectoryTrans"
+											],
+											"query": [
+												{
+													"key": "username",
+													"value": "string",
+													"description": "Username to check Plus status (not used)"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "login",
+					"item": [
+						{
+							"name": "Valid user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"  pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response contains a user object\", function () {",
+											"  const json = pm.response.json();",
+											"  pm.expect(json).to.have.property(\"user\");",
+											"  pm.expect(json.user).to.have.property(\"username\", \"test\");",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"test\",\n  \"password\": \"test\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Login successful",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"username\": \"string\",\n  \"password\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"login"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"user\": {\n    \"id\": \"string\",\n    \"username\": \"string\",\n    \"plus\": true,\n    \"appAccountToken_apple\": \"string\"\n  }\n}"
+								},
+								{
+									"name": "Missing username or password",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"username\": \"string\",\n  \"password\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"login"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Invalid credentials",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"username\": \"string\",\n  \"password\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"login"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Internal server error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"username\": \"string\",\n  \"password\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"login"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Invalid user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"  pm.response.to.have.status(401);",
+											"});",
+											"",
+											"pm.test(\"Error message is returned\", function () {",
+											"  const json = pm.response.json();",
+											"  pm.expect(json).to.have.property(\"error\");",
+											"  pm.expect(json.error.toLowerCase()).to.include(\"invalid\");",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"nonce\",\n  \"password\": \"nonce\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Login successful",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"username\": \"string\",\n  \"password\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"login"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"user\": {\n    \"id\": \"string\",\n    \"username\": \"string\",\n    \"plus\": true,\n    \"appAccountToken_apple\": \"string\"\n  }\n}"
+								},
+								{
+									"name": "Missing username or password",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"username\": \"string\",\n  \"password\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"login"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Invalid credentials",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"username\": \"string\",\n  \"password\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"login"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Internal server error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"username\": \"string\",\n  \"password\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"login"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "create-user",
+					"item": [
+						{
+							"name": "Register a new user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const json = pm.response.json();",
+											"",
+											"if (pm.response.code === 201) {",
+											"  pm.test(\"User object returned on successful creation\", function () {",
+											"    pm.expect(json).to.have.property('user');",
+											"    pm.expect(json.user).to.have.property('username');",
+											"  });",
+											"} else if (pm.response.code === 409) {",
+											"  pm.test(\"Conflict returns error\", function () {",
+											"    pm.expect(json).to.have.property('error');",
+											"    pm.expect(json.error).to.include('already exists');",
+											"  });",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"newman\",\n  \"password\": \"hello\",\n  \"promoCode\": \"\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/create-user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"create-user"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "User created successfully",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"username\": \"string\",\n  \"password\": \"strin\",\n  \"promoCode\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/create-user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"create-user"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"user\": {\n    \"id\": \"string\",\n    \"username\": \"string\",\n    \"plus\": true,\n    \"appAccountToken_apple\": \"string\"\n  }\n}"
+								},
+								{
+									"name": "Username and password required",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"username\": \"string\",\n  \"password\": \"strin\",\n  \"promoCode\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/create-user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"create-user"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "User already exists",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"username\": \"string\",\n  \"password\": \"strin\",\n  \"promoCode\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/create-user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"create-user"
+											]
+										}
+									},
+									"status": "Conflict",
+									"code": 409,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Internal server error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"username\": \"string\",\n  \"password\": \"strin\",\n  \"promoCode\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/create-user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"create-user"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:80"
+		}
+	]
+}
