@@ -19,7 +19,6 @@ enm/test-results/
 enm/playwright-report/
 enm/playwright/.cache/
 
-
 # Node
 enm/node_modules
 enm/npm-debug.log
@@ -59,6 +58,9 @@ enm/Thumbs.db
 
 
 # enm api
+
+# Postman Newman
+api-enm/newman
 
 # Build output
 api-enm/dist/

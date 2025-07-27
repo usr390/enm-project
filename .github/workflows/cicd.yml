@@ -3,6 +3,7 @@ name: ci/cd
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  MONGO_URL: ${{ secrets.MONGO_URL }}
 on:
   push:
     branches: [ "main" ]
@@ -30,6 +31,17 @@ jobs:
       env:
         PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
       run: cd enm && npx percy exec -- npm run test:playwright
+    
+    - name: Start API server in background
+      env:
+        MONGO_URL: ${{ secrets.MONGO_URL }}
+      working-directory: ./api-enm
+      run: |
+        pnpm run dev &
+        sleep 5 
+
+    - name: Run Postman tests
+      run: pnpm test:postman
 
       # angular tests
     - name: Run Commit Tests
