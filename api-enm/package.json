@@ -13,7 +13,8 @@
 		"dev:run": "node --inspect --no-warnings --loader ./dist/dev.js --watch dist/src",
 		"build": "esbuild index=./src --bundle --minify --outdir=dist --packages=external --platform=node",
 		"start": "node dist",
-		"test:postman": "node scripts/run-postman-tests.js"
+		"test:postman": "node scripts/run-postman-tests.js",
+		"start: ci": "tsx src/index.ts"
 	},
 	"dependencies": {
 		"@railway/cli": "^3.3.1",
