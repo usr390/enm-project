@@ -51,7 +51,7 @@ jobs:
     - name: Run Postman tests
       run: |
         pnpm dlx newman run tests/Rarelygroovy API.postman_collection \
-          -e tests/local.env.json \
+          --env-var baseUrl=http://127.0.0.1:3000 \
           --reporters cli,junit \
           --reporter-junit-export newman-results.xml
 
