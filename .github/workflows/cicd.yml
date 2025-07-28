@@ -38,11 +38,23 @@ jobs:
         PORT: 3000
       working-directory: ./api-enm
       run: |
-        pnpm run dev &
-        sleep 5 
+        pnpm run start:ci &
+        for i in {1..30}; do
+          if curl -sf http://127.0.0.1:${PORT}/ >/dev/null; then
+            echo "API is up"
+            break
+          fi
+          echo "Waiting for API..."
+          sleep 2
+        done
 
     - name: Run Postman tests
-      run: pnpm test:postman
+      run: |
+        pnpm dlx newman run tests/postman/rarelygroovy-api.postman_collection.json \
+          -e tests/postman/local.env.json \
+          --reporters cli,junit \
+          --reporter-junit-export newman-results.xml
+
 
       # angular tests
     - name: Run Commit Tests
