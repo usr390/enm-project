@@ -38,7 +38,7 @@ jobs:
         PORT: 3000
       working-directory: ./api-enm
       run: |
-        pnpm run start:ci &
+        pnpm run dev &
         sleep 5 
 
     - name: Run Postman tests
