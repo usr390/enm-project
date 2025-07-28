@@ -50,8 +50,8 @@ jobs:
 
     - name: Run Postman tests
       run: |
-        pnpm dlx newman run tests/postman/rarelygroovy-api.postman_collection.json \
-          -e tests/postman/local.env.json \
+        pnpm dlx newman run tests/Rarelygroovy API.postman_collection \
+          -e tests/local.env.json \
           --reporters cli,junit \
           --reporter-junit-export newman-results.xml
 
