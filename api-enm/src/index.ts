@@ -18,7 +18,7 @@ const corsOptions = {
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import { DateTime } from "luxon";
-import bcrypt from './lib/bcrypt';
+const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 import rateLimit from 'express-rate-limit';
 const apiLimiter = rateLimit({
