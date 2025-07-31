@@ -8,7 +8,7 @@
 
       <ng-container *ngIf="!(showRecentlyTouredArtistsOnly$ | async)" >
         <h2 class="datekey">
-          <span style="color: #e2e2e2">Artist Directory</span>
+          <span style="color: #e2e2e2" id="artist-directory-header">Artist Directory</span>
           <span class="numberOfEvents" *ngIf="count$ | async as count" style="text-decoration: none;">
             Listed: {{ count }}
         </span></h2>

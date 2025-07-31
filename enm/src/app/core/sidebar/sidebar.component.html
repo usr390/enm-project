@@ -7,7 +7,7 @@
         <p routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"><span><a routerLink="/artist-directory" (click)="closeSidebar()">Artist Directory</a></span></p>
     </ng-template>
     <ng-template pTemplate="footer">
-        <p *ngIf="(user$ | async)">Logged in as {{(user$ | async)?.username}}</p>
+        <p id="logged-in-as" *ngIf="(user$ | async)">Logged in as {{(user$ | async)?.username}}</p>
         <p>
             <span *ngIf="(user$ | async)"><a href="/"(click)="onLogOut()">Log Out</a></span>
             <span *ngIf="!(user$ | async)"><a [routerLink]="['/login']"  href="/">Log In</a></span> &nbsp;
