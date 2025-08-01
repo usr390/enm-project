@@ -1,24 +1,82 @@
 import { test, expect } from '@playwright/test';
-import { mockEvents } from './mocks/mockEvents';
+import { mockEvents, } from './mocks/mockEvents';
+import { mockArtists, } from './mocks/mockArtists';
+import { mockUser, } from './mocks/mockUser';
+import { mockLogin, mockCreateUser, applyEventFilter, applyArtistDirectoryFilter } from './helpers/helpers';
+
+
 import percySnapshot from '@percy/playwright';
 
+test.describe('Events', () => { 
+    test.beforeEach(async ({ context, page }) => {
+      await context.route('**/api/enmEventsTrans', route =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify(mockEvents),
+        })
+      );
+      await page.goto('/');
+    });
 
-test('Events header renders from mocked API', async ({ context, page }) => {
-  // 1️⃣ Route FIRST, on the context
-  await context.route('**/api/enmEventsTrans', route => {
-    route.fulfill({
-      status: 200,
-      contentType: 'application/json',
-      body: JSON.stringify(mockEvents)});
+    test('page renders', async ({ page }) => {
+      await percySnapshot(page, 'Events page');
+      const header = page.locator('#events-header');
+      await expect(header).toBeVisible();
+      await expect(header).toHaveText('Events');
+    });
+  
+    test('filter works', async ({ page }) => {
+      await applyEventFilter(page, 'xxx');
+      const disclaimer = page.locator('#no-events-found-disclaimer');
+      await expect(disclaimer).toBeVisible();
+      await expect(disclaimer).toHaveText('No events found for "xxx".');
+    });
+})
+
+test.describe('Artist Directory', () => { 
+  test.beforeEach(async ({ context, page }) => {
+    await context.route('**/api/artistDirectoryTrans', route => {
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(mockArtists)});
+    });
+    await page.goto('/artist-directory');
+
   });
 
+  test('page renders', async ({ context, page }) => {
+      await percySnapshot(page, 'Artist Directory page');
+      const header = page.locator('#artist-directory-header');
+      await expect(header).toBeVisible();
+      await expect(header).toHaveText('Artist Directory');
+  });
+  test('filter works', async ({ page }) => {
+    await applyArtistDirectoryFilter(page, 'Guilty Pleasure');
+    const aritistCount = page.locator('#artist-directory-count');
+    await expect(aritistCount).toBeVisible();
+    await expect(aritistCount).toHaveText('Listed: 1');
+  });
+})
 
-  // 2️⃣ THEN navigate
-  await page.goto('/');
-  await percySnapshot(page, 'Events page');
 
-  // 3️⃣ Assert UI
-  const header = page.locator('#events-header');
-  await expect(header).toBeVisible();
-  await expect(header).toHaveText('Events');
+test('User is logged from mocked API', async ({ context, page }) => {
+  await mockLogin(context, page, mockUser);
+  await page.click('#app-sidebar');
+  await percySnapshot(page, 'Side bar open');
+  const loggedInAs = page.locator('#logged-in-as');
+
+  await expect(loggedInAs).toBeVisible();
+  await expect(loggedInAs).toHaveText(`Logged in as ${mockUser.user.username}`);
+});
+
+test('User is created from mocked API', async ({ context, page }) => {
+  await mockCreateUser(context, page, mockUser);
+  await page.click('#app-sidebar');
+  await percySnapshot(page, 'Side bar open');
+  const loggedInAs = page.locator('#logged-in-as');
+
+  await expect(loggedInAs).toBeVisible();
+  await expect(loggedInAs).toHaveText(`Logged in as ${mockUser.user.username}`);
 });

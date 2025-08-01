@@ -202,7 +202,7 @@
   <div *ngIf="(filteredEnmEventList$ | async)?.length == 0" class="d-flex justify-content-center align-items-center text-center no-results-text" style="height: 70vh;">
     <ng-container *ngIf="filter$ | async as filters">
       <div *ngIf="(filteredEnmEventList$ | async)?.length === 0" class="d-flex justify-content-center align-items-center text-center no-results-text" style="height: 70vh;">
-        <p>
+        <p id="no-events-found-disclaimer">
           <span>No events found</span>
           <ng-container *ngIf="filters.text || filters.recentlyListed || filters.touring">
             <span *ngIf="filters.text"> for "{{ filters.text }}"</span>

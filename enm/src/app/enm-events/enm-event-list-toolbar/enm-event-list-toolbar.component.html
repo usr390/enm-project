@@ -4,7 +4,7 @@
             <div class="col-12">
                 <div class="p-toolbar-group-start">
                     <a routerLink="/"><app-logo></app-logo></a>
-                    <app-sidebar class="pull-right"></app-sidebar>
+                    <app-sidebar class="pull-right" id="app-sidebar"></app-sidebar>
                 </div>
             </div>
         </div>
@@ -12,14 +12,14 @@
         <div *ngIf="((currentRoute$ | async) === '/events' || (currentRoute$ | async)?.startsWith('/events?'))"  class="row">
             <div class="col-12">
                 <div class="p-toolbar-group-end">
-                    <div><app-enm-event-list-filter></app-enm-event-list-filter></div>
+                    <div><app-enm-event-list-filter id="enm-event-list-filter"></app-enm-event-list-filter></div>
                 </div>
             </div>
         </div>
         <div *ngIf="((currentRoute$ | async) === '/artist-directory' || (currentRoute$ | async)?.startsWith('/artist-directory?') || (currentRoute$ | async)?.startsWith('/iBhLq5wrrxafte4a') || (currentRoute$ | async)?.startsWith('/iBhLq5wrrxafte4a?'))"  class="row">
             <div class="col-12">
                 <div class="p-toolbar-group-end">
-                    <div><app-enm-event-list-filter></app-enm-event-list-filter></div>
+                    <div><app-enm-event-list-filter id="artist-directory-filter"></app-enm-event-list-filter></div>
                 </div>
             </div>
         </div>

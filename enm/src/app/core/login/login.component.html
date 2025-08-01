@@ -10,17 +10,17 @@
                 <div class="col"><label>Username</label></div>
             </div>
             <div class="row g-0 justify-content-center input-row">
-                <div class="col-auto"><input formControlName="username" pInputText placeholder="Username" maxlength="20" style="width: 223px;"></div>
+                <div class="col-auto"><input formControlName="username" pInputText placeholder="Username" maxlength="20" style="width: 223px;" id="username-input"></div>
             </div>
             <div class="row">
                 <div class="col"><label>Password</label></div>
             </div>
             <div class="row g-0 justify-content-center input-row">
-                <div class="col-auto"><p-password formControlName="password" [feedback]="false" placeholder="Password" [toggleMask]="true"></p-password></div>
+                <div class="col-auto"><p-password formControlName="password" [feedback]="false" placeholder="Password" [toggleMask]="true" id="password-input"></p-password></div>
             </div>
             <div class="row">
                 <div class="col">
-                    <p-button type="submit" label="Log In" [disabled]="userLogInForm.invalid || logInButtonCooldown || (( logInProcessing$ | async) === true)">
+                    <p-button id="login-button" type="submit" label="Log In" [disabled]="userLogInForm.invalid || logInButtonCooldown || (( logInProcessing$ | async) === true)">
                         <div *ngIf="logInProcessing$ | async">
                             <p-progressSpinner strokeWidth="2" fill="var(--surface-ground)" class="custom-spinner" [style]="{width: '20px', height: '12px', margin: '0px 20px 0px 0px'}"></p-progressSpinner>
                         </div>
