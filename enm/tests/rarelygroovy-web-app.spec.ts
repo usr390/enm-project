@@ -54,9 +54,12 @@ test.describe('Artist Directory', () => {
   });
   test('filter works', async ({ page }) => {
     await applyArtistDirectoryFilter(page, 'Guilty Pleasure');
-    const aritistCount = page.locator('#artist-directory-count');
-    await expect(aritistCount).toBeVisible();
-    await expect(aritistCount).toHaveText('Listed: 1');
+    const artistCount = page.locator('#artist-directory-count');
+    await expect(artistCount).toBeVisible();
+
+    const expected = 1;
+    const regex = new RegExp(`Listed:\\s*${expected}(?:\\s+of\\s+\\d+)?\\s*$`);
+    await expect(artistCount).toHaveText(regex);
   });
 })
 
