@@ -21,357 +21,178 @@
     </ng-container>
     <div class="card">
       <p-dataView #dv [value]="date.value">
-        <!-- user logged in -->
-        <ng-container *ngIf="user$ | async as user" class="event-details">
-          <!-- plus user, has routerLink activated. should have access to event detail page -->
-          <ng-template *ngIf="user?.plus" let-enmEvent pTemplate="listItem">
-            <div class="col-12">
-              <div *ngIf="enmEvent.isRecentlyListed" class="recently-listed-badge">
-                <p-tag [style]="{'color': '#a2a2a2'}">
-                  <i>Listed<span *ngIf="enmEvent.creationDateTime | listedHowLongAgo as listedTime">&nbsp;{{ listedTime }}</span></i>
-                </p-tag>
-              </div>
-              <div *ngIf="enmEvent.canceled" class="tags">
-                <p-tag [style]="{'background-color': '#829bb4'}">
-                  <span *ngIf="enmEvent.canceled">Canceled</span>
-                </p-tag>
-              </div>
-              <div *ngIf="enmEvent.postponed" class="tags">
-                <p-tag [style]="{'background-color': '#829bb4'}">
-                  <span *ngIf="enmEvent.postponed">Postponed</span>
-                </p-tag>
-              </div>
-              <!-- HERE'S THE VISIBLE CONTENT -->
-              
-              <a [routerLink]="isCopying ? null : ['/events', enmEvent._id]" (click)="onEnmEventListSelection(enmEvent._id)" class="event-card-link .event-card-link" href="/">
-                <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
-                  <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
-                    <div class="flex flex-column align-items-center sm:align-items-start gap-3">
-                      <h1>
-                        <span *ngIf="enmEvent.venue" class="text-2xl font-bold text-900" [innerHTML]="enmEvent.venue.name | highlightPipe: (filter$ | async)?.text" style="display: inline-block;">
-                          {{ enmEvent.venue.name }}
+        <ng-template let-enmEvent pTemplate="listItem" let-i="index" >
+          <div class="col-12">
+            <div *ngIf="enmEvent.isRecentlyListed" class="recently-listed-badge">
+              <p-tag [style]="{'color': '#a2a2a2'}">
+                <i>Listed<span *ngIf="enmEvent.creationDateTime | listedHowLongAgo as listedTime">&nbsp;{{ listedTime }}</span></i>
+              </p-tag>
+            </div>
+            <div *ngIf="enmEvent.canceled" class="tags">
+              <p-tag [style]="{'background-color': '#829bb4'}">
+                <span *ngIf="enmEvent.canceled">Canceled</span>
+              </p-tag>
+            </div>
+            <div *ngIf="enmEvent.postponed" class="tags">
+              <p-tag [style]="{'background-color': '#829bb4'}">
+                <span *ngIf="enmEvent.postponed">Postponed</span>
+              </p-tag>
+            </div>
+            <!-- HERE'S THE VISIBLE CONTENT -->
+            <a [routerLink]="isCopying ? null : ['/events', enmEvent._id]" (click)="onEnmEventListSelection(enmEvent._id)" class="event-card-link .event-card-link" href="/">
+              <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                  <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                    <h1>
+                      <span *ngIf="enmEvent.venue" class="text-2xl font-bold text-900" [innerHTML]="enmEvent.venue.name | highlightPipe: (filter$ | async)?.text" style="display: inline-block;">
+                        {{ enmEvent.venue.name }}
+                      </span>
+                      <span *ngIf="enmEvent.venue.debut" style="display: inline-block; margin-left: 8px;">
+                        &nbsp;<p-tag value="venue debut" [style]="{'font-size': '.3em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
+                      </span>
+                    </h1>
+                    <div class="m-0 lh-lg artists artist-name">
+                      <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
+                        <div class="artist-container">
+                          <span class="artist-name" [innerHTML]="artist.name | highlightPipe: (filter$ | async)?.text">{{ artist.name }}</span>&nbsp;&nbsp;
+                          <span *ngIf="(artist.location) && (artist.location != 'RGV')">
+                            <p-tag value="{{artist.location | lowercase}}" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#937fee'}"></p-tag>&nbsp;&nbsp;
+                          </span>
+                          <span *ngIf="artist.debut">
+                            <p-tag value="debut" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
+                          </span>
+                          <span *ngIf="artist.albumDebut">
+                            <p-tag value="album debut" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
+                          </span>
+                          <span *ngIf="artist.lastShow">
+                            <p-tag value="last show" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
+                          </span>
+                        </div>
+                        <span *ngIf="i < enmEvent.artists.length - 1">&middot;</span>&nbsp;
+                      </ng-container>
+                    </div>
+                    <div *ngIf="enmEvent.promoter">
+                      <div class="custom-divider">
+                        <hr style="width: 40px;">
+                      </div>
+                      <h6 class="card-text" style="color: #a2a2a2;">
+                        <span class="promoter-name">{{ enmEvent.promoter.name }}</span>
+                        <span *ngIf="enmEvent.promoter.debut" class="tags">
+                          <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>
                         </span>
-                        <span *ngIf="enmEvent.venue.debut" style="display: inline-block; margin-left: 8px;">
-                          &nbsp;<p-tag value="venue debut" [style]="{'font-size': '.3em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#57B7AA'}"></p-tag>&nbsp;&nbsp;
-                        </span>
-                      </h1>
-                      <div class="m-0 lh-lg artists artist-name">
-                        <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
-                          <div class="artist-container">
-                            <span class="artist-name" [innerHTML]="artist.name | highlightPipe: (filter$ | async)?.text">{{ artist.name }}</span>&nbsp;&nbsp;
-                            <span *ngIf="(artist.location) && (artist.location != 'RGV')">
-                              <p-tag value="{{artist.location | lowercase}}" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#937fee'}"></p-tag>&nbsp;&nbsp;
-                            </span>
-                            <span *ngIf="artist.debut">
-                              <p-tag value="debut" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>&nbsp;&nbsp;
-                            </span>
-                            <span *ngIf="artist.albumDebut">
-                              <p-tag value="album debut" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>&nbsp;&nbsp;
-                            </span>
-                            <span *ngIf="artist.lastShow">
-                              <p-tag value="last show" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>&nbsp;&nbsp;
-                            </span>
-                          </div>
-                          <span *ngIf="i < enmEvent.artists.length - 1">&middot;</span>&nbsp;
+                        <!-- Add ampersand and promoter2 if promoter2 exists -->
+                        <ng-container *ngIf="enmEvent.promoter2">
+                          <span class="promoter-name">&nbsp;&amp;&nbsp;</span>
+                          <span class="promoter-name">{{ enmEvent.promoter2.name }}</span>
+                          <span *ngIf="enmEvent.promoter2.debut" class="tags">
+                            <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>
+                          </span>
                         </ng-container>
-                      </div>
-                      <div *ngIf="enmEvent.promoter">
-                        <div class="custom-divider">
-                          <hr style="width: 40px;">
-                        </div>
-                        <h6 class="card-text" style="color: #a2a2a2;">
-                          <span class="promoter-name">{{ enmEvent.promoter.name }}</span>
-                          <span *ngIf="enmEvent.promoter.debut" class="tags">
-                            <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>
-                          </span>
-                          <!-- Add ampersand and promoter2 if promoter2 exists -->
-                          <ng-container *ngIf="enmEvent.promoter2">
-                            <span class="promoter-name">&nbsp;&amp;&nbsp;</span>
-                            <span class="promoter-name">{{ enmEvent.promoter2.name }}</span>
-                            <span *ngIf="enmEvent.promoter2.debut" class="tags">
-                              <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>
+                      </h6>
+                    </div>
+
+                    <!-- This will only show if the user is on a mobile device -->
+                    <div *ngIf="isMobile">
+                      <div class="row">
+                        <div class="col-6" *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="margin-bottom: 15px;">
+                          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer">
+                            <span (click)="openFlyer($event)">
+                              <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> 
+                              <span style="padding-bottom: 100px;"> Flyer</span>
                             </span>
-                          </ng-container>
-                        </h6>
-                      </div>
-
-                      <!-- This will only show if the user is on a mobile device -->
-                      <div *ngIf="isMobile">
-                        <div class="row">
-                          <div class="col-6" *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="margin-bottom: 15px;">
-                            <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer">
-                              <span (click)="openFlyer($event)">
-                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> 
-                                <span style="padding-bottom: 100px;"> Flyer</span>
-                              </span>
-                            </a>
-                            <a class="flyer-icon"  *ngIf="enmEvent.rsvp && enmEvent.rsvp != 'pending'" href="{{enmEvent.rsvp}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
-                              <span  (click)="openFlyer($event)">
-                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
-                                <span style="padding-bottom: 100px;"> RSVP</span>
-                              </span>
-                            </a>
-                            <a class="flyer-icon"  *ngIf="enmEvent.tickets && enmEvent.tickets != 'pending'" href="{{enmEvent.tickets}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
-                              <span (click)="openFlyer($event)">
-                                <i style="font-size: 2em; margin-top: 15px" class="fa-solid fa-ticket"></i> 
-                                <span style="padding-bottom: 100px;"> Tickets</span>
-                              </span>
-                            </a>
-                            <a class="flyer-icon"  *ngIf="enmEvent.signup && enmEvent.signup != 'pending'" href="{{enmEvent.signup}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
-                              <span (click)="openFlyer($event)">
-                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
-                                <span style="padding-bottom: 100px;"> Sign Up</span>
-                              </span>
-                            </a>
-                          </div>
-                        </div>
-                        <div class="click-to-copy clickable-address">
-                          <span class="flex align-items-center gap-2" >
-                            <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)">
-                              <!-- this condition checks that a time was provided. it displays it if yes-->
-                              <span *ngIf="enmEvent.doorTime" class="doortime">doors {{ enmEvent.doorTime | doorTimeToTime }} </span>
-                              <span *ngIf="(enmEvent.dateTime | date:'HH:mm') != '23:59'" class="datetime">{{ enmEvent.dateTime | dateTimeToTime }} &middot; </span>
-                              <span *ngIf="enmEvent.dateTime" class="datetime">{{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }} </span>
-                              <!-- synonyms -->
-                              <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
-                              <span *ngIf="enmEvent.cover !== null && enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
-                              <!-- synonyms, address --> <br>
-                              <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, <span [innerHTML]="enmEvent.venue.city | highlightPipe: (filter$ | async)?.text">{{ enmEvent.venue.city }}</span> &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
-                              <!---->
-                            </div>
-                          </span>
+                          </a>
+                          <a class="flyer-icon"  *ngIf="enmEvent.rsvp && enmEvent.rsvp != 'pending'" href="{{enmEvent.rsvp}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
+                            <span  (click)="openFlyer($event)">
+                              <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
+                              <span style="padding-bottom: 100px;"> RSVP</span>
+                            </span>
+                          </a>
+                          <a class="flyer-icon"  *ngIf="enmEvent.tickets && enmEvent.tickets != 'pending'" href="{{enmEvent.tickets}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
+                            <span (click)="openFlyer($event)">
+                              <i style="font-size: 2em; margin-top: 15px" class="fa-solid fa-ticket"></i> 
+                              <span style="padding-bottom: 100px;"> Tickets</span>
+                            </span>
+                          </a>
+                          <a class="flyer-icon"  *ngIf="enmEvent.signup && enmEvent.signup != 'pending'" href="{{enmEvent.signup}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
+                            <span (click)="openFlyer($event)">
+                              <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
+                              <span style="padding-bottom: 100px;"> Sign Up</span>
+                            </span>
+                          </a>
                         </div>
                       </div>
-
-                      <!-- This will only show if the user is NOT on a mobile device -->
-                      <div *ngIf="!isMobile">
-                        <div class="row">
-                          <div class="col-6" *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="margin-bottom: 15px;">
-                            <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer">
-                              <span (click)="openFlyer($event)">
-                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> 
-                                <span style="padding-bottom: 100px;"> Flyer</span>
-                              </span>
-                            </a>
-                            <a class="flyer-icon"  *ngIf="enmEvent.rsvp && enmEvent.rsvp != 'pending'" href="{{enmEvent.rsvp}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
-                              <span  (click)="openFlyer($event)">
-                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
-                                <span style="padding-bottom: 100px;"> RSVP</span>
-                              </span>
-                            </a>
-                            <a class="flyer-icon"  *ngIf="enmEvent.tickets && enmEvent.tickets != 'pending'" href="{{enmEvent.tickets}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
-                              <span (click)="openFlyer($event)">
-                                <i style="font-size: 2em; margin-top: 15px" class="fa-solid fa-ticket"></i> 
-                                <span style="padding-bottom: 100px;"> Tickets</span>
-                              </span>
-                            </a>
-                            <a class="flyer-icon"  *ngIf="enmEvent.signup && enmEvent.signup != 'pending'" href="{{enmEvent.signup}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
-                              <span (click)="openFlyer($event)">
-                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
-                                <span style="padding-bottom: 100px;"> Sign Up</span>
-                              </span>
-                            </a>
+                      <div class="click-to-copy clickable-address">
+                        <span class="flex align-items-center gap-2" >
+                          <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)">
+                            <!-- this condition checks that a time was provided. it displays it if yes-->
+                            <span *ngIf="enmEvent.doorTime" class="doortime">doors {{ enmEvent.doorTime | doorTimeToTime }} </span>
+                            <span *ngIf="(enmEvent.dateTime | date:'HH:mm') != '23:59'" class="datetime">{{ enmEvent.dateTime | dateTimeToTime }} &middot; </span>
+                            <span *ngIf="enmEvent.dateTime" class="datetime">{{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }} </span>
+                            <!-- synonyms -->
+                            <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
+                            <span *ngIf="enmEvent.cover !== null && enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+                            <!-- synonyms, address --> <br>
+                            <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                            <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, <span [innerHTML]="enmEvent.venue.city | highlightPipe: (filter$ | async)?.text">{{ enmEvent.venue.city }}</span> &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
+                            <!---->
                           </div>
+                        </span>
+                      </div>
+                    </div>
+
+                    <!-- This will only show if the user is NOT on a mobile device -->
+                    <div *ngIf="!isMobile">
+                      <div class="row">
+                        <div class="col-6" *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="margin-bottom: 15px;">
+                          <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer">
+                            <span (click)="openFlyer($event)">
+                              <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> 
+                              <span style="padding-bottom: 100px;"> Flyer</span>
+                            </span>
+                          </a>
+                          <a class="flyer-icon"  *ngIf="enmEvent.rsvp && enmEvent.rsvp != 'pending'" href="{{enmEvent.rsvp}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
+                            <span  (click)="openFlyer($event)">
+                              <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
+                              <span style="padding-bottom: 100px;"> RSVP</span>
+                            </span>
+                          </a>
+                          <a class="flyer-icon"  *ngIf="enmEvent.tickets && enmEvent.tickets != 'pending'" href="{{enmEvent.tickets}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
+                            <span (click)="openFlyer($event)">
+                              <i style="font-size: 2em; margin-top: 15px" class="fa-solid fa-ticket"></i> 
+                              <span style="padding-bottom: 100px;"> Tickets</span>
+                            </span>
+                          </a>
+                          <a class="flyer-icon"  *ngIf="enmEvent.signup && enmEvent.signup != 'pending'" href="{{enmEvent.signup}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
+                            <span (click)="openFlyer($event)">
+                              <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
+                              <span style="padding-bottom: 100px;"> Sign Up</span>
+                            </span>
+                          </a>
                         </div>
-                        <div class="click-to-copy clickable-address">
-                          <span class="flex align-items-center gap-2" >
-                            <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)" pTooltip="Click To Copy Address" tooltipPosition="bottom">
-                              <span *ngIf="enmEvent.doorTime" class="doortime">doors {{ enmEvent.doorTime | doorTimeToTime }} </span>
-                              <span *ngIf="(enmEvent.dateTime | date:'HH:mm') != '23:59'" class="datetime">{{ enmEvent.dateTime | dateTimeToTime }} &middot; </span>
-                              <span *ngIf="enmEvent.dateTime" class="datetime"> {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }} </span>
-                              <!-- synonyms -->
-                              <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
-                              <span *ngIf="enmEvent.cover !== null && enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
-                              <!-- synonyms, address --> <br>
-                              <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, <span [innerHTML]="enmEvent.venue.city | highlightPipe: (filter$ | async)?.text">{{ enmEvent.venue.city }}</span> &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
-                              <!---->
-                            </div>
-                          </span>
-                        </div>
+                      </div>
+                      <div class="click-to-copy clickable-address">
+                        <span class="flex align-items-center gap-2" >
+                          <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)" pTooltip="Click To Copy Address" tooltipPosition="bottom">
+                            <span *ngIf="enmEvent.doorTime" class="doortime">doors {{ enmEvent.doorTime | doorTimeToTime }} </span>
+                            <span *ngIf="(enmEvent.dateTime | date:'HH:mm') != '23:59'" class="datetime">{{ enmEvent.dateTime | dateTimeToTime }} &middot; </span>
+                            <span *ngIf="enmEvent.dateTime" class="datetime"> {{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }} </span>
+                            <!-- synonyms -->
+                            <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
+                            <span *ngIf="enmEvent.cover !== null && enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
+                            <!-- synonyms, address --> <br>
+                            <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
+                            <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, <span [innerHTML]="enmEvent.venue.city | highlightPipe: (filter$ | async)?.text">{{ enmEvent.venue.city }}</span> &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
+                            <!---->
+                          </div>
+                        </span>
                       </div>
                     </div>
                   </div>
                 </div>
-              </a>
-            </div>
-          </ng-template> 
-        </ng-container>
-        <!-- no user logged in or non-plus user logged in. should not have routerLink activated. should not have event detail page available -->
-        <ng-container *ngIf="((user$ | async) === null) || (!(user$ | async)?.plus)">
-          <ng-template let-enmEvent pTemplate="listItem">
-            <div class="col-12">
-  
-              <!-- HERE'S THE VISIBLE CONTENT -->
-                <div *ngIf="enmEvent.isRecentlyListed" class="recently-listed-badge">
-                  <p-tag [style]="{'color': '#a2a2a2'}">
-                    <i>Listed<span *ngIf="enmEvent.creationDateTime | listedHowLongAgo as listedTime">&nbsp;{{ listedTime }}</span></i>
-                  </p-tag>
-                </div>
-                <div *ngIf="enmEvent.canceled">
-                  <p-tag [style]="{'color': '#a2a2a2'}">
-                    <span *ngIf="enmEvent.canceled">Canceled</span>
-                  </p-tag>
-                </div>
-                <div *ngIf="enmEvent.postponed">
-                  <p-tag [style]="{'color': '#a2a2a2'}">
-                    <span *ngIf="enmEvent.postponed">Postponed</span>
-                  </p-tag>
-                </div>
-              <a [routerLink]="isCopying ? null : ['/events', enmEvent._id]" (click)="onEnmEventListSelection(enmEvent._id)" class="event-card-link .event-card-link" href="/">
-                <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
-                  <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
-                    <div class="flex flex-column align-items-center sm:align-items-start gap-3">
-                      <h1 *ngIf="enmEvent.venue" class="text-2xl font-bold text-900">{{ enmEvent.venue.name }}
-                        <span *ngIf="enmEvent.venue.debut">
-                          &nbsp;<p-tag value="venue debut" [style]="{'font-size': '.3em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>&nbsp;&nbsp;
-                        </span></h1>
-                      <div class="m-0 lh-lg artists artist-name">
-                        <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
-                          <div class="artist-container">
-                            <span class="artist-name">{{ artist.name }}
-                              <span *ngIf="(artist.location) && (artist.location != 'RGV')">
-                                <p-tag value="{{artist.location | lowercase}}" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#937fee'}"></p-tag>&nbsp;&nbsp;
-                              </span>
-                              <span *ngIf="artist.debut" class="tags">
-                                <p-tag value="debut" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>
-                              </span></span>&nbsp;&nbsp;
-                              <span *ngIf="artist.albumDebut">
-                                <p-tag value="album debut" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>&nbsp;&nbsp;
-                              </span>
-                              <span *ngIf="artist.lastShow">
-                                <p-tag value="last show" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
-                              </span>
-                          </div>
-                          <span *ngIf="i < enmEvent.artists.length - 1">&middot;</span>&nbsp;
-                        </ng-container>
-                      </div>
-                      <div *ngIf="enmEvent.promoter">
-                        <div class="custom-divider">
-                          <hr style="width: 40px;">
-                        </div>
-                        <h6 class="card-text" style="color: #a2a2a2;">
-                          {{ enmEvent.promoter.name }}
-                          <span *ngIf="enmEvent.promoter.debut" class="tags">
-                            <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>
-                          </span>
-                          <!-- Add ampersand and promoter2 if promoter2 exists -->
-                          <ng-container *ngIf="enmEvent.promoter2">
-                            &nbsp;&amp;&nbsp;
-                            {{ enmEvent.promoter2.name }}
-                            <span *ngIf="enmEvent.promoter2.debut" class="tags">
-                              <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>
-                            </span>
-                          </ng-container>
-                        </h6>
-                      </div>
-                      <br>
-                      
-                      <!-- This will only show if the user is on a mobile device -->
-                      <div *ngIf="isMobile">
-                        <div class="row">
-                          <div class="col-6" *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="margin-bottom: 15px;">
-                            <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer">
-                              <span (click)="openFlyer($event)">
-                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> 
-                                <span style="padding-bottom: 100px;"> Flyer</span>
-                              </span>
-                            </a>
-                            <a class="flyer-icon"  *ngIf="enmEvent.rsvp && enmEvent.rsvp != 'pending'" href="{{enmEvent.rsvp}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
-                              <span  (click)="openFlyer($event)">
-                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
-                                <span style="padding-bottom: 100px;"> RSVP</span>
-                              </span>
-                            </a>
-                            <a class="flyer-icon"  *ngIf="enmEvent.tickets && enmEvent.tickets != 'pending'" href="{{enmEvent.tickets}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
-                              <span (click)="openFlyer($event)">
-                                <i style="font-size: 2em; margin-top: 15px" class="fa-solid fa-ticket"></i> 
-                                <span style="padding-bottom: 100px;"> Tickets</span>
-                              </span>
-                            </a>
-                            <a class="flyer-icon"  *ngIf="enmEvent.signup && enmEvent.signup != 'pending'" href="{{enmEvent.signup}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
-                              <span (click)="openFlyer($event)">
-                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
-                                <span style="padding-bottom: 100px;"> Sign Up</span>
-                              </span>
-                            </a>
-                          </div>
-                        </div>
-                        <div class="click-to-copy clickable-address">
-                          <span class="flex align-items-center gap-2" >
-                            <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)">
-                              <!-- this condition checks that a time was provided. it displays it if yes-->
-                              <span *ngIf="enmEvent.doorTime" class="doortime">doors {{ enmEvent.doorTime | doorTimeToTime }} </span>
-                              <span *ngIf="(enmEvent.dateTime | date:'HH:mm') != '23:59'" class="datetime">{{ enmEvent.dateTime | dateTimeToTime }} &middot; </span>
-                              <span *ngIf="enmEvent.dateTime" class="datetime">{{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }} </span>
-                              <!-- synonyms -->
-                              <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
-                              <span *ngIf="enmEvent.cover !== null && enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
-                              <!-- synonyms, address --> <br>
-                              <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }} &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
-                              <!---->
-                            </div>
-                          </span>
-                        </div>
-                      </div>
-
-                      <!-- This will only show if the user is NOT on a mobile device -->
-                      <div *ngIf="!isMobile">
-                        <div class="row">
-                          <div class="col-6" *ngIf="enmEvent.flyer && enmEvent.flyer != 'pending'" class="font-semibold" style="margin-bottom: 15px;">
-                            <a class="flyer-icon" href="{{enmEvent.flyer}}" target="_blank" rel="noopener noreferrer">
-                              <span (click)="openFlyer($event)">
-                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-file-lines"></i> 
-                                <span style="padding-bottom: 100px;"> Flyer</span>
-                              </span>
-                            </a>
-                            <a class="flyer-icon"  *ngIf="enmEvent.rsvp && enmEvent.rsvp != 'pending'" href="{{enmEvent.rsvp}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
-                              <span  (click)="openFlyer($event)">
-                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
-                                <span style="padding-bottom: 100px;"> RSVP</span>
-                              </span>
-                            </a>
-                            <a class="flyer-icon"  *ngIf="enmEvent.tickets && enmEvent.tickets != 'pending'" href="{{enmEvent.tickets}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
-                              <span (click)="openFlyer($event)">
-                                <i style="font-size: 2em; margin-top: 15px" class="fa-solid fa-ticket"></i> 
-                                <span style="padding-bottom: 100px;"> Tickets</span>
-                              </span>
-                            </a>
-                            <a class="flyer-icon"  *ngIf="enmEvent.signup && enmEvent.signup != 'pending'" href="{{enmEvent.signup}}" target="_blank" rel="noopener noreferrer" style="margin-left: 25px">
-                              <span (click)="openFlyer($event)">
-                                <i style="font-size: 2em; margin-top: 15px" class="fa-regular fa-pen-to-square"></i> 
-                                <span style="padding-bottom: 100px;"> Sign Up</span>
-                              </span>
-                            </a>
-                          </div>
-                        </div>
-                        <div class="click-to-copy clickable-address">
-                          <span class="flex align-items-center gap-2" >
-                            <div class="font-semibold" style="display: inline-block" (click)="copyAddress($event)" pTooltip="Click To Copy Address" tooltipPosition="bottom">
-                              <!-- this condition checks that a time was provided. it displays it if yes-->
-                              <span *ngIf="enmEvent.doorTime" class="doortime">doors {{ enmEvent.doorTime | doorTimeToTime }} </span>
-                              <span *ngIf="(enmEvent.dateTime | date:'HH:mm') != '23:59'" class="datetime">{{ enmEvent.dateTime | dateTimeToTime }} &middot; </span>
-                              <span *ngIf="enmEvent.dateTime" class="datetime">{{ enmEvent.dateTime | dateTimeToWordifiedMonth }} {{ enmEvent.dateTime | dateTimeToDay }} </span>
-                              <!-- synonyms -->
-                              <span *ngIf="enmEvent.priceOfEntry >= 0">&middot; {{ enmEvent.priceOfEntry | wordifiedCover }}</span>
-                              <span *ngIf="enmEvent.cover !== null && enmEvent.cover >= 0">&middot; {{ enmEvent.cover | wordifiedCover }}</span>
-                              <!-- synonyms, address --> <br>
-                              <span #addressText class="card-text clickable-address address-text" *ngIf="enmEvent.address && enmEvent.city">{{ enmEvent.address }}, {{ enmEvent.city }}</span>
-                              <span #venueAddressText class="card-text clickable-address venue-address-text" *ngIf="enmEvent.venue">{{ enmEvent.venue.address }}, {{ enmEvent.venue.city }} &nbsp;<i class="pi pi-copy" style="font-size: .8rem"></i></span>
-                              <!---->
-                            </div>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </ng-template>
-        </ng-container>
+              </div>
+            </a>
+          </div>
+        </ng-template> 
       </p-dataView>          
     </div>
   </div>
@@ -397,10 +218,6 @@
       </div>
     </ng-container>
   </div>
-
-
-
-    
 </div>
 <div *ngIf="isVisible">
   <p-scrollTop (click)="refreshlist()" [style]="{'background-color': '#e2e2e2', 'color': 'white', 'border-color': '#0056b3'}"></p-scrollTop>
