@@ -14,6 +14,10 @@ export const selectAll = createSelector(selectEntities, (entities): EnmEvent[] =
   Object.values(entities)
 );
 
+export const selectAllCount = createSelector(selectEntities, (entities): number =>
+  Object.values(entities ?? {}).length
+);
+
 export const selectFilter = createSelector(
   selectFeature,
   (state: EnmEventsState): Filter => state.filter

@@ -6,12 +6,12 @@
 
 <div *ngIf="!(listLoading$ | async)" class="container-sm  text-center">
   <div *ngFor="let date of (groupedByDateEnmEventList$ | async | keyvalue); let isFirst = first">
-    <ng-container *ngIf="filteredEventCount$ | async as count">
+    <ng-container *ngIf="counts$ | async as counts">
         <span *ngIf="isFirst">
           <h2 class="datekey">
             <span id="events-header" style="color: #e2e2e2">Events</span>
             <span class="numberOfEvents">
-              Listed: {{ count }}
+              Listed: {{ counts.filtered }} of {{ counts.total }}
             </span>
           </h2>
         </span>
@@ -52,7 +52,7 @@
                           {{ enmEvent.venue.name }}
                         </span>
                         <span *ngIf="enmEvent.venue.debut" style="display: inline-block; margin-left: 8px;">
-                          &nbsp;<p-tag value="venue debut" [style]="{'font-size': '.3em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
+                          &nbsp;<p-tag value="venue debut" [style]="{'font-size': '.3em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#57B7AA'}"></p-tag>&nbsp;&nbsp;
                         </span>
                       </h1>
                       <div class="m-0 lh-lg artists artist-name">
@@ -63,13 +63,13 @@
                               <p-tag value="{{artist.location | lowercase}}" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#937fee'}"></p-tag>&nbsp;&nbsp;
                             </span>
                             <span *ngIf="artist.debut">
-                              <p-tag value="debut" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
+                              <p-tag value="debut" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>&nbsp;&nbsp;
                             </span>
                             <span *ngIf="artist.albumDebut">
-                              <p-tag value="album debut" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
+                              <p-tag value="album debut" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>&nbsp;&nbsp;
                             </span>
                             <span *ngIf="artist.lastShow">
-                              <p-tag value="last show" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
+                              <p-tag value="last show" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>&nbsp;&nbsp;
                             </span>
                           </div>
                           <span *ngIf="i < enmEvent.artists.length - 1">&middot;</span>&nbsp;
@@ -82,14 +82,14 @@
                         <h6 class="card-text" style="color: #a2a2a2;">
                           <span class="promoter-name">{{ enmEvent.promoter.name }}</span>
                           <span *ngIf="enmEvent.promoter.debut" class="tags">
-                            <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>
+                            <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>
                           </span>
                           <!-- Add ampersand and promoter2 if promoter2 exists -->
                           <ng-container *ngIf="enmEvent.promoter2">
                             <span class="promoter-name">&nbsp;&amp;&nbsp;</span>
                             <span class="promoter-name">{{ enmEvent.promoter2.name }}</span>
                             <span *ngIf="enmEvent.promoter2.debut" class="tags">
-                              <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>
+                              <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>
                             </span>
                           </ng-container>
                         </h6>
@@ -225,7 +225,7 @@
                     <div class="flex flex-column align-items-center sm:align-items-start gap-3">
                       <h1 *ngIf="enmEvent.venue" class="text-2xl font-bold text-900">{{ enmEvent.venue.name }}
                         <span *ngIf="enmEvent.venue.debut">
-                          &nbsp;<p-tag value="venue debut" [style]="{'font-size': '.3em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
+                          &nbsp;<p-tag value="venue debut" [style]="{'font-size': '.3em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>&nbsp;&nbsp;
                         </span></h1>
                       <div class="m-0 lh-lg artists artist-name">
                         <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
@@ -235,10 +235,10 @@
                                 <p-tag value="{{artist.location | lowercase}}" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#937fee'}"></p-tag>&nbsp;&nbsp;
                               </span>
                               <span *ngIf="artist.debut" class="tags">
-                                <p-tag value="debut" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>
+                                <p-tag value="debut" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>
                               </span></span>&nbsp;&nbsp;
                               <span *ngIf="artist.albumDebut">
-                                <p-tag value="album debut" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
+                                <p-tag value="album debut" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>&nbsp;&nbsp;
                               </span>
                               <span *ngIf="artist.lastShow">
                                 <p-tag value="last show" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>&nbsp;&nbsp;
@@ -254,14 +254,14 @@
                         <h6 class="card-text" style="color: #a2a2a2;">
                           {{ enmEvent.promoter.name }}
                           <span *ngIf="enmEvent.promoter.debut" class="tags">
-                            <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>
+                            <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>
                           </span>
                           <!-- Add ampersand and promoter2 if promoter2 exists -->
                           <ng-container *ngIf="enmEvent.promoter2">
                             &nbsp;&amp;&nbsp;
                             {{ enmEvent.promoter2.name }}
                             <span *ngIf="enmEvent.promoter2.debut" class="tags">
-                              <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>
+                              <p-tag value="promoter debut" [style]="{'font-size': '.5em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>
                             </span>
                           </ng-container>
                         </h6>

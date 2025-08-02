@@ -9,9 +9,9 @@
       <ng-container *ngIf="!(showRecentlyTouredArtistsOnly$ | async)" >
         <h2 class="datekey">
           <span style="color: #e2e2e2" id="artist-directory-header">Artist Directory</span>
-          <span id="artist-directory-count" class="numberOfEvents" *ngIf="count$ | async as count" style="text-decoration: none;">
-            Listed: {{ count }}
-        </span></h2>
+          <span id="artist-directory-count" class="numberOfEvents" *ngIf="counts$ | async as counts" style="text-decoration: none;">
+            Listed: {{ counts.filtered }} of {{ counts.total }}
+          </span></h2>
         <div class="card">
           <p-dataView #dv [value]="(artists$ | async) ?? []">
             <ng-template let-artist pTemplate="listItem">
@@ -158,8 +158,8 @@
           <p-overlayPanel [style]="{'width': '200px', 'margin-right': '300px'}" #op2>
             <p>Artists that have recently toured the valley! (or have an upcoming show)</p>
           </p-overlayPanel>
-          <span class="numberOfEvents" *ngIf="countRecentlyTouredArtists$ | async as count">
-            Listed: {{ count }}
+          <span class="numberOfEvents" *ngIf="nonRGVCounts$ | async as counts">
+            Listed: {{ counts.filtered }} of {{ counts.total }}
           </span>
         </h2>
         <div class="card">

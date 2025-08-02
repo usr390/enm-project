@@ -1,6 +1,6 @@
 <button class="back-arrow d-flex align-items-center p-button p-button-rounded p-button-lg p-button-text" (click)="goBack()" style="background: none; border: none;">
   <i class="pi pi-arrow-left" style="font-size: 1.5rem; margin-right: 10px;"></i>
-  <h5 style="margin: 0;">Back To Events</h5>
+  <h5 style="margin: 0;">Events</h5>
 </button>
 
 <div *ngIf="enmEvent$ | async as enmEvent" class="container-sm d-flex flex-column justify-content-center align-items-center" style="margin-top: 10px">
@@ -36,7 +36,7 @@
           'padding-right': '4px',
           'padding-top': '2px',
           'padding-bottom': '2px',
-          'color': '#f8addf'
+          'color': '#57B7AA'
         }"></p-tag>
         &nbsp;&nbsp;
       </span>
@@ -60,7 +60,7 @@
         }"></p-tag>
       </span>
       <span *ngIf="artist.debut" class="tags">
-        <p-tag value="debut" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#f8addf'}"></p-tag>
+        <p-tag value="debut" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>
       </span>
       <span *ngIf="artist.albumDebut">
         <p-tag value="album debut" [style]="{
@@ -72,7 +72,7 @@
           'padding-right': '4px',
           'padding-top': '2px',
           'padding-bottom': '2px',
-          'color': '#f8addf'
+          'color': '#57B7AA'
         }"></p-tag>
       </span>
       <span *ngIf="artist.lastShow">
@@ -85,7 +85,7 @@
           'padding-right': '4px',
           'padding-top': '2px',
           'padding-bottom': '2px',
-          'color': '#f8addf'
+          'color': '#57B7AA'
         }"></p-tag>
       </span>
     </div>
@@ -113,7 +113,7 @@
             'padding-right': '4px',
             'padding-top': '2px',
             'padding-bottom': '2px',
-            'color': '#f8addf'
+            'color': '#57B7AA'
           }"></p-tag>
         </span>
       </h6>
@@ -133,7 +133,7 @@
               'padding-right': '4px',
               'padding-top': '2px',
               'padding-bottom': '2px',
-              'color': '#f8addf'
+              'color': '#57B7AA'
             }"></p-tag>
           </span>
         </h6>

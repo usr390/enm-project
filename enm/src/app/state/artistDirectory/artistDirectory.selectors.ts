@@ -14,6 +14,20 @@ export const selectAll = createSelector(selectEntities, (entities): Artist[] =>
   Object.values(entities)
 );
 
+export const selectAllCount = createSelector(
+  selectAll,
+  (artists: Artist[]): number => {
+    return artists.filter(artist => artist.location === 'RGV').length
+  }
+);
+
+export const selectAllNonRGVCount = createSelector(
+  selectAll,
+  (artists: Artist[]): number => {
+    return artists.filter(artist => artist.location !== 'RGV').length
+  }
+);
+
 export const selectSortedArtistsWithEnhancedSorting = createSelector(
   selectAll,
   (artists: Artist[]): Artist[] => {

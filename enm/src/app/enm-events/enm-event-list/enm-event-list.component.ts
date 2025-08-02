@@ -2,7 +2,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 // 3rd party
 import { Store } from '@ngrx/store';
-import { filter, map, take } from 'rxjs';
+import { combineLatest, filter, map, take } from 'rxjs';
 import { DateTime } from 'luxon';
 // enm
 import { EnmEvent } from '../../models/enm-event.model';
@@ -50,6 +50,12 @@ export class EnmEventListComponent implements OnInit {
 
   filteredEnmEventList$ = this.store$.select(fromEnmEvent.selectFiltered);
   filteredEventCount$ = this.store$.select(fromEnmEvent.selectFilteredEventCount);
+  totalEventCount$ = this.store$.select(fromEnmEvent.selectAllCount);
+
+  counts$ = combineLatest({
+    filtered: this.filteredEventCount$,
+    total: this.totalEventCount$
+  });
   
   groupedByDateEnmEventList$ = this.filteredEnmEventList$.pipe(
     map((events) => {
