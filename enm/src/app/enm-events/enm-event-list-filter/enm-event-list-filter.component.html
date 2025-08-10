@@ -32,7 +32,7 @@
             <p-scroller 
                 [items]="genres" 
                 [itemSize]="75"
-                scrollHeight="50px" 
+                scrollHeight="45px" 
                 orientation="horizontal" 
                 styleClass="border-1 surface-border">
                 <ng-template pTemplate="item" let-genre let-options="options">
@@ -46,11 +46,12 @@
         <p-scroller 
         [items]="toggleItems" 
         [itemSize]="150" 
-        scrollHeight="50px" 
+        scrollHeight="45px" 
         orientation="horizontal" 
         styleClass="border-1 surface-border">
             <ng-template pTemplate="item" let-toggle let-options="options">
                 <p-toggleButton 
+                [attr.data-testid]="toggle.id"
                 [style]="{ height: '1em', 'min-width': '190px' }" 
                 formControlName="{{toggle.controlName}}" 
                 onLabel="{{toggle.onLabel}}" 

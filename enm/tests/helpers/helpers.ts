@@ -1,5 +1,5 @@
 // tests/helpers/auth.ts
-import { Page, BrowserContext } from '@playwright/test';
+import { test, expect, Page, BrowserContext } from '@playwright/test';
 
 export async function mockLogin(
   context: BrowserContext,
@@ -67,3 +67,37 @@ export async function applyEventFilter(
   ) {
     await page.fill(selector, text);
   }
+
+// artist directory helpers
+
+export async function getArtistStartYearsFromEntirePage(
+  page: Page,
+  sectionClass: 'rgv-artists-activity-range' | 'touring-artists-activity-range'
+): Promise<number[]> {
+  const tags = page.locator(`.${sectionClass} >> css=p-tag, .${sectionClass} >> css=.p-tag`);
+  await expect(tags.first()).toBeVisible();
+
+  const texts = await tags.allInnerTexts();
+
+  const years = texts.map(t => {
+    const m = t.match(/(\d{4})/);
+    if (!m) throw new Error(`No year found in: "${t}"`);
+    return Number(m[1]);
+  });
+
+  expect(years.every(Number.isFinite)).toBeTruthy();
+  return years;
+}
+
+export function expectNonIncreasingYears(nums: number[]) {
+  for (let i = 1; i < nums.length; i++) {
+    expect(nums[i], `Index ${i}: ${nums[i]} should be <= ${nums[i - 1]}`).toBeLessThanOrEqual(nums[i - 1]);
+  }
+}
+
+export async function clickTimelineToggleButton(page: Page) {
+  const toggle = page.getByTestId('timeline-button'); // or: page.locator('#timeline-button')
+  await toggle.scrollIntoViewIfNeeded();
+  await toggle.click();
+  await page.waitForLoadState('networkidle');
+}

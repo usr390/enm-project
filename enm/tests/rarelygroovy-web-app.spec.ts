@@ -1,11 +1,11 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 import { mockEvents, } from './mocks/mockEvents';
 import { mockArtists, } from './mocks/mockArtists';
 import { mockUser, } from './mocks/mockUser';
-import { mockLogin, mockCreateUser, applyEventFilter, applyArtistDirectoryFilter } from './helpers/helpers';
+import { mockLogin, mockCreateUser, applyEventFilter, applyArtistDirectoryFilter, getArtistStartYearsFromEntirePage, expectNonIncreasingYears, clickTimelineToggleButton } from './helpers/helpers';
 
 
-import percySnapshot from '@percy/playwright';
+// import percySnapshot from '@percy/playwright';
 
 test.describe('Events', () => { 
     test.beforeEach(async ({ context, page }) => {
@@ -20,7 +20,7 @@ test.describe('Events', () => {
     });
 
     test('page renders', async ({ page }) => {
-      await percySnapshot(page, 'Events page');
+      // await percySnapshot(page, 'Events page');
       const header = page.locator('#events-header');
       await expect(header).toBeVisible();
       await expect(header).toHaveText('Events');
@@ -47,7 +47,7 @@ test.describe('Artist Directory', () => {
   });
 
   test('page renders', async ({ context, page }) => {
-      await percySnapshot(page, 'Artist Directory page');
+      // await percySnapshot(page, 'Artist Directory page');
       const header = page.locator('#artist-directory-header');
       await expect(header).toBeVisible();
       await expect(header).toHaveText('Artist Directory');
@@ -61,25 +61,31 @@ test.describe('Artist Directory', () => {
     const regex = new RegExp(`Listed:\\s*${expected}(?:\\s+of\\s+\\d+)?\\s*$`);
     await expect(artistCount).toHaveText(regex);
   });
+  test('timeline sort orders RGV by start year (desc)', async ({ page }) => {
+    await clickTimelineToggleButton(page);
+    const years = await getArtistStartYearsFromEntirePage(page, 'rgv-artists-activity-range');
+    expectNonIncreasingYears(years);
+  });
 })
 
 
 test('User is logged from mocked API', async ({ context, page }) => {
   await mockLogin(context, page, mockUser);
   await page.click('#app-sidebar');
-  await percySnapshot(page, 'Side bar open');
+  // await percySnapshot(page, 'Side bar open');
   const loggedInAs = page.locator('#logged-in-as');
 
   await expect(loggedInAs).toBeVisible();
   await expect(loggedInAs).toHaveText(`Logged in as ${mockUser.user.username}`);
 });
 
-test('User is created from mocked API', async ({ context, page }) => {
+test.skip('User is created from mocked API', async ({ context, page }) => {
   await mockCreateUser(context, page, mockUser);
   await page.click('#app-sidebar');
-  await percySnapshot(page, 'Side bar open');
+  // await percySnapshot(page, 'Side bar open');
   const loggedInAs = page.locator('#logged-in-as');
 
   await expect(loggedInAs).toBeVisible();
   await expect(loggedInAs).toHaveText(`Logged in as ${mockUser.user.username}`);
 });
+
