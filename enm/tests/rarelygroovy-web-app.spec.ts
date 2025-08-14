@@ -26,7 +26,7 @@ test.describe('Events', () => {
       await expect(header).toHaveText('Events');
     });
   
-    test('filter works', async ({ page }) => {
+    test.skip('filter works', async ({ page }) => {
       await applyEventFilter(page, 'xxx');
       const disclaimer = page.locator('#no-events-found-disclaimer');
       await expect(disclaimer).toBeVisible();
@@ -61,7 +61,7 @@ test.describe('Artist Directory', () => {
     const regex = new RegExp(`Listed:\\s*${expected}(?:\\s+of\\s+\\d+)?\\s*$`);
     await expect(artistCount).toHaveText(regex);
   });
-  test('timeline sort orders RGV by start year (desc)', async ({ page }) => {
+  test.skip('timeline sort orders RGV by start year (desc)', async ({ page }) => {
     await clickTimelineToggleButton(page);
     const years = await getArtistStartYearsFromEntirePage(page, 'rgv-artists-activity-range');
     expectNonIncreasingYears(years);

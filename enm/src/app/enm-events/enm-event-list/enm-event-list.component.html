@@ -19,8 +19,8 @@
           {{ date.key | wordifiedDateKey }}
         </h2>
     </ng-container>
-    <div class="card">
-      <p-dataView #dv [value]="date.value">
+    <div class="card event-list">
+      <p-dataView #dv [value]="date.value" >
         <ng-template let-enmEvent pTemplate="listItem" let-i="index" >
           <div class="col-12">
             <div *ngIf="enmEvent.isRecentlyListed" class="recently-listed-badge">
