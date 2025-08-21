@@ -6,6 +6,7 @@ import * as ArtistDirectoryActions from './../../state/artistDirectory/artistDir
 import * as ArtistDirectorySelectors from './../../state/artistDirectory/artistDirectory.selectors';
 import * as AuthSelectors from './../../state/auth/auth.selectors';
 import { combineLatest } from 'rxjs';
+import { Artist } from 'src/app/models/artist.model';
 
 
 @Component({
@@ -44,5 +45,19 @@ export class ArtistDirectoryComponent {
   ngOnInit() {
     this.store$.dispatch(ArtistDirectoryActions.artistDirectoryRequest());
   }
+
+  getArtistCreatedDate(artist: Artist): string {
+  if (!artist?._id) return '';
+
+  // Extract ObjectId timestamp (first 8 hex chars)
+  const timestamp = parseInt(artist._id.substring(0, 8), 16) * 1000;
+
+  // Convert to a human-readable date string
+  return new Date(timestamp).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  });
+}
 
 }

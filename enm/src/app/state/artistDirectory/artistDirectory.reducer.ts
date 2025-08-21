@@ -28,7 +28,7 @@ const _artistDirectoryReducer = createReducer(
       }
     }),
 
-    on(artistDirectoryFilter, (state, { text, recentlyListed, sortByYearDescending, recentlyToured, randomArtist, womanFronted, includesWomen, rock, punk, metal, edm, rap, jazz, pop, experimental, latin, other }) => ({
+    on(artistDirectoryFilter, (state, { text, recentlyListed, sortByYearDescending, recentlyToured, randomArtist, womanFronted, recentlyAdded, includesWomen, rock, punk, metal, edm, rap, jazz, pop, experimental, latin, other }) => ({
         ...state,
         artistDirectoryFilter: {
           ...state.artistDirectoryFilter,
@@ -38,6 +38,7 @@ const _artistDirectoryReducer = createReducer(
           recentlyToured,
           randomArtist,
           womanFronted,
+          recentlyAdded,
           includesWomen,
           rock,
           punk,

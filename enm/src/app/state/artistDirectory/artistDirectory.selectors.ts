@@ -213,9 +213,6 @@ export const selectFiltered = createSelector(
       return [];
     }
 
-    
-
-
     return filteredArtists;
   }
 );
@@ -294,6 +291,16 @@ export const sortFilteredNonRGV = createSelector(
   selectFilter,
   (filteredArtists: Artist[], filter: ArtistDirectoryFilter): Artist[] => {
     let filteredAndSortedArtists = filteredArtists;
+    
+    if (filter.recentlyAdded) {
+      filteredAndSortedArtists.sort((a, b) => {
+        const bt = getObjectIdTimestamp(b._id);
+        const at = getObjectIdTimestamp(a._id);
+        // newest first; tie-break by name for deterministic order
+        return bt - at || a.name.localeCompare(b.name);
+      });
+      return filteredAndSortedArtists;
+    }
 
     // Conditionally apply sorting by 'start' property in descending order
     if (filter.sortByYearDescending) {
@@ -314,6 +321,16 @@ export const sortFiltered = createSelector(
   selectFilter,
   (filteredArtists: Artist[], filter: ArtistDirectoryFilter): Artist[] => {
     let filteredAndSortedArtists = filteredArtists;
+
+    if (filter.recentlyAdded) {
+      filteredAndSortedArtists.sort((a, b) => {
+        const bt = getObjectIdTimestamp(b._id);
+        const at = getObjectIdTimestamp(a._id);
+        // newest first; tie-break by name for deterministic order
+        return bt - at || a.name.localeCompare(b.name);
+      });
+      return filteredAndSortedArtists;
+    }
 
     // Conditionally apply sorting by 'start' property in descending order
     if (filter.sortByYearDescending) {
@@ -617,3 +634,19 @@ const genreMapping: GenreMapping = {
     selectFeature,
     (state: ArtistDirectoryState): boolean => state.artistDirectoryFilter.recentlyToured
   );
+
+  const getObjectIdTimestamp = (id: string): number => {
+  if (!id) return 0;
+
+  // Normalize: handle ObjectId("...") or plain 24-hex
+  let hex = id;
+  const m = /^ObjectId\("([0-9a-fA-F]{24})"\)$/.exec(id);
+  if (m) hex = m[1];
+
+  // Must be 24 hex chars
+  if (!/^[0-9a-fA-F]{24}$/.test(hex)) return 0;
+
+  const tsHex = hex.slice(0, 8);
+  const ts = Number.parseInt(tsHex, 16);
+  return Number.isFinite(ts) ? ts : 0;
+};

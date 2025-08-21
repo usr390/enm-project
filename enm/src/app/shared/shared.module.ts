@@ -50,6 +50,7 @@ import { LinkifyPipe } from './pipes/linkify.pipe';
 import { BlogPreviewPipe } from '../blog-preview.pipe';
 import { BlogifyBodyPipe } from '../blogify-body.pipe';
 import { TableModule } from 'primeng/table';
+import { ArtistIDtoCreationTimePipe } from '../artist-idto-creation-time.pipe';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { TableModule } from 'primeng/table';
     LinkifyPipe,
     BlogPreviewPipe,
     BlogifyBodyPipe,
+    ArtistIDtoCreationTimePipe,
   ],
   imports: [
     CommonModule,
@@ -147,7 +149,8 @@ import { TableModule } from 'primeng/table';
     LinkifyPipe,
     BlogPreviewPipe,
     BlogifyBodyPipe,
-    TableModule
+    TableModule,
+    ArtistIDtoCreationTimePipe
   ],
   providers: [
     // primeng providers
