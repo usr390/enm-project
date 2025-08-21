@@ -23,10 +23,11 @@
                   </div>
                   <!-- HERE'S THE VISIBLE CONTENT -->
                     <span>
-                      <div *ngIf="(filter$ | async)?.recentlyAdded"
-     style="font-size: 0.75rem; color: #aaa; margin-top: 4px; margin-bottom: 6px;">
-                        Added {{ artist._id | artistIDtoCreationTime:'datetime' }}
-                      </div>
+                      <i>
+                        <div *ngIf="(filter$ | async)?.recentlyAdded" style="font-size: 0.75rem; color: #aaa; margin-top: 4px; margin-bottom: 12px;">
+                          Added {{ artist._id | artistIDtoCreationTime }}
+                        </div>
+                      </i>
                       <span class="artist-name" [innerHTML]="artist.name | highlightPipe: (filter$ | async)?.text">{{ artist.name }}</span>&nbsp; <span *ngIf="artist.fka">(FKA {{artist.fka}})</span>
                       <span *ngIf="(artist.location) && (artist.location !== 'RGV')">
                         <p-tag value="{{artist.location}}" [style]="{'font-size': '.4em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'background-color': '#937fee'}"></p-tag>&nbsp;
@@ -176,10 +177,11 @@
                         </p-overlayPanel>
                         <p-button (click)="op3.toggle($event)" icon="fa-regular fa-note-sticky" [style]="{'width': '20px', 'height': '28px', 'font-size': '.9em',  'color': 'white','background': 'none','margin-left': '25px'}"></p-button>
                       </div>
-                      <div *ngIf="(filter$ | async)?.recentlyAdded"
-     style="font-size: 0.75rem; color: #aaa; margin-top: 4px; margin-bottom: 6px;">
-                        Added {{ artist._id | artistIDtoCreationTime:'datetime' }}
-                      </div>
+                      <i>
+                        <div *ngIf="(filter$ | async)?.recentlyAdded" style="font-size: 0.75rem; color: #aaa; margin-top: 4px; margin-bottom: 12px;">
+                          Added {{ artist._id | artistIDtoCreationTime }}
+                        </div>
+                      </i>
                       <span class="artist-name" [innerHTML]="artist.name | highlightPipe: (filter$ | async)?.text">{{ artist.name }}</span>&nbsp;
                       <span *ngIf="(artist.medium) && (artist.medium === 'collective')">
                         <p-tag value="{{artist.medium}}" [style]="{'font-size': '.7em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#99ccff'}"></p-tag>&nbsp;
