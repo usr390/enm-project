@@ -45,7 +45,7 @@
 <div class="m-0 lh-lg artists artist-name">
   <ng-container *ngFor="let artist of enmEvent.artists; let i = index;">
     <div class="artist-container">
-      {{ artist.name }}
+      <span>{{ artist.name }}</span>&nbsp;&nbsp;
       <span *ngIf="(artist.location) && (artist.location != 'RGV')">
         <p-tag value="{{artist.location | lowercase}}" [style]="{
           'font-size': '.6em',
@@ -57,7 +57,7 @@
           'padding-top': '2px',
           'padding-bottom': '2px',
           'color': '#937fee'
-        }"></p-tag>
+        }"></p-tag>&nbsp;&nbsp;
       </span>
       <span *ngIf="artist.debut" class="tags">
         <p-tag value="debut" [style]="{'font-size': '.6em', 'margin-bottom': '10px', 'position': 'relative', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#57B7AA'}"></p-tag>
@@ -73,7 +73,7 @@
           'padding-top': '2px',
           'padding-bottom': '2px',
           'color': '#57B7AA'
-        }"></p-tag>
+        }"></p-tag>&nbsp;&nbsp;
       </span>
       <span *ngIf="artist.lastShow">
         <p-tag value="last show" [style]="{
@@ -86,12 +86,12 @@
           'padding-top': '2px',
           'padding-bottom': '2px',
           'color': '#57B7AA'
-        }"></p-tag>
+        }"></p-tag>&nbsp;&nbsp;
       </span>
     </div>
 
     <!-- Add separator for all but the last artist -->
-    <span *ngIf="i < enmEvent.artists.length - 1">&nbsp;&nbsp;&nbsp; &middot; &nbsp;&nbsp;&nbsp;</span>
+    <span *ngIf="i < enmEvent.artists.length - 1">&middot;</span>&nbsp;
   </ng-container>
 </div>
 
