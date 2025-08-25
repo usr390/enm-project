@@ -5,7 +5,7 @@ import { mockUser, } from './mocks/mockUser';
 import { mockLogin, mockCreateUser, applyEventFilter, applyArtistDirectoryFilter, getArtistStartYearsFromEntirePage, expectNonIncreasingYears, clickTimelineToggleButton } from './helpers/helpers';
 
 
-// import percySnapshot from '@percy/playwright';
+import percySnapshot from '@percy/playwright';
 
 test.describe('Events', () => { 
     test.beforeEach(async ({ context, page }) => {
@@ -20,13 +20,13 @@ test.describe('Events', () => {
     });
 
     test('page renders', async ({ page }) => {
-      // await percySnapshot(page, 'Events page');
+      await percySnapshot(page, 'Events page');
       const header = page.locator('#events-header');
       await expect(header).toBeVisible();
       await expect(header).toHaveText('Events');
     });
   
-    test.skip('filter works', async ({ page }) => {
+    test('filter works', async ({ page }) => {
       await applyEventFilter(page, 'xxx');
       const disclaimer = page.locator('#no-events-found-disclaimer');
       await expect(disclaimer).toBeVisible();
@@ -47,7 +47,7 @@ test.describe('Artist Directory', () => {
   });
 
   test('page renders', async ({ context, page }) => {
-      // await percySnapshot(page, 'Artist Directory page');
+      await percySnapshot(page, 'Artist Directory page');
       const header = page.locator('#artist-directory-header');
       await expect(header).toBeVisible();
       await expect(header).toHaveText('Artist Directory');
@@ -72,7 +72,7 @@ test.describe('Artist Directory', () => {
 test('User is logged from mocked API', async ({ context, page }) => {
   await mockLogin(context, page, mockUser);
   await page.click('#app-sidebar');
-  // await percySnapshot(page, 'Side bar open');
+  await percySnapshot(page, 'Side bar open');
   const loggedInAs = page.locator('#logged-in-as');
 
   await expect(loggedInAs).toBeVisible();
@@ -82,7 +82,7 @@ test('User is logged from mocked API', async ({ context, page }) => {
 test.skip('User is created from mocked API', async ({ context, page }) => {
   await mockCreateUser(context, page, mockUser);
   await page.click('#app-sidebar');
-  // await percySnapshot(page, 'Side bar open');
+  await percySnapshot(page, 'Side bar open');
   const loggedInAs = page.locator('#logged-in-as');
 
   await expect(loggedInAs).toBeVisible();
