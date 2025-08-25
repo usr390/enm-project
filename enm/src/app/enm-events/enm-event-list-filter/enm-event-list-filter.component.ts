@@ -195,11 +195,11 @@ export class EnmEventListFilterComponent {
     this.genres.forEach(genre => {
       this.artistDirectoryFilterForm.get(genre)?.setValue(false);
     });
-    this.artistDirectoryFilterForm.patchValue({ filter: '', recentlyListed: false, sortByYearDescending: false, recentlyToured: false, randomArtist: false, womanFronted: false, includesWomen: false, Rock: false, Punk: false, Metal: false, EDM: false, Rap: false, Jazz: false, Pop: false, Experimental: false, Latin: false, Other: false });
+    this.artistDirectoryFilterForm.patchValue({ filter: '', recentlyListed: false, sortByYearDescending: false, recentlyToured: false, randomArtist: false, womanFronted: false, recentlyAdded: false, includesWomen: false, Rock: false, Punk: false, Metal: false, EDM: false, Rap: false, Jazz: false, Pop: false, Experimental: false, Latin: false, Other: false });
     this.filterArtistDirectoryResults();
   }
   anyGenreSelected(): boolean {
-    return this.genres.some(genre => this.artistDirectoryFilterForm.get(genre)?.value) || this.artistDirectoryFilterForm.controls.recentlyToured.value as boolean || this.artistDirectoryFilterForm.controls.sortByYearDescending.value as boolean || this.artistDirectoryFilterForm.controls.womanFronted.value as boolean;
+    return this.genres.some(genre => this.artistDirectoryFilterForm.get(genre)?.value) || this.artistDirectoryFilterForm.controls.recentlyToured.value as boolean || this.artistDirectoryFilterForm.controls.sortByYearDescending.value as boolean || this.artistDirectoryFilterForm.controls.womanFronted.value as boolean || this.artistDirectoryFilterForm.controls.recentlyAdded.value as boolean;
   }
 }
 
