@@ -351,7 +351,7 @@
   </ng-container>
 
   <ng-container *ngIf="enmEvent.promoter || enmEvent.promoter2">
-    <h2 style="color: #a2a2a2; margin-top: 30px; text-align: center;">
+    <h2 style="color: #a2a2a2; margin-top: 60px; text-align: center;">
       {{ enmEvent.promoter2 ? 'Promoters' : 'Promoter' }}
     </h2>
 
@@ -369,6 +369,23 @@
         <div class="promoter-name">{{ enmEvent.promoter2.name }}</div>
         <div *ngIf="enmEvent.promoter2.link && enmEvent.promoter2.link !== 'pending'" class="social-links" style="margin-top: 5px;">
           <a href="{{ enmEvent.promoter2.link }}" target="_blank" rel="noopener noreferrer" class="promoter-social-icon">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+    <ng-container *ngIf="enmEvent.venue">
+    <h2 style="color: #a2a2a2; margin-top: 30px; text-align: center;">
+      Venue
+    </h2>
+
+    <div class="promoters-section" style="margin-bottom: 30px; color: #a2a2a2; text-align: center;">
+      <div *ngIf="enmEvent.venue" style="margin-bottom: 15px;">
+        <div class="promoter-name">{{ enmEvent.venue.name }}</div>
+        <div *ngIf="enmEvent.venue.link && enmEvent.venue.link !== 'pending'" class="social-links" style="margin-top: 5px;">
+          <a href="{{ enmEvent.venue.link }}" target="_blank" rel="noopener noreferrer" class="promoter-social-icon">
             <i class="fab fa-instagram"></i>
           </a>
         </div>
