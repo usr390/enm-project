@@ -14,12 +14,21 @@ import * as AuthSelectors from './../../state/auth/auth.selectors';
 })
 export class SidebarComponent {
 
+  isAppleDevice = false;
+
   constructor(private store$: Store<AuthState>) {}
 
   user$ = this.store$.select(AuthSelectors.selectUser);
 
   sidebarVisible = false;
   currentDate = new Date();
+
+  ngOnInit(): void {
+    const ua = navigator.userAgent;
+
+    // Matches iPhone, iPad, and Mac
+    this.isAppleDevice = /iPhone|iPad|Macintosh/i.test(ua);
+  }
 
   onLogOut() {
     this.store$.dispatch(AuthActions.logOut());

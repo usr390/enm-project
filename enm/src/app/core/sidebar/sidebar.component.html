@@ -15,6 +15,9 @@
             <a href="https://instagram.com/rarelygroovy" target="_blank" style->Instagram</a> &nbsp;
             <span><a href="https://ko-fi.com/rgvyyy" target="_blank">Ko-Fi ❤️</a></span> &nbsp;
         </p>
+        <p *ngIf="isAppleDevice">
+            <span><a href="https://apps.apple.com/us/app/rarelygroovy/id6743501928" target="_blank">Download App For iPhone</a></span> &nbsp;
+        </p>
     </ng-template>
 </p-sidebar>
 <i (click)="sidebarVisible = true" class="pi pi-bars clickable-icon"></i>
