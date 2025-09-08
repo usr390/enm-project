@@ -15,6 +15,7 @@ export interface Artist {
     "debut": boolean,
     "albumDebut": boolean,
     "lastShow": boolean,
+    "comeback": boolean,
     "start": string,
     "genre": [],
     "rgvDebut": boolean,
