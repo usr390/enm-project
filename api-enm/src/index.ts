@@ -54,6 +54,7 @@ const stripe = require('stripe')(process.env.STRIPE_API_KEY);
 const stripeWebHookSecret = process.env.STRIPE_API_WEBHOOK_SECRET;
 const stripeTest = require('stripe')(process.env.STRIPE_API_KEY_TEST)
 const stripeWebHookSecretTest = process.env.STRIPE_API_WEBHOOK_SECRET_TEST;
+const formspreeEndpoint = process.env.FORMSPREE_ENDPOINT;
 
 
 app.get('/', express.json(), (req: Request, res: Response) => {
@@ -74,6 +75,28 @@ app.get('/api/enmEvents', express.json(), async (req, res) => {
     userAgent: req.get('User-Agent')
     // ... any other properties you find relevant
   });
+
+  if (username !== "muslimgauze") {
+    const emailPayload = {
+      _subject: "API Hit Notification",
+      message: `API endpoint /api/enmEventsTrans was hit.
+        Timestamp: ${new Date().toISOString()}
+        User: ${username || "Unknown"}
+        User-Agent: ${req.get("User-Agent")}
+      `
+    };
+
+    try {
+      // Send email via Formspree
+      await fetch(formspreeEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(emailPayload)
+      });
+    } catch (err) {
+      console.error("Failed to send email:", err);
+    }
+  }
   try {
     const isPlusUser = await checkUserPlusStatus(username);
 
