@@ -41,6 +41,7 @@ import PromoterModel from "./models/Promoter";
 import { checkUserPlusStatus } from "./utilty/isplus";
 import PromoCodeModel from "./models/PromoCode";
 import BlogModel from "./models/Blog";
+import LogModel from "./models/Log";
 
 const app = express(); 
 app.use(cors(corsOptions)); 
@@ -54,8 +55,6 @@ const stripe = require('stripe')(process.env.STRIPE_API_KEY);
 const stripeWebHookSecret = process.env.STRIPE_API_WEBHOOK_SECRET;
 const stripeTest = require('stripe')(process.env.STRIPE_API_KEY_TEST)
 const stripeWebHookSecretTest = process.env.STRIPE_API_WEBHOOK_SECRET_TEST;
-const formspreeEndpoint = process.env.FORMSPREE_ENDPOINT;
-
 
 app.get('/', express.json(), (req: Request, res: Response) => {
   res.send('enm-api')
@@ -76,27 +75,6 @@ app.get('/api/enmEvents', express.json(), async (req, res) => {
     // ... any other properties you find relevant
   });
 
-  if (username !== "muslimgauze") {
-    const emailPayload = {
-      _subject: "API Hit Notification",
-      message: `API endpoint /api/enmEventsTrans was hit.
-        Timestamp: ${new Date().toISOString()}
-        User: ${username || "Unknown"}
-        User-Agent: ${req.get("User-Agent")}
-      `
-    };
-
-    try {
-      // Send email via Formspree
-      await fetch(formspreeEndpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(emailPayload)
-      });
-    } catch (err) {
-      console.error("Failed to send email:", err);
-    }
-  }
   try {
     const isPlusUser = await checkUserPlusStatus(username);
 
@@ -140,19 +118,30 @@ app.get('/api/enmEvents', express.json(), async (req, res) => {
 });
 
 app.get('/api/enmEventsTrans', express.json(), async (req, res) => {
-  const username = req.query.username;
-  console.log({
-    timestamp: new Date().toISOString(),
-    method: req.method,
-    url: req.url,
-    query: req.query,
-    status: res.statusCode, // Note: This might need to be logged after response is sent
-    responseTime: `${res.getHeader('X-Response-Time')}ms`, // Requires middleware to set this header
-    headers: req.headers, // Be cautious about sensitive data
-    clientIP: req.ip,
-    userAgent: req.get('User-Agent')
-    // ... any other properties you find relevant
+  const username = String(req.query.username || "Unknown");
+
+  // Start timing now so we can compute response time when the response finishes
+  const start = process.hrtime.bigint();
+
+  // When the response is finished, write a log
+  res.on('finish', async () => {
+    if (username.toLowerCase() !== "muslimgauze") {
+      const durationNs = process.hrtime.bigint() - start;
+      const responseTimeMs = Number(durationNs / BigInt(1_000_000));
+
+      LogModel.create({
+        endpoint: req.originalUrl ?? req.url,
+        method: req.method,
+        username,
+        query: req.query,
+        clientIP: req.ip,
+        userAgent: req.get('User-Agent'),
+        statusCode: res.statusCode,
+        responseTimeMs,
+      }).catch(e => console.error("Failed to insert request log:", e));
+    }
   });
+
   try {
     const isPlusUser = await checkUserPlusStatus(username);
 
@@ -196,7 +185,28 @@ app.get('/api/enmEventsTrans', express.json(), async (req, res) => {
 });
 
 app.get('/api/enmEvents/pastTrans', express.json(), async (req, res) => {
-  const username = req.query.username;
+  const username = String(req.query.username || "Unknown");
+  const start = process.hrtime.bigint();
+
+  // Log only if NOT muslimgauze
+  res.on('finish', () => {
+    if (username.toLowerCase() !== "muslimgauze") {
+      const durationNs = process.hrtime.bigint() - start;
+      const responseTimeMs = Number(durationNs / BigInt(1_000_000));
+
+      LogModel.create({
+        endpoint: req.originalUrl ?? req.url,
+        method: req.method,
+        username,
+        query: req.query,
+        clientIP: req.ip,
+        userAgent: req.get('User-Agent'),
+        statusCode: res.statusCode,
+        responseTimeMs,
+      }).catch(e => console.error("Failed to insert request log:", e));
+    }
+  });  
+  
   try {
     const isPlusUser = true;
     if (!isPlusUser) {
@@ -375,8 +385,27 @@ app.get('/api/artistDirectory', express.json(), async (req: Request, res: Respon
 });
 
 app.get('/api/artistDirectoryTrans', express.json(), async (req: Request, res: Response) => {
-  const username = req.query.username;
+  const username = String(req.query.username || "Unknown");
+  const start = process.hrtime.bigint();
 
+  // Log only if NOT muslimgauze
+  res.on('finish', () => {
+    if (username.toLowerCase() !== "muslimgauze") {
+      const durationNs = process.hrtime.bigint() - start;
+      const responseTimeMs = Number(durationNs / BigInt(1_000_000));
+
+      LogModel.create({
+        endpoint: req.originalUrl ?? req.url,
+        method: req.method,
+        username,
+        query: req.query,
+        clientIP: req.ip,
+        userAgent: req.get('User-Agent'),
+        statusCode: res.statusCode,
+        responseTimeMs,
+      }).catch(e => console.error("Failed to insert request log:", e));
+    }
+  });
   try {
     const isPlusUser = await checkUserPlusStatus(username);
 
