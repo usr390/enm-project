@@ -278,12 +278,15 @@
                         <p-tag value="{{artist.genre | genreListPipe:' · '}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2'}"></p-tag>
                       </span>
         
-                      <span *ngIf="(artist.start) && (artist.start !== 'pending') && (artist.end) && (artist.end === 'pending')">
-                        <p-tag value="{{artist.start | date:'yyyy' }} - active" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2'}"></p-tag>&nbsp;
-                      </span>
-                      <span *ngIf="(artist.start) && (artist.start !== 'pending') && (artist.end) && (artist.end !== 'pending')">
-                        <p-tag value="{{artist.start | date:'yyyy' }} - {{artist.end | date: 'yyyy'}}, {{artist.status}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2'}"></p-tag>&nbsp;
-                      </span>
+                        <span *ngIf="!artist.start2 && (artist.start) && (artist.start !== 'pending') && (artist.end) && (artist.end === 'pending')">
+                          <p-tag value="{{artist.start | date:'yyyy' }} - active" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                        </span>
+                        <span *ngIf="!artist.start2 && (artist.start) && (artist.start !== 'pending') && (artist.end) && (artist.end !== 'pending')">
+                          <p-tag value="{{artist.start | date:'yyyy' }} - {{artist.end | date: 'yyyy'}}, {{artist.status}}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                        </span>
+                        <span *ngIf="artist.start2 && (artist.start) && (artist.start !== 'pending') && (artist.end) && (artist.start2 !== 'pending') && (artist.end2)">
+                          <p-tag value="{{ (artist.start | date:'yyyy') + ' - ' + (artist.end === 'pending' ? 'active' : (artist.end | date:'yyyy')) + ', ' + (artist.start2 | date:'yyyy') + ' - ' + (artist.end2 === 'pending' ? 'active' : (artist.end2 | date:'yyyy')) + (artist.end2 !== 'pending' ? ', ' + artist.status2 : '') }}" [style]="{'font-size': '.8em', 'bottom': '10px', 'padding-left': '4px', 'padding-right': '4px', 'padding-top': '2px', 'padding-bottom': '2px', 'color': '#a2a2a2', 'background-color': 'transparent'}"></p-tag>&nbsp;
+                        </span>
                     </span>
         
         
